@@ -24,17 +24,17 @@ if [ -z "$GEMINI_API_KEY" ]; then
     export GEMINI_API_KEY="$INPUT_KEY"
 fi
 
-echo "👉 Kéo thả file video viral mẫu (.mp4) bạn muốn học vào cửa sổ này,"
-echo "   sau đó nhấn [ENTER] để bắt đầu phân tích:"
+echo "👉 Dán LINK VIDEO (TikTok, YouTube Shorts, Reels, Douyin...)"
+echo "   HOẶC Kéo thả file video (.mp4) vào đây rồi nhấn [ENTER]:"
 echo ""
 
-read -p "Đường dẫn video viral mẫu: " VIDEO_PATH
+read -p "URL / Đường dẫn video viral: " INPUT_VAL
 
-VIDEO_PATH=$(echo "$VIDEO_PATH" | sed -e "s/^'//" -e "s/'$//" -e 's/^"//' -e 's/"$//' -e 's/\\ / /g' -e 's/\\//g')
+INPUT_VAL=$(echo "$INPUT_VAL" | sed -e "s/^'//" -e "s/'$//" -e 's/^"//' -e 's/"$//' -e 's/\\ / /g' -e 's/\\//g')
 
-if [ -z "$VIDEO_PATH" ] || [ ! -f "$VIDEO_PATH" ]; then
+if [ -z "$INPUT_VAL" ]; then
     echo ""
-    echo "❌ Lỗi: File video không tồn tại tại đường dẫn: $VIDEO_PATH"
+    echo "❌ Lỗi: URL hoặc Đường dẫn video không được để trống!"
     echo ""
     read -n 1 -s -r -p "Nhấn phím bất kỳ để thoát..."
     exit 1
@@ -44,7 +44,7 @@ echo ""
 echo "🚀 Đang khởi chạy Gemini AI phân tích & học phong cách video mẫu..."
 echo "--------------------------------------------------"
 
-node renderer/scripts/learnStyle.js "$VIDEO_PATH"
+node renderer/scripts/learnStyle.js "$INPUT_VAL"
 
 echo ""
 echo "=================================================="

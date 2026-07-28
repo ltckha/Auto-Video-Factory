@@ -357,7 +357,7 @@ function saveEffectStats(stats) {
 
 function parseLogContentForStats(content) {
   const lines = content.split(/\r?\n/);
-  const sceneEffects = [];
+  const sceneElements = [];
   let lastSceneIndex = -1;
   let allScenesRendered = false;
   let firstErrorSceneIndex = -1;
@@ -366,14 +366,42 @@ function parseLogContentForStats(content) {
     if (line.includes("Concat") || line.includes("concatScenes") || line.includes("Render completed:")) {
       allScenesRendered = true;
     }
-    const sceneMatch = line.match(/Render scene (\d+)\/(\d+): .*?advanced_effect=(.+)$/);
+    const sceneMatch = line.match(/Render scene (\d+)\/(\d+): (.*?)(?:\s+advanced_effect=(.+))?$/);
     if (sceneMatch) {
-      lastSceneIndex = sceneEffects.length;
-      const raw = sceneMatch[3].trim();
-      const hasArrow = raw.includes("->");
-      const rawEffect = hasArrow ? raw.split("->")[1].trim() : raw;
-      const effKey = normalizeRegistryKey(rawEffect);
-      sceneEffects.push(effKey);
+      lastSceneIndex = sceneElements.length;
+      const fullLine = line;
+      const elements = [];
+
+      // 1. Advanced Effect
+      const effMatch = fullLine.match(/advanced_effect=(.+?)(?:\s+subtitle_style=|\s+transition_out=|$)/);
+      if (effMatch) {
+        const raw = effMatch[1].trim();
+        const rawEffect = raw.includes("->") ? raw.split("->")[1].trim() : raw;
+        const effKey = normalizeRegistryKey(rawEffect);
+        if (effKey && effKey !== "none" && effKey !== "fallback") {
+          elements.push(`advanced_effect:${effKey}`);
+        }
+      }
+
+      // 2. Subtitle Style
+      const subMatch = fullLine.match(/subtitle_style=([^\s]+)/);
+      if (subMatch) {
+        const subKey = normalizeRegistryKey(subMatch[1]);
+        if (subKey && subKey !== "none" && subKey !== "default") {
+          elements.push(`subtitle_style:${subKey}`);
+        }
+      }
+
+      // 3. Transition Out
+      const transMatch = fullLine.match(/transition_out=([^\s]+)/);
+      if (transMatch) {
+        const transKey = normalizeRegistryKey(transMatch[1]);
+        if (transKey && transKey !== "none") {
+          elements.push(`transition_out:${transKey}`);
+        }
+      }
+
+      sceneElements.push(elements);
       continue;
     }
     if (line.includes("ERROR:") && firstErrorSceneIndex === -1 && !allScenesRendered) {
@@ -384,18 +412,18 @@ function parseLogContentForStats(content) {
   }
 
   if (firstErrorSceneIndex !== -1) {
-    const failedEffect = sceneEffects[firstErrorSceneIndex];
+    const failedElements = sceneElements[firstErrorSceneIndex] || [];
     return {
       successes: [],
-      failures: failedEffect && failedEffect !== "none" && failedEffect !== "fallback" ? [failedEffect] : [],
+      failures: failedElements,
     };
   } else {
     const hasAnyError = lines.some((l) => l.includes("ERROR:"));
     if (hasAnyError) {
       return { successes: [], failures: [] };
     }
-    const successes = unique(sceneEffects.filter((e) => e && e !== "none" && e !== "fallback"));
-    return { successes, failures: [] };
+    const allSuccesses = unique(sceneElements.flat().filter(Boolean));
+    return { successes: allSuccesses, failures: [] };
   }
 }
 
@@ -453,16 +481,30 @@ function getSafePool(stats, options = {}) {
   const minSamples = options.minSamples ?? 5;
   const minSuccessRate = options.minSuccessRate ?? 0.9;
   const poolSize = options.poolSize ?? 5;
+  const prefix = options.prefix ?? null;
 
   const entries = [];
   for (const [key, value] of Object.entries(stats || {})) {
     if (key === "_meta" || key === "fallback" || key === "none" || !value || typeof value !== "object") continue;
+
+    if (prefix) {
+      if (prefix === "advanced_effect:") {
+        if (key.startsWith("subtitle_style:") || key.startsWith("transition_out:")) continue;
+      } else if (!key.startsWith(prefix)) {
+        continue;
+      }
+    }
+
     const success = Number(value.success) || 0;
     const fail = Number(value.fail) || 0;
     const total = success + fail;
     const rate = success / Math.max(1, total);
     if (total >= minSamples && rate >= minSuccessRate) {
-      entries.push({ key, total, rate });
+      let cleanKey = key;
+      if (prefix && key.startsWith(prefix)) {
+        cleanKey = key.slice(prefix.length);
+      }
+      entries.push({ key: cleanKey, total, rate });
     }
   }
 
@@ -472,7 +514,7 @@ function getSafePool(stats, options = {}) {
 
 function selectSafeEffect() {
   const stats = loadEffectStats();
-  const pool = getSafePool(stats);
+  const pool = getSafePool(stats, { prefix: "advanced_effect:" });
   if (!pool || pool.length === 0) {
     return DEFAULT_SAFE_EFFECT;
   }
@@ -484,16 +526,37 @@ function selectSafeEffect() {
   return selected;
 }
 
+function computeStyleSimilarity(sceneA, sceneB) {
+  if (!sceneA || !sceneB) return 0;
+  const effA = sceneA.advanced_effect || sceneA.suggested_advanced_effect || {};
+  const effB = sceneB.advanced_effect || sceneB.suggested_advanced_effect || {};
+  let matches = 0;
+  const fields = ["camera_motion", "intent", "pacing"];
+  fields.forEach((f) => {
+    if (effA[f] && effB[f] && String(effA[f]).toLowerCase().trim() === String(effB[f]).toLowerCase().trim()) {
+      matches++;
+    }
+  });
+  return matches / fields.length;
+}
+
+function isDuplicateStyle(sceneA, sceneB, threshold = 0.65) {
+  return computeStyleSimilarity(sceneA, sceneB) >= threshold;
+}
+
 module.exports = {
   bootstrapEffectStatsIfNeeded,
+  computeStyleSimilarity,
   createEffectAnalytics,
   getLearnedEffectsPath,
   getRecentLogAnalysis,
   getSafePool,
   initializeEffectLearning,
+  isDuplicateStyle,
   normalizeLearningKey,
   resolveLearnedAdvancedEffect,
   selectSafeEffect,
   updateEffectStatsFromLog,
 };
+
 

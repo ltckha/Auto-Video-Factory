@@ -1,0 +1,74 @@
+{
+  "style_profile": {
+    "name": "Romantic Lifestyle Split-Collage",
+    "category_niche": "Lifestyle & Fashion Aesthetics",
+    "average_scene_duration_s": 3,
+    "pacing_speed": "pulse",
+    "hook_strategy": "Use a colorful multi-grid split-screen visual pairing fresh luxury hydrangeas with classic leather monk-strap shoes to instantly convey romantic, high-end lifestyle vibes.",
+    "preferred_font_layout": "Playful, pastel-colored handwritten stickers placed inside open frame spaces to emphasize a cheerful scrapbook style.",
+    "transition_rules": [
+      "Dynamic frame removal timed precisely to the musical beat",
+      "Soft opacity fades to step-by-step collapse collage panels into a unified focal scene"
+    ]
+  },
+  "few_shot_examples": [
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Multi-Grid Beat Decay",
+        "intent": "reveal_impact",
+        "camera_motion": "static",
+        "focus": "product",
+        "intensity": 0.8,
+        "mood": "satisfying",
+        "pacing": "pulse"
+      },
+      "duration_range": "0.0s - 3.0s",
+      "suggested_subtitle_style": "Playful handwritten text stickers in pink, blue, and yellow shades",
+      "suggested_text_effect": "Fading sticker popping animation",
+      "suggested_transition_out": {
+        "duration": 0.4,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Upbeat romantic background track with distinct, punchy rhythm beats"
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Full-Screen Rhythmic Tap Focus",
+        "intent": "premium_showcase",
+        "camera_motion": "drift",
+        "focus": "product",
+        "intensity": 0.6,
+        "mood": "premium",
+        "pacing": "dynamic"
+      },
+      "duration_range": "3.0s - 15.0s",
+      "suggested_subtitle_style": "Minimalist center frame alignment",
+      "suggested_text_effect": "None",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Instrumental rhythm progression without speech"
+    }
+  ],
+  "learned_novel_effects": [
+    {
+      "effect_name": "Multi-Grid Beat Decay",
+      "camera_motion": "static",
+      "description": "An editing style where a multi-panel collage layout systematically sheds outer frames to rhythmically collapse the viewer's focus on a single subject, synced to music beats.",
+      "recommended_intensity": 0.8,
+      "visual_intent": "satisfying_cut"
+    },
+    {
+      "effect_name": "Aesthetic Sticker Sparkle",
+      "camera_motion": "drift",
+      "description": "Utilizing colorful, hand-drawn pastel typography overlays combined with simple design elements like arrows to evoke a cozy scrapbook and diary feel.",
+      "recommended_intensity": 0.5,
+      "visual_intent": "luxury_soft"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "style_profile": {
+    "name": "Dynamic Loafer Showcase",
+    "category_niche": "Mens Fashion & Footwear",
+    "average_scene_duration_s": 1.8,
+    "pacing_speed": "dynamic",
+    "hook_strategy": "Starts with a blurred black-and-white low-angle tease, immediately dropping into a sharp color transition with a physical step forward synced to a beat drop.",
+    "preferred_font_layout": "Minimalist centered bottom third, clean sans-serif font matching the modern aesthetic.",
+    "transition_rules": [
+      "Beat-synced cuts with sudden exposure/light leaks",
+      "Alternating high-contrast shadow shots with bright indoor lighting"
+    ]
+  },
+  "few_shot_examples": [
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "B&W Blur Pulse Drop",
+        "intent": "reveal_impact",
+        "camera_motion": "snap",
+        "focus": "product",
+        "intensity": 0.9,
+        "mood": "energetic",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 1.5s",
+      "suggested_subtitle_style": "No subtitle to preserve visual impact",
+      "suggested_text_effect": "None",
+      "suggested_transition_out": {
+        "duration": 0.2,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Silent with low-fi bass sweep rising into a sharp pop sound effect."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Sunlight Shadow Shift",
+        "intent": "premium_showcase",
+        "camera_motion": "drift",
+        "focus": "texture",
+        "intensity": 0.7,
+        "mood": "premium",
+        "pacing": "dynamic"
+      },
+      "duration_range": "1.5s - 10.0s",
+      "suggested_subtitle_style": "Clean white font with thin outline at the lower middle",
+      "suggested_text_effect": "Typewriter fade",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "wipe_right"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Upbeat instrumental music pacing."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Macro Detail Zoom",
+        "intent": "luxury_soft",
+        "camera_motion": "push_in",
+        "focus": "logo",
+        "intensity": 0.6,
+        "mood": "premium",
+        "pacing": "slow"
+      },
+      "duration_range": "10.0s - 15.0s",
+      "suggested_subtitle_style": "Elegant minimalist sans-serif",
+      "suggested_text_effect": "Slide up reveal",
+      "suggested_transition_out": {
+        "duration": 0.4,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Deep, warm voiceover describing the craftsmanship."
+    }
+  ]
+}

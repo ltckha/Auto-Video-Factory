@@ -75,9 +75,14 @@ Toàn bộ các Prompt System phục vụ cho việc tích hợp n8n được l�
 
 ---
 
-## 5. Hướng dẫn dành cho AI Agent tiếp theo
-Khi bắt đầu một phiên làm việc mới hỗ trợ người dùng:
-1. **ĐỌC ĐẦU TIÊN:** Hãy đọc trực tiếp file `SYSTEM_STATUS.md` này để hiểu nhanh các cấu hình tùy biến.
-2. **KHÔNG tự ý sửa cấu trúc âm thanh:** Tránh thay đổi hoặc xóa logic `anullsrc`, `hasAudioStream`, `resolveVoiceWav` trong `render.js` để tránh tái diễn lỗi lệch âm thanh khi concat.
-3. **Quản lý Prompt:** Khi người dùng yêu cầu chỉnh sửa prompt, hãy sửa đổi file chính trong thư mục `prompts/`, tuyệt đối không tự ý ghi đè các file trong `prompts/backups/` trừ khi có yêu cầu cụ thể.
-4. **Quản lý Enum (QUAN TRỌNG):** Để thêm hoặc sửa giá trị enum của `advanced_effect` (intent, mood, pacing, focus, camera_motion), chỉ được chỉnh sửa file `renderer/config/effectEnums.json`, sau đó chạy `npm run sync-prompt` từ thư mục `renderer/`. **Tuyệt đối không hardcode enum trực tiếp vào `effects.js` hoặc chỉnh sửa thủ công phần enum trong `timeline_generator_prompt.md`.**
+---
+
+## 6. Thư Mục Quản Lý Ý Tưởng & Lộ Trình (Ideas Backlog)
+- [ideas/INDEX.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/INDEX.md): Bảng quản lý tổng hợp trạng thái các ý tưởng & tính năng đang nghiên cứu/triển khai.
+- [ideas/IDEA_001_long_video_and_multi_clips.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_001_long_video_and_multi_clips.md): Spec chi tiết cho ý tưởng **IDEA-001** (Xử lý video dài >5m & Ghép chùm clips ngắn).
+- [ideas/IDEA_002_copyright_safe_audio_and_bgm.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_002_copyright_safe_audio_and_bgm.md): Spec chi tiết cho ý tưởng **IDEA-002** (Hệ thống âm thanh 3 tầng & Nhạc nền an toàn bản quyền).
+- [ideas/IDEA_003_dynamic_overlay_stickers.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_003_dynamic_overlay_stickers.md): Spec chi tiết cho ý tưởng **IDEA-003** (Hệ thống Sticker chuyển động nền trong suốt).
+
+
+
+

@@ -32,6 +32,7 @@ const {
   resolveTextEffect,
   summarizeMotionPlan,
 } = require("./effects");
+const { resolveBgmTrack, resolveSfxTrack } = require("./audioEngine");
 const {
   bootstrapEffectStatsIfNeeded,
   createEffectAnalytics,
@@ -1623,10 +1624,13 @@ async function renderCurrentProject() {
     const motionPlan = buildMotionPlan(scene, advancedEffect);
     advancedEffectsUsed.push(advancedEffect);
     logEffectLearning(advancedEffect);
+    const subStyleLog = scene.subtitle_style || scene.subtitleStyle || "default";
+    const transOutLog = scene.transition_out ? scene.transition_out.type : (scene.transitionOut ? scene.transitionOut.type : "none");
     log(
       `Render scene ${scene.index + 1}/${scenes.length}: ${scene.id} ` +
         `start=${scene.start}s duration=${scene.duration}s ` +
-        `text_effect=${formatEffectLog(textEffect)} advanced_effect=${formatEffectLog(advancedEffect)}`
+        `text_effect=${formatEffectLog(textEffect)} advanced_effect=${formatEffectLog(advancedEffect)} ` +
+        `subtitle_style=${subStyleLog} transition_out=${transOutLog}`
     );
     logSemanticMotionPlan(scene, advancedEffect, motionPlan);
     sceneFiles.push(await renderScene(inputVideo, scene));
@@ -1641,6 +1645,30 @@ async function renderCurrentProject() {
   }
   writeEffectAnalyticsReport(createEffectAnalytics(advancedEffectsUsed));
   log(`Render completed: project=${videoId} output=${outputPath}`);
+
+  // Bổ sung BGM Audio Mix nếu có cấu hình audio_config trong timeline JSON
+  try {
+    const audioConfig = timeline.audio_config || {};
+    const bgmMood = audioConfig.bgm_mood || "chill";
+    if (bgmMood !== "none") {
+      const bgmTrack = resolveBgmTrack(bgmMood, audioConfig.bgm_url);
+      if (bgmTrack && bgmTrack.path && fs.existsSync(bgmTrack.path)) {
+        log(`[AudioEngine] Đang chèn BGM [${bgmMood}] từ: ${bgmTrack.path}`);
+        const bgmTempOutput = path.join(TEMP_DIR, `${videoId}_bgm_mixed.mp4`);
+        const mixCmd = `ffmpeg -y -i "${outputPath}" -i "${bgmTrack.path}" -filter_complex "[1:a]asetrate=44320,aresample=44100,volume=0.25,aloop=loop=-1:size=2e+9[bgm];[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=2[aout]" -map 0:v -map "[aout]" -c:v copy -c:a aac -b:a 192k "${bgmTempOutput}"`;
+        execSync(mixCmd, { stdio: "pipe" });
+        if (fs.existsSync(bgmTempOutput)) {
+          fs.renameSync(bgmTempOutput, outputPath);
+          log(`[AudioEngine] ✅ Đã chèn BGM Nhạc Nền thành công vào: ${outputPath}`);
+        }
+        if (bgmTrack.isTemp && fs.existsSync(bgmTrack.path)) {
+          try { fs.unlinkSync(bgmTrack.path); } catch {}
+        }
+      }
+    }
+  } catch (audioErr) {
+    log(`[AudioEngine] WARN: Lỗi chèn BGM (${audioErr.message}) — giữ nguyên audio mặc định.`);
+  }
 
   cleanupTempDir();
   archiveSuccessfulRender(workflow, log);

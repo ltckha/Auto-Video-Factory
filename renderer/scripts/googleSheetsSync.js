@@ -171,8 +171,26 @@ async function syncAnalyticsToSheet() {
   const analytics = [];
   for (const [key, val] of Object.entries(stats)) {
     if (key === "_meta" || key === "fallback" || key === "none" || typeof val !== "object") continue;
+
+    let type = "Advanced Effect";
+    let cleanKey = key;
+    if (key.startsWith("subtitle_style:")) {
+      type = "Subtitle Style";
+      cleanKey = key.replace("subtitle_style:", "");
+    } else if (key.startsWith("transition_out:")) {
+      type = "Transition Out";
+      cleanKey = key.replace("transition_out:", "");
+    } else if (key.startsWith("advanced_effect:")) {
+      type = "Advanced Effect";
+      cleanKey = key.replace("advanced_effect:", "");
+    }
+
+    const formattedKey = `[${type}] ${cleanKey}`;
+
     analytics.push({
-      key,
+      key: formattedKey,
+      rawKey: cleanKey,
+      type,
       success: val.success || 0,
       fail: val.fail || 0,
     });
@@ -186,7 +204,7 @@ async function syncAnalyticsToSheet() {
 
   // 2. Local CSV Backup
   const csvPath = path.join(BACKUP_DIR, "effects_analytics.csv");
-  const headers = ["Effect Key", "Success Count", "Fail Count", "Success Rate (%)", "Safe Pool Status"];
+  const headers = ["Feature Key", "Success Count", "Fail Count", "Success Rate (%)", "Safe Pool Status"];
   ensureBackupDir();
   const lines = [headers.join(",")];
 

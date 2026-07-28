@@ -10,6 +10,9 @@ const INCOMING_DIR = path.join(ROOT, "incoming");
 const PROMPTS_DIR = path.join(ROOT, "renderer", "prompts");
 const PROMPT_PATH = path.join(PROMPTS_DIR, "timeline_generator_prompt.md");
 
+const ENUMS_PATH = path.join(ROOT, "renderer", "config", "effectEnums.json");
+const effectEnums = fs.existsSync(ENUMS_PATH) ? JSON.parse(fs.readFileSync(ENUMS_PATH, "utf8")) : {};
+
 const RESPONSE_SCHEMA = {
   type: "OBJECT",
   properties: {
@@ -24,6 +27,14 @@ const RESPONSE_SCHEMA = {
         }
       },
       required: ["title", "description", "hashtags"]
+    },
+    audio_config: {
+      type: "OBJECT",
+      properties: {
+        bgm_mood: { type: "STRING", enum: ["energetic", "luxury", "chill", "satisfying", "none"] },
+        bgm_url: { type: "STRING" },
+        enable_sfx: { type: "BOOLEAN" }
+      }
     },
     timeline: {
       type: "ARRAY",
@@ -60,11 +71,11 @@ const RESPONSE_SCHEMA = {
             type: "OBJECT",
             properties: {
               name: { type: "STRING" },
-              intent: { type: "STRING" },
-              mood: { type: "STRING" },
-              pacing: { type: "STRING" },
-              focus: { type: "STRING" },
-              camera_motion: { type: "STRING" },
+              intent: { type: "STRING", enum: effectEnums.intent || [] },
+              mood: { type: "STRING", enum: effectEnums.mood || [] },
+              pacing: { type: "STRING", enum: effectEnums.pacing || [] },
+              focus: { type: "STRING", enum: effectEnums.focus || [] },
+              camera_motion: { type: "STRING", enum: effectEnums.camera_motion || [] },
               intensity: { type: "NUMBER" },
               description: { type: "STRING" }
             },
@@ -73,7 +84,7 @@ const RESPONSE_SCHEMA = {
           transition_out: {
             type: "OBJECT",
             properties: {
-              type: { type: "STRING" },
+              type: { type: "STRING", enum: effectEnums.transition_type || [] },
               duration: { type: "NUMBER" }
             },
             required: ["type", "duration"]
@@ -306,7 +317,57 @@ async function main() {
   if (!fs.existsSync(promptPath)) {
     throw new Error(`Không tìm thấy file prompt system tại: ${promptPath}`);
   }
-  const systemInstruction = fs.readFileSync(promptPath, "utf8");
+  let systemInstruction = fs.readFileSync(promptPath, "utf8");
+
+  // Nhận diện Ngách Nội Dung & Nạp Master Preset nếu đạt độ tin cậy >= 0.7
+  let activePresetContext = "";
+  try {
+    console.log("[NicheDetect] Đang nhận diện ngách nội dung của video gốc...");
+    const candidateModels = ["gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash", "gemini-2.0-flash"];
+    const nicheResponse = await generateContentWithRetryFallback(
+      ai,
+      candidateModels,
+      [
+        {
+          fileData: {
+            fileUri: fileState.uri,
+            mimeType: fileState.mimeType,
+          },
+        },
+        "Phân tích ngắn gọn video và trả về JSON chứa category (ngách nội dung: tech_unboxing, asmr_build, affiliate_sales, fashion_lifestyle, food_cooking, diy_home, general_viral) và niche_confidence (số thực từ 0.0 đến 1.0).",
+      ],
+      {
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: "OBJECT",
+          properties: {
+            category: { type: "STRING" },
+            niche_confidence: { type: "NUMBER" },
+          },
+          required: ["category", "niche_confidence"],
+        },
+      }
+    );
+
+    const nicheData = JSON.parse(nicheResponse.text || "{}");
+    const category = (nicheData.category || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9_-]/g, "_").toLowerCase().trim();
+    const confidence = Number(nicheData.niche_confidence) || 0;
+
+    if (category && confidence >= 0.7) {
+      const presetPath = path.join(ROOT, "effects", "presets", `preset_${category}.json`);
+      if (fs.existsSync(presetPath)) {
+        console.log(`[NicheDetect] Đã chọn Master Preset: ${category} (Độ tin cậy: ${confidence})`);
+        const presetContent = fs.readFileSync(presetPath, "utf8");
+        activePresetContext = `\n\n━━━━━━━━━━━━━━━━━━\nMASTER NICHE FEW-SHOT PRESET (${category.toUpperCase()})\n━━━━━━━━━━━━━━━━━━\nHãy tham khảo cấu trúc nhịp độ, vị trí chữ và hiệu ứng từ Preset Ngách dưới đây khi sinh timeline:\n${presetContent}\n`;
+      } else {
+        console.log(`[NicheDetect] Chưa có file Preset Master cho ngách [${category}] (Độ tin cậy: ${confidence}) — dùng prompt chuẩn, không nạp preset`);
+      }
+    } else {
+      console.log(`[NicheDetect] Độ tin cậy thấp (${confidence}) — dùng prompt chuẩn, không nạp preset`);
+    }
+  } catch (nicheErr) {
+    console.warn(`[NicheDetect] WARN: Lỗi nhận diện ngách (${nicheErr.message}) — dùng prompt chuẩn, không nạp preset`);
+  }
 
     console.log("[AI] Đang gửi yêu cầu phân tích video sang Gemini AI...");
     const candidateModels = ["gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash", "gemini-2.0-flash"];
@@ -323,7 +384,7 @@ async function main() {
         "Hãy thực hiện phân tích video trên và trả về kịch bản Timeline JSON chi tiết theo đúng cấu trúc quy chuẩn.",
       ],
       {
-        systemInstruction,
+        systemInstruction: systemInstruction + activePresetContext,
         responseMimeType: "application/json",
         responseSchema: RESPONSE_SCHEMA,
       }
@@ -420,6 +481,7 @@ async function main() {
 
   } catch (err) {
     console.error("\n[Error] Lỗi trong quá trình tạo timeline:", err.message);
+    process.exitCode = 1;
   } finally {
     // Luôn dọn dẹp file tạm trên File API để tránh lãng phí dung lượng
     if (uploadResult && uploadResult.name) {
