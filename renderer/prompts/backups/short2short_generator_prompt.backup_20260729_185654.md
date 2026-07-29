@@ -27,13 +27,10 @@ QUY TẮC LỌC BỎ CẢNH RÁC & CẢNH CHẾT (BẮT BUỘC "include": false)
 QUY TẮC QUY ĐỔI MỐC THỜI GIAN (BẮT BUỘC CHÍNH XÁC)
 ━━━━━━━━━━━━━━━━━━
 - Các trường `start_s` và `end_s` BẮT BUỘC phải là **tổng số giây thực tế dưới dạng số (float/number)**.
-- ⚠️ **CẤM VIẾT NGUYÊN MỐC PHÚT:GIÂY BỎ DẤU HAI CHẤM:**
-  - CẤM ghi `113` cho 1 phút 13 giây (BẮT BUỘC phải quy đổi `1 * 60 + 13 = 73`).
-  - CẤM ghi `135` cho 1 phút 35 giây (BẮT BUỘC phải quy đổi `1 * 60 + 35 = 95`).
 - **Công thức tính bắt buộc:** `Tổng số giây = (Số phút * 60) + Số giây`
-  - Ví dụ 1: 1 phút 05 giây (1:05) -> **1 * 60 + 5 = 65** (Ghi `65`, CẤM ghi `105`).
-  - Ví dụ 2: 1 phút 13 giây (1:13) -> **1 * 60 + 13 = 73** (Ghi `73`, CẤM ghi `113`).
-  - Ví dụ 3: 1 phút 49 giây (1:49) -> **1 * 60 + 49 = 109** (Ghi `109`, CẤM ghi `149`).
+  - Ví dụ 1: Mốc thời gian 1:05 (1 phút 5 giây) -> **1 * 60 + 5 = 65** (Ghi `65`, CẤM ghi `105`).
+  - Ví dụ 2: Mốc thời gian 1:15 (1 phút 15 giây) -> **1 * 60 + 15 = 75** (Ghi `75`, CẤM ghi `115`).
+  - Ví dụ 3: Mốc thời gian 1:29 (1 phút 29 giây) -> **1 * 60 + 29 = 89** (Ghi `89`, CẤM ghi `129`).
 
 ━━━━━━━━━━━━━━━━━━
 QUY TẮC PHÂN LOẠI & ĐỒNG BỘ VOICEOVER (CỰC KỲ QUAN TRỌNG)

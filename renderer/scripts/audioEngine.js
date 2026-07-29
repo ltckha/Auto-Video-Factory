@@ -84,13 +84,13 @@ function resolveSfxTrack(transitionType, textEffectName) {
   return null;
 }
 
-function buildAudioFilterOptions(hasVoice, hasBgm, hasSfx = false) {
+function buildAudioFilterOptions(hasVoice, hasBgm, hasSfx = false, bgmVolume = 0.50) {
   if (!hasBgm) {
     return { filterComplex: null, inputs: [] };
   }
 
   // Auto-ducking BGM khi có Voice, kết hợp Micro Pitch Shift (+0.5% asetrate) để né Content ID
-  const bgmFilter = `[1:a]asetrate=44320,aresample=44100,volume=0.2,aloop=loop=-1:size=2e+9[bgm];[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=2[aout]`;
+  const bgmFilter = `[1:a]asetrate=44320,aresample=44100,volume=${bgmVolume},aloop=loop=-1:size=2e+9[bgm];[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=2[aout]`;
   return {
     filterComplex: bgmFilter,
     mapAudio: "[aout]",

@@ -166,54 +166,63 @@ function validateAndFixTimelineTimestamps(timelineJson, videoPath) {
   let fixedCount = 0;
   const scenes = timelineJson.timeline;
 
+  function tryConvertMSS(val, minExpected, maxExpected) {
+    if (val >= 100) {
+      const min = Math.floor(val / 100);
+      const sec = val % 100;
+      if (sec < 60) {
+        const converted = min * 60 + sec;
+        if (converted >= minExpected - 0.5 && converted <= maxExpected + 1) {
+          return { converted, min, sec };
+        }
+      }
+    }
+    return null;
+  }
+
+  let prevEnd = 0;
   for (let i = 0; i < scenes.length; i++) {
     const s = scenes[i];
     let start = Number(s.start_s ?? s.start) || 0;
     let end = Number(s.end_s ?? s.end) || 0;
 
-    // Phát hiện và tự động sửa lỗi AI nhầm mốc M:SS -> MSS (Ví dụ 1:15 -> 115)
-    if (start >= videoDuration && start >= 100) {
-      const min = Math.floor(start / 100);
-      const sec = start % 100;
-      if (sec < 60) {
-        const converted = min * 60 + sec;
-        if (converted < videoDuration) {
-          console.log(
-            `[AutoCorrect] ⚠️ Phát hiện AI nhầm mốc thời gian M:SS (${min}:${sec < 10 ? "0" + sec : sec}). Tự động chuyển start_s từ ${start}s -> ${converted}s`
-          );
-          start = converted;
-          fixedCount++;
-        }
-      }
-    }
-
-    if (end >= videoDuration && end >= 100) {
-      const min = Math.floor(end / 100);
-      const sec = end % 100;
-      if (sec < 60) {
-        const converted = min * 60 + sec;
-        if (converted <= videoDuration + 1) {
-          console.log(
-            `[AutoCorrect] ⚠️ Phát hiện AI nhầm mốc thời gian M:SS (${min}:${sec < 10 ? "0" + sec : sec}). Tự động chuyển end_s từ ${end}s -> ${converted}s`
-          );
-          end = converted;
-          fixedCount++;
-        }
-      }
-    }
-
-    // Clamp an toàn nếu vẫn vượt quá độ dài video gốc
-    if (start >= videoDuration - 0.5) {
-      start = Math.max(0, videoDuration - 5);
+    // 1. Kiểm tra chuyển đổi start mốc M:SS -> MSS (Ví dụ 1:13 -> 113 -> 73s)
+    const mssStart = tryConvertMSS(start, prevEnd, videoDuration);
+    if (mssStart && (start >= videoDuration || start > prevEnd + 25)) {
+      console.log(
+        `[AutoCorrect] ⚠️ Phát hiện AI nhầm mốc thời gian M:SS (${mssStart.min}:${mssStart.sec < 10 ? "0" + mssStart.sec : mssStart.sec}). Tự động chuyển start_s từ ${start}s -> ${mssStart.converted}s`
+      );
+      start = mssStart.converted;
       fixedCount++;
     }
+
+    // 2. Kiểm tra chuyển đổi end mốc M:SS -> MSS (Ví dụ 1:13 -> 113 -> 73s)
+    const mssEnd = tryConvertMSS(end, start, videoDuration);
+    if (mssEnd && (end >= videoDuration || end > start + 25)) {
+      console.log(
+        `[AutoCorrect] ⚠️ Phát hiện AI nhầm mốc thời gian M:SS (${mssEnd.min}:${mssEnd.sec < 10 ? "0" + mssEnd.sec : mssEnd.sec}). Tự động chuyển end_s từ ${end}s -> ${mssEnd.converted}s`
+      );
+      end = mssEnd.converted;
+      fixedCount++;
+    }
+
+    // 3. Clamp an toàn đảm bảo start < end và không vượt quá độ dài video gốc
     if (end > videoDuration) {
       end = videoDuration;
       fixedCount++;
     }
 
+    if (start >= end) {
+      const fallbackDuration = Number(s.duration_s) || 5;
+      start = Math.max(0, Math.min(start, Math.max(0, videoDuration - fallbackDuration)));
+      end = Math.min(videoDuration, start + fallbackDuration);
+      console.log(`[AutoCorrect] ⚠️ Hiệu chỉnh mốc thời gian vỡ (start >= end): scene=${s.scene_id} -> start=${start}s, end=${end}s`);
+      fixedCount++;
+    }
+
     s.start_s = Number(start.toFixed(2));
     s.end_s = Number(end.toFixed(2));
+    prevEnd = s.end_s;
   }
 
   if (fixedCount > 0) {
@@ -323,7 +332,7 @@ async function main() {
   let activePresetContext = "";
   try {
     console.log("[NicheDetect] Đang nhận diện ngách nội dung của video gốc...");
-    const candidateModels = ["gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash", "gemini-2.0-flash"];
+    const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash", "gemini-2.0-flash"];
     const nicheResponse = await generateContentWithRetryFallback(
       ai,
       candidateModels,
@@ -370,7 +379,7 @@ async function main() {
   }
 
     console.log("[AI] Đang gửi yêu cầu phân tích video sang Gemini AI...");
-    const candidateModels = ["gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash", "gemini-2.0-flash"];
+    const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash", "gemini-2.0-flash"];
     const response = await generateContentWithRetryFallback(
       ai,
       candidateModels,
@@ -444,6 +453,7 @@ async function main() {
       const scenes = timelineJson.timeline || [];
       const shortDur = scenes.reduce((acc, s) => acc + (Number(s.duration_s) || 0), 0);
       const effectsUsed = [...new Set(scenes.map((s) => s.advanced_effect?.name).filter(Boolean))].join(", ");
+      const captionText = `${videoMeta.description || ""} ${(videoMeta.hashtags || []).map((h) => `#${h}`).join(" ")}`.trim();
 
       let origDurSec = null;
       try {
@@ -496,7 +506,11 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error("Unhandled rejection:", err);
-  process.exit(1);
-});
+module.exports = { validateAndFixTimelineTimestamps, generateTimeline: main };
+
+if (require.main === module) {
+  main().catch((err) => {
+    console.error("Unhandled rejection:", err);
+    process.exit(1);
+  });
+}

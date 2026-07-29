@@ -1334,9 +1334,13 @@ async function renderTemporalWarpScene(inputVideo, scene, voiceWav = null) {
         outputPath,
       ];
     } else if (hasOrigAudio) {
-      // Trường hợp 2: Giữ lại âm thanh gốc của video và đồng bộ tốc độ mượt mà bằng atempo
+      // Trường hợp 2: Chỉ tắt tiếng gốc (mute) khi scene bị tua nhanh mạnh (speedRatio >= 2.0) và không có thoại voiceover.
       const speedRatio = (s.sourceDuration || s.duration) / s.duration;
-      const audioFilter = buildAudioSpeedFilter(speedRatio);
+      const isMutedForSpeedup = (speedRatio >= 2.0) && (!s.voice || s.voice.trim() === "");
+      const audioFilter = isMutedForSpeedup ? "volume=0.0" : buildAudioSpeedFilter(speedRatio);
+      if (isMutedForSpeedup) {
+        log(`[AudioEngine] Scene ${s.id}: tua nhanh ${speedRatio.toFixed(2)}x -> Tắt tiếng gốc (Mute) nhường không gian cho BGM`);
+      }
       return [
         "-hide_banner",
         "-y",
@@ -1653,13 +1657,20 @@ async function renderCurrentProject() {
     if (bgmMood !== "none") {
       const bgmTrack = resolveBgmTrack(bgmMood, audioConfig.bgm_url);
       if (bgmTrack && bgmTrack.path && fs.existsSync(bgmTrack.path)) {
-        log(`[AudioEngine] Đang chèn BGM [${bgmMood}] từ: ${bgmTrack.path}`);
+        const modeStr = String(timeline.video_meta?.pipeline_mode || "").toLowerCase();
+        const isLong2Short = modeStr.includes("long2short");
+        const hasVoiceover = scenes.some((s) => s.include !== false && s.voice && s.voice.trim().length > 0);
+        const hasFastSpeedup = scenes.some((s) => s.include !== false && ((s.sourceDuration || s.duration) / s.duration >= 2.0));
+        // Đẩy BGM lên 85% KHI VÀ CHỈ KHI thuộc mode Long2Short hoặc có cảnh tua nhanh >= 2.0x.
+        // Nếu là video 1.0x bình thường không có voiceover -> BGM mức mặc định 50% (0.50). Nếu có thoại -> 25% (0.25).
+        const bgmVolume = (isLong2Short || hasFastSpeedup) ? 0.85 : (hasVoiceover ? 0.25 : 0.50);
+        log(`[AudioEngine] Đang chèn BGM [${bgmMood}] (Âm lượng BGM: ${(bgmVolume * 100).toFixed(0)}%) từ: ${bgmTrack.path}`);
         const bgmTempOutput = path.join(TEMP_DIR, `${videoId}_bgm_mixed.mp4`);
-        const mixCmd = `ffmpeg -y -i "${outputPath}" -i "${bgmTrack.path}" -filter_complex "[1:a]asetrate=44320,aresample=44100,volume=0.25,aloop=loop=-1:size=2e+9[bgm];[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=2[aout]" -map 0:v -map "[aout]" -c:v copy -c:a aac -b:a 192k "${bgmTempOutput}"`;
+        const mixCmd = `ffmpeg -y -i "${outputPath}" -i "${bgmTrack.path}" -filter_complex "[1:a]asetrate=44320,aresample=44100,volume=${bgmVolume},aloop=loop=-1:size=2e+9[bgm];[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=2[aout]" -map 0:v -map "[aout]" -c:v copy -c:a aac -b:a 192k "${bgmTempOutput}"`;
         execSync(mixCmd, { stdio: "pipe" });
         if (fs.existsSync(bgmTempOutput)) {
           fs.renameSync(bgmTempOutput, outputPath);
-          log(`[AudioEngine] ✅ Đã chèn BGM Nhạc Nền thành công vào: ${outputPath}`);
+          log(`[AudioEngine] ✅ Đã chèn BGM Nhạc Nền thành công (Volume: ${(bgmVolume * 100).toFixed(0)}%) vào: ${outputPath}`);
         }
         if (bgmTrack.isTemp && fs.existsSync(bgmTrack.path)) {
           try { fs.unlinkSync(bgmTrack.path); } catch {}
