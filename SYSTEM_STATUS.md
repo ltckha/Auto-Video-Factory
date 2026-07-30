@@ -82,6 +82,8 @@ Toàn bộ các Prompt System phục vụ cho việc tích hợp n8n được l�
 - [ideas/IDEA_001_long_video_and_multi_clips.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_001_long_video_and_multi_clips.md): Spec chi tiết cho ý tưởng **IDEA-001** (Xử lý video dài >5m & Ghép chùm clips ngắn).
 - [ideas/IDEA_002_copyright_safe_audio_and_bgm.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_002_copyright_safe_audio_and_bgm.md): Spec chi tiết cho ý tưởng **IDEA-002** (Hệ thống âm thanh 3 tầng & Nhạc nền an toàn bản quyền).
 - [ideas/IDEA_003_dynamic_overlay_stickers.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_003_dynamic_overlay_stickers.md): Spec chi tiết cho ý tưởng **IDEA-003** (Hệ thống Sticker chuyển động nền trong suốt).
+- [ideas/IDEA_004_ai_pure_photo2video.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_004_ai_pure_photo2video.md): Spec chi tiết cho ý tưởng **IDEA-004** (Pipeline Video AI Pure: Từ 1 ảnh Shopee -> Video điện ảnh).
+- [ideas/IDEA_005_ai_hybrid_dream_hook.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_005_ai_hybrid_dream_hook.md): Spec chi tiết cho ý tưởng **IDEA-005** (Pipeline Video AI Hybrid: Quay thật + Cảnh AI Dream Hook 3s).
 
 
 
