@@ -233,17 +233,75 @@ function validateAndFixTimelineTimestamps(timelineJson, videoPath) {
 }
 
 async function main() {
+  const { resolveMultiInputs, getVideoDuration } = require("./multiInputResolver");
+  const { generateFastPreview } = require("./fastPreviewGenerator");
+
   const nonFlagArgs = process.argv.slice(2).filter((arg) => !arg.startsWith("--"));
-  const videoPathArg = nonFlagArgs[0];
-  if (!videoPathArg) {
+  if (nonFlagArgs.length === 0) {
     console.error("Lỗi: Vui lòng truyền đường dẫn video gốc.");
     process.exit(1);
   }
 
-  const absoluteVideoPath = path.resolve(videoPathArg);
-  if (!fs.existsSync(absoluteVideoPath)) {
-    console.error(`Lỗi: Không tìm thấy file video tại: ${absoluteVideoPath}`);
+  const TEMP_WORK_DIR = path.join(INCOMING_DIR, "temp_concat");
+  let inputRes;
+  try {
+    inputRes = resolveMultiInputs(nonFlagArgs, TEMP_WORK_DIR);
+  } catch (resErr) {
+    console.error("Lỗi xử lý đầu vào video:", resErr.message);
     process.exit(1);
+  }
+
+  const absoluteVideoPath = inputRes.masterVideoPath;
+  const dur = inputRes.totalDuration;
+
+  const defaultProjectId = inputRes.suggestedProjectId || path.basename(absoluteVideoPath, path.extname(absoluteVideoPath));
+  const projectId = defaultProjectId;
+
+  // Phân tích tham số mode trước khi upload: node generateTimeline.js <path> [--mode=short2short|long2short|long_highlight_clusters]
+  let mode = null;
+  const modeArg = process.argv.find((arg) => arg.startsWith("--mode="));
+  if (modeArg) {
+    mode = modeArg.split("=")[1].toLowerCase().trim();
+  }
+
+  // Tự động nhận diện Mode dựa trên Ma trận 5 Tầng thời lượng nếu không truyền cờ --mode
+  if (!mode) {
+    if (dur < 60) {
+      mode = "short2short";
+    } else if (dur >= 60 && dur <= 90) {
+      console.log(`\n[ModeSelect] 🔀 Video dài ${dur.toFixed(1)}s (Vùng 60s-90s linh hoạt). Mặc định chọn 'short2short'. (Dùng --mode=long2short để đổi).`);
+      mode = "short2short";
+    } else if (dur > 90 && dur <= 180) {
+      mode = "long2short";
+    } else if (dur > 180 && dur <= 300) {
+      console.log(`\n[ModeSelect] 🖐️ Video dài ${dur.toFixed(1)}s (Vùng 3m-5m linh hoạt). Mặc định chọn 'long2short'. (Dùng --mode=long_highlight_clusters để sinh chùm shorts MỚI).`);
+      mode = "long2short";
+    } else {
+      console.log(`\n[ModeSelect] 🔥 Video dài ${dur.toFixed(1)}s (> 5 phút). Tự động chọn Mode MỚI 'long_highlight_clusters' (Chùm Video Ngắn Batch)!`);
+      mode = "long_highlight_clusters";
+    }
+  }
+
+  const isShort2Short = mode === "short2short";
+  const isClusterMode = mode === "long_highlight_clusters" || mode === "clusters";
+  const pipelineMode = isClusterMode ? "LongHighlightClusters" : (isShort2Short ? "Short2Short" : "Long2Short");
+  const promptFileName = isClusterMode
+    ? "long_highlight_cluster_prompt.md"
+    : (isShort2Short ? "short2short_generator_prompt.md" : "long2short_generator_prompt.md");
+  const promptPath = path.join(PROMPTS_DIR, promptFileName);
+
+  console.log(`[Mode] Chế độ chạy: ${pipelineMode} (Prompt: ${promptFileName}, Độ dài gốc: ${dur.toFixed(1)}s)`);
+
+  if (!fs.existsSync(promptPath)) {
+    throw new Error(`Không tìm thấy file prompt system tại: ${promptPath}`);
+  }
+  let systemInstruction = fs.readFileSync(promptPath, "utf8");
+
+  // Nếu là Mode Cluster / Video Dài (> 5m) -> Tạo Fast Preview 4x siêu nhẹ để upload nhanh gấp 10 lần!
+  let fileToUpload = absoluteVideoPath;
+  if (isClusterMode || dur > 300) {
+    console.log(`[FastPreview] Tự động kích hoạt tạo Fast Preview 4x siêu nhẹ cho video dài (${dur.toFixed(1)}s)...`);
+    fileToUpload = generateFastPreview(absoluteVideoPath, TEMP_WORK_DIR, 4.0);
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
@@ -252,17 +310,14 @@ async function main() {
     process.exit(1);
   }
 
-  const defaultProjectId = path.basename(absoluteVideoPath, path.extname(absoluteVideoPath));
-  const projectId = nonFlagArgs[1] || defaultProjectId;
   console.log(`[Project] Khởi tạo dự án: ${projectId}`);
-
   const ai = new GoogleGenAI({ apiKey });
 
   let uploadResult;
   try {
-    console.log(`[Upload] Đang upload video lên Gemini File API: ${absoluteVideoPath}...`);
+    console.log(`[Upload] Đang upload video lên Gemini File API: ${fileToUpload}...`);
     uploadResult = await ai.files.upload({
-      file: absoluteVideoPath,
+      file: fileToUpload,
       mimeType: "video/mp4",
     });
     console.log(`[Upload] Đã tải lên file: ${uploadResult.name} (URI: ${uploadResult.uri})`);
@@ -287,99 +342,134 @@ async function main() {
     }
     console.log("[Poll] Video đã sẵn sàng hoạt động!");
 
-  // Phân tích tham số mode: node generateTimeline.js <path_to_video> [project_id] [--mode=short2short|long2short]
-  let mode = null;
-  const modeArg = process.argv.find((arg) => arg.startsWith("--mode="));
-  if (modeArg) {
-    mode = modeArg.split("=")[1].toLowerCase().trim();
-  }
-
-  // Tự động nhận diện Mode dựa trên độ dài video nếu không truyền cờ --mode
-  if (!mode) {
-    let dur = null;
+    // Nhận diện Ngách Nội Dung & Nạp Master Preset nếu đạt độ tin cậy >= 0.7
+    let activePresetContext = "";
     try {
-      const cmd = `ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${videoPathArg}"`;
-      const out = require("child_process").execSync(cmd, { encoding: "utf8" }).trim();
-      dur = parseFloat(out);
-    } catch {}
-
-    if (dur && Number.isFinite(dur)) {
-      if (dur < 55) {
-        mode = "short2short";
-      } else if (dur > 90) {
-        mode = "long2short";
-      } else {
-        mode = "short2short";
-      }
-    } else {
-      mode = "long2short";
-    }
-  }
-
-  const isShort2Short = mode === "short2short";
-  const pipelineMode = isShort2Short ? "Short2Short" : "Long2Short";
-  const promptFileName = isShort2Short ? "short2short_generator_prompt.md" : "long2short_generator_prompt.md";
-  const promptPath = path.join(PROMPTS_DIR, promptFileName);
-
-  console.log(`[Mode] Chế độ chạy: ${pipelineMode} (Prompt: ${promptFileName})`);
-
-  if (!fs.existsSync(promptPath)) {
-    throw new Error(`Không tìm thấy file prompt system tại: ${promptPath}`);
-  }
-  let systemInstruction = fs.readFileSync(promptPath, "utf8");
-
-  // Nhận diện Ngách Nội Dung & Nạp Master Preset nếu đạt độ tin cậy >= 0.7
-  let activePresetContext = "";
-  try {
-    console.log("[NicheDetect] Đang nhận diện ngách nội dung của video gốc...");
-    const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash", "gemini-2.0-flash"];
-    const nicheResponse = await generateContentWithRetryFallback(
-      ai,
-      candidateModels,
-      [
+      console.log("[NicheDetect] Đang nhận diện ngách nội dung & nhịp độ video gốc...");
+      const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
+      const nicheResponse = await generateContentWithRetryFallback(
+        ai,
+        candidateModels,
+        [
+          {
+            fileData: {
+              fileUri: fileState.uri,
+              mimeType: fileState.mimeType,
+            },
+          },
+          "Phân tích ngắn gọn video và trả về JSON chứa category (ngách nội dung: tech_unboxing, asmr_build, affiliate_sales, fashion_lifestyle, food_cooking, diy_home, general_viral), pacing (fast_impact hoặc cinematic_slow) và niche_confidence (số thực từ 0.0 đến 1.0).",
+        ],
         {
-          fileData: {
-            fileUri: fileState.uri,
-            mimeType: fileState.mimeType,
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: "OBJECT",
+            properties: {
+              category: { type: "STRING" },
+              pacing: { type: "STRING" },
+              niche_confidence: { type: "NUMBER" },
+            },
+            required: ["category", "pacing", "niche_confidence"],
           },
-        },
-        "Phân tích ngắn gọn video và trả về JSON chứa category (ngách nội dung: tech_unboxing, asmr_build, affiliate_sales, fashion_lifestyle, food_cooking, diy_home, general_viral) và niche_confidence (số thực từ 0.0 đến 1.0).",
-      ],
-      {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: "OBJECT",
-          properties: {
-            category: { type: "STRING" },
-            niche_confidence: { type: "NUMBER" },
-          },
-          required: ["category", "niche_confidence"],
-        },
-      }
-    );
+        }
+      );
 
-    const nicheData = JSON.parse(nicheResponse.text || "{}");
-    const category = (nicheData.category || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9_-]/g, "_").toLowerCase().trim();
-    const confidence = Number(nicheData.niche_confidence) || 0;
+      const nicheData = JSON.parse(nicheResponse.text || "{}");
+      const category = (nicheData.category || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9_-]/g, "_").toLowerCase().trim();
+      const confidence = Number(nicheData.niche_confidence) || 0;
 
-    if (category && confidence >= 0.7) {
-      const presetPath = path.join(ROOT, "effects", "presets", `preset_${category}.json`);
-      if (fs.existsSync(presetPath)) {
-        console.log(`[NicheDetect] Đã chọn Master Preset: ${category} (Độ tin cậy: ${confidence})`);
-        const presetContent = fs.readFileSync(presetPath, "utf8");
-        activePresetContext = `\n\n━━━━━━━━━━━━━━━━━━\nMASTER NICHE FEW-SHOT PRESET (${category.toUpperCase()})\n━━━━━━━━━━━━━━━━━━\nHãy tham khảo cấu trúc nhịp độ, vị trí chữ và hiệu ứng từ Preset Ngách dưới đây khi sinh timeline:\n${presetContent}\n`;
-      } else {
-        console.log(`[NicheDetect] Chưa có file Preset Master cho ngách [${category}] (Độ tin cậy: ${confidence}) — dùng prompt chuẩn, không nạp preset`);
+      if (category && confidence >= 0.7) {
+        const presetPath = path.join(ROOT, "effects", "presets", `preset_${category}.json`);
+        if (fs.existsSync(presetPath)) {
+          console.log(`[NicheDetect] Đã chọn Master Preset: ${category} (Độ tin cậy: ${confidence})`);
+          const presetContent = fs.readFileSync(presetPath, "utf8");
+          activePresetContext = `\n\n━━━━━━━━━━━━━━━━━━\nMASTER NICHE FEW-SHOT PRESET (${category.toUpperCase()})\n━━━━━━━━━━━━━━━━━━\nHãy tham khảo cấu trúc nhịp độ, vị trí chữ và hiệu ứng từ Preset Ngách dưới đây khi sinh timeline:\n${presetContent}\n`;
+        }
       }
-    } else {
-      console.log(`[NicheDetect] Độ tin cậy thấp (${confidence}) — dùng prompt chuẩn, không nạp preset`);
+    } catch (nicheErr) {
+      console.warn(`[NicheDetect] WARN: Lỗi nhận diện ngách (${nicheErr.message}) — dùng prompt chuẩn, không nạp preset`);
     }
-  } catch (nicheErr) {
-    console.warn(`[NicheDetect] WARN: Lỗi nhận diện ngách (${nicheErr.message}) — dùng prompt chuẩn, không nạp preset`);
-  }
 
+    if (isClusterMode) {
+      // XỬ LÝ MODE CLUSTER (PASS 1 & PASS 2 DÀNH CHO VIDEO DÀI/BATCH SHORTS)
+      console.log("[AI] [Pass 1] Đang gửi yêu cầu gom cụm điểm sáng sang Gemini AI...");
+      const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
+      const clusterResponse = await generateContentWithRetryFallback(
+        ai,
+        candidateModels,
+        [
+          {
+            fileData: {
+              fileUri: fileState.uri,
+              mimeType: fileState.mimeType,
+            },
+          },
+          "Hãy phân tích toàn bộ video, tái cấu trúc video dài thành danh sách từ 2 đến 5 Video Ngắn Hoàn Chỉnh Độc Lập (có cấu trúc câu chuyện hoàn chỉnh: Hook 3s -> Nội Dung -> Kết Bài).",
+        ],
+        {
+          systemInstruction: systemInstruction,
+          responseMimeType: "application/json",
+        }
+      );
+
+      const clusterData = JSON.parse(clusterResponse.text || "{}");
+      const clusters = clusterData.clusters || [];
+      console.log(`[Pass 1] ✅ Đã phát hiện ${clusters.length} Cụm Video Ngắn Độc Lập đắt giá!`);
+
+      if (clusters.length === 0) {
+        console.warn("[Pass 1] Cảnh báo: Không tìm thấy cụm điểm sáng nào, fallback về mode Long2Short chuẩn.");
+      } else {
+        // Pass 2: Đọc prompt Long2Short chuẩn để sinh từng file JSON kịch bản độc lập
+        const stdPromptPath = path.join(PROMPTS_DIR, "long2short_generator_prompt.md");
+        const stdInstruction = fs.readFileSync(stdPromptPath, "utf8");
+
+        for (let idx = 0; idx < clusters.length; idx++) {
+          const c = clusters[idx];
+          const subProjectId = `${projectId}_short${String(idx + 1).padStart(2, "0")}`;
+          console.log(`\n[Pass 2] (${idx + 1}/${clusters.length}) Đang tạo kịch bản Timeline JSON riêng cho Short: '${subProjectId}' (${c.cluster_title})...`);
+
+          const focusText = c.narrative_focus ? ` (Tập trung: ${c.narrative_focus})` : "";
+          const promptMsg = `Hãy tạo kịch bản Timeline JSON hoàn chỉnh cho Video Ngắn Độc Lập '${c.cluster_title}'${focusText} sử dụng các mốc thời gian sau từ video gốc:\n${JSON.stringify(c.timecodes, null, 2)}`;
+          const subResponse = await generateContentWithRetryFallback(
+            ai,
+            candidateModels,
+            [
+              {
+                fileData: {
+                  fileUri: fileState.uri,
+                  mimeType: fileState.mimeType,
+                },
+              },
+              promptMsg,
+            ],
+            {
+              systemInstruction: stdInstruction + activePresetContext,
+              responseMimeType: "application/json",
+              responseSchema: RESPONSE_SCHEMA,
+            }
+          );
+
+          let subTimelineJson = JSON.parse(subResponse.text || "{}");
+          subTimelineJson = validateAndFixTimelineTimestamps(subTimelineJson, absoluteVideoPath);
+
+          const nowCreatedAt = getLocalDateTime();
+          subTimelineJson.video_meta = subTimelineJson.video_meta || {};
+          subTimelineJson.video_meta.title = c.cluster_title || subTimelineJson.video_meta.title;
+          subTimelineJson.video_meta.pipeline_mode = "LongHighlightClusters";
+          subTimelineJson.video_meta.created_at = nowCreatedAt;
+          subTimelineJson.video_meta.input_file = absoluteVideoPath;
+
+          fs.mkdirSync(INCOMING_DIR, { recursive: true });
+          const subOutputPath = path.join(INCOMING_DIR, `${subProjectId}.json`);
+          fs.writeFileSync(subOutputPath, JSON.stringify(subTimelineJson, null, 2), "utf8");
+          console.log(`[Timeline] ✅ Đã sinh thành công file kịch bản độc lập: ${subOutputPath}`);
+        }
+        return;
+      }
+    }
+
+    // CHẾ ĐỘ CHUẨN (SHORT2SHORT HOẶC LONG2SHORT CŨ)
     console.log("[AI] Đang gửi yêu cầu phân tích video sang Gemini AI...");
-    const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash", "gemini-2.0-flash"];
+    const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
     const response = await generateContentWithRetryFallback(
       ai,
       candidateModels,

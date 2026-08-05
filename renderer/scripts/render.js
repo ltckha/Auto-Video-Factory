@@ -46,7 +46,9 @@ const {
   createWorkflowContext,
 } = require("./archiveWorkflow");
 const { resolveFont } = require("./fontRegistry");
-const { prepareSubtitleLayout, wrapSubtitleText } = require("./subtitleLayoutEngine");
+const { prepareSubtitleLayout, wrapSubtitleText, computeCompleteSubtitleLayout } = require("./subtitleLayoutEngine");
+const { resolveCardTemplate, resolveStickerAsset } = require("./overlayAssetResolver");
+const { generateCompositeCardImage } = require("./cardCompositeEngine");
 const { resolveSubtitleStyle } = require("./subtitleStyles");
 const { getSubtitlePosition } = require("./textPositionEngine");
 const {
@@ -631,7 +633,7 @@ function timeToSeconds(value) {
   return NaN;
 }
 
-function buildVideoFilters(scene) {
+function buildVideoFilters(scene, cardResult = null, cardInputIndex = 1) {
   const filters = [
     `scale=${TARGET.width}:${TARGET.height}:force_original_aspect_ratio=increase`,
     `crop=${TARGET.width}:${TARGET.height}`,
@@ -640,6 +642,14 @@ function buildVideoFilters(scene) {
   filters.push(...buildAdvancedFilters(scene, TARGET));
   if (scene.openingHook) {
     filters.push(...buildOpeningHookFilters(scene));
+  }
+
+  const baseFilterStr = filters.join(",");
+
+  if (cardResult && cardResult.compositePath && fs.existsSync(cardResult.compositePath)) {
+    const { overlayX, overlayY } = cardResult;
+    const cardOverlay = `[vbase][${cardInputIndex}:v]overlay=${overlayX}:${overlayY},format=yuv420p`;
+    return `[0:v]${baseFilterStr}[vbase];${cardOverlay}`;
   }
 
   const textFilters = buildTextFilters(scene);
@@ -766,15 +776,42 @@ function buildTypingFilters(cue, scene, cueIndex) {
 }
 
 function drawTextFilter(cue, effect, scene, cueIndex, subtitleStyle, shouldLog = true) {
-  const preset = resolveSubtitleStyle(scene, cue, cueIndex);
+  const explicitStyle = cue.subtitle_style || cue.subtitleStyle || scene.subtitle_style || scene.subtitleStyle;
+  const preset = resolveSubtitleStyle(explicitStyle ? { ...scene, subtitle_style: explicitStyle } : scene, cue, cueIndex);
   const font = resolveFont(preset.font);
-  const style = subtitleStyle || prepareSubtitleText(cue.text, preset);
+
+  const cardTemplate = resolveCardTemplate(preset.graphicTemplate || preset.displayName || explicitStyle);
+  let layout = null;
+  if (cardTemplate && cardTemplate.exists) {
+    layout = computeCompleteSubtitleLayout({
+      text: cue.text || scene.subtitle,
+      presetName: preset.graphicTemplate || preset.displayName || explicitStyle,
+      positionAnchor: cue.text_position || scene.textPosition || "top",
+      videoW: TARGET.width,
+      videoH: TARGET.height,
+    });
+  }
+
+  const rawStyle = subtitleStyle || (layout ? { lines: layout.lines, fontSize: layout.fontSize, lineSpacing: Math.round(layout.fontSize * 0.2) } : prepareSubtitleText(cue.text, preset));
+  const style = {
+    ...rawStyle,
+    lines: rawStyle.lines || (cue.text || scene.subtitle || "").split("\n"),
+  };
+
   const position = getSubtitlePosition(cue.text_position || scene.textPosition, SUBTITLE);
-  const textFile = writeSubtitleTextFile(scene, cueIndex, style.wrappedText);
-  const effectOptions = effect.build({ cue, style, subtitle: SUBTITLE, baseY: position.y });
+  const positionY = layout
+    ? `'(${layout.overlayY + layout.innerPaddingY + 10})'`
+    : position.y;
+  const positionX = layout
+    ? `'(${layout.overlayX + layout.innerPaddingX} + (${layout.innerW} - text_w)/2)'`
+    : "(w-text_w)/2";
+
+  const posObj = { key: cue.text_position || scene.textPosition || "top", y: positionY };
+  const textFile = writeSubtitleTextFile(scene, cueIndex, (style.lines || []).join("\n"));
+  const effectOptions = effect.build({ cue, style, subtitle: SUBTITLE, baseY: positionY });
 
   if (shouldLog) {
-    logSubtitleStyle(scene, cueIndex, style, preset, font, position);
+    logSubtitleStyle(scene, cueIndex, style, preset, font, posObj);
   }
 
   if (Array.isArray(preset.layers) && preset.layers.length) {
@@ -784,10 +821,10 @@ function drawTextFilter(cue, effect, scene, cueIndex, subtitleStyle, shouldLog =
         font,
         style,
         preset,
-        effectOptions,
+        effectOptions: { ...effectOptions, x: positionX },
         cue,
         layer,
-        positionY: position.y,
+        positionY,
       }))
       .join(",");
   }
@@ -797,9 +834,9 @@ function drawTextFilter(cue, effect, scene, cueIndex, subtitleStyle, shouldLog =
     font,
     style,
     preset,
-    effectOptions,
+    effectOptions: { ...effectOptions, x: positionX },
     cue,
-    positionY: position.y,
+    positionY,
   });
 }
 
@@ -1292,6 +1329,17 @@ async function renderTemporalWarpScene(inputVideo, scene, voiceWav = null) {
   const hasOrigAudio = voiceWav ? false : hasAudioStream(inputVideo);
 
   const buildArgs = (s) => {
+    const cardResult = generateCompositeCardImage({
+      sceneId: s.id,
+      text: s.subtitle || s.text || s.caption || "",
+      presetName: s.subtitleStyle || s.subtitle_style || "vibrant_sticker_label",
+      positionAnchor: s.textPosition || s.text_position || "top",
+      videoW: TARGET.width,
+      videoH: TARGET.height,
+    });
+    const cardInputIndex = voiceWav ? 2 : 1;
+    const extraInputs = cardResult && cardResult.compositePath ? ["-i", cardResult.compositePath] : [];
+
     if (voiceWav) {
       // Trường hợp 1: Có WAV voice — nhúng apad vào filter_complex để pad silence cho đủ duration_s
       return [
@@ -1305,8 +1353,9 @@ async function renderTemporalWarpScene(inputVideo, scene, voiceWav = null) {
         (s.sourceDuration || s.duration).toFixed(3),
         "-i",
         voiceWav,
+        ...extraInputs,
         "-filter_complex",
-        `${buildTemporalWarpFilterComplex(s, segments)};[1:a]apad=whole_dur=${s.duration.toFixed(3)},atrim=end=${s.duration.toFixed(3)},asetpts=PTS-STARTPTS[aout_wav]`,
+        `${buildTemporalWarpFilterComplex(s, segments, cardResult, cardInputIndex)};[1:a]apad=whole_dur=${s.duration.toFixed(3)},atrim=end=${s.duration.toFixed(3)},asetpts=PTS-STARTPTS[aout_wav]`,
         "-map",
         "[vout]",
         "-map",
@@ -1348,10 +1397,11 @@ async function renderTemporalWarpScene(inputVideo, scene, voiceWav = null) {
         s.start.toFixed(3),
         "-i",
         inputVideo,
+        ...extraInputs,
         "-t",
         (s.sourceDuration || s.duration).toFixed(3),
         "-filter_complex",
-        `${buildTemporalWarpFilterComplex(s, segments)};[0:a]${audioFilter},aresample=44100,asetpts=PTS-STARTPTS[aout_orig]`,
+        `${buildTemporalWarpFilterComplex(s, segments, cardResult, 1)};[0:a]${audioFilter},aresample=44100,asetpts=PTS-STARTPTS[aout_orig]`,
         "-map",
         "[vout]",
         "-map",
@@ -1387,6 +1437,7 @@ async function renderTemporalWarpScene(inputVideo, scene, voiceWav = null) {
         s.start.toFixed(3),
         "-i",
         inputVideo,
+        ...extraInputs,
         "-t",
         (s.sourceDuration || s.duration).toFixed(3),
         "-f",
@@ -1394,11 +1445,11 @@ async function renderTemporalWarpScene(inputVideo, scene, voiceWav = null) {
         "-i",
         `anullsrc=channel_layout=stereo:sample_rate=44100:duration=${s.duration.toFixed(3)}`,
         "-filter_complex",
-        buildTemporalWarpFilterComplex(s, segments),
+        buildTemporalWarpFilterComplex(s, segments, cardResult, extraInputs.length ? 1 : 2),
         "-map",
         "[vout]",
         "-map",
-        "1:a",
+        `${extraInputs.length ? 2 : 1}:a`,
         "-c:v",
         "libx264",
         "-preset",
@@ -1444,7 +1495,7 @@ async function renderTemporalWarpScene(inputVideo, scene, voiceWav = null) {
   return outputPath;
 }
 
-function buildTemporalWarpFilterComplex(scene, segments) {
+function buildTemporalWarpFilterComplex(scene, segments, cardResult = null, cardInputIndex = 1) {
   const segmentFilters = segments.map((segment) => {
     const speed = Math.max(0.05, segment.speed);
     return `[0:v]trim=start=${segment.from.toFixed(3)}:end=${segment.to.toFixed(
@@ -1457,6 +1508,17 @@ function buildTemporalWarpFilterComplex(scene, segments) {
     segments.length === 1
       ? `${concatInput}null[twcat]`
       : `${concatInput}concat=n=${segments.length}:v=1:a=0[twcat]`;
+
+  if (cardResult && cardResult.compositePath && fs.existsSync(cardResult.compositePath)) {
+    const { overlayX, overlayY } = cardResult;
+    const baseFilterStr = buildAdvancedFilters(scene, TARGET).join(",");
+    const hookFilterStr = scene.openingHook ? buildOpeningHookFilters(scene).join(",") : "";
+    const filterChain = [baseFilterStr, hookFilterStr].filter(Boolean).join(",");
+    const vbaseChain = filterChain ? `[twcat]${filterChain}[vtwbase];[vtwbase]` : `[twcat]`;
+    const cardOverlay = `${vbaseChain}[${cardInputIndex}:v]overlay=${overlayX}:${overlayY},format=yuv420p[vout]`;
+
+    return [...segmentFilters, concatFilter, cardOverlay].join(";");
+  }
 
   return [...segmentFilters, concatFilter, `[twcat]${buildVideoFilters(scene)}[vout]`].join(";");
 }

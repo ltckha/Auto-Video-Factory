@@ -19,6 +19,9 @@ const FONT_REGISTRY = {
   helvetica_neue: ["Helvetica Neue", "HelveticaNeue", "HelveticaNeue-Medium"],
   montserrat: ["Montserrat", "Montserrat Bold", "Montserrat-SemiBold", "Montserrat-Regular"],
   be_vietnam_pro: ["Be Vietnam Pro", "BeVietnamPro", "Be Vietnam"],
+  lexend: ["Lexend", "Lexend Bold", "Lexend-Medium"],
+  anton: ["Anton", "Anton-Regular"],
+  outfit: ["Outfit", "Outfit-Bold", "Outfit-Regular"],
   arial_unicode: ["Arial Unicode", "Arial Unicode.ttf", "Arial Unicode MS"],
   noto_sans: ["Noto Sans", "NotoSans-Regular", "NotoSans"],
 };

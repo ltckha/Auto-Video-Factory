@@ -1,8 +1,8 @@
 {
   "_meta": {
     "bootstrapped": true,
-    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/VID_20260712_101525_render.log",
-    "rr_index": 1
+    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/IMG_20251029_200932_render.log",
+    "rr_index": 4
   },
   "speedup": {
     "success": 37,
@@ -49,75 +49,99 @@
     "fail": 0
   },
   "advanced_effect:zoomsoft": {
-    "success": 13,
+    "success": 54,
     "fail": 0
   },
   "subtitle_style:hookbold": {
-    "success": 13,
-    "fail": 0
+    "success": 52,
+    "fail": 4
   },
   "transition_out:wipeleft": {
-    "success": 8,
-    "fail": 0
+    "success": 47,
+    "fail": 4
   },
   "advanced_effect:shake": {
-    "success": 8,
+    "success": 17,
     "fail": 0
   },
   "subtitle_style:framedcard": {
-    "success": 13,
+    "success": 43,
     "fail": 0
   },
   "transition_out:fade": {
-    "success": 13,
+    "success": 46,
     "fail": 0
   },
   "advanced_effect:zoomin": {
-    "success": 8,
+    "success": 16,
     "fail": 0
   },
   "subtitle_style:neonglow": {
-    "success": 11,
+    "success": 44,
     "fail": 0
   },
   "transition_out:slideup": {
-    "success": 12,
+    "success": 48,
     "fail": 0
   },
   "transition_out:wiperight": {
-    "success": 10,
+    "success": 15,
     "fail": 0
   },
   "subtitle_style:ctared": {
-    "success": 9,
+    "success": 25,
     "fail": 0
   },
   "subtitle_style:goldcaption": {
-    "success": 10,
+    "success": 38,
     "fail": 0
   },
   "advanced_effect:speedup": {
-    "success": 2,
+    "success": 24,
     "fail": 0
   },
   "advanced_effect:rgbshift": {
-    "success": 2,
-    "fail": 0
+    "success": 12,
+    "fail": 2
   },
   "advanced_effect:overshootzoom": {
-    "success": 8,
+    "success": 20,
     "fail": 0
   },
   "transition_out:pixelize": {
-    "success": 3,
+    "success": 5,
     "fail": 0
   },
   "advanced_effect:flash": {
-    "success": 3,
+    "success": 4,
     "fail": 0
   },
   "transition_out:circleopen": {
+    "success": 35,
+    "fail": 0
+  },
+  "advanced_effect:cinematiczoom": {
+    "success": 21,
+    "fail": 0
+  },
+  "advanced_effect:speedpulse": {
     "success": 4,
     "fail": 0
+  },
+  "subtitle_style:vibrantstickerlabel": {
+    "success": 2,
+    "fail": 0
+  },
+  "subtitle_style:minimalglasscard": {
+    "success": 2,
+    "fail": 0
+  },
+  "subtitle_style:warningredbadge": {
+    "success": 2,
+    "fail": 0
+  },
+  "advanced_effect:speedrampfast": {
+    "success": 17,
+    "fail": 2
   }
 }

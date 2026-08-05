@@ -1,10 +1,9 @@
 const TRANSITION_REGISTRY = {
   fade: "fade",
-  wipe_left: "wipeleft",
-  wipe_right: "wiperight",
-  slide_up: "slideup",
-  circle_open: "circleopen",
-  pixelize: "pixelize",
+  flash_cut: "flashwhite",
+  flash_white: "flashwhite",
+  zoom_match: "zoomin",
+  motion_match: "whipleft",
 };
 
 function normalizeTransitionOut(scene) {
@@ -15,30 +14,30 @@ function normalizeTransitionOut(scene) {
   const raw = scene.transition_out || scene.transitionOut;
   if (!raw) return null;
 
-  let rawType = "fade";
-  let rawDuration = 0.4;
+  let rawType = "hard_cut";
+  let rawDuration = 0.0;
 
   if (typeof raw === "string") {
     rawType = raw.trim().toLowerCase();
   } else if (typeof raw === "object") {
-    rawType = String(raw.type || "fade").trim().toLowerCase();
-    rawDuration = Number(raw.duration) || 0.4;
+    rawType = String(raw.type || "hard_cut").trim().toLowerCase();
+    rawDuration = Number(raw.duration) || 0.0;
+  }
+
+  // ÉP BUỘC TỪ BỎ CÁC CHUYỂN CẢNH SLIDE/CIRCLE/WIPE NGẪU NHIÊN NGỚ NGẨN (Transition Grammar Rule)
+  if (["hard_cut", "hardcut", "none", "cut", "", "wipe_left", "wipe_right", "slide_up", "slide_down", "circle_open", "circle_close", "pixelize"].includes(rawType)) {
+    return null; // HARD CUT: Cắt thẳng 0s không hiệu ứng rườm rà!
   }
 
   const xfadeType = TRANSITION_REGISTRY[rawType];
   if (!xfadeType) {
-    console.warn(`[Transition] Cảnh báo: transition type không hợp lệ "${rawType}", fallback về "fade"`);
-    return {
-      type: "fade",
-      xfadeType: "fade",
-      duration: Math.max(0.1, Math.min(1.5, rawDuration)),
-    };
+    return null; // Fallback to clean Hard Cut 0s for obsolete transitions
   }
 
   return {
     type: rawType,
     xfadeType,
-    duration: Math.max(0.1, Math.min(1.5, rawDuration)),
+    duration: Math.max(0.06, Math.min(1.5, rawDuration || 0.12)),
   };
 }
 

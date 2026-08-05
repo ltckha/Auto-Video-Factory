@@ -296,7 +296,7 @@ async function main() {
     }
     console.log("[Poll] Video sẵn sàng phân tích!");
 
-    const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash", "gemini-2.0-flash"];
+    const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
     const response = await generateContentWithRetryFallback(
       ai,
       candidateModels,

@@ -43,24 +43,37 @@ QUY TẮC PHÂN LOẠI & ĐỒNG BỘ VOICEOVER (CỰC KỲ QUAN TRỌNG)
 3. **Danh sách scene_type hợp lệ** - Chỉ chọn 1 trong: `["hook", "intro", "body", "highlight", "outro", "cta"]`.
 
 ━━━━━━━━━━━━━━━━━━
-CINEMATIC BEHAVIOR RENDERER RULES (HỆ THỐNG ĐIỀU KHIỂN)
+SINGLE-PASS RAW INGREDIENTS & INTENT DIRECTIVES (ĐẠO DIỄN AI NỘI DUNG)
 ━━━━━━━━━━━━━━━━━━
-Khi tạo `advanced_effect`, chọn tên hiệu ứng từ danh sách hợp lệ bên dưới:
-- `advanced_effect.name`: Chọn 1 trong: `Flash`, `Speed Up`, `Zoom In`, `Shake`, `Glow`, `Smooth Transition`, `Cinematic Zoom`, `Fast Motion`, `Satisfying Timewarp`, `Jump Cuts`, `Epic Reveal`.
+- ⚠️ BẠN KHÔNG CẦN CHỌN TÊN HIỆU ỨNG FFMPEG HOẶC TRANSITION! Code Engine sẽ tự động quyết định cách dựng.
+- Bạn chỉ cần phân tích video và xuất ra **Nguyên Liệu & Ý Định (Raw Ingredients)**:
+  - **`visual_intent`:** Ý định thị giác (Chọn 1 trong: `attention`, `explain`, `demonstrate`, `compare`, `reveal`, `emphasize`, `warn`, `prove`, `offer`, `cta`).
+  - **`rhythm_intent`:** Nhịp điệu cảm xúc (Chọn 1 trong: `REST`, `BUILD`, `ACCELERATE`, `HIT`, `RELEASE`).
+  - **`scene_relationship`:** Quan hệ với cảnh kế tiếp (Chọn 1 trong: `continuation`, `contrast`, `reveal`, `before_after`, `explanation`).
+  - **`emphasis_items`:** Mảng các từ/cụm từ quan trọng cần nổi bật: `[{"text": "cực kỳ êm", "type": "benefit", "score": 0.95}]` (Loại: `benefit`, `commercial`, `warning`, `proof`, `cta`).
+  - **`semantic_phrases`:** Tách câu thoại thành các Cụm Ý ngắn có ý nghĩa.
 
 ━━━━━━━━━━━━━━━━━━
-TEXT POSITIONING & STYLE RULES
+TEXT POSITIONING, SUBTITLE STYLES & GRAMMATICAL LINE WRAPPING RULES (\n)
 ━━━━━━━━━━━━━━━━━━
 - Subtitle ngắn (3-8 từ), nhịp nhanh, cảm xúc mạnh.
 - **`text_position`:** Vị trí phụ đề. Chọn một trong: `top`, `center`, `bottom`.
-  - **Mặc định ưu tiên cao nhất:** `top` (chiếm hơn 90% các cảnh) vì đây là vùng an toàn nhất để tránh đè lên sản phẩm hoặc chi tiết thao tác ở giữa và dưới khung hình.
-- **`text_effect.name`:** Chọn 1 trong: `Pop-up`, `Bounce`, `Typewriter`, `Slide In`, `Glow`.
-- **`subtitle_style`:** Phong cách hiển thị phụ đề. Chọn 1 trong:
-  - `hook_bold`: Chữ to, đậm, màu sắc nổi bật gây chú ý mạnh ở đầu video.
-  - `neon_glow`: Hiệu ứng viền phát sáng dạ quang.
-  - `framed_card`: Chữ nằm trong một khung nền mờ (dễ đọc trên mọi background phức tạp).
-  - `gold_caption`: Chữ màu vàng gold sang trọng, thanh lịch.
-  - `cta_red`: Chữ màu đỏ tươi rực rỡ nhấn mạnh lời kêu gọi hành động ở cuối video.
+  - **Mặc định ưu tiên cao nhất:** `top` (chiếm hơn 90% các cảnh) để tránh đè sản phẩm/giao diện.
+- **`text_effect.name`:** Chọn 1 trong các hiệu ứng múa chữ:
+  - `rotated_sticker_pop`: Dán nổi xoay nghiêng góc -3° kèm độ nảy spring (đi kèm `vibrant_sticker_label`).
+  - `smooth_blur_reveal`: Mờ ảo hiện dần từ Gaussian Blur sang nét căng (đi kèm `minimal_glass_card`).
+  - `stomp_zoom`: Nổ chữ giật nảy 125% kèm micro-shake trên nhịp (đi kèm `warning_red_badge`).
+  - `word_by_word_bounce`: Từng từ nhún nhảy 8-12px theo tiết tấu (đi kèm `neon_cyber_card`).
+  - `highlight_marker_swipe`: Dải dạ quang quẹt trượt dưới chân từ khóa.
+  - `pop_up`: Chữ nảy ra gây chú ý mạnh mẽ ở câu đầu.
+- **`subtitle_style` & QUY TẮC NGẮT DÒNG `\n` TỰ NHIÊN (BẮT BUỘC):**
+  Bạn BẮT BUỘC phải chèn dấu `\n` ngắt dòng trực tiếp vào chuỗi `text_content` / `subtitle` theo đúng ngữ pháp Tiếng Việt và tuân thủ giới hạn độ dài ký tự tối đa trên từng dòng của từng Preset:
+  - `vibrant_sticker_label`: Khung Sticker Vàng Dán Nghiêng. **Max 14-16 ký tự/dòng, tối đa 2-3 dòng** (VD: `"KUALA LUMPUR VỀ ĐÊM\nSỐNG ĐỘNG THẾ NÀO?"`).
+  - `vibrant_yellow_lightning`: Khung Sticker Vàng Tia Sét. **Max 15-18 ký tự/dòng, tối đa 2-3 dòng** (VD: `"SIÊU PHẨM GIÀY DA\nBẢO HÀNH 12 THÁNG"`).
+  - `minimal_glass_card`: Khung Kính Mờ Glassmorphism 3D. **Max 18-22 ký tự/dòng, tối đa 2-3 dòng** (VD: `"ĐÔI GIÀY DA BÒ THỦ CÔNG\nSANG TRỌNG VÀ ÊM ÁI"`).
+  - `warning_red_badge`: Khung Đỏ Tươi 3D Báo Động. **Max 11-13 ký tự/dòng, tối đa 2 dòng** (VD: `"ĐỪNG MUA NẾU\nCHƯA XEM!"`).
+  - `neon_cyber_card`: Khung Cyber Neon Dạ Quang. **Max 16-20 ký tự/dòng, tối đa 2 dòng**.
+  - `editorial_clean_text`: Chữ Editorial Chân Phương Không Khung. **Max 20-25 ký tự/dòng**.
 
 ━━━━━━━━━━━━━━━━━━
 TRANSITION OUT RULES (CHUYỂN CẢNH KỊCH TÍNH ĐA DẠNG)
@@ -94,17 +107,41 @@ OUTPUT JSON SCHEMA
       "text_content": "CHỮ HIỂN THỊ TRÊN MAN HINH",
       "text_position": "top",
       "subtitle_style": "hook_bold",
-      "text_effect": {
-        "name": "Pop-up"
-      },
-      "advanced_effect": {
-        "name": "Epic Reveal",
-        "intensity": 0.9
-      },
-      "transition_out": {
-        "type": "fade",
-        "duration": 0.4
-      }
+      "visual_intent": "warn",
+      "rhythm_intent": "HIT",
+      "scene_relationship": "contrast",
+      "emphasis_items": [
+        {
+          "text": "cực kỳ êm",
+          "type": "benefit",
+          "score": 0.95
+        },
+        {
+          "text": "299K",
+          "type": "commercial",
+          "score": 1.0
+        }
+      ],
+      "semantic_phrases": [
+        {
+          "id": "p01",
+          "text": "Đôi dép da bò này",
+          "role": "context",
+          "emphasis": 0.3
+        },
+        {
+          "id": "p02",
+          "text": "đi CỰC KỲ ÊM",
+          "role": "benefit",
+          "emphasis": 0.95
+        },
+        {
+          "id": "p03",
+          "text": "mà giá chỉ 299K!",
+          "role": "commercial",
+          "emphasis": 1.0
+        }
+      ]
     }
   ]
 }

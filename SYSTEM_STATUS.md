@@ -14,10 +14,12 @@ Tài liệu này đóng vai trò là **Bộ nhớ Trạng thái Cục bộ (Loca
 
 ## 2. Các Mốc Chỉnh sửa & Cấu hình Quan trọng (Status: Đang Hoạt Động Tốt)
 
-### 📌 Cấp quyền & Đường dẫn động (`render_long2short.command`)
-- **Vị trí:** [render_long2short.command](file:///Users/khan/Developer/Auto-Video-Factory/render_long2short.command)
-- **Tính năng:** Tự động nhận diện thư mục chạy thực tế (`SCRIPT_DIR`) để di chuyển đến đúng vị trí, cho phép dự án hoạt động portable ở bất kỳ đâu.
-- **Quyền hạn:** Đã cấp quyền `chmod 755` và xóa hoàn toàn cờ quarantine của macOS.
+### 📌 Danh Sách Lệnh Command Gọn Gàng (Executable Commands)
+- **`generate.command`:** [generate.command](file:///Users/khan/Developer/Auto-Video-Factory/generate.command) — Phân tích video, chọn mode 5 tầng & sinh kịch bản JSON.
+- **`render.command`:** [render.command](file:///Users/khan/Developer/Auto-Video-Factory/render.command) — Dựng video thành phẩm từ kịch bản JSON.
+- **`learn.command`:** [learn.command](file:///Users/khan/Developer/Auto-Video-Factory/learn.command) — Học phong cách dựng từ video mẫu.
+- **`sync.command`:** [sync.command](file:///Users/khan/Developer/Auto-Video-Factory/sync.command) — Đồng bộ dự án.
+- **Quyền hạn:** Tất cả đã được cấp quyền `chmod +x` chuẩn trên macOS.
 
 ### 📌 Chuẩn hóa Âm thanh (Audio Normalization)
 - **Vị trí:** [render.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/render.js) (hàm `renderScene` và `renderTemporalWarpScene`).
@@ -54,6 +56,7 @@ Tài liệu này đóng vai trò là **Bộ nhớ Trạng thái Cục bộ (Loca
 | [fontRegistry.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/fontRegistry.js) | ~3.4KB | Quét và đăng ký font chữ từ hệ thống macOS | `resolveFont` — dùng để ffmpeg tìm font khi vẽ chữ lên video |
 | [captionGenerator.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/captionGenerator.js) | ~0.7KB | Sinh nội dung caption/post text từ `video_meta` của timeline JSON để dùng cho mạng xã hội | `buildPostText` — đọc `title`, `description`, `hashtags` từ `video_meta` |
 | [archiveWorkflow.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/archiveWorkflow.js) | ~2.3KB | Quản lý vòng đời project sau khi render xong: di chuyển video thành phẩm sang `rendered/` hoặc `failed/`, tạo folder archive có timestamp | `createWorkflowContext`, `archiveSuccessfulRender`, `handleProjectFailure` |
+| [google_apps_script.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/google_apps_script.js) | ~7.3KB | Mã Google Apps Script tự động tạo Dashboard trên Google Sheet (Tab Projects Tracker, Scenes Detail, Effects Analytics) | `doPost`, `ensureSheetsAndHeaders`, `updateProjectTracker` |
 
 **Config file:**
 | [effectEnums.json](file:///Users/khan/Developer/Auto-Video-Factory/renderer/config/effectEnums.json) | ~0.5KB | **Single Source of Truth** cho toàn bộ enum của `advanced_effect` | Được `effects.js` load động và `syncPromptEnums.js` dùng để inject vào prompt |
@@ -81,9 +84,12 @@ Toàn bộ các Prompt System phục vụ cho việc tích hợp n8n được l�
 - [ideas/INDEX.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/INDEX.md): Bảng quản lý tổng hợp trạng thái các ý tưởng & tính năng đang nghiên cứu/triển khai.
 - [ideas/IDEA_001_long_video_and_multi_clips.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_001_long_video_and_multi_clips.md): Spec chi tiết cho ý tưởng **IDEA-001** (Xử lý video dài >5m & Ghép chùm clips ngắn).
 - [ideas/IDEA_002_copyright_safe_audio_and_bgm.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_002_copyright_safe_audio_and_bgm.md): Spec chi tiết cho ý tưởng **IDEA-002** (Hệ thống âm thanh 3 tầng & Nhạc nền an toàn bản quyền).
-- [ideas/IDEA_003_dynamic_overlay_stickers.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_003_dynamic_overlay_stickers.md): Spec chi tiết cho ý tưởng **IDEA-003** (Hệ thống Sticker chuyển động nền trong suốt).
-- [ideas/IDEA_004_ai_pure_photo2video.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_004_ai_pure_photo2video.md): Spec chi tiết cho ý tưởng **IDEA-004** (Pipeline Video AI Pure: Từ 1 ảnh Shopee -> Video điện ảnh).
+- [ideas/IDEA_003_dynamic_overlay_stickers.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_003_dynamic_overlay_stickers.md): Spec chi tiết cho ý tưởng **IDEA-003** (🔄 Đã hợp nhất vào IDEA-007).
 - [ideas/IDEA_005_ai_hybrid_dream_hook.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_005_ai_hybrid_dream_hook.md): Spec chi tiết cho ý tưởng **IDEA-005** (Pipeline Video AI Hybrid: Quay thật + Cảnh AI Dream Hook 3s).
+- [ideas/IDEA_006_intent_driven_micro_effects.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_006_intent_driven_micro_effects.md): Spec chi tiết cho ý tưởng **IDEA-006** (Intent-Driven Editing & Micro-Effects Engine CapCut/TikTok 2026).
+- [ideas/IDEA_007_dynamic_subtitle_typography.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_007_dynamic_subtitle_typography.md): Spec chi tiết cho ý tưởng **IDEA-007** (Next-Gen Dynamic Subtitle Typography, Badges & Overlay Stickers Engine).
+
+
 
 
 
