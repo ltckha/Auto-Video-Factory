@@ -66,13 +66,17 @@ TEXT POSITIONING, SUBTITLE STYLES & GRAMMATICAL LINE WRAPPING RULES (\n)
   - `word_by_word_bounce`: Từng từ nhún nhảy 8-12px theo tiết tấu (đi kèm `neon_cyber_card`).
   - `highlight_marker_swipe`: Dải dạ quang quẹt trượt dưới chân từ khóa.
   - `pop_up`: Chữ nảy ra gây chú ý mạnh mẽ ở câu đầu.
-- **`subtitle_style` & QUY TẮC NGẮT DÒNG `\n` TỰ NHIÊN (BẮT BUỘC):**
-  Bạn có thể chọn 1 trong các Style Chuẩn hoặc **tự do đề xuất Tên Style Sáng Tạo mới** (ví dụ: `cyber_neon_glow`, `fire_flame_badge`, `luxury_gold_vip`...) để phù hợp với cảm xúc hình ảnh. Hệ thống sẽ tự động học và đăng ký các Style mới này:
-  - `vibrant_yellow_sticker` (hoặc `hook_bold`): Khung Sticker Vàng. **Max 14-16 ký tự/dòng, tối đa 2-3 dòng** (VD: `"KUALA LUMPUR VỀ ĐÊM\nSỐNG ĐỘNG THẾ NÀO?"`).
-  - `vibrant_yellow_lightning_sticker` (hoặc `gold_caption`): Khung Sét Vàng. **Max 15-18 ký tự/dòng, tối đa 2-3 dòng** (VD: `"SIÊU PHẨM GIÀY DA\nBẢO HÀNH 12 THÁNG"`).
-  - `minimal_glass_card` (hoặc `framed_card`): Khung Kính Mờ Glassmorphism. **Max 18-22 ký tự/dòng, tối đa 2-3 dòng** (VD: `"ĐÔI GIÀY DA BÒ THỦ CÔNG\nSANG TRỌNG VÀ ÊM ÁI"`).
-  - `warning_red_badge` (hoặc `cta_red`): Khung Đỏ Tươi 3D. **Max 11-13 ký tự/dòng, tối đa 2 dòng** (VD: `"ĐỪNG MUA NẾU\nCHƯA XEM!"`).
-  - `Tên Style Sáng Tạo Mới`: Bạn được phép tự do đặt tên (như `neon_cyber_glow`, `fire_action`, `luxury_vip`...). Engine sẽ tự động ghi nhận style mới vào backlog thiết kế.
+- **`subtitle_style` & QUY TẮC BẮT BUỘC CHÈN DẤU `\n` NGẮT DÒNG:**
+  - ⚠️ **BẮT BUỘC CHÈN DẤU `\n` NGẮT DÒNG TRỰC TIẾP VÀO `subtitle` / `text_content`:** CẤM để câu văn dài > 16 ký tự nằm dồn trên 1 dòng. Bạn BẮT BUỘC phải chèn dấu `\n` chia câu thành 2-3 dòng ngắn cân đối (VD: `"KUALA LUMPUR VỀ ĐÊM\nSỐNG ĐỘNG THẾ NÀO?"` hoặc `"SẮM NGAY CHO CĂN BẾP\nTẠI GIỎ HÀNG"`).
+  - **BẮT BUỘC NHẤT QUÁN XUYÊN SUỐT VIDEO:** Chọn 01 Style chính (`primary_style`) làm ngôn ngữ thiết kế chung và **giữ nguyên 100% cho tất cả các phân cảnh thân video (`hook`, `intro`, `body`)** để video có tính nhận diện cao cấp, chuyên nghiệp.
+  - **NGOẠI LỆ NỔI BẬT PHÂN CẢNH CUỐI (`outro` / `cta`):** Ở phân cảnh cuối cùng của video, bạn được phép giữ nguyên Style chính HOẶC chuyển đổi sang 1 trong 2 Khung Accent nổi bật bùng nổ:
+    - ⚡ `vibrant_yellow_lightning_sticker` (Khung Sét Vàng Rực Rỡ)
+    - 🚨 `warning_red_badge` / `cta_red` (Khung Badge Đỏ Cảnh Báo 3D)
+  - Giới hạn độ dài ký tự tối đa trên từng dòng:
+    - `vibrant_yellow_sticker` (hoặc `hook_bold`): **Max 14-16 ký tự/dòng, tối đa 2-3 dòng**.
+    - `vibrant_yellow_lightning_sticker` (hoặc `gold_caption`): **Max 15-18 ký tự/dòng, tối đa 2-3 dòng**.
+    - `minimal_glass_card` (hoặc `framed_card`): **Max 18-22 ký tự/dòng, tối đa 2-3 dòng**.
+    - `warning_red_badge` (hoặc `cta_red`): **Max 11-13 ký tự/dòng, tối đa 2 dòng**.
 
 ━━━━━━━━━━━━━━━━━━
 TRANSITION OUT RULES (CHUYỂN CẢNH KỊCH TÍNH ĐA DẠNG)

@@ -28,6 +28,41 @@ function loadVisionProfiles() {
 }
 
 /**
+ * Split text into natural, balanced lines if explicit \n is missing
+ */
+function splitTextIntoNaturalLines(rawText, maxCharsPerLine = 16) {
+  const clean = (rawText || "").trim();
+  if (clean.includes("\n")) {
+    return clean.split("\n").map((l) => l.trim()).filter(Boolean);
+  }
+
+  const words = clean.split(/\s+/).filter(Boolean);
+  if (words.length <= 3 && clean.length <= maxCharsPerLine) {
+    return [clean];
+  }
+
+  const lines = [];
+  let currentLine = [];
+  let currentLen = 0;
+
+  for (const word of words) {
+    if (currentLine.length > 0 && currentLen + word.length + 1 > maxCharsPerLine) {
+      lines.push(currentLine.join(" "));
+      currentLine = [word];
+      currentLen = word.length;
+    } else {
+      currentLine.push(word);
+      currentLen += (currentLine.length > 0 ? 1 : 0) + word.length;
+    }
+  }
+  if (currentLine.length > 0) {
+    lines.push(currentLine.join(" "));
+  }
+
+  return lines;
+}
+
+/**
  * Auto-fit font size calculator per line
  */
 function autoFitLineFontSize(line, containerW, containerH, profile = {}) {
@@ -56,6 +91,7 @@ function generateKineticCardSequence(params) {
     presetName = "vibrant_yellow_lightning_sticker",
     textEffect = "Typewriter",
     durationS = 5.0,
+    positionAnchor = "top",
     videoW = 1080,
     videoH = 1920,
   } = params;
@@ -64,7 +100,12 @@ function generateKineticCardSequence(params) {
   const cardW = Math.round(videoW * 0.88);
   const cardH = Math.round(cardW * 0.50);
   const overlayX = Math.round((videoW - cardW) / 2);
-  const overlayY = Math.round(videoH * 0.12);
+  let overlayY = Math.round(videoH * 0.05); // Raised to 5% to avoid overlapping main subject
+  if (positionAnchor === "center") {
+    overlayY = Math.round((videoH - cardH) / 2);
+  } else if (positionAnchor === "bottom") {
+    overlayY = Math.round(videoH * 0.68);
+  }
 
   const cardKey = presetName || cardTemplate.name || "vibrant_yellow_sticker";
   const visionProfiles = loadVisionProfiles();
@@ -85,7 +126,8 @@ function generateKineticCardSequence(params) {
   const innerW = Math.round(cardW * ((xmax - xmin) / 1000));
   const innerH = Math.round(cardH * ((ymax - ymin) / 1000));
 
-  const lines = text.includes("\n") ? text.split("\n") : [text];
+  // Split text into natural lines (auto-wrap if no \n is provided)
+  const lines = splitTextIntoNaturalLines(text, profile.max_chars_per_line || 16);
   const fontFile = profile.font_file && fs.existsSync(profile.font_file)
     ? profile.font_file
     : "/System/Library/Fonts/Supplemental/Arial Black.ttf";
@@ -100,15 +142,20 @@ function generateKineticCardSequence(params) {
   const allWords = text.replace(/\n/g, " ").split(/\s+/).filter(Boolean);
   const fps = 25;
   const totalFrames = Math.max(15, Math.round(durationS * fps));
-  const revealDurationFrames = Math.min(Math.round(fps * 1.2), Math.round(totalFrames * 0.35));
+  const revealDurationFrames = Math.min(Math.round(fps * 1.5), Math.round(totalFrames * 0.45));
+  const maxRenderFrame = Math.min(totalFrames, revealDurationFrames + 5);
 
   const sequenceDir = path.join(TEMP_DIR, `kinetic_seq_${sceneId}`);
   if (!fs.existsSync(sequenceDir)) {
     fs.mkdirSync(sequenceDir, { recursive: true });
   }
 
-  // Render individual frames in sequence
-  for (let frameIdx = 0; frameIdx < Math.min(totalFrames, 25); frameIdx++) {
+  // Calculate line font sizes ONCE using the FULL text of each line to guarantee 100% constant font size across all frames
+  const lineFontSizes = lines.map((l) => autoFitLineFontSize(l, innerW, innerH / lines.length, profile));
+  const totalTextH = lineFontSizes.reduce((sum, fsVal) => sum + fsVal * 1.25, 0);
+
+  // Render individual frames in sequence up to maxRenderFrame (when all words are 100% revealed)
+  for (let frameIdx = 0; frameIdx < maxRenderFrame; frameIdx++) {
     const frameNumStr = String(frameIdx + 1).padStart(3, "0");
     const framePath = path.join(sequenceDir, `frame_${frameNumStr}.png`);
 
@@ -119,8 +166,6 @@ function generateKineticCardSequence(params) {
       visibleWordsCount = Math.max(1, Math.ceil(progress * allWords.length));
     }
 
-    const currentVisibleText = allWords.slice(0, visibleWordsCount).join(" ");
-    
     // Reconstruct lines based on original text structure
     let currentLines = [];
     let wordCursor = 0;
@@ -131,27 +176,27 @@ function generateKineticCardSequence(params) {
         if (wordCursor < visibleWordsCount) {
           lineWords.push(allWords[wordCursor]);
           wordCursor++;
+        } else {
+          // Fill missing words with invisible space to maintain line height & structure
+          lineWords.push("");
         }
       }
-      if (lineWords.length > 0) {
-        currentLines.push(lineWords.join(" "));
-      }
+      currentLines.push(lineWords.join(" "));
     }
-    if (currentLines.length === 0) currentLines = [currentVisibleText];
-
-    // Compute line sizes and Y positions
-    const lineFontSizes = currentLines.map((l) => autoFitLineFontSize(l, innerW, innerH / currentLines.length, profile));
-    const totalTextH = lineFontSizes.reduce((sum, fsVal) => sum + fsVal * 1.25, 0);
 
     let currentY = Math.round((cardH - totalTextH) / 2);
-    const drawTextFilters = currentLines.map((l, idx) => {
+    const drawTextFilters = [];
+    currentLines.forEach((l, idx) => {
       const lineFs = lineFontSizes[idx];
-      const textFilePath = path.join(TEMP_DIR, `kinetic_txt_${sceneId}_${frameIdx}_${idx}.txt`);
-      fs.writeFileSync(textFilePath, l, "utf8");
+      const cleanLine = l.trim();
+      if (cleanLine.length > 0) {
+        const textFilePath = path.join(TEMP_DIR, `kinetic_txt_${sceneId}_${frameIdx}_${idx}.txt`);
+        fs.writeFileSync(textFilePath, cleanLine, "utf8");
 
-      const lineDraw = `drawtext=textfile='${textFilePath.replace(/'/g, "'\\''")}':fontfile='${fontFile}':fontcolor=${fontColor}:fontsize=${lineFs}:borderw=3:bordercolor=${strokeColor}:shadowx=0:shadowy=4:shadowcolor=${shadowColor}:text_align=C:x=(w-text_w)/2:y=${currentY}`;
+        const lineDraw = `drawtext=textfile='${textFilePath.replace(/'/g, "'\\''")}':fontfile='${fontFile}':fontcolor=${fontColor}:fontsize=${lineFs}:borderw=3:bordercolor=${strokeColor}:shadowx=0:shadowy=4:shadowcolor=${shadowColor}:text_align=C:x=(w-text_w)/2:y=${currentY}`;
+        drawTextFilters.push(lineDraw);
+      }
       currentY += Math.round(lineFs * 1.25);
-      return lineDraw;
     });
 
     // Check for Pop Overshoot scale factor
@@ -176,8 +221,8 @@ function generateKineticCardSequence(params) {
     }
   }
 
-  // Duplicate last rendered frame to remaining frames to save CPU render time
-  const lastRenderedNum = Math.min(totalFrames, 25);
+  // Duplicate last rendered frame (which contains 100% of all words) to remaining frames
+  const lastRenderedNum = maxRenderFrame;
   const lastFramePath = path.join(sequenceDir, `frame_${String(lastRenderedNum).padStart(3, "0")}.png`);
 
   for (let frameIdx = lastRenderedNum; frameIdx < totalFrames; frameIdx++) {

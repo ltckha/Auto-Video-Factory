@@ -1,8 +1,8 @@
 {
   "_meta": {
     "bootstrapped": true,
-    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/IMG_20251029_200932_render.log",
-    "rr_index": 4
+    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/VID_20260719_180114_render.log",
+    "rr_index": 2
   },
   "speedup": {
     "success": 37,
@@ -49,39 +49,39 @@
     "fail": 0
   },
   "advanced_effect:zoomsoft": {
-    "success": 54,
+    "success": 67,
     "fail": 0
   },
   "subtitle_style:hookbold": {
-    "success": 52,
+    "success": 65,
     "fail": 4
   },
   "transition_out:wipeleft": {
-    "success": 47,
+    "success": 58,
     "fail": 4
   },
   "advanced_effect:shake": {
-    "success": 17,
+    "success": 19,
     "fail": 0
   },
   "subtitle_style:framedcard": {
-    "success": 43,
+    "success": 53,
     "fail": 0
   },
   "transition_out:fade": {
-    "success": 46,
+    "success": 59,
     "fail": 0
   },
   "advanced_effect:zoomin": {
-    "success": 16,
+    "success": 19,
     "fail": 0
   },
   "subtitle_style:neonglow": {
-    "success": 44,
+    "success": 52,
     "fail": 0
   },
   "transition_out:slideup": {
-    "success": 48,
+    "success": 60,
     "fail": 0
   },
   "transition_out:wiperight": {
@@ -89,15 +89,15 @@
     "fail": 0
   },
   "subtitle_style:ctared": {
-    "success": 25,
+    "success": 30,
     "fail": 0
   },
   "subtitle_style:goldcaption": {
-    "success": 38,
+    "success": 46,
     "fail": 0
   },
   "advanced_effect:speedup": {
-    "success": 24,
+    "success": 34,
     "fail": 0
   },
   "advanced_effect:rgbshift": {
@@ -117,11 +117,11 @@
     "fail": 0
   },
   "transition_out:circleopen": {
-    "success": 35,
+    "success": 45,
     "fail": 0
   },
   "advanced_effect:cinematiczoom": {
-    "success": 21,
+    "success": 29,
     "fail": 0
   },
   "advanced_effect:speedpulse": {
@@ -141,7 +141,11 @@
     "fail": 0
   },
   "advanced_effect:speedrampfast": {
-    "success": 17,
+    "success": 25,
     "fail": 2
+  },
+  "advanced_effect:snapzoom": {
+    "success": 1,
+    "fail": 0
   }
 }

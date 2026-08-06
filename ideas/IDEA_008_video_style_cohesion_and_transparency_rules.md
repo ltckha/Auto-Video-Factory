@@ -26,6 +26,6 @@
 
 ## 📋 2. Kế Hoạch Lộ Trình Triển Khai (Roadmap)
 
-- [ ] **Giai đoạn 1:** Cập nhật `short2short_generator_prompt.md` và `long2short_generator_prompt.md` quy định AI chọn 1 `primary_subtitle_style` nhất quán cho toàn video.
-- [ ] **Giai đoạn 2:** Cập nhật `subtitleLayoutEngine.js` & `kineticCardEngine.js` áp dụng thuật toán phân loại tọa độ theo độ trong suốt (Glass -> linh hoạt Y, Solid -> khóa Y 5%).
-- [ ] **Giai đoạn 3:** Render kiểm thử đối chứng giữa video phong cách nhất quán vs video đa style.
+- [x] **Giai đoạn 1:** Cập nhật `short2short_generator_prompt.md` quy định AI chọn 01 `primary_style` nhất quán xuyên suốt thân video.
+- [x] **Giai đoạn 2:** Cập nhật `effectControl.js` và `render.js` thực thi khóa cứng Style Khung đồng nhất toàn video, ngoại lệ cho phép phân cảnh cuối dùng ⚡ `vibrant_yellow_lightning_sticker` hoặc 🚨 `warning_red_badge`.
+- [ ] **Giai đoạn 3:** Cập nhật bộ thuật toán vị trí Khung theo độ trong suốt (Glassmorphism -> linh hoạt, Solid -> khóa Y 5%).

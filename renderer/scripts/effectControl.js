@@ -25,23 +25,33 @@ class EffectControlManager {
   }
 
   /**
-   * Evaluates requested effects and returns allowed effects or fallbacks
+   * Evaluates requested effects and returns allowed effects or fallbacks.
+   * Enforces Rule 2: Single Primary Subtitle Style throughout video,
+   * allowing vibrant_yellow_lightning_sticker or warning_red_badge for the final scene.
    */
-  processSceneEffects(sceneId, requestedStyle = {}, requestedEffect = {}) {
-    let style = typeof requestedStyle === "string" ? requestedStyle : requestedStyle.name || "hook_bold";
+  processSceneEffects(sceneId, requestedStyle = {}, requestedEffect = {}, isFinalScene = false) {
+    let style = typeof requestedStyle === "string" ? requestedStyle : requestedStyle.name || "vibrant_yellow_sticker";
     let textEffect = typeof requestedEffect === "string" ? requestedEffect : requestedEffect.name || "Pop-up";
 
-    // 1. Check Cooldown rule (no same style for 2 consecutive scenes)
-    const recentHistory = this.history.slice(-COOLDOWN_SCENES);
-    const lastStyle = recentHistory.length > 0 ? recentHistory[recentHistory.length - 1].style : null;
-    const lastTextEffect = recentHistory.length > 0 ? recentHistory[recentHistory.length - 1].textEffect : null;
-
-    if (style === lastStyle) {
-      // Rotate style to ensure visual variety
-      if (style === "hook_bold" || style === "vibrant_yellow_sticker") style = "framed_card";
-      else if (style === "framed_card" || style === "minimal_glass_card") style = "gold_caption";
-      else style = "vibrant_yellow_sticker";
+    // 1. Establish Primary Style for video cohesion
+    if (!this.primaryStyle) {
+      this.primaryStyle = style;
     }
+
+    if (isFinalScene) {
+      // Outro accent rule: Allow vibrant_yellow_lightning_sticker, warning_red_badge, cta_red or primaryStyle
+      const allowedOutroStyles = ["vibrant_yellow_lightning_sticker", "gold_caption", "warning_red_badge", "cta_red", this.primaryStyle];
+      if (!allowedOutroStyles.includes(style)) {
+        style = "vibrant_yellow_lightning_sticker";
+      }
+    } else {
+      // Body scenes: Enforce video-wide primary style cohesion
+      style = this.primaryStyle;
+    }
+
+    // 2. Check Cooldown rule for text animation effect (Typewriter vs Pop-up)
+    const recentHistory = this.history.slice(-COOLDOWN_SCENES);
+    const lastTextEffect = recentHistory.length > 0 ? recentHistory[recentHistory.length - 1].textEffect : null;
 
     if (textEffect === lastTextEffect) {
       textEffect = textEffect === "Typewriter" ? "Pop-up" : "Typewriter";
@@ -70,6 +80,5 @@ class EffectControlManager {
   }
 }
 
-module.exports = {
-  EffectControlManager,
-};
+module.exports = EffectControlManager;
+module.exports.EffectControlManager = EffectControlManager;

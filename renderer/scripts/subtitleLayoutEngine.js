@@ -94,15 +94,15 @@ function computeStageBFramePosition(positionAnchor, videoW, videoH, cardW, cardH
   // Center horizontally
   let overlayX = Math.round((videoW - cardW) / 2);
 
-  // Vertical position anchoring
-  let overlayY = Math.round(videoH * 0.12); // Default 'top'
+  // Vertical position anchoring (Raised to 0.05 / ~96px to avoid overlapping main subject)
+  let overlayY = Math.round(videoH * 0.05); // Default 'top'
 
   if (positionAnchor === "center") {
     overlayY = Math.round((videoH - cardH) / 2);
   } else if (positionAnchor === "bottom" || positionAnchor === "bottom_safe") {
     overlayY = Math.round(videoH * 0.68); // Safe from bottom TikTok caption & comment input
   } else if (positionAnchor === "top") {
-    overlayY = Math.round(videoH * 0.12);
+    overlayY = Math.round(videoH * 0.05);
   }
 
   // Clamp Y Y-axis to respect Safe Zone

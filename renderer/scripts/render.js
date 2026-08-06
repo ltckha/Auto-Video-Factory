@@ -1340,7 +1340,9 @@ async function renderTemporalWarpScene(inputVideo, scene, voiceWav = null) {
       videoH: TARGET.height,
     });
     const cardInputIndex = voiceWav ? 2 : 1;
-    const extraInputs = cardResult && cardResult.compositePath ? ["-i", cardResult.compositePath] : [];
+    const extraInputs = cardResult && cardResult.sequencePattern
+      ? ["-framerate", "25", "-i", cardResult.sequencePattern]
+      : (cardResult && cardResult.compositePath ? ["-i", cardResult.compositePath] : []);
 
     if (voiceWav) {
       // Trường hợp 1: Có WAV voice — nhúng apad vào filter_complex để pad silence cho đủ duration_s
@@ -1684,9 +1686,26 @@ async function renderCurrentProject() {
   log(`Output: ${outputPath}`);
   log(`Audio enabled: ${AUDIO_ENABLED} (giữ audio input, encode AAC cho concat)`);
 
+  const { EffectControlManager } = require("./effectControl");
+  const effectControl = new EffectControlManager();
+
   const sceneFiles = [];
   const advancedEffectsUsed = [];
   for (const scene of scenes) {
+    const isFinalScene = scene.index === scenes.length - 1;
+    const requestedStyle = scene.subtitleStyle || scene.subtitle_style || "vibrant_yellow_sticker";
+    const processed = effectControl.processSceneEffects(
+      scene.id,
+      requestedStyle,
+      scene.textEffect,
+      isFinalScene
+    );
+    scene.subtitleStyle = processed.style;
+    scene.subtitle_style = processed.style;
+    if (processed.textEffect) {
+      scene.textEffect = processed.textEffect;
+    }
+
     const textEffect = resolveTextEffect(scene.textEffect);
     const advancedEffect = resolveAdvancedEffect(scene.advancedEffect);
     const motionPlan = buildMotionPlan(scene, advancedEffect);
