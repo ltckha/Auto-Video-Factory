@@ -21,6 +21,7 @@ const CARD_TEMPLATE_MAP = {
   framed_card: "minimal_glass_card.png",
   gold_caption: "vibrant_yellow_lightning_sticker.png",
   cta_red: "warning_red_badge.png",
+  neon_glow: "warning_red_badge.png",
 };
 
 // Inner safe bounding box ratios for each graphic card template
@@ -38,16 +39,27 @@ const CARD_INNER_BOUNDS = {
   cta_red: { x: 0.22, y: 0.22, w: 0.56, h: 0.56 },
 };
 
+const { logUnmappedStyle } = require("./unmappedStyleLogger");
+
 /**
  * Resolve graphic card template file path and inner bounds
  * @param {string} presetName 
+ * @param {string} sampleText
  * @returns {{ path: string, exists: boolean, bounds: {x: number, y: number, w: number, h: number} }}
  */
-function resolveCardTemplate(presetName) {
-  const filename = CARD_TEMPLATE_MAP[presetName] || "vibrant_yellow_sticker.png";
+function resolveCardTemplate(presetName, sampleText = "") {
+  let filename = CARD_TEMPLATE_MAP[presetName];
+
+  if (!filename) {
+    // Log unmapped AI style to backlog for future asset creation
+    const mappedFallback = "vibrant_yellow_sticker";
+    logUnmappedStyle(presetName, sampleText, mappedFallback);
+    filename = CARD_TEMPLATE_MAP[mappedFallback] || "vibrant_yellow_sticker.png";
+  }
+
   const filePath = path.join(CARDS_DIR, filename);
   const exists = fs.existsSync(filePath);
-  const bounds = CARD_INNER_BOUNDS[presetName] || { x: 0.10, y: 0.15, w: 0.80, h: 0.70 };
+  const bounds = CARD_INNER_BOUNDS[presetName] || CARD_INNER_BOUNDS.vibrant_yellow_sticker || { x: 0.10, y: 0.15, w: 0.80, h: 0.70 };
 
   return {
     path: filePath,

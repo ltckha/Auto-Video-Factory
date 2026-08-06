@@ -67,13 +67,12 @@ TEXT POSITIONING, SUBTITLE STYLES & GRAMMATICAL LINE WRAPPING RULES (\n)
   - `highlight_marker_swipe`: Dải dạ quang quẹt trượt dưới chân từ khóa.
   - `pop_up`: Chữ nảy ra gây chú ý mạnh mẽ ở câu đầu.
 - **`subtitle_style` & QUY TẮC NGẮT DÒNG `\n` TỰ NHIÊN (BẮT BUỘC):**
-  Bạn BẮT BUỘC phải chèn dấu `\n` ngắt dòng trực tiếp vào chuỗi `text_content` / `subtitle` theo đúng ngữ pháp Tiếng Việt và tuân thủ giới hạn độ dài ký tự tối đa trên từng dòng của từng Preset:
-  - `vibrant_sticker_label`: Khung Sticker Vàng Dán Nghiêng. **Max 14-16 ký tự/dòng, tối đa 2-3 dòng** (VD: `"KUALA LUMPUR VỀ ĐÊM\nSỐNG ĐỘNG THẾ NÀO?"`).
-  - `vibrant_yellow_lightning`: Khung Sticker Vàng Tia Sét. **Max 15-18 ký tự/dòng, tối đa 2-3 dòng** (VD: `"SIÊU PHẨM GIÀY DA\nBẢO HÀNH 12 THÁNG"`).
-  - `minimal_glass_card`: Khung Kính Mờ Glassmorphism 3D. **Max 18-22 ký tự/dòng, tối đa 2-3 dòng** (VD: `"ĐÔI GIÀY DA BÒ THỦ CÔNG\nSANG TRỌNG VÀ ÊM ÁI"`).
-  - `warning_red_badge`: Khung Đỏ Tươi 3D Báo Động. **Max 11-13 ký tự/dòng, tối đa 2 dòng** (VD: `"ĐỪNG MUA NẾU\nCHƯA XEM!"`).
-  - `neon_cyber_card`: Khung Cyber Neon Dạ Quang. **Max 16-20 ký tự/dòng, tối đa 2 dòng**.
-  - `editorial_clean_text`: Chữ Editorial Chân Phương Không Khung. **Max 20-25 ký tự/dòng**.
+  Bạn có thể chọn 1 trong các Style Chuẩn hoặc **tự do đề xuất Tên Style Sáng Tạo mới** (ví dụ: `cyber_neon_glow`, `fire_flame_badge`, `luxury_gold_vip`...) để phù hợp với cảm xúc hình ảnh. Hệ thống sẽ tự động học và đăng ký các Style mới này:
+  - `vibrant_yellow_sticker` (hoặc `hook_bold`): Khung Sticker Vàng. **Max 14-16 ký tự/dòng, tối đa 2-3 dòng** (VD: `"KUALA LUMPUR VỀ ĐÊM\nSỐNG ĐỘNG THẾ NÀO?"`).
+  - `vibrant_yellow_lightning_sticker` (hoặc `gold_caption`): Khung Sét Vàng. **Max 15-18 ký tự/dòng, tối đa 2-3 dòng** (VD: `"SIÊU PHẨM GIÀY DA\nBẢO HÀNH 12 THÁNG"`).
+  - `minimal_glass_card` (hoặc `framed_card`): Khung Kính Mờ Glassmorphism. **Max 18-22 ký tự/dòng, tối đa 2-3 dòng** (VD: `"ĐÔI GIÀY DA BÒ THỦ CÔNG\nSANG TRỌNG VÀ ÊM ÁI"`).
+  - `warning_red_badge` (hoặc `cta_red`): Khung Đỏ Tươi 3D. **Max 11-13 ký tự/dòng, tối đa 2 dòng** (VD: `"ĐỪNG MUA NẾU\nCHƯA XEM!"`).
+  - `Tên Style Sáng Tạo Mới`: Bạn được phép tự do đặt tên (như `neon_cyber_glow`, `fire_action`, `luxury_vip`...). Engine sẽ tự động ghi nhận style mới vào backlog thiết kế.
 
 ━━━━━━━━━━━━━━━━━━
 TRANSITION OUT RULES (CHUYỂN CẢNH KỊCH TÍNH ĐA DẠNG)
