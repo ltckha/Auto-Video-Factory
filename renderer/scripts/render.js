@@ -1333,7 +1333,9 @@ async function renderTemporalWarpScene(inputVideo, scene, voiceWav = null) {
       sceneId: s.id,
       text: s.subtitle || s.text || s.caption || "",
       presetName: s.subtitleStyle || s.subtitle_style || "vibrant_sticker_label",
+      textEffect: s.textEffect || s.text_effect || "Typewriter",
       positionAnchor: s.textPosition || s.text_position || "top",
+      durationS: s.duration || 5.0,
       videoW: TARGET.width,
       videoH: TARGET.height,
     });

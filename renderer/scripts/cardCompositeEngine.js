@@ -46,23 +46,54 @@ function autoFitFontSize(lines, containerW, containerH, profile = {}) {
   return Math.max(minFs, Math.min(maxFs, fontSize));
 }
 
+const { generateKineticCardSequence } = require("./kineticCardEngine");
+
 /**
  * Generate a pre-composite transparent PNG file combining the frame card + centered text
  * @param {Object} params
- * @returns {{ compositePath: string, overlayX: number, overlayY: number, cardW: number, cardH: number }}
+ * @returns {{ compositePath: string, sequencePattern?: string, overlayX: number, overlayY: number, cardW: number, cardH: number }}
  */
 function generateCompositeCardImage(params) {
   const {
     sceneId = "scene_001",
     text = "",
     presetName = "vibrant_sticker_label",
+    textEffect = "Typewriter",
     positionAnchor = "top",
+    durationS = 5.0,
     videoW = 1080,
     videoH = 1920,
   } = params;
 
   if (!fs.existsSync(TEMP_DIR)) {
     fs.mkdirSync(TEMP_DIR, { recursive: true });
+  }
+
+  // If animated text effect is requested, delegate to kineticCardEngine
+  if (textEffect && textEffect !== "none" && textEffect !== "static") {
+    try {
+      const seqRes = generateKineticCardSequence({
+        sceneId,
+        text,
+        presetName,
+        textEffect,
+        durationS,
+        videoW,
+        videoH,
+      });
+
+      const firstFrame = path.join(seqRes.sequenceDir, "frame_001.png");
+      return {
+        compositePath: firstFrame,
+        sequencePattern: seqRes.sequencePattern,
+        overlayX: seqRes.overlayX,
+        overlayY: seqRes.overlayY,
+        cardW: seqRes.cardW,
+        cardH: seqRes.cardH,
+      };
+    } catch (e) {
+      console.error("[CardCompositeEngine] Kinetic sequence error, fallback to static:", e);
+    }
   }
 
   const cardTemplate = resolveCardTemplate(presetName);

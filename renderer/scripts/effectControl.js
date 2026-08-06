@@ -1,71 +1,75 @@
 /**
- * Effect Budget & Cooldown Control Engine (Priority 6) - CapCut / TikTok 2026 Trend
- * Manages per-video effect quotas and enforces same-effect cooldown memory to prevent AI effect overdose.
+ * Effect Budget & Cooldown Control (Auto-Video-Factory)
+ * Manages visual effect quota per video and enforces 2-scene cooldown rules to prevent visual fatigue.
  */
 
-class EffectController {
-  constructor(options = {}) {
-    this.maxFlashCount = options.maxFlashCount || 3;
-    this.maxShakeCount = options.maxShakeCount || 4;
-    this.maxPunchZoomCount = options.maxPunchZoomCount || 5;
+const DEFAULT_BUDGET = {
+  max_flashes: 3,
+  max_shakes: 4,
+  max_punch_zooms: 5,
+  max_kinetic_pop: 4,
+};
 
-    this.currentFlashCount = 0;
-    this.currentShakeCount = 0;
-    this.currentPunchZoomCount = 0;
+const COOLDOWN_SCENES = 2;
 
-    this.effectHistory = []; // Tracks recent effect names per scene
-    this.cooldownScenes = options.cooldownScenes || 2;
+class EffectControlManager {
+  constructor(customBudget = {}) {
+    this.budget = { ...DEFAULT_BUDGET, ...customBudget };
+    this.usageCounter = {
+      flashes: 0,
+      shakes: 0,
+      punch_zooms: 0,
+      kinetic_pop: 0,
+    };
+    this.history = []; // History of past scene effects
   }
 
   /**
-   * Checks if an effect can be applied based on quota and cooldown.
-   * @param {string} effectName 
-   * @param {number} sceneIndex 
-   * @returns {boolean} True if allowed, false if budget exceeded or in cooldown
+   * Evaluates requested effects and returns allowed effects or fallbacks
    */
-  canApplyEffect(effectName, sceneIndex) {
-    if (!effectName) return true;
-    const name = String(effectName).toLowerCase().trim();
+  processSceneEffects(sceneId, requestedStyle = {}, requestedEffect = {}) {
+    let style = typeof requestedStyle === "string" ? requestedStyle : requestedStyle.name || "hook_bold";
+    let textEffect = typeof requestedEffect === "string" ? requestedEffect : requestedEffect.name || "Pop-up";
 
-    // 1. Check Cooldown Memory (same_effect_cooldown = 2 scenes)
-    const recentHistory = this.effectHistory.slice(-this.cooldownScenes);
-    if (recentHistory.includes(name)) {
-      return false; // In cooldown! Fallback to clean hard cut or basic zoom
+    // 1. Check Cooldown rule (no same style for 2 consecutive scenes)
+    const recentHistory = this.history.slice(-COOLDOWN_SCENES);
+    const lastStyle = recentHistory.length > 0 ? recentHistory[recentHistory.length - 1].style : null;
+    const lastTextEffect = recentHistory.length > 0 ? recentHistory[recentHistory.length - 1].textEffect : null;
+
+    if (style === lastStyle) {
+      // Rotate style to ensure visual variety
+      if (style === "hook_bold" || style === "vibrant_yellow_sticker") style = "framed_card";
+      else if (style === "framed_card" || style === "minimal_glass_card") style = "gold_caption";
+      else style = "vibrant_yellow_sticker";
     }
 
-    // 2. Check Quota Budget
-    if (name.includes("flash")) {
-      if (this.currentFlashCount >= this.maxFlashCount) return false;
+    if (textEffect === lastTextEffect) {
+      textEffect = textEffect === "Typewriter" ? "Pop-up" : "Typewriter";
     }
 
-    if (name.includes("shake")) {
-      if (this.currentShakeCount >= this.maxShakeCount) return false;
+    // 2. Check Quota Budget for heavy effects
+    if (textEffect.toLowerCase().includes("pop") || textEffect.toLowerCase().includes("bounce")) {
+      if (this.usageCounter.kinetic_pop >= this.budget.max_kinetic_pop) {
+        textEffect = "Typewriter"; // Fallback to smooth typewriter
+      } else {
+        this.usageCounter.kinetic_pop++;
+      }
     }
 
-    if (name.includes("punch_zoom")) {
-      if (this.currentPunchZoomCount >= this.maxPunchZoomCount) return false;
-    }
+    // Record scene in history
+    this.history.push({
+      sceneId,
+      style,
+      textEffect,
+    });
 
-    return true;
-  }
-
-  /**
-   * Records an applied effect.
-   * @param {string} effectName 
-   * @param {number} sceneIndex 
-   */
-  recordEffect(effectName, sceneIndex) {
-    if (!effectName) return;
-    const name = String(effectName).toLowerCase().trim();
-
-    this.effectHistory.push(name);
-
-    if (name.includes("flash")) this.currentFlashCount++;
-    if (name.includes("shake")) this.currentShakeCount++;
-    if (name.includes("punch_zoom")) this.currentPunchZoomCount++;
+    return {
+      style,
+      textEffect,
+    };
   }
 }
 
 module.exports = {
-  EffectController,
+  EffectControlManager,
 };
