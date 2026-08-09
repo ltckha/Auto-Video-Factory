@@ -37,7 +37,9 @@ node_modules/
 npm-debug.log*
 
 # --- Editor ---
-.vscode/
-.idea/
-*.swp
-*.swo
+# --- Environment & Secrets ---
+.env
+renderer/config/env.json
+renderer/config/*.json
+!renderer/config/cardVisionProfiles.json
+!renderer/config/effectEnums.json

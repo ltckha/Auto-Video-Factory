@@ -14,7 +14,8 @@ Thư mục này lưu trữ tất cả các ý tưởng, cải tiến kỹ thuậ
 | **IDEA-005** | Pipeline Video AI Hybrid (Quay Thật + AI Dream Hook 3s) | Xử Lý Phân Cảnh & Hook (AI Hybrid Engine) | 💡 **Đang Nghiên Cứu** | 29/07/2026 | [IDEA_005_ai_hybrid_dream_hook.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_005_ai_hybrid_dream_hook.md) |
 | **IDEA-006** | Intent-Driven Editing & Micro-Effects Engine (TikTok 2026) | Động Cơ Dựng Phim & Micro FX (AI FX Engine) | ✅ **Hoàn Thành** | 06/08/2026 | [IDEA_006_intent_driven_micro_effects.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_006_intent_driven_micro_effects.md) |
 | **IDEA-007** | Next-Gen Dynamic Subtitle Typography, Badges & Overlays | Đồ Họa Lớp Phủ & Múa Chữ (Kinetic Overlays) | ✅ **Hoàn Thành** | 06/08/2026 | [IDEA_007_dynamic_subtitle_typography.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_007_dynamic_subtitle_typography.md) |
-| **IDEA-008** | Video Style Cohesion & Card Transparency Positioning Rules | Quy Tắc Nhất Quán Brand & Độ Trong Suốt Khung | 💡 **Đang Nghiên Cứu** | 06/08/2026 | [IDEA_008_video_style_cohesion_and_transparency_rules.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_008_video_style_cohesion_and_transparency_rules.md) |
+| **IDEA-008** | Video Style Cohesion & Card Transparency Positioning Rules | Quy Tắc Nhất Quán Brand & Độ Trong Suốt Khung | ✅ **Hoàn Thành** | 06/08/2026 | [IDEA_008_video_style_cohesion_and_transparency_rules.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_008_video_style_cohesion_and_transparency_rules.md) |
+| **IDEA-009** | Closed-Loop AI Video Quality Audit & Self-Learning Engine | AI Đánh Giá Video & Tự Động Học Sau Render | 💡 **Đang Nghiên Cứu** | 06/08/2026 | [IDEA_009_closed_loop_ai_video_qa_and_self_learning.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_009_closed_loop_ai_video_qa_and_self_learning.md) |
 
 ---
 

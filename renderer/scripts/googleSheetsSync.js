@@ -82,19 +82,39 @@ async function syncProjectToSheet(projectData) {
   // 1. Webhook
   await sendWebhook({
     action: "sync_project",
-    project: projectData,
+    sheetName: "Auto-Video-Factory",
+    project: {
+      projectId: projectData.projectId || projectData.job_id,
+      status: projectData.status,
+      inputFile: projectData.inputFile,
+      title: projectData.title,
+      rawCaption: projectData.captionHashtags || projectData.raw_caption || "",
+      originalDuration: projectData.originalDuration,
+      shortDuration: projectData.shortDuration,
+      sceneCount: projectData.sceneCount,
+      hookScore: projectData.hookScore,
+      effectsSummary: projectData.effectsSummary,
+      outputFile: projectData.outputFile || projectData.video_path,
+      createdAt: projectData.createdAt,
+      renderedAt: projectData.renderedAt,
+      brandFb: projectData.brandFb || "",
+      brandYt: projectData.brandYt || "",
+      brandIg: projectData.brandIg || "",
+      brandTt: projectData.brandTt || "",
+      brandShopee: projectData.brandShopee || "",
+      brandZalo: projectData.brandZalo || "",
+    },
   });
 
   // 2. Local CSV Backup
   const csvPath = path.join(BACKUP_DIR, "projects_tracker.csv");
   const headers = [
-    "Project ID", "Pipeline Mode", "Status", "Input File", "Video Title", "Caption & Hashtags",
-    "Original Duration", "Short Duration", "Scene Count", "Opening Hook Score",
-    "Effects Summary", "Output File", "Created At", "Rendered At"
+    "job_id", "Status", "Input File", "title", "raw_caption", "Original Duration",
+    "Short Duration", "Scene Count", "Opening Hook Score", "Effects Summary", "video_path",
+    "Created At", "Rendered At", "brand_fb", "brand_yt", "brand_ig", "brand_tt", "brand_shopee", "brand_zalo"
   ];
   const row = [
     projectData.projectId,
-    projectData.pipelineMode || "Long2Short",
     projectData.status,
     projectData.inputFile,
     projectData.title,
@@ -106,7 +126,13 @@ async function syncProjectToSheet(projectData) {
     projectData.effectsSummary,
     projectData.outputFile,
     projectData.createdAt,
-    projectData.renderedAt
+    projectData.renderedAt,
+    projectData.brandFb || "",
+    projectData.brandYt || "",
+    projectData.brandIg || "",
+    projectData.brandTt || "",
+    projectData.brandShopee || "",
+    projectData.brandZalo || ""
   ];
   appendCsvLine(csvPath, headers, row);
 }
@@ -117,6 +143,7 @@ async function syncScenesToSheet(projectId, scenes) {
   // 1. Webhook
   await sendWebhook({
     action: "sync_scenes",
+    sheetName: "Video-Factory-SCENES",
     projectId,
     scenes,
   });
@@ -199,6 +226,7 @@ async function syncAnalyticsToSheet() {
   // 1. Webhook
   await sendWebhook({
     action: "sync_analytics",
+    sheetName: "Video-Factory-EFFECTS",
     analytics,
   });
 

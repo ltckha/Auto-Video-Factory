@@ -561,3 +561,42 @@ DÙNG CỰC THÍCH","Kích thước lớn 54 x 70 cm dung tích 25L cực kỳ v
 SIÊU DAI TIỆN LỢI","Túi rác Inochi Soji tiện lợi vừa cập bến đây cả nhà ơi!","Rút tập túi rác ra khỏi lớp bọc ni lông","hook_bold (top)","Product Reveal (snap)","wipe_left (0.3s)"
 "VID_20260719_180114","scene_002","conclusion","20s - 29s","9s","KÍCH THƯỚC 54x70CM
 DÙNG CỰC THÍCH","Kích thước lớn 54 x 70 cm dung tích 25L cực kỳ vừa vặn cho gia đình.","Cầm cuộn túi rác xoay kiểm tra tem nhãn thông số","cta_red (top)","Detail Showcase (push_in)","fade (0.3s)"
+"C2548D_1_batch","scene_001","hook","0s - 3s","3s","BỎ QUA CẢNH
+BƯỚC LƯỜI HỔNG","Cảnh lưng đi chậm chưa đủ hấp dẫn để làm mở đầu.","Góc quay từ sau lưng bước đi trên đường ướt","hook_bold (top)","Low Energy Filter (static)","none"
+"C2548D_1_batch","scene_002","hook","4s - 7s","3s","ĐÂY MỚI LÀ CHẤT
+CỦA QUÝ ÔNG!","Muốn lịch lãm từ ánh nhìn đầu tiên?","Cận cảnh đôi giày da đen bóng bước đi trên nền đường đá ướt đẫm","hook_bold (top)","Focus Detail Impact (snap)","wipe_left (0.3s)"
+"C2548D_1_batch","scene_003","body","8s - 11s","3s","PHỐI ÁO MĂNG TÔ
+CỰC KỲ TINH TẾ","Khoác chiếc măng tô chuẩn phom là tôn dáng ngay.","Góc quay ngang nam người mẫu tự tin đút tay túi quần bước đi","hook_bold (top)","Elegant Motion Drift (drift)","slide_up (0.3s)"
+"C2548D_1_batch","scene_004","conclusion","12s - 15s","3s","THẦN THÁI TỰ TIN
+THU HÚT MỌI ÁNH NHÌN","Thần thái chuẩn nam thần mùa thu đông này!","Góc chính diện người mẫu mỉm cười tự tin bước về phía ống kính","cta_red (top)","Hero Reveal Pulse (push_in)","fade (0.4s)"
+"C2548D_1_batch","scene_002","hook","4s - 7s","3s","ĐÂY MỚI LÀ CHẤT
+CỦA QUÝ ÔNG!","Muốn lịch lãm từ ánh nhìn đầu tiên?","Cận cảnh đôi giày da đen bóng bước đi trên nền đường đá ướt đẫm","hook_bold (top)","Focus Detail Impact (snap)","wipe_left (0.3s)"
+"C2548D_1_batch","scene_003","body","8s - 11s","3s","PHỐI ÁO MĂNG TÔ
+CỰC KỲ TINH TẾ","Khoác chiếc măng tô chuẩn phom là tôn dáng ngay.","Góc quay ngang nam người mẫu tự tin đút tay túi quần bước đi","hook_bold (top)","Elegant Motion Drift (drift)","slide_up (0.3s)"
+"C2548D_1_batch","scene_004","conclusion","12s - 15s","3s","THẦN THÁI TỰ TIN
+THU HÚT MỌI ÁNH NHÌN","Thần thái chuẩn nam thần mùa thu đông này!","Góc chính diện người mẫu mỉm cười tự tin bước về phía ống kính","cta_red (top)","Hero Reveal Pulse (push_in)","fade (0.4s)"
+"VID_20260719_175727","scene_000","hook","0s - 15s","15s","BÓC TÚI HÀNG","","Tay cầm dao rọc túi nilon xanh","hook_bold (top)","fast_cut (static)","none"
+"VID_20260719_175727","scene_001","hook","16s - 18.5s","2.5s","BỘ NGUỒN ADAPTER
+12V MỚI CỰC CHẤT","Trải nghiệm bộ nguồn Adapter 12V mới cập bến nhé mọi người!","Tay rút cục Adapter từ hộp giấy trắng ra","hook_bold (top)","reveal_snap (snap)","wipe_left (0.3s)"
+"VID_20260719_175727","scene_002","body","27s - 32s","5s","THÔNG SỐ RÕ RÀNG
+THIẾT KẾ CHẮC CHẮN","Mặt sau in đầy đủ thông số kỹ thuật, hoàn thiện siêu chắc chắn luôn.","Cận cảnh nhãn AC/DC Adapter và chi tiết dây cắm","hook_bold (top)","detail_focus (push_in)","slide_up (0.3s)"
+"VID_20260719_175727","scene_003","body","37s - 40.5s","3.5s","CẮM ĐIỆN SÁNG ĐÈN
+HOẠT ĐỘNG CỰC TỐT","Vừa cắm điện là đèn LED xanh sáng liền, điện vào cực kỳ ổn định.","Tay cắm phích điện, đèn LED xanh lá/xanh dương trên adapter sáng lên","hook_bold (top)","power_on_impact (pulse)","circle_open (0.3s)"
+"VID_20260719_175727","scene_004","conclusion","41s - 44s","3s","CHỌN NGAY TẠI
+GIỎ HÀNG BÊN TRÁI","Anh em cần nguồn chuẩn cho thiết bị tham khảo ngay bên dưới góc màn hình nha!","Toàn cảnh bộ nguồn đã cắm điện sẵn sàng","cta_red (top)","final_cta (drift)","none"
+"VID_20260719_175727","scene_001","hook","16s - 18.5s","2.5s","BỘ NGUỒN ADAPTER
+12V MỚI CỰC CHẤT","Trải nghiệm bộ nguồn Adapter 12V mới cập bến nhé mọi người!","Tay rút cục Adapter từ hộp giấy trắng ra","hook_bold (top)","reveal_snap (snap)","wipe_left (0.3s)"
+"VID_20260719_175727","scene_002","body","27s - 32s","5s","THÔNG SỐ RÕ RÀNG
+THIẾT KẾ CHẮC CHẮN","Mặt sau in đầy đủ thông số kỹ thuật, hoàn thiện siêu chắc chắn luôn.","Cận cảnh nhãn AC/DC Adapter và chi tiết dây cắm","hook_bold (top)","detail_focus (push_in)","slide_up (0.3s)"
+"VID_20260719_175727","scene_003","body","37s - 40.5s","3.5s","CẮM ĐIỆN SÁNG ĐÈN
+HOẠT ĐỘNG CỰC TỐT","Vừa cắm điện là đèn LED xanh sáng liền, điện vào cực kỳ ổn định.","Tay cắm phích điện, đèn LED xanh lá/xanh dương trên adapter sáng lên","hook_bold (top)","power_on_impact (pulse)","circle_open (0.3s)"
+"VID_20260719_175727","scene_004","conclusion","41s - 44s","3s","CHỌN NGAY TẠI
+GIỎ HÀNG BÊN TRÁI","Anh em cần nguồn chuẩn cho thiết bị tham khảo ngay bên dưới góc màn hình nha!","Toàn cảnh bộ nguồn đã cắm điện sẵn sàng","cta_red (top)","final_cta (drift)","none"
+"VID_20260720_152942","scene_001","hook","0s - 15s","15s","BÓC TÚI HÀNG
+GIÀY DA HOT","Cùng mình mở hộp gói hàng giày da nam vừa cập bến xem sao nha.","Tay xé túi nilon niêm phong màu xám đen rườm rà","hook_bold (top)","fast_unboxing (static)","none"
+"VID_20260720_152942","scene_002","body","15s - 44s","29s","ĐÓNG GÓI CẨN THẬN
+LỚP XỐP DÀY","Bên trong được bọc thêm túi xốp kín đáo chống trầy xước.","Tháo dây rút túi gấu brown và lấy túi chống shock","framed_card (top)","cut_dead_time (static)","none"
+"VID_20260720_152942","scene_003","conclusion","44s - 55s","11s","GIÀY DA BÒ CAO CẤP
+FORM CHUẨN MỀM ÊM","Mẫu giày da bò Royal Cobbler màu nâu cực kỳ sang trọng, da thật mềm mịn lên chân bao êm.","Cận cảnh bàn tay tháo túi bóng lộ ra đôi giày da bò nâu thương hiệu Royal Cobbler","gold_caption (top)","product_reveal (push_in)","fade (0.3s)"
+"VID_20260720_152942","scene_003","conclusion","44s - 55s","11s","GIÀY DA BÒ CAO CẤP
+FORM CHUẨN MỀM ÊM","Mẫu giày da bò Royal Cobbler màu nâu cực kỳ sang trọng, da thật mềm mịn lên chân bao êm.","Cận cảnh bàn tay tháo túi bóng lộ ra đôi giày da bò nâu thương hiệu Royal Cobbler","gold_caption (top)","product_reveal (push_in)","fade (0.3s)"

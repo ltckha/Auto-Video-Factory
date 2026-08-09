@@ -1,8 +1,8 @@
 {
   "_meta": {
     "bootstrapped": true,
-    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/VID_20260719_180114_render.log",
-    "rr_index": 2
+    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/VID_20260720_152942_render.log",
+    "rr_index": 1
   },
   "speedup": {
     "success": 37,
@@ -49,19 +49,19 @@
     "fail": 0
   },
   "advanced_effect:zoomsoft": {
-    "success": 67,
+    "success": 70,
     "fail": 0
   },
   "subtitle_style:hookbold": {
-    "success": 65,
+    "success": 67,
     "fail": 4
   },
   "transition_out:wipeleft": {
-    "success": 58,
+    "success": 60,
     "fail": 4
   },
   "advanced_effect:shake": {
-    "success": 19,
+    "success": 20,
     "fail": 0
   },
   "subtitle_style:framedcard": {
@@ -69,7 +69,7 @@
     "fail": 0
   },
   "transition_out:fade": {
-    "success": 59,
+    "success": 61,
     "fail": 0
   },
   "advanced_effect:zoomin": {
@@ -81,7 +81,7 @@
     "fail": 0
   },
   "transition_out:slideup": {
-    "success": 60,
+    "success": 62,
     "fail": 0
   },
   "transition_out:wiperight": {
@@ -89,15 +89,15 @@
     "fail": 0
   },
   "subtitle_style:ctared": {
-    "success": 30,
+    "success": 32,
     "fail": 0
   },
   "subtitle_style:goldcaption": {
-    "success": 46,
+    "success": 47,
     "fail": 0
   },
   "advanced_effect:speedup": {
-    "success": 34,
+    "success": 36,
     "fail": 0
   },
   "advanced_effect:rgbshift": {
@@ -117,7 +117,7 @@
     "fail": 0
   },
   "transition_out:circleopen": {
-    "success": 45,
+    "success": 46,
     "fail": 0
   },
   "advanced_effect:cinematiczoom": {
@@ -145,7 +145,7 @@
     "fail": 2
   },
   "advanced_effect:snapzoom": {
-    "success": 1,
+    "success": 2,
     "fail": 0
   }
 }
