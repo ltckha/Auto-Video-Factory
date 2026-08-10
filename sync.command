@@ -48,4 +48,4 @@ else
 fi
 
 echo ""
-read -n 1 -s -r -p "Nhấn phím bất kỳ để đóng..."
+read -t 10 -n 1 -s -r -p "Tự động đóng sau 10s hoặc nhấn phím bất kỳ để đóng..."

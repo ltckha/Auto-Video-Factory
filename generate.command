@@ -57,13 +57,13 @@ if [ -n "$RAW_DUR" ] && [ "$RAW_DUR" != "0" ]; then
         echo "   [1] Short2Short : Tái cấu trúc, đổi voice & hiệu ứng cho Video Ngắn (Mặc định)"
         echo "   [2] Long2Short  : Cắt lọc phân cảnh đắt giá từ Video Dài"
         echo ""
-        read -p "Nhập lựa chọn của bạn [Mặc định 1]: " MODE_CHOICE
+        read -t 10 -p "Nhập lựa chọn của bạn [Mặc định 1 (tự động sau 10s)]: " MODE_CHOICE
         if [ "$MODE_CHOICE" = "2" ]; then
             MODE_FLAG="--mode=long2short"
             echo "👉 Đã chọn Chế độ: LONG2SHORT"
         else
             MODE_FLAG="--mode=short2short"
-            echo "👉 Đã chọn Chế độ: SHORT2SHORT"
+            echo "👉 Đã chọn Chế độ: SHORT2SHORT (Mặc định)"
         fi
     elif [ "$DUR_INT" -gt 90 ] && [ "$DUR_INT" -le 180 ]; then
         MODE_FLAG="--mode=long2short"
@@ -74,13 +74,13 @@ if [ -n "$RAW_DUR" ] && [ "$RAW_DUR" != "0" ]; then
         echo "   [1] Long2Short            : Cắt 01 Video Ngắn rút gọn (Mặc định)"
         echo "   [2] LongHighlightClusters : Tự động lọc rác & Xuất Chùm 3-5 Video Ngắn MỚI"
         echo ""
-        read -p "Nhập lựa chọn của bạn [Mặc định 1]: " MODE_CHOICE
+        read -t 10 -p "Nhập lựa chọn của bạn [Mặc định 1 (tự động sau 10s)]: " MODE_CHOICE
         if [ "$MODE_CHOICE" = "2" ]; then
             MODE_FLAG="--mode=long_highlight_clusters"
             echo "👉 Đã chọn Chế độ MỚI: LONG HIGHLIGHT CLUSTERS (BATCH SHORTS)"
         else
             MODE_FLAG="--mode=long2short"
-            echo "👉 Đã chọn Chế độ: LONG2SHORT"
+            echo "👉 Đã chọn Chế độ: LONG2SHORT (Mặc định)"
         fi
     else
         MODE_FLAG="--mode=long_highlight_clusters"
@@ -91,7 +91,7 @@ else
     echo "   [1] Short2Short            : Video ngắn (< 60s)"
     echo "   [2] Long2Short             : Video dài (60s - 5 phút)"
     echo "   [3] LongHighlightClusters  : Video rất dài (> 5m) hoặc Chùm Clips MỚI"
-    read -p "Nhập lựa chọn của bạn [Mặc định 2]: " MODE_CHOICE
+    read -t 10 -p "Nhập lựa chọn của bạn [Mặc định 2 (tự động sau 10s)]: " MODE_CHOICE
     if [ "$MODE_CHOICE" = "1" ]; then
         MODE_FLAG="--mode=short2short"
     elif [ "$MODE_CHOICE" = "3" ]; then
@@ -112,15 +112,15 @@ if [ $GEN_STATUS -eq 0 ]; then
     echo ""
     echo "=================================================="
     echo "⚡ BẠN CÓ MUỐN TIẾN HÀNH RENDER DỰ ÁN NGAY KHÔNG?"
-    echo "   [1] Có   - Tiến hành Render & Gửi ra NAS ngay (Mặc định)"
+    echo "   [1] Có   - Tiến hành Render & Gửi ra NAS ngay (Mặc định - Tự động chọn sau 10s)"
     echo "   [2] Không - Thoát và để render sau"
     echo "=================================================="
     echo ""
-    read -p "Nhập lựa chọn của bạn [Mặc định 1]: " RENDER_CHOICE
+    read -t 10 -p "Nhập lựa chọn của bạn [Mặc định 1 (tự động sau 10s)]: " RENDER_CHOICE
 
     if [ "$RENDER_CHOICE" != "2" ]; then
         echo ""
-        echo "🚀 Đang tiến hành Render dự án..."
+        echo "🚀 Đang tiến hành Render dự án (Tự động kích hoạt)..."
         echo "--------------------------------------------------"
         node renderer/scripts/render.js
     else
@@ -134,4 +134,5 @@ echo "=================================================="
 echo "                  HOÀN TẤT"
 echo "=================================================="
 echo ""
-read -n 1 -s -r -p "Nhấn phím bất kỳ để đóng..."
+read -t 10 -n 1 -s -r -p "Tự động đóng sau 10s hoặc nhấn phím bất kỳ để đóng..."
+exit 0
