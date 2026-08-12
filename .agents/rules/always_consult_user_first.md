@@ -1,15 +1,22 @@
 ---
 trigger: "always"
-description: "Always discuss, consult, and align on plans with the user BEFORE writing code or taking execution steps."
+description: "BẮT BUỘC LUÔN LUÔN thảo luận, trình bày phương án và thống nhất với NGƯỜI DÙNG trước khi sửa code, đổi file hoặc thực hiện bất kỳ hành động nào."
 ---
 
-# 📜 RULE: Always Discuss & Consult User Before Execution
+# 📜 QUY TẮC BẮT BUỘC: LUÔN THẢO LUẬN VỚI NGƯỜI DÙNG TRƯỚC KHÍ LÀM (ALWAYS DISCUSS FIRST)
 
-1. **Mandatory Prior Consultation (Bắt Buộc Trao Đổi Trước Khi Làm):**
-   Trước khi sửa code, thay đổi tham số hệ thống, tạo file hoặc chạy lệnh render video, AI assistant **BẮT BUỘC LUÔN LUÔN** trình bày phương án, giải thích chi tiết và trao đổi thống nhất với USER trước.
+1. **BẮT BUỘC THẢO LUẬN TRƯỚC KHI THỰC HIỆN (Mandatory Consultation First):**
+   Trước khi viết code, chỉnh sửa file, thay đổi tham số hệ thống, tạo file mới hoặc thực hiện bất kỳ hành động nào, AI Assistant **BẮT BUỘC LUÔN LUÔN**:
+   - Trình bày phương án chi tiết cho người dùng xem trước.
+   - Giải thích rõ nguyên nhân, giải pháp đề xuất và ảnh hưởng.
+   - Thảo luận và lắng nghe ý kiến người dùng.
 
-2. **Wait for Explicit User Approval (Đợi Xác Nhận Từ USER):**
-   Không tự ý suy đoán hoặc tự động triển khai mã nguồn khi chưa được USER đồng ý phương án.
+2. **ĐỜI Ý KIẾN THỐNG NHẤT TỪ NGƯỜI DÙNG (Wait for User Alignment):**
+   KHÔNG ĐƯỢC tự ý sửa file, chạy tool sửa code hoặc thay đổi thiết kế khi chưa thảo luận và thống nhất với người dùng.
 
-3. **Preview First Workflow (Ưu Tiên Tạo Ảnh Preview Xem Trước):**
-   Đối với các thay đổi liên quan đến đồ họa, phông chữ, vị trí khung hình hoặc hiệu ứng thị giác: Luôn tạo ảnh preview xem trước để USER duyệt tỷ lệ thị giác trước khi áp dụng vào hệ thống chính hoặc render video.
+3. **ƯU TIÊN PREVIEW / HÌNH ẢNH XEM TRƯỚC:**
+   Đối với các thay đổi liên quan đến đồ họa, phông chữ, khung hình, subtitle hay hiệu ứng thị giác: Luôn tạo ảnh preview xem trước để người dùng duyệt trước khi áp dụng chính thức.
+
+4. **QUY TẮC OUTRO / CTA TẾ NHỊ & DỊU DÀNG (SUBTLE CTA RULE):**
+   - Phân cảnh cuối (Outro/CTA) **BẮT BUỘC** phải tế nhị, nhẹ nhàng, đọng lại cảm xúc hoặc 1 câu trích dẫn hay/ấm áp.
+   - **NGHIÊM CẤM** các câu thúc giục mua hàng, kêu gọi giật gân (Cấm: *"Đừng mua nếu chưa xem"*, *"Sắm ngay kẻo hết"*, *"Click giỏ hàng"*...).

@@ -12,6 +12,30 @@ const DEFAULT_BUDGET = {
 
 const COOLDOWN_SCENES = 2;
 
+const OFFICIAL_STYLES = [
+  "vibrant_yellow_sticker",
+  "minimal_glass_card",
+  "warning_red_badge",
+  "vibrant_yellow_lightning_sticker",
+];
+
+function normalizeOfficialStyle(rawStyle) {
+  if (!rawStyle || typeof rawStyle !== "string") return "minimal_glass_card";
+  const s = rawStyle.toLowerCase().trim();
+  if (OFFICIAL_STYLES.includes(s)) return s;
+
+  if (s.includes("lightning") || s.includes("gold") || s.includes("outro") || s.includes("fire") || s.includes("spark")) {
+    return "vibrant_yellow_lightning_sticker";
+  }
+  if (s.includes("warning") || s.includes("red") || s.includes("cta")) {
+    return "warning_red_badge";
+  }
+  if (s.includes("yellow") || s.includes("sticker")) {
+    return "vibrant_yellow_sticker";
+  }
+  return "minimal_glass_card";
+}
+
 class EffectControlManager {
   constructor(customBudget = {}) {
     this.budget = { ...DEFAULT_BUDGET, ...customBudget };
@@ -30,7 +54,8 @@ class EffectControlManager {
    * allowing vibrant_yellow_lightning_sticker or warning_red_badge for the final scene.
    */
   processSceneEffects(sceneId, requestedStyle = {}, requestedEffect = {}, isFinalScene = false) {
-    let style = typeof requestedStyle === "string" ? requestedStyle : requestedStyle.name || "vibrant_yellow_sticker";
+    let rawStyle = typeof requestedStyle === "string" ? requestedStyle : requestedStyle.name || "minimal_glass_card";
+    let style = normalizeOfficialStyle(rawStyle);
     let textEffect = typeof requestedEffect === "string" ? requestedEffect : requestedEffect.name || "Pop-up";
 
     // 1. Establish Primary Style for video cohesion
@@ -39,8 +64,8 @@ class EffectControlManager {
     }
 
     if (isFinalScene) {
-      // Outro accent rule: Allow vibrant_yellow_lightning_sticker, warning_red_badge, cta_red or primaryStyle
-      const allowedOutroStyles = ["vibrant_yellow_lightning_sticker", "gold_caption", "warning_red_badge", "cta_red", this.primaryStyle];
+      // Outro accent rule: Allow vibrant_yellow_lightning_sticker, warning_red_badge or primaryStyle
+      const allowedOutroStyles = ["vibrant_yellow_lightning_sticker", "warning_red_badge", this.primaryStyle];
       if (!allowedOutroStyles.includes(style)) {
         style = "vibrant_yellow_lightning_sticker";
       }

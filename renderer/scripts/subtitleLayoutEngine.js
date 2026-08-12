@@ -90,23 +90,26 @@ function computeStageATextFitting(text, innerBounds, cardWidth, cardHeight) {
  * @param {number} cardH Card overlay height
  * @returns {{ overlayX: number, overlayY: number }}
  */
-function computeStageBFramePosition(positionAnchor, videoW, videoH, cardW, cardH) {
-  // Center horizontally
+function computeStageBFramePosition(positionAnchor, videoW, videoH, cardW, cardH, presetName = "") {
   let overlayX = Math.round((videoW - cardW) / 2);
 
-  // Vertical position anchoring (Raised to 0.05 / ~96px to avoid overlapping main subject)
-  let overlayY = Math.round(videoH * 0.05); // Default 'top'
+  // Vertical position anchoring:
+  // vibrant_yellow_sticker & warning_red_badge: Top margin Y = 3.5% (67px) - raised higher
+  // minimal_glass_card & vibrant_yellow_lightning_sticker: Top margin Y = 5.0% (96px)
+  const isRaisedHigh = presetName.includes("vibrant_yellow_sticker") || presetName.includes("warning_red_badge");
+  const topRatio = isRaisedHigh ? 0.035 : 0.05;
+  let overlayY = Math.round(videoH * topRatio); // Default 'top'
 
   if (positionAnchor === "center") {
     overlayY = Math.round((videoH - cardH) / 2);
   } else if (positionAnchor === "bottom" || positionAnchor === "bottom_safe") {
     overlayY = Math.round(videoH * 0.68); // Safe from bottom TikTok caption & comment input
   } else if (positionAnchor === "top") {
-    overlayY = Math.round(videoH * 0.05);
+    overlayY = Math.round(videoH * topRatio);
   }
 
   // Clamp Y Y-axis to respect Safe Zone
-  const minY = Math.round(videoH * SAFE_ZONE.TOP_MIN_Y);
+  const minY = Math.round(videoH * (isRaisedHigh ? 0.03 : SAFE_ZONE.TOP_MIN_Y));
   const maxY = Math.round(videoH * SAFE_ZONE.BOTTOM_MAX_Y - cardH);
   overlayY = Math.max(minY, Math.min(maxY, overlayY));
 
@@ -128,13 +131,13 @@ function computeStageBFramePosition(positionAnchor, videoW, videoH, cardW, cardH
 function computeCompleteSubtitleLayout(params) {
   const {
     text = "",
-    presetName = "vibrant_sticker_label",
+    presetName = "vibrant_yellow_sticker",
     positionAnchor = "top",
     videoW = 1080,
     videoH = 1920,
   } = params;
 
-  const cardTemplate = resolveCardTemplate(presetName);
+  const cardTemplate = resolveCardTemplate(presetName, text);
 
   // Card target dimensions (scale to ~85% of video width)
   const cardW = Math.round(videoW * 0.88);
@@ -143,8 +146,8 @@ function computeCompleteSubtitleLayout(params) {
   // Stage A: Fit Text into Frame
   const stageA = computeStageATextFitting(text, cardTemplate.bounds, cardW, cardH);
 
-  // Stage B: Position Frame on Video
-  const stageB = computeStageBFramePosition(positionAnchor, videoW, videoH, cardW, cardH);
+  // Stage B: Position Frame on Video (respect presetName for Y height)
+  const stageB = computeStageBFramePosition(positionAnchor, videoW, videoH, cardW, cardH, presetName);
 
   return {
     cardTemplate,

@@ -40,7 +40,10 @@ QUY TẮC PHÂN LOẠI & ĐỒNG BỘ VOICEOVER (CỰC KỲ QUAN TRỌNG)
 ━━━━━━━━━━━━━━━━━━
 1. **Quy tắc đặt tên scene_id**: Định dạng `scene_id` bắt buộc phải là dạng chuỗi `"scene_001"`, `"scene_002"`, `"scene_003"`... để hệ thống tự động ánh xạ chính xác với file âm thanh thuyết minh rời `{projectId}_{scene_id}.wav` trong thư mục `incoming/`.
 2. **Quy tắc về thời lượng Voice**: Lời thoại `voice` ngắn gọn tự nhiên. Độ dài văn bản phải tương thích với thời lượng của cảnh (`duration_s`). Trường `voice` tuyệt đối không dùng văn phong quảng cáo thương mại và cấm các từ như mua ngay, chốt đơn, thêm vào giỏ hàng, deal sốc, sale hoặc sắm ngay.
-3. **Danh sách scene_type hợp lệ** - Chỉ chọn 1 trong: `["hook", "intro", "body", "highlight", "outro", "cta"]`.
+3. **QUY TẮC OUTRO / CTA TẾ NHỊ & DỊU DÀNG (BẮT BUỘC):**
+   - 🚫 **NGHIÊM CẤM TẤT CẢ CÁC CÂU KÊU GỌI HỐI HẢ / THÚC GIỤC GIAO DỊCH:** Tuyệt đối CẤM các câu giật gân hoặc thúc giục như *"Đừng mua nếu chưa xem"*, *"Sắm ngay kẻo hết"*, *"Bấm vào giỏ hàng bên dưới"*, *"Click ngay deal tốt"*.
+   - ✨ **KẾT BÀI TẾ NHỊ, ẤM ÁP & ĐẮNG SÂU:** Phân cảnh Outro/CTA cuối cùng BẮT BUỘC chỉ được truyền tải những lời nhắn nhẹ nhàng, trích dẫn hay, lời chúc hoặc đọng lại cảm xúc chân thành (VD: *"Một chút dịu dàng cho góc bếp nhỏ."*, *"Gói trọn bình yên trong từng chi tiết."*, *"Sự tử tế bắt đầu từ những điều nhỏ bé nhất."*, *"Hy vọng ngày hôm nay của bạn thật dễ chịu."*).
+4. **Danh sách scene_type hợp lệ** - Chỉ chọn 1 trong: `["hook", "intro", "body", "highlight", "outro", "cta"]`.
 
 ━━━━━━━━━━━━━━━━━━
 SINGLE-PASS RAW INGREDIENTS & INTENT DIRECTIVES (ĐẠO DIỄN AI NỘI DUNG)
@@ -71,12 +74,13 @@ TEXT POSITIONING, SUBTITLE STYLES & GRAMMATICAL LINE WRAPPING RULES (\n)
   - **BẮT BUỘC NHẤT QUÁN XUYÊN SUỐT VIDEO:** Chọn 01 Style chính (`primary_style`) làm ngôn ngữ thiết kế chung và **giữ nguyên 100% cho tất cả các phân cảnh thân video (`hook`, `intro`, `body`)** để video có tính nhận diện cao cấp, chuyên nghiệp.
   - **NGOẠI LỆ NỔI BẬT PHÂN CẢNH CUỐI (`outro` / `cta`):** Ở phân cảnh cuối cùng của video, bạn được phép giữ nguyên Style chính HOẶC chuyển đổi sang 1 trong 2 Khung Accent nổi bật bùng nổ:
     - ⚡ `vibrant_yellow_lightning_sticker` (Khung Sét Vàng Rực Rỡ)
-    - 🚨 `warning_red_badge` / `cta_red` (Khung Badge Đỏ Cảnh Báo 3D)
-  - Giới hạn độ dài ký tự tối đa trên từng dòng:
-    - `vibrant_yellow_sticker` (hoặc `hook_bold`): **Max 14-16 ký tự/dòng, tối đa 2-3 dòng**.
-    - `vibrant_yellow_lightning_sticker` (hoặc `gold_caption`): **Max 15-18 ký tự/dòng, tối đa 2-3 dòng**.
-    - `minimal_glass_card` (hoặc `framed_card`): **Max 18-22 ký tự/dòng, tối đa 2-3 dòng**.
-    - `warning_red_badge` (hoặc `cta_red`): **Max 11-13 ký tự/dòng, tối đa 2 dòng**.
+    - 🚨 `warning_red_badge` (Khung Badge Đỏ Cảnh Báo 3D)
+  - **DANH SÁCH 4 BỘ KHUNG ĐỒ HỌA GỢI Ý CHÍNH THỨC:**
+    - 🟨 `vibrant_yellow_sticker` (Sticker Vàng Rực Rỡ): **Max 14-16 ký tự/dòng, tối đa 2-3 dòng**.
+    - 🧊 `minimal_glass_card` (Kính Mờ Sang Trọng): **Max 18-22 ký tự/dòng, tối đa 2-3 dòng**.
+    - 🚨 `warning_red_badge` (Badge Đỏ Cảnh Báo 3D): **Max 11-13 ký tự/dòng, tối đa 2 dòng**.
+    - ⚡ `vibrant_yellow_lightning_sticker` (Accent Sét Vàng Outro): **Max 15-18 ký tự/dòng, tối đa 2-3 dòng**.
+  - 💡 **CHO PHÉP SÁNG TẠO TÊN STYLE MỚI:** Ngoài 4 khung gợi ý trên, bạn hoàn toàn có thể tự do đề xuất tên Style sáng tạo mới (VD: `cyberpunk_glitch_card`, `fire_flame_badge`, `vintage_gold_card`...). Hệ thống sẽ tự động ghi nhận vào Backlog để Editor tạo thêm bộ khung mới về sau!
 
 ━━━━━━━━━━━━━━━━━━
 TRANSITION OUT RULES (CHUYỂN CẢNH KỊCH TÍNH ĐA DẠNG)
@@ -109,7 +113,7 @@ OUTPUT JSON SCHEMA
       "voice": "Lời thoại tự nhiên reaction",
       "text_content": "CHỮ HIỂN THỊ TRÊN MAN HINH",
       "text_position": "top",
-      "subtitle_style": "hook_bold",
+      "subtitle_style": "minimal_glass_card",
       "visual_intent": "warn",
       "rhythm_intent": "HIT",
       "scene_relationship": "contrast",

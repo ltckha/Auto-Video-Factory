@@ -18,7 +18,7 @@
 
 ---
 
-## 🛠️ Giải Pháp Thiết Kế Kỹ Thuật (Smart Multi-Short Cluster Engine)
+## 🛠️ Giải Pháp Thiết Kế Kỹ Thuật (Smart Multi-Short Cluster Engine + Human-in-the-Loop)
 
 ### 1. Kéo Thả Multi-Input & FFmpeg Lossless Concat
 - Hỗ trợ kéo thả 1 Thư mục Folder HOẶC kéo thả nhiều file `.mp4` cùng lúc.
@@ -31,13 +31,20 @@
 ### 3. Semantic Highlight Clustering (Pass 1 - AI Editor Brain)
 - Gemini lọc bỏ 100% cảnh rác/chán.
 - Trích xuất các khoảnh khắc đắt giá (Highlights).
-- Tự động gom các đoạn ngắn (5s-8s) hoặc các đoạn có liên kết nội dung thành các **Chùm Kịch Bản (Clusters)**:
-  - *Cluster 1:* Segment 1 (5s) + Segment 2 (12s) $\rightarrow$ Short #1 (17s).
-  - *Cluster 2:* Segment 3 (28s) $\rightarrow$ Short #2 (28s).
-  - *Cluster 3:* Segment 4 (8s) + Segment 5 (15s) $\rightarrow$ Short #3 (23s).
+- Đề xuất các **Chùm Kịch Bản (Clusters)** ban đầu kèm mốc thời gian và tiêu đề nội dung.
 
-### 4. Batch Multi-Render Engine
-- Xuất mảng các file JSON kịch bản: `{projectId}_short01.json`, `{projectId}_short02.json`, `{projectId}_short03.json`.
+### 4. Interactive Human Review & Edit (Con Người Làm Chủ Mốc Thời Gian & Nội Dung) 🌟
+- Dừng lại tại màn hình Terminal sau Pass 1 để hiển thị danh sách các Short đề xuất.
+- Có đếm ngược 10 giây: Nếu người dùng không nhập gì, hệ thống tự động chốt theo đề xuất AI và tiếp tục.
+- Cho phép người dùng chọn **Option [2]** để tinh chỉnh:
+  - **Sửa mốc thời gian (Timestamps):** Thay đổi `01:15-02:30` thành `01:05-02:40`.
+  - **Sửa tiêu đề & định hướng nội dung:** Đổi tên hoặc bổ sung góc nhìn truyền thông mong muốn.
+  - **Xóa / Lọc bớt Short:** Bỏ các đoạn không muốn dựng.
+
+### 5. Pass 2: Deep Timeline Generation & Batch Multi-Render Engine
+- Gemini nhận mốc thời gian và định hướng nội dung đã được con người chốt/tối ưu.
+- Xuất mảng các file JSON kịch bản: `{projectId}_short01.json`, `{projectId}_short02.json`...
+- Tự động sao chép video mp4 nguồn tương ứng sang `incoming/{projectId}_short01.mp4`.
 - `render.js` tự động lặp render toàn bộ danh sách, chèn hiệu ứng chuyển cảnh mượt tại các điểm nối clip, chèn BGM (50% - 85%) và đồng bộ Google Sheet!
 
 ---
@@ -46,3 +53,4 @@
 
 - **27/07/2026:** Khởi tạo ý tưởng (💡 Draft & Research).
 - **08/03/2026:** Thống nhất tư duy thiết kế Smart Multi-Short Cluster Engine & Chuyển trạng thái sang 🚧 **Đang Triển Khai**.
+- **10/08/2026:** Thảo luận và thống nhất nâng cấp mô hình **Human-in-the-Loop**: Cho phép con người Review, chỉnh sửa mốc thời gian & tiêu đề nội dung trước khi render.

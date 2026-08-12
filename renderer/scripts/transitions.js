@@ -112,9 +112,9 @@ function hasAnyTransitions(scenes) {
 function buildTransitionFilterComplex(sceneCount, steps) {
   const filters = [];
 
-  // Chuẩn hóa timebase, fps và audio sample rate cho toàn bộ input streams để tránh lỗi lệch timebase trong xfade
+  // Chuẩn hóa timebase, fps, resolution (1080x1920), setsar=1 và audio sample rate cho toàn bộ input streams để tránh lỗi lệch timebase/SAR trong xfade/concat
   for (let k = 0; k < sceneCount; k++) {
-    filters.push(`[${k}:v]fps=30,settb=AVTB[v_in_${k}]`);
+    filters.push(`[${k}:v]scale=1080:1920,setsar=1,fps=30,settb=AVTB[v_in_${k}]`);
     filters.push(`[${k}:a]aresample=44100,asetpts=PTS-STARTPTS[a_in_${k}]`);
   }
 

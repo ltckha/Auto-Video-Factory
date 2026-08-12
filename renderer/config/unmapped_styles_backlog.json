@@ -8,5 +8,13 @@
     "samples": [
       "CHẮC CHẮN BẠN CHƯA BIẾT!"
     ]
+  },
+  "hook_bold": {
+    "style_name": "hook_bold",
+    "occurrences": 8,
+    "first_requested": "2026-08-11T06:25:03.726Z",
+    "last_requested": "2026-08-12T02:36:24.266Z",
+    "mapped_fallback": "minimal_glass_card",
+    "samples": []
   }
 }

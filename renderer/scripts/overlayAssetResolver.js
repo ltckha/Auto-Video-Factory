@@ -10,33 +10,24 @@ const ASSETS_DIR = path.join(__dirname, "../assets/overlays");
 const CARDS_DIR = path.join(ASSETS_DIR, "cards");
 const STICKERS_DIR = path.join(ASSETS_DIR, "stickers");
 
-// Map preset names to graphic card template filenames
+// Map preset names to graphic card template filenames (Official 4 PNG Cards)
 const CARD_TEMPLATE_MAP = {
+  vibrant_yellow_sticker: "vibrant_yellow_sticker.png",
   vibrant_sticker_label: "vibrant_yellow_sticker.png",
-  vibrant_yellow_lightning: "vibrant_yellow_lightning_sticker.png",
   minimal_glass_card: "minimal_glass_card.png",
   warning_red_badge: "warning_red_badge.png",
-  neon_cyber_badge: "warning_red_badge.png",
-  hook_bold: "vibrant_yellow_sticker.png",
-  framed_card: "minimal_glass_card.png",
-  gold_caption: "vibrant_yellow_lightning_sticker.png",
-  cta_red: "warning_red_badge.png",
-  neon_glow: "warning_red_badge.png",
+  vibrant_yellow_lightning_sticker: "vibrant_yellow_lightning_sticker.png",
+  vibrant_yellow_lightning: "vibrant_yellow_lightning_sticker.png",
 };
 
 // Inner safe bounding box ratios for each graphic card template
-// x, y, w, h are percentage ratios relative to card template dimensions
 const CARD_INNER_BOUNDS = {
-  vibrant_sticker_label: { x: 0.20, y: 0.20, w: 0.60, h: 0.60 },
   vibrant_yellow_sticker: { x: 0.20, y: 0.20, w: 0.60, h: 0.60 },
-  vibrant_yellow_lightning: { x: 0.18, y: 0.22, w: 0.64, h: 0.56 },
+  vibrant_sticker_label: { x: 0.20, y: 0.20, w: 0.60, h: 0.60 },
   minimal_glass_card: { x: 0.12, y: 0.15, w: 0.76, h: 0.70 },
   warning_red_badge: { x: 0.22, y: 0.22, w: 0.56, h: 0.56 },
-  neon_cyber_card: { x: 0.18, y: 0.20, w: 0.64, h: 0.60 },
-  hook_bold: { x: 0.20, y: 0.20, w: 0.60, h: 0.60 },
-  framed_card: { x: 0.12, y: 0.15, w: 0.76, h: 0.70 },
-  gold_caption: { x: 0.18, y: 0.22, w: 0.64, h: 0.56 },
-  cta_red: { x: 0.22, y: 0.22, w: 0.56, h: 0.56 },
+  vibrant_yellow_lightning_sticker: { x: 0.18, y: 0.22, w: 0.64, h: 0.56 },
+  vibrant_yellow_lightning: { x: 0.18, y: 0.22, w: 0.64, h: 0.56 },
 };
 
 const { logUnmappedStyle } = require("./unmappedStyleLogger");
@@ -51,10 +42,15 @@ function resolveCardTemplate(presetName, sampleText = "") {
   let filename = CARD_TEMPLATE_MAP[presetName];
 
   if (!filename) {
-    // Log unmapped AI style to backlog for future asset creation
-    const mappedFallback = "vibrant_yellow_sticker";
+    // Smart Fallback Selection:
+    // If new style name contains action/outro keywords -> Fallback to vibrant_yellow_lightning_sticker
+    // Otherwise -> Fallback to minimal_glass_card
+    const norm = (presetName || "").toLowerCase();
+    const isOutroOrAction = ["lightning", "fire", "outro", "cta", "spark", "badge", "nổ"].some((k) => norm.includes(k));
+    const mappedFallback = isOutroOrAction ? "vibrant_yellow_lightning_sticker" : "minimal_glass_card";
+
     logUnmappedStyle(presetName, sampleText, mappedFallback);
-    filename = CARD_TEMPLATE_MAP[mappedFallback] || "vibrant_yellow_sticker.png";
+    filename = CARD_TEMPLATE_MAP[mappedFallback] || "minimal_glass_card.png";
   }
 
   const filePath = path.join(CARDS_DIR, filename);

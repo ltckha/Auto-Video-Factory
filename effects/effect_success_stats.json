@@ -1,7 +1,7 @@
 {
   "_meta": {
     "bootstrapped": true,
-    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/VID_20260720_153916_render.log",
+    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/VID_20260724_120656_render.log",
     "rr_index": 0
   },
   "speedup": {
@@ -49,19 +49,19 @@
     "fail": 0
   },
   "advanced_effect:zoomsoft": {
-    "success": 74,
+    "success": 82,
     "fail": 0
   },
   "subtitle_style:hookbold": {
-    "success": 70,
+    "success": 76,
     "fail": 4
   },
   "transition_out:wipeleft": {
-    "success": 64,
+    "success": 72,
     "fail": 4
   },
   "advanced_effect:shake": {
-    "success": 23,
+    "success": 28,
     "fail": 0
   },
   "subtitle_style:framedcard": {
@@ -69,7 +69,7 @@
     "fail": 0
   },
   "transition_out:fade": {
-    "success": 64,
+    "success": 70,
     "fail": 0
   },
   "advanced_effect:zoomin": {
@@ -81,15 +81,15 @@
     "fail": 0
   },
   "transition_out:slideup": {
-    "success": 66,
+    "success": 73,
     "fail": 0
   },
   "transition_out:wiperight": {
-    "success": 15,
+    "success": 17,
     "fail": 0
   },
   "subtitle_style:ctared": {
-    "success": 36,
+    "success": 39,
     "fail": 0
   },
   "subtitle_style:goldcaption": {
@@ -97,11 +97,11 @@
     "fail": 0
   },
   "advanced_effect:speedup": {
-    "success": 39,
+    "success": 44,
     "fail": 0
   },
   "advanced_effect:rgbshift": {
-    "success": 13,
+    "success": 14,
     "fail": 2
   },
   "advanced_effect:overshootzoom": {
@@ -117,7 +117,7 @@
     "fail": 0
   },
   "transition_out:circleopen": {
-    "success": 47,
+    "success": 51,
     "fail": 0
   },
   "advanced_effect:cinematiczoom": {
@@ -133,19 +133,23 @@
     "fail": 0
   },
   "subtitle_style:minimalglasscard": {
-    "success": 2,
+    "success": 4,
     "fail": 0
   },
   "subtitle_style:warningredbadge": {
-    "success": 2,
+    "success": 3,
     "fail": 0
   },
   "advanced_effect:speedrampfast": {
-    "success": 25,
+    "success": 26,
     "fail": 2
   },
   "advanced_effect:snapzoom": {
     "success": 2,
+    "fail": 0
+  },
+  "subtitle_style:vibrantyellowlightningsticker": {
+    "success": 3,
     "fail": 0
   }
 }

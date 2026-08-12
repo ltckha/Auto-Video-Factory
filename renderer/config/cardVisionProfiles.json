@@ -26,17 +26,17 @@
     "fill_ratio_h": 0.68
   },
   "hook_bold": {
-    "inner_box": [180, 160, 820, 840],
+    "inner_box": [120, 80, 880, 920],
     "tilt_degrees": 0.0,
-    "font_color": "0x111111",
-    "stroke_color": "0x111111@0.8",
-    "shadow_color": "0x000000@0.3",
-    "font_file": "renderer/assets/fonts/BeVietnamPro-Black.ttf",
+    "font_color": "white",
+    "stroke_color": "0x111111@0.35",
+    "shadow_color": "0x000000@0.35",
+    "font_file": "renderer/assets/fonts/BeVietnamPro-Bold.ttf",
     "max_lines": 3,
-    "max_font_size": 68,
-    "min_font_size": 42,
-    "fill_ratio_w": 0.78,
-    "fill_ratio_h": 0.68
+    "max_font_size": 78,
+    "min_font_size": 48,
+    "fill_ratio_w": 0.85,
+    "fill_ratio_h": 0.75
   },
   "vibrant_yellow_lightning_sticker": {
     "inner_box": [140, 100, 860, 900],
@@ -80,9 +80,9 @@
   "minimal_glass_card": {
     "inner_box": [120, 80, 880, 920],
     "tilt_degrees": 0.0,
-    "font_color": "0xFFFFFF",
-    "stroke_color": "0x000000@0.5",
-    "shadow_color": "0x000000@0.6",
+    "font_color": "white",
+    "stroke_color": "0x111111@0.35",
+    "shadow_color": "0x000000@0.35",
     "font_file": "renderer/assets/fonts/BeVietnamPro-Bold.ttf",
     "max_lines": 3,
     "max_font_size": 78,

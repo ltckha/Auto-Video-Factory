@@ -55,7 +55,7 @@ const RESPONSE_SCHEMA = {
           speed_strategy: { type: "STRING", enum: ["uniform", "adaptive", "ramp", "jumpcut"] },
           render_priority: { type: "STRING", enum: ["keep", "compress"] },
           subtitle: { type: "STRING" },
-          subtitle_style: { type: "STRING", enum: ["hook_bold", "neon_glow", "framed_card", "gold_caption", "cta_red"] },
+          subtitle_style: { type: "STRING" },
           text_position: { type: "STRING", enum: ["top", "center", "bottom"] },
           voice: { type: "STRING" },
           visual_cue: { type: "STRING" },
@@ -412,12 +412,16 @@ async function main() {
       );
 
       const clusterData = JSON.parse(clusterResponse.text || "{}");
-      const clusters = clusterData.clusters || [];
+      let clusters = clusterData.clusters || [];
       console.log(`[Pass 1] ✅ Đã phát hiện ${clusters.length} Cụm Video Ngắn Độc Lập đắt giá!`);
 
       if (clusters.length === 0) {
         console.warn("[Pass 1] Cảnh báo: Không tìm thấy cụm điểm sáng nào, fallback về mode Long2Short chuẩn.");
       } else {
+        // NÂNG CẤP HUMAN-IN-THE-LOOP: Cho phép con người Review, chỉnh mốc thời gian & Tiêu đề/Nội dung trước Pass 2
+        const { reviewAndEditClusters } = require("./interactiveClusterReview");
+        clusters = await reviewAndEditClusters(clusters);
+
         // Pass 2: Đọc prompt Long2Short chuẩn để sinh từng file JSON kịch bản độc lập
         const stdPromptPath = path.join(PROMPTS_DIR, "long2short_generator_prompt.md");
         const stdInstruction = fs.readFileSync(stdPromptPath, "utf8");
@@ -462,6 +466,50 @@ async function main() {
           const subOutputPath = path.join(INCOMING_DIR, `${subProjectId}.json`);
           fs.writeFileSync(subOutputPath, JSON.stringify(subTimelineJson, null, 2), "utf8");
           console.log(`[Timeline] ✅ Đã sinh thành công file kịch bản độc lập: ${subOutputPath}`);
+
+          // Sao chép video nguồn vào incoming cho từng short cụm để sẵn sàng render
+          const subVideoPath = path.join(INCOMING_DIR, `${subProjectId}.mp4`);
+          fs.copyFileSync(absoluteVideoPath, subVideoPath);
+          console.log(`[Video] ✅ Đã sao chép video nguồn sang: ${subVideoPath}`);
+
+          // Đồng bộ thông tin kịch bản từng short sang Google Sheet & Local CSV Backup
+          try {
+            const videoMeta = subTimelineJson.video_meta || {};
+            const scenes = subTimelineJson.timeline || [];
+            const shortDur = scenes.reduce((acc, s) => acc + (Number(s.duration_s) || 0), 0);
+            const effectsUsed = [...new Set(scenes.map((s) => s.advanced_effect?.name).filter(Boolean))].join(", ");
+            const captionText = `${videoMeta.description || ""} ${(videoMeta.hashtags || []).map((h) => `#${h}`).join(" ")}`.trim();
+
+            let origDurSec = null;
+            try {
+              const cmd = `ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${absoluteVideoPath}"`;
+              const out = require("child_process").execSync(cmd, { encoding: "utf8" }).trim();
+              origDurSec = parseFloat(out);
+            } catch {}
+            const origDurationFormatted = origDurSec && Number.isFinite(origDurSec) ? `${origDurSec.toFixed(1)}s` : "";
+
+            await syncProjectToSheet({
+              projectId: subProjectId,
+              pipelineMode: "LongHighlightClusters",
+              status: "🤖 Timeline Ready",
+              inputFile: absoluteVideoPath,
+              title: videoMeta.title || c.cluster_title || "",
+              captionHashtags: captionText,
+              originalDuration: origDurationFormatted,
+              shortDuration: `${shortDur.toFixed(1)}s`,
+              sceneCount: scenes.length,
+              hookScore: scenes[0]?.hook_strength || "",
+              effectsSummary: effectsUsed,
+              outputFile: "",
+              createdAt: nowCreatedAt,
+              renderedAt: "",
+            });
+
+            await syncScenesToSheet(subProjectId, scenes);
+            console.log(`[GoogleSheet] ✅ Đã đồng bộ kịch bản '${subProjectId}' sang Google Sheet!`);
+          } catch (sheetErr) {
+            console.warn(`[GoogleSheet] WARN: Không thể đồng bộ Google Sheet: ${sheetErr.message}`);
+          }
         }
         return;
       }
