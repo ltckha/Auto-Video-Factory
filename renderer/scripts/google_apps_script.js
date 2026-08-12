@@ -450,6 +450,8 @@ function syncInputTabsToMaster() {
 
     if (existingMasterIdsMap[jId]) {
       var oldRow = existingMasterIdsMap[jId];
+      var videoPathChanged = inputJob.video_path && (inputJob.video_path !== oldRow[2]);
+      
       var updatedRow = [
         inputJob.job_id,
         inputJob.title || oldRow[1],
@@ -459,12 +461,12 @@ function syncInputTabsToMaster() {
         inputJob.brand_fb || oldRow[10],
         inputJob.brand_yt || oldRow[11],
         inputJob.brand_ig || oldRow[12],
-        oldRow[13] || "needs_edit",
-        oldRow[14] || "needs_edit",
-        oldRow[15] || "needs_edit",
-        oldRow[16] || "needs_edit",
-        oldRow[17] || "needs_edit",
-        oldRow[18] || "needs_edit"
+        videoPathChanged ? "needs_edit" : (String(oldRow[13] || "").trim() || "needs_edit"),
+        videoPathChanged ? "needs_edit" : (String(oldRow[14] || "").trim() || "needs_edit"),
+        videoPathChanged ? "needs_edit" : (String(oldRow[15] || "").trim() || "needs_edit"),
+        videoPathChanged ? "needs_edit" : (String(oldRow[16] || "").trim() || "needs_edit"),
+        videoPathChanged ? "needs_edit" : (String(oldRow[17] || "").trim() || "needs_edit"),
+        videoPathChanged ? "needs_edit" : (String(oldRow[18] || "").trim() || "needs_edit")
       ];
       newMasterTable.push(updatedRow);
     } else {
