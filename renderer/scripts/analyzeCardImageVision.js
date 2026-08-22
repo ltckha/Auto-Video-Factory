@@ -72,8 +72,12 @@ Return ONLY valid JSON matching this schema:
   "max_lines": number
 }`;
 
+  const MODELS_CONFIG_PATH = path.join(__dirname, "..", "config", "geminiModelsConfig.json");
+  const modelsConfig = fs.existsSync(MODELS_CONFIG_PATH) ? JSON.parse(fs.readFileSync(MODELS_CONFIG_PATH, "utf8")) : {};
+  const visionModel = (modelsConfig.models && modelsConfig.models.vision_ocr && modelsConfig.models.vision_ocr[0]) || "gemini-3.5-flash-lite";
+
   const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
+    model: visionModel,
     contents: [
       {
         role: "user",

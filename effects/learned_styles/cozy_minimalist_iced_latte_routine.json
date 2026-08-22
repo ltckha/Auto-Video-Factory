@@ -1,59 +1,17 @@
 {
   "style_profile": {
-    "name": "Romantic Lifestyle Split-Collage",
-    "category_niche": "Lifestyle & Fashion Aesthetics",
-    "average_scene_duration_s": 3,
-    "pacing_speed": "pulse",
-    "hook_strategy": "Use a colorful multi-grid split-screen visual pairing fresh luxury hydrangeas with classic leather monk-strap shoes to instantly convey romantic, high-end lifestyle vibes.",
-    "preferred_font_layout": "Playful, pastel-colored handwritten stickers placed inside open frame spaces to emphasize a cheerful scrapbook style.",
+    "name": "Cozy Minimalist Iced Latte Routine",
+    "category_niche": "lifestyle___fashion_aesthetics",
+    "average_scene_duration_s": 1.5,
+    "pacing_speed": "dynamic",
+    "hook_strategy": "Clean aesthetic kitchen counter setting a ribbed glass tumbler down with an instant crisp clink sound and minimalist lowercase text 'morning coffee', followed by fast tactile box tearing to trigger cozy aesthetic satisfaction.",
+    "preferred_font_layout": "Delicate lowercase sans-serif centered in middle third with clean white tone, no heavy background badge.",
     "transition_rules": [
-      "Dynamic frame removal timed precisely to the musical beat",
-      "Soft opacity fades to step-by-step collapse collage panels into a unified focal scene"
+      "Rapid jump cuts synced to physical tactile interaction (box tear, pod opening, milk pour, straw stir)",
+      "High-key airy white lighting with soft focus transition between action beats"
     ]
   },
   "few_shot_examples": [
-    {
-      "scene_type": "hook",
-      "suggested_advanced_effect": {
-        "name": "Multi-Grid Beat Decay",
-        "intent": "reveal_impact",
-        "camera_motion": "static",
-        "focus": "product",
-        "intensity": 0.8,
-        "mood": "satisfying",
-        "pacing": "pulse"
-      },
-      "duration_range": "0.0s - 3.0s",
-      "suggested_subtitle_style": "Playful handwritten text stickers in pink, blue, and yellow shades",
-      "suggested_text_effect": "Fading sticker popping animation",
-      "suggested_transition_out": {
-        "duration": 0.4,
-        "type": "fade"
-      },
-      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Upbeat romantic background track with distinct, punchy rhythm beats"
-    },
-    {
-      "scene_type": "highlight",
-      "suggested_advanced_effect": {
-        "name": "Full-Screen Rhythmic Tap Focus",
-        "intent": "premium_showcase",
-        "camera_motion": "drift",
-        "focus": "product",
-        "intensity": 0.6,
-        "mood": "premium",
-        "pacing": "dynamic"
-      },
-      "duration_range": "3.0s - 15.0s",
-      "suggested_subtitle_style": "Minimalist center frame alignment",
-      "suggested_text_effect": "None",
-      "suggested_transition_out": {
-        "duration": 0.3,
-        "type": "fade"
-      },
-      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Instrumental rhythm progression without speech"
-    },
     {
       "scene_type": "hook",
       "suggested_advanced_effect": {
@@ -116,6 +74,29 @@
       },
       "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
       "voice_rhythm": "Creamy milk swirl and rhythmic glass straw stirring sound."
+    }
+  ],
+  "learned_novel_effects": [
+    {
+      "effect_name": "Aesthetic Glass Clink Impact",
+      "camera_motion": "snap",
+      "description": "Subtle camera snap synced with the physical placement of glassware on marble.",
+      "recommended_intensity": 0.8,
+      "visual_intent": "reveal_impact"
+    },
+    {
+      "effect_name": "Ice Cube Drop Cascade",
+      "camera_motion": "shake",
+      "description": "Micro jitter/shake capturing the rapid impact of ice cubes falling into the cup.",
+      "recommended_intensity": 0.75,
+      "visual_intent": "actioncut"
+    },
+    {
+      "effect_name": "Milk Swirl Drift",
+      "camera_motion": "drift",
+      "description": "Gentle upward drift following the swirling pattern of milk mixing into coffee.",
+      "recommended_intensity": 0.7,
+      "visual_intent": "premium_showcase"
     }
   ]
 }

@@ -77,14 +77,13 @@ const RENDERED_DIR = path.join(WORKSPACE_ROOT, "rendered");
 const FAILED_DIR = path.join(WORKSPACE_ROOT, "failed");
 
 const NAS_MOUNT_DIR = "/Volumes/Media/Auto-Video-Factory";
-const NAS_ARCHIVE_DIR = path.join(NAS_MOUNT_DIR, "archive");
 const LOCAL_ARCHIVE_DIR = path.join(WORKSPACE_ROOT, "archive");
 
 function resolveArchiveDir() {
   if (fs.existsSync("/Volumes/Media")) {
     try {
-      fs.mkdirSync(NAS_ARCHIVE_DIR, { recursive: true });
-      return NAS_ARCHIVE_DIR;
+      fs.mkdirSync(NAS_MOUNT_DIR, { recursive: true });
+      return NAS_MOUNT_DIR;
     } catch (e) {
       console.warn(`[Archive] WARN: Không thể truy cập ổ NAS (${e.message}). Dùng archive local.`);
     }
@@ -317,10 +316,10 @@ function resolveOutputPath(timeline) {
   if (timeline.output) return resolveProjectPath(timeline.output);
 
   if (workflow.enabled) {
-    return path.join(RENDERED_DIR, `${videoId}_final.mp4`);
+    return path.join(RENDERED_DIR, `${videoId}.mp4`);
   }
 
-  return path.join(OUTPUT_DIR, `${videoId}_final.mp4`);
+  return path.join(OUTPUT_DIR, `${videoId}.mp4`);
 }
 
 function normalizeTimeline(timeline) {
@@ -856,13 +855,24 @@ function buildDrawTextFilterOptions({ textFile, font, style, preset, effectOptio
     `shadowy=${layer.shadowy || effectOptions.shadowy || preset.shadowy}`,
     `shadowcolor=${layer.shadowcolor || effectOptions.shadowcolor || preset.shadowcolor}`,
     `box=${layer.box === undefined ? (effectOptions.box === undefined ? (preset.box === false ? "0" : "1") : effectOptions.box) : layer.box}`,
-    `boxcolor=${layer.boxcolor || effectOptions.boxcolor || preset.boxcolor}`,
-    `boxborderw=${layer.boxborderw || effectOptions.boxborderw || preset.boxborderw}`,
+  ];
+
+  const boxColorVal = layer.boxcolor || effectOptions.boxcolor || preset.boxcolor;
+  if (boxColorVal && boxColorVal !== "undefined") {
+    options.push(`boxcolor=${boxColorVal}`);
+  }
+
+  const boxBorderWVal = layer.boxborderw || effectOptions.boxborderw || preset.boxborderw;
+  if (boxBorderWVal && boxBorderWVal !== "undefined") {
+    options.push(`boxborderw=${boxBorderWVal}`);
+  }
+
+  options.push(
     "text_align=C",
     `x=${x}`,
     `y=${y}`,
-    `enable='between(t\\,${cue.start.toFixed(3)}\\,${cue.end.toFixed(3)})'`,
-  ];
+    `enable='between(t\\,${cue.start.toFixed(3)}\\,${cue.end.toFixed(3)})'`
+  );
 
   if (Array.isArray(effectOptions.extraOptions)) {
     options.push(...effectOptions.extraOptions);
@@ -1736,8 +1746,12 @@ async function renderCurrentProject() {
   // Bổ sung BGM Audio Mix nếu có cấu hình audio_config trong timeline JSON
   try {
     const audioConfig = timeline.audio_config || {};
-    const bgmMood = audioConfig.bgm_mood || "chill";
-    if (bgmMood !== "none") {
+    const hasOriginalMusic = audioConfig.has_original_music === true;
+    const bgmMood = audioConfig.bgm_mood || (hasOriginalMusic ? "none" : "chill");
+
+    if (hasOriginalMusic || bgmMood === "none") {
+      log(`[AudioEngine] 🎵 Video gốc ĐÃ CÓ SẴN NHẠC NỀN / ÂM THANH -> Tự động giữ nguyên 100% âm thanh gốc, KHÔNG chèn đè nhạc ngoài.`);
+    } else {
       const bgmTrack = resolveBgmTrack(bgmMood, audioConfig.bgm_url);
       if (bgmTrack && bgmTrack.path && fs.existsSync(bgmTrack.path)) {
         const modeStr = String(timeline.video_meta?.pipeline_mode || "").toLowerCase();
@@ -1773,7 +1787,7 @@ async function renderCurrentProject() {
     const captionText = `${videoMeta.description || ""} ${(videoMeta.hashtags || []).map((h) => `#${h}`).join(" ")}`.trim();
     const effectsUsed = [...new Set(scenes.map((s) => s.advanced_effect?.name).filter(Boolean))].join(", ");
     const shortDur = scenes.reduce((acc, s) => acc + (Number(s.duration) || 0), 0);
-    const archivedOutputFile = path.join(workflow.archiveDir, videoId, `${videoId}_final.mp4`);
+    const archivedOutputFile = path.join(workflow.archiveDir, videoId, `${videoId}.mp4`);
 
     const createdAtFormatted = videoMeta.created_at || (function() {
       try {

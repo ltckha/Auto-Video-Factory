@@ -1,8 +1,8 @@
 {
   "_meta": {
     "bootstrapped": true,
-    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/VID_20260724_120656_render.log",
-    "rr_index": 0
+    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/DJI_20260309183149_0006_D_render.log",
+    "rr_index": 1
   },
   "speedup": {
     "success": 37,
@@ -49,7 +49,7 @@
     "fail": 0
   },
   "advanced_effect:zoomsoft": {
-    "success": 82,
+    "success": 103,
     "fail": 0
   },
   "subtitle_style:hookbold": {
@@ -57,11 +57,11 @@
     "fail": 4
   },
   "transition_out:wipeleft": {
-    "success": 72,
+    "success": 86,
     "fail": 4
   },
   "advanced_effect:shake": {
-    "success": 28,
+    "success": 43,
     "fail": 0
   },
   "subtitle_style:framedcard": {
@@ -69,11 +69,11 @@
     "fail": 0
   },
   "transition_out:fade": {
-    "success": 70,
+    "success": 87,
     "fail": 0
   },
   "advanced_effect:zoomin": {
-    "success": 19,
+    "success": 23,
     "fail": 0
   },
   "subtitle_style:neonglow": {
@@ -81,11 +81,11 @@
     "fail": 0
   },
   "transition_out:slideup": {
-    "success": 73,
-    "fail": 0
+    "success": 91,
+    "fail": 1
   },
   "transition_out:wiperight": {
-    "success": 17,
+    "success": 27,
     "fail": 0
   },
   "subtitle_style:ctared": {
@@ -97,27 +97,27 @@
     "fail": 0
   },
   "advanced_effect:speedup": {
-    "success": 44,
-    "fail": 0
+    "success": 57,
+    "fail": 1
   },
   "advanced_effect:rgbshift": {
-    "success": 14,
+    "success": 16,
     "fail": 2
   },
   "advanced_effect:overshootzoom": {
-    "success": 21,
+    "success": 28,
     "fail": 0
   },
   "transition_out:pixelize": {
-    "success": 5,
+    "success": 6,
     "fail": 0
   },
   "advanced_effect:flash": {
-    "success": 4,
+    "success": 5,
     "fail": 0
   },
   "transition_out:circleopen": {
-    "success": 51,
+    "success": 58,
     "fail": 0
   },
   "advanced_effect:cinematiczoom": {
@@ -133,15 +133,15 @@
     "fail": 0
   },
   "subtitle_style:minimalglasscard": {
-    "success": 4,
-    "fail": 0
+    "success": 17,
+    "fail": 1
   },
   "subtitle_style:warningredbadge": {
     "success": 3,
     "fail": 0
   },
   "advanced_effect:speedrampfast": {
-    "success": 26,
+    "success": 27,
     "fail": 2
   },
   "advanced_effect:snapzoom": {
@@ -149,7 +149,11 @@
     "fail": 0
   },
   "subtitle_style:vibrantyellowlightningsticker": {
-    "success": 3,
+    "success": 22,
+    "fail": 0
+  },
+  "subtitle_style:vibrantyellowsticker": {
+    "success": 6,
     "fail": 0
   }
 }

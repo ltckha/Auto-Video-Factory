@@ -1,59 +1,17 @@
 {
   "style_profile": {
-    "name": "Dynamic Loafer Showcase",
-    "category_niche": "Mens Fashion & Footwear",
-    "average_scene_duration_s": 1.8,
+    "name": "Bespoke Leather Sole Stitching ASMR",
+    "category_niche": "mens_fashion___footwear",
+    "average_scene_duration_s": 2.5,
     "pacing_speed": "dynamic",
-    "hook_strategy": "Starts with a blurred black-and-white low-angle tease, immediately dropping into a sharp color transition with a physical step forward synced to a beat drop.",
+    "hook_strategy": "Extreme macro close-up piercing of thick tanned leather sole with sharp awl and taut waxing thread, creating instant tactile intrigue and crisp ASMR friction sounds.",
     "preferred_font_layout": "Minimalist centered bottom third, clean sans-serif font matching the modern aesthetic.",
     "transition_rules": [
-      "Beat-synced cuts with sudden exposure/light leaks",
-      "Alternating high-contrast shadow shots with bright indoor lighting"
+      "Seamless tactile match cuts on needle pierce and thread loop pull",
+      "Macro texture drift focusing on high-contrast leather grain and waxed stitching"
     ]
   },
   "few_shot_examples": [
-    {
-      "scene_type": "body",
-      "suggested_advanced_effect": {
-        "name": "Sunlight Shadow Shift",
-        "intent": "premium_showcase",
-        "camera_motion": "drift",
-        "focus": "texture",
-        "intensity": 0.7,
-        "mood": "premium",
-        "pacing": "dynamic"
-      },
-      "duration_range": "1.5s - 10.0s",
-      "suggested_subtitle_style": "Clean white font with thin outline at the lower middle",
-      "suggested_text_effect": "Typewriter fade",
-      "suggested_transition_out": {
-        "duration": 0.3,
-        "type": "wipe_right"
-      },
-      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Upbeat instrumental music pacing."
-    },
-    {
-      "scene_type": "highlight",
-      "suggested_advanced_effect": {
-        "name": "Macro Detail Zoom",
-        "intent": "luxury_soft",
-        "camera_motion": "push_in",
-        "focus": "logo",
-        "intensity": 0.6,
-        "mood": "premium",
-        "pacing": "slow"
-      },
-      "duration_range": "10.0s - 15.0s",
-      "suggested_subtitle_style": "Elegant minimalist sans-serif",
-      "suggested_text_effect": "Slide up reveal",
-      "suggested_transition_out": {
-        "duration": 0.4,
-        "type": "fade"
-      },
-      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Deep, warm voiceover describing the craftsmanship."
-    },
     {
       "scene_type": "hook",
       "suggested_advanced_effect": {
@@ -116,6 +74,22 @@
       },
       "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
       "voice_rhythm": "Warm resonant outro tone highlighting bespoke quality."
+    }
+  ],
+  "learned_novel_effects": [
+    {
+      "effect_name": "Tactile Awl Pierce",
+      "camera_motion": "push_in",
+      "description": "Macro camera push into the piercing action of leather crafting awl, emphasizing sharp tactile impact.",
+      "recommended_intensity": 0.85,
+      "visual_intent": "reveal_impact"
+    },
+    {
+      "effect_name": "Rhythmic Stitch Pull",
+      "camera_motion": "drift",
+      "description": "Smooth lateral camera drift following the waxing thread being pulled through stitch holes.",
+      "recommended_intensity": 0.75,
+      "visual_intent": "premium_showcase"
     }
   ]
 }

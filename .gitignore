@@ -43,3 +43,5 @@ renderer/config/env.json
 renderer/config/*.json
 !renderer/config/cardVisionProfiles.json
 !renderer/config/effectEnums.json
+*service*.json
+config/*service*.json

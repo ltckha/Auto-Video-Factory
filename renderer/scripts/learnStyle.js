@@ -296,7 +296,14 @@ async function main() {
     }
     console.log("[Poll] Video sẵn sàng phân tích!");
 
-    const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
+    const MODELS_CONFIG_PATH = path.join(__dirname, "..", "config", "geminiModelsConfig.json");
+    const modelsConfig = fs.existsSync(MODELS_CONFIG_PATH) ? JSON.parse(fs.readFileSync(MODELS_CONFIG_PATH, "utf8")) : {};
+    const candidateModels = (modelsConfig.models && modelsConfig.models.lightweight_tasks) || [
+      "gemini-3.5-flash-lite",
+      "gemini-3.1-flash-lite",
+      "gemini-3.7-flash",
+      "gemini-3.6-flash"
+    ];
     const response = await generateContentWithRetryFallback(
       ai,
       candidateModels,

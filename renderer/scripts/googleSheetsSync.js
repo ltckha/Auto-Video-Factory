@@ -1,5 +1,11 @@
+/**
+ * Direct Google Sheets Synchronizer for Auto-Video-Factory
+ * 100% Dynamic Header-Mapped Syncing with Google Sheets API v4 (Service Account).
+ */
+
 const fs = require("fs");
 const path = require("path");
+const sheetsClient = require("./googleSheetsDirectClient");
 
 const ROOT = path.resolve(__dirname, "..", "..");
 const BACKUP_DIR = path.join(ROOT, "renderer", "output", "sheets_backup");
@@ -9,55 +15,6 @@ function getLocalDateTime() {
   const now = new Date();
   const pad = (n) => String(n).padStart(2, "0");
   return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-}
-
-function getWebhookUrl() {
-  if (process.env.GOOGLE_SHEET_WEBHOOK_URL) {
-    return process.env.GOOGLE_SHEET_WEBHOOK_URL.trim();
-  }
-
-  // Thử đọc từ config local env.json
-  const configPath = path.join(ROOT, "renderer", "config", "env.json");
-  if (fs.existsSync(configPath)) {
-    try {
-      const conf = JSON.parse(fs.readFileSync(configPath, "utf8"));
-      if (conf.GOOGLE_SHEET_WEBHOOK_URL) return conf.GOOGLE_SHEET_WEBHOOK_URL.trim();
-    } catch {}
-  }
-
-  // Thử đọc từ ~/.zshrc hoặc ~/.bash_profile
-  const homeDir = process.env.HOME || "/Users/khan";
-  const shellFiles = [path.join(homeDir, ".zshrc"), path.join(homeDir, ".bash_profile")];
-  for (const sf of shellFiles) {
-    if (fs.existsSync(sf)) {
-      try {
-        const content = fs.readFileSync(sf, "utf8");
-        const match = content.match(/GOOGLE_SHEET_WEBHOOK_URL=["']?([^"'\r\n]+)["']?/);
-        if (match && match[1]) {
-          return match[1].trim();
-        }
-      } catch {}
-    }
-  }
-
-  return "";
-}
-
-async function sendWebhook(payload) {
-  const url = getWebhookUrl();
-  if (!url) return false;
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    return response.ok;
-  } catch (err) {
-    console.warn(`[GoogleSheetSync] WARN: Không thể gửi Webhook Google Sheet: ${err.message}`);
-    return false;
-  }
 }
 
 function ensureBackupDir() {
@@ -79,32 +36,38 @@ function appendCsvLine(filePath, headers, values) {
 }
 
 async function syncProjectToSheet(projectData) {
-  // 1. Webhook
-  await sendWebhook({
-    action: "sync_project",
-    sheetName: "Auto-Video-Factory",
-    project: {
-      projectId: projectData.projectId || projectData.job_id,
-      status: projectData.status,
-      inputFile: projectData.inputFile,
-      title: projectData.title,
-      rawCaption: projectData.captionHashtags || projectData.raw_caption || "",
-      originalDuration: projectData.originalDuration,
-      shortDuration: projectData.shortDuration,
-      sceneCount: projectData.sceneCount,
-      hookScore: projectData.hookScore,
-      effectsSummary: projectData.effectsSummary,
-      outputFile: projectData.outputFile || projectData.video_path,
-      createdAt: projectData.createdAt,
-      renderedAt: projectData.renderedAt,
-      brandFb: projectData.brandFb || "",
-      brandYt: projectData.brandYt || "",
-      brandIg: projectData.brandIg || "",
-      brandTt: projectData.brandTt || "",
-      brandShopee: projectData.brandShopee || "",
-      brandZalo: projectData.brandZalo || "",
-    },
-  });
+  const jobId = projectData.projectId || projectData.job_id || "";
+  if (!jobId) return;
+
+  const projectDict = {
+    job_id: jobId,
+    status: projectData.status || "🎬 Rendered",
+    input_file: projectData.inputFile || "",
+    title: projectData.title || "",
+    raw_caption: projectData.captionHashtags || projectData.raw_caption || "",
+    original_duration: projectData.originalDuration || "",
+    short_duration: projectData.shortDuration || "",
+    scene_count: projectData.sceneCount || "",
+    hook_score: projectData.hookScore || "",
+    effects_summary: projectData.effectsSummary || "",
+    video_path: projectData.outputFile || projectData.video_path || "",
+    created_at: projectData.createdAt || getLocalDateTime(),
+    rendered_at: projectData.renderedAt || getLocalDateTime(),
+    brand_fb: projectData.brandFb || "",
+    brand_yt: projectData.brandYt || "",
+    brand_ig: projectData.brandIg || "",
+    brand_tt: projectData.brandTt || "",
+    brand_shopee: projectData.brandShopee || "",
+    brand_zalo: projectData.brandZalo || ""
+  };
+
+  // 1. Direct Dynamic Header-Mapped Upsert
+  try {
+    await sheetsClient.upsertRowByHeader("Auto-Video-Factory", "job_id", jobId, projectDict);
+    console.log(`[GoogleSheetDirect] ✅ Đã đồng bộ theo TÊN CỘT ĐỘNG cho dự án '${jobId}' (Tab Auto-Video-Factory).`);
+  } catch (err) {
+    console.warn(`[GoogleSheetDirect] WARN: Lỗi đồng bộ Direct API: ${err.message}`);
+  }
 
   // 2. Local CSV Backup
   const csvPath = path.join(BACKUP_DIR, "projects_tracker.csv");
@@ -114,25 +77,25 @@ async function syncProjectToSheet(projectData) {
     "Created At", "Rendered At", "brand_fb", "brand_yt", "brand_ig", "brand_tt", "brand_shopee", "brand_zalo"
   ];
   const row = [
-    projectData.projectId,
-    projectData.status,
-    projectData.inputFile,
-    projectData.title,
-    projectData.captionHashtags,
-    projectData.originalDuration,
-    projectData.shortDuration,
-    projectData.sceneCount,
-    projectData.hookScore,
-    projectData.effectsSummary,
-    projectData.outputFile,
-    projectData.createdAt,
-    projectData.renderedAt,
-    projectData.brandFb || "",
-    projectData.brandYt || "",
-    projectData.brandIg || "",
-    projectData.brandTt || "",
-    projectData.brandShopee || "",
-    projectData.brandZalo || ""
+    projectDict.job_id,
+    projectDict.status,
+    projectDict.input_file,
+    projectDict.title,
+    projectDict.raw_caption,
+    projectDict.original_duration,
+    projectDict.short_duration,
+    projectDict.scene_count,
+    projectDict.hook_score,
+    projectDict.effects_summary,
+    projectDict.video_path,
+    projectDict.created_at,
+    projectDict.rendered_at,
+    projectDict.brand_fb,
+    projectDict.brand_yt,
+    projectDict.brand_ig,
+    projectDict.brand_tt,
+    projectDict.brand_shopee,
+    projectDict.brand_zalo
   ];
   appendCsvLine(csvPath, headers, row);
 }
@@ -140,21 +103,7 @@ async function syncProjectToSheet(projectData) {
 async function syncScenesToSheet(projectId, scenes) {
   if (!scenes || !Array.isArray(scenes)) return;
 
-  // 1. Webhook
-  await sendWebhook({
-    action: "sync_scenes",
-    sheetName: "Video-Factory-SCENES",
-    projectId,
-    scenes,
-  });
-
-  // 2. Local CSV Backup
-  const csvPath = path.join(BACKUP_DIR, "scenes_detail.csv");
-  const headers = [
-    "Project ID", "Scene ID", "Scene Type", "Time (Start-End)", "Target Duration",
-    "Subtitle", "Voice Text", "Visual Cue", "Subtitle Style", "Advanced Effect", "Transition Out"
-  ];
-
+  const rows = [];
   for (const s of scenes) {
     const textEffectName = typeof s.text_effect === "object" ? s.text_effect?.name : s.text_effect;
     const advEffectName = typeof s.advanced_effect === "object" ? s.advanced_effect?.name : s.advanced_effect;
@@ -170,7 +119,7 @@ async function syncScenesToSheet(projectId, scenes) {
     const styleText = `${s.subtitle_style || "default"} (${s.text_position || "bottom"})`;
     const effectText = `${advEffectName || "none"} (${s.advanced_effect?.camera_motion || "static"})`;
 
-    const row = [
+    rows.push([
       projectId,
       s.scene_id || s.id || "",
       s.scene_type || "body",
@@ -182,8 +131,25 @@ async function syncScenesToSheet(projectId, scenes) {
       styleText,
       effectText,
       transOutType
-    ];
-    appendCsvLine(csvPath, headers, row);
+    ]);
+  }
+
+  // 1. Direct Google Sheets API v4
+  try {
+    await sheetsClient.appendValues("Video-Factory-SCENES!A1", rows);
+    console.log(`[GoogleSheetDirect] ✅ Đã ghi ${rows.length} phân cảnh vào Google Sheets (Tab Video-Factory-SCENES).`);
+  } catch (err) {
+    console.warn(`[GoogleSheetDirect] WARN: Lỗi ghi scenes vào Google Sheets: ${err.message}`);
+  }
+
+  // 2. Local CSV Backup
+  const csvPath = path.join(BACKUP_DIR, "scenes_detail.csv");
+  const headers = [
+    "Project ID", "Scene ID", "Scene Type", "Time (Start-End)", "Target Duration",
+    "Subtitle", "Voice Text", "Visual Cue", "Subtitle Style", "Advanced Effect", "Transition Out"
+  ];
+  for (const r of rows) {
+    appendCsvLine(csvPath, headers, r);
   }
 }
 
@@ -195,7 +161,7 @@ async function syncAnalyticsToSheet() {
     }
   } catch {}
 
-  const analytics = [];
+  const rows = [];
   for (const [key, val] of Object.entries(stats)) {
     if (key === "_meta" || key === "fallback" || key === "none" || typeof val !== "object") continue;
 
@@ -213,34 +179,31 @@ async function syncAnalyticsToSheet() {
     }
 
     const formattedKey = `[${type}] ${cleanKey}`;
+    const success = val.success || 0;
+    const fail = val.fail || 0;
+    const total = success + fail;
+    const rate = total > 0 ? ((success / total) * 100).toFixed(1) + "%" : "0%";
+    const status = (success >= 5 && (success / Math.max(1, total)) >= 0.9) ? "Safe" : "Restricted";
 
-    analytics.push({
-      key: formattedKey,
-      rawKey: cleanKey,
-      type,
-      success: val.success || 0,
-      fail: val.fail || 0,
-    });
+    rows.push([formattedKey, success, fail, rate, status]);
   }
 
-  // 1. Webhook
-  await sendWebhook({
-    action: "sync_analytics",
-    sheetName: "Video-Factory-EFFECTS",
-    analytics,
-  });
+  const headers = ["Feature Key", "Success Count", "Fail Count", "Success Rate (%)", "Safe Pool Status"];
+
+  // 1. Direct Google Sheets API v4
+  try {
+    await sheetsClient.overwriteSheet("Video-Factory-EFFECTS", headers, rows);
+    console.log(`[GoogleSheetDirect] ✅ Đã cập nhật bảng Analytics hiệu ứng trên Google Sheets (Tab Video-Factory-EFFECTS).`);
+  } catch (err) {
+    console.warn(`[GoogleSheetDirect] WARN: Lỗi đồng bộ Analytics Google Sheet: ${err.message}`);
+  }
 
   // 2. Local CSV Backup
   const csvPath = path.join(BACKUP_DIR, "effects_analytics.csv");
-  const headers = ["Feature Key", "Success Count", "Fail Count", "Success Rate (%)", "Safe Pool Status"];
   ensureBackupDir();
   const lines = [headers.join(",")];
-
-  for (const item of analytics) {
-    const total = item.success + item.fail;
-    const rate = total > 0 ? ((item.success / total) * 100).toFixed(1) + "%" : "0%";
-    const status = (item.success >= 5 && (item.success / Math.max(1, total)) >= 0.9) ? "Safe" : "Restricted";
-    lines.push(`"${item.key}","${item.success}","${item.fail}","${rate}","${status}"`);
+  for (const r of rows) {
+    lines.push(`"${r[0]}","${r[1]}","${r[2]}","${r[3]}","${r[4]}"`);
   }
   fs.writeFileSync(csvPath, `${lines.join("\n")}\n`, "utf8");
 }

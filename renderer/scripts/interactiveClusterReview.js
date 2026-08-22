@@ -8,17 +8,23 @@ async function reviewAndEditClusters(clusters) {
   if (!clusters || clusters.length === 0) return clusters;
 
   console.log("\n==================================================");
-  console.log("🎯 DANH SÁCH AI ĐỀ XUẤT CHÙM VIDEO NGẮN (BATCH SHORTS):");
+  console.log("🎯 DANH SÁCH AI ĐÃ SĂN ĐIỂM SÁNG & TRÍCH XUẤT CHÙM SHORTS:");
   console.log("==================================================");
 
   clusters.forEach((c, idx) => {
     const timeStr = (c.timecodes || [])
-      .map((t) => `${t.start || "0s"} - ${t.end || "0s"}`)
+      .map((t) => `${t.start_s !== undefined ? t.start_s : (t.start || "0")}s - ${t.end_s !== undefined ? t.end_s : (t.end || "0")}s`)
       .join(", ");
-    console.log(`\n [${idx + 1}] Short #${idx + 1}: ${c.cluster_title || "Video Ngắn"}`);
-    console.log(`     ⏱️ Mốc thời gian : ${timeStr || "Tự động"}`);
+    console.log(`\n [${idx + 1}] 🎬 Short #${idx + 1}: ${c.cluster_title || "Video Ngắn"}`);
+    if (c.core_value_type) {
+      console.log(`     💎 Giá trị cốt lõi : [${c.core_value_type}]`);
+    }
+    console.log(`     ⏱️ Mốc thời gian  : ${timeStr || "Tự động"}`);
+    if (c.hook_highlight) {
+      console.log(`     🎣 Móc câu (Hook)  : ${c.hook_highlight}`);
+    }
     if (c.narrative_focus) {
-      console.log(`     🎯 Định hướng   : ${c.narrative_focus}`);
+      console.log(`     🎯 Định hướng     : ${c.narrative_focus}`);
     }
   });
 
@@ -78,7 +84,7 @@ async function editClustersInteractively(clusters) {
   const edited = [];
   for (let i = 0; i < clusters.length; i++) {
     const c = clusters[i];
-    const oldTimeStr = (c.timecodes || []).map((t) => `${t.start || "0s"}-${t.end || "0s"}`).join(", ");
+    const oldTimeStr = (c.timecodes || []).map((t) => `${t.start_s !== undefined ? t.start_s : (t.start || "0")}s-${t.end_s !== undefined ? t.end_s : (t.end || "0")}s`).join(", ");
 
     console.log(`\n📌 Short #${i + 1}: ${c.cluster_title}`);
     console.log(`   Mốc hiện tại : ${oldTimeStr}`);
@@ -101,7 +107,6 @@ async function editClustersInteractively(clusters) {
     if (newFocus) updatedCluster.narrative_focus = newFocus;
 
     if (newTime) {
-      // Parse format như 01:05-02:40 hoặc 65-160 hoặc 1:05 - 2:40
       const parsedTime = parseTimeStringToSeconds(newTime);
       if (parsedTime) {
         updatedCluster.timecodes = [parsedTime];
@@ -111,7 +116,7 @@ async function editClustersInteractively(clusters) {
     }
 
     edited.push(updatedCluster);
-    console.log(`   ✅ Đã cập nhật Short #${i + 1}: "${updatedCluster.cluster_title}" (${(updatedCluster.timecodes || []).map(t => `${t.start}-${t.end}`).join(", ")})`);
+    console.log(`   ✅ Đã cập nhật Short #${i + 1}: "${updatedCluster.cluster_title}"`);
   }
 
   rl.close();

@@ -40,10 +40,14 @@ QUY TẮC PHÂN LOẠI & ĐỒNG BỘ VOICEOVER (CỰC KỲ QUAN TRỌNG)
 ━━━━━━━━━━━━━━━━━━
 1. **Quy tắc đặt tên scene_id**: Định dạng `scene_id` bắt buộc phải là dạng chuỗi `"scene_001"`, `"scene_002"`, `"scene_003"`... để hệ thống tự động ánh xạ chính xác với file âm thanh thuyết minh rời `{projectId}_{scene_id}.wav` trong thư mục `incoming/`.
 2. **Quy tắc về thời lượng Voice**: Lời thoại `voice` ngắn gọn tự nhiên. Độ dài văn bản phải tương thích với thời lượng của cảnh (`duration_s`). Trường `voice` tuyệt đối không dùng văn phong quảng cáo thương mại và cấm các từ như mua ngay, chốt đơn, thêm vào giỏ hàng, deal sốc, sale hoặc sắm ngay.
-3. **QUY TẮC OUTRO / CTA TẾ NHỊ & DỊU DÀNG (BẮT BUỘC):**
+3. **QUY TẮC OUTRO / CTA TẾ NHỊ & SÁNG TẠO ĐỘC BẢN (BẮT BUỘC):**
    - 🚫 **NGHIÊM CẤM TẤT CẢ CÁC CÂU KÊU GỌI HỐI HẢ / THÚC GIỤC GIAO DỊCH:** Tuyệt đối CẤM các câu giật gân hoặc thúc giục như *"Đừng mua nếu chưa xem"*, *"Sắm ngay kẻo hết"*, *"Bấm vào giỏ hàng bên dưới"*, *"Click ngay deal tốt"*.
-   - ✨ **KẾT BÀI TẾ NHỊ, ẤM ÁP & ĐẮNG SÂU:** Phân cảnh Outro/CTA cuối cùng BẮT BUỘC chỉ được truyền tải những lời nhắn nhẹ nhàng, trích dẫn hay, lời chúc hoặc đọng lại cảm xúc chân thành (VD: *"Một chút dịu dàng cho góc bếp nhỏ."*, *"Gói trọn bình yên trong từng chi tiết."*, *"Sự tử tế bắt đầu từ những điều nhỏ bé nhất."*, *"Hy vọng ngày hôm nay của bạn thật dễ chịu."*).
-4. **Danh sách scene_type hợp lệ** - Chỉ chọn 1 trong: `["hook", "intro", "body", "highlight", "outro", "cta"]`.
+   - 🚫 **TUYỆT ĐỐI CẤM SỬ DỤNG VĂN MẪU RẬP KHUÔN:** Cấm lặp lại cùng một câu văn mẫu giữa các video.
+   - ✨ **KẾT BÀI SÁNG TẠO 100% ĐỘC BẢN:** Phân cảnh Outro/CTA cuối cùng BẮT BUỘC phải là câu kết riêng biệt gắn liền với ngữ cảnh thực tế của video.
+4. **Nhận diện Nhạc Nền Gốc (Audio / Music Detection):**
+   - Nếu video gốc **ĐÃ CÓ SẴN NHẠC NỀN / BÀI HÁT / ASMR HAY**: BẮT BUỘC đặt `"has_original_music": true` và `"bgm_mood": "none"`.
+   - Nếu video gốc **LÀ VIDEO CÂM HOẶC CHỈ CÓ TẠP ÂM MIC KHÔNG CÓ NHẠC**: Đặt `"has_original_music": false` và chọn `"bgm_mood"` (`chill`, `satisfying`, `energetic`).
+5. **Danh sách scene_type hợp lệ** - Chỉ chọn 1 trong: `["hook", "intro", "body", "highlight", "outro", "cta"]`.
 
 ━━━━━━━━━━━━━━━━━━
 SINGLE-PASS RAW INGREDIENTS & INTENT DIRECTIVES (ĐẠO DIỄN AI NỘI DUNG)

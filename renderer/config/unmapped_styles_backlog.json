@@ -16,5 +16,17 @@
     "last_requested": "2026-08-12T02:36:24.266Z",
     "mapped_fallback": "minimal_glass_card",
     "samples": []
+  },
+  "editorial_premium": {
+    "style_name": "editorial_premium",
+    "occurrences": 6,
+    "first_requested": "2026-08-12T05:57:24.738Z",
+    "last_requested": "2026-08-19T07:34:02.395Z",
+    "mapped_fallback": "minimal_glass_card",
+    "samples": [
+      "GÓI TRỌN BÌNH YÊN\nCHO TỪNG BƯỚC CHÂN",
+      "SỰ TỈ MỈ TẠO NÊN\nGIÁ TRỊ BỀN BỈ",
+      "XẢ NƯỚC SẠCH BÓNG\nTHÔNG THOÁNG TỨC THÌ ⚡"
+    ]
   }
 }

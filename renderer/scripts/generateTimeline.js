@@ -13,6 +13,11 @@ const PROMPT_PATH = path.join(PROMPTS_DIR, "timeline_generator_prompt.md");
 const ENUMS_PATH = path.join(ROOT, "renderer", "config", "effectEnums.json");
 const effectEnums = fs.existsSync(ENUMS_PATH) ? JSON.parse(fs.readFileSync(ENUMS_PATH, "utf8")) : {};
 
+const MODELS_CONFIG_PATH = path.join(ROOT, "renderer", "config", "geminiModelsConfig.json");
+const modelsConfig = fs.existsSync(MODELS_CONFIG_PATH) ? JSON.parse(fs.readFileSync(MODELS_CONFIG_PATH, "utf8")) : {};
+const HEAVY_MODELS = (modelsConfig.models && modelsConfig.models.heavy_video_analysis) || ["gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
+const LITE_MODELS = (modelsConfig.models && modelsConfig.models.lightweight_tasks) || ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.7-flash", "gemini-3.6-flash"];
+
 const RESPONSE_SCHEMA = {
   type: "OBJECT",
   properties: {
@@ -234,7 +239,7 @@ function validateAndFixTimelineTimestamps(timelineJson, videoPath) {
 
 async function main() {
   const { resolveMultiInputs, getVideoDuration } = require("./multiInputResolver");
-  const { generateFastPreview } = require("./fastPreviewGenerator");
+  const { generateSmartProxy1x } = require("./smartProxyGenerator");
 
   const nonFlagArgs = process.argv.slice(2).filter((arg) => !arg.startsWith("--"));
   if (nonFlagArgs.length === 0) {
@@ -297,11 +302,11 @@ async function main() {
   }
   let systemInstruction = fs.readFileSync(promptPath, "utf8");
 
-  // Nếu là Mode Cluster / Video Dài (> 5m) -> Tạo Fast Preview 4x siêu nhẹ để upload nhanh gấp 10 lần!
+  // Nếu là Mode Cluster / Video Dài (> 5m) -> Tạo Smart Proxy 1x 720p siêu nhẹ (giữ 100% âm thanh & mốc giây)
   let fileToUpload = absoluteVideoPath;
   if (isClusterMode || dur > 300) {
-    console.log(`[FastPreview] Tự động kích hoạt tạo Fast Preview 4x siêu nhẹ cho video dài (${dur.toFixed(1)}s)...`);
-    fileToUpload = generateFastPreview(absoluteVideoPath, TEMP_WORK_DIR, 4.0);
+    console.log(`[SmartProxy] Tự động tạo Smart Proxy 1x 720p siêu nhẹ cho video dài (${dur.toFixed(1)}s)...`);
+    fileToUpload = generateSmartProxy1x(absoluteVideoPath, TEMP_WORK_DIR);
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
@@ -346,10 +351,9 @@ async function main() {
     let activePresetContext = "";
     try {
       console.log("[NicheDetect] Đang nhận diện ngách nội dung & nhịp độ video gốc...");
-      const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
       const nicheResponse = await generateContentWithRetryFallback(
         ai,
-        candidateModels,
+        LITE_MODELS,
         [
           {
             fileData: {
@@ -392,10 +396,9 @@ async function main() {
     if (isClusterMode) {
       // XỬ LÝ MODE CLUSTER (PASS 1 & PASS 2 DÀNH CHO VIDEO DÀI/BATCH SHORTS)
       console.log("[AI] [Pass 1] Đang gửi yêu cầu gom cụm điểm sáng sang Gemini AI...");
-      const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
       const clusterResponse = await generateContentWithRetryFallback(
         ai,
-        candidateModels,
+        HEAVY_MODELS,
         [
           {
             fileData: {
@@ -435,7 +438,7 @@ async function main() {
           const promptMsg = `Hãy tạo kịch bản Timeline JSON hoàn chỉnh cho Video Ngắn Độc Lập '${c.cluster_title}'${focusText} sử dụng các mốc thời gian sau từ video gốc:\n${JSON.stringify(c.timecodes, null, 2)}`;
           const subResponse = await generateContentWithRetryFallback(
             ai,
-            candidateModels,
+            HEAVY_MODELS,
             [
               {
                 fileData: {
@@ -517,10 +520,9 @@ async function main() {
 
     // CHẾ ĐỘ CHUẨN (SHORT2SHORT HOẶC LONG2SHORT CŨ)
     console.log("[AI] Đang gửi yêu cầu phân tích video sang Gemini AI...");
-    const candidateModels = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
     const response = await generateContentWithRetryFallback(
       ai,
-      candidateModels,
+      HEAVY_MODELS,
       [
         {
           fileData: {

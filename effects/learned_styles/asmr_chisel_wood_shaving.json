@@ -1,0 +1,102 @@
+{
+  "style_profile": {
+    "name": "Ultra-Sharp Chisel Wood Shaving ASMR",
+    "category_niche": "asmr_build",
+    "average_scene_duration_s": 1.3,
+    "pacing_speed": "dynamic",
+    "hook_strategy": "Direct macro close-up of a razor-sharp Japanese chisel shaving thin wooden curls off a two-tone cedar block, delivering instant visual satisfaction and crisp tactile crunching ASMR sounds from second zero.",
+    "preferred_font_layout": "Zero on-screen subtitle overlay to maximize clear visual view of intricate wood grain and micro-carving action.",
+    "transition_rules": [
+      "Rapid jump cuts synced to tactile slicing rhythm and shaving curl releases",
+      "Dynamic macro camera push following the blade path along the grain"
+    ]
+  },
+  "few_shot_examples": [
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Tactile Chisel Slice",
+        "intent": "reveal_impact",
+        "camera_motion": "push_in",
+        "focus": "texture",
+        "intensity": 0.9,
+        "mood": "satisfying",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 2.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Silent voiceover, crisp high-frequency wood slicing sound."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Wood Curl Snap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.85,
+        "mood": "satisfying",
+        "pacing": "dynamic"
+      },
+      "duration_range": "2.0s - 10.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.2,
+        "type": "wipe_left"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Rhythmic crunching and shaving curl popping sounds."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Macro Grain Drift",
+        "intent": "premium_showcase",
+        "camera_motion": "drift",
+        "focus": "texture",
+        "intensity": 0.7,
+        "mood": "premium",
+        "pacing": "slow"
+      },
+      "duration_range": "10.0s - 13.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Smooth resonant tool rest audio with polished wooden surface reveal."
+    }
+  ],
+  "learned_novel_effects": [
+    {
+      "effect_name": "Tactile Chisel Slice",
+      "camera_motion": "push_in",
+      "description": "Macro camera push tracking along the edge of a chisel slicing wood fibers.",
+      "recommended_intensity": 0.9,
+      "visual_intent": "reveal_impact"
+    },
+    {
+      "effect_name": "Wood Curl Snap",
+      "camera_motion": "snap",
+      "description": "Instant subtle camera snap synced with the curling and separation of shaving debris.",
+      "recommended_intensity": 0.85,
+      "visual_intent": "actioncut"
+    },
+    {
+      "effect_name": "Macro Grain Drift",
+      "camera_motion": "drift",
+      "description": "Smooth lateral panning across fine polished grain surfaces.",
+      "recommended_intensity": 0.7,
+      "visual_intent": "premium_showcase"
+    }
+  ]
+}

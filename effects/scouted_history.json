@@ -1,0 +1,38 @@
+{
+  "last_niche_index": 3,
+  "history": [
+    {
+      "video_id": "wYuSwmHZOvA",
+      "url": "http://www.youtube.com/watch?v=wYuSwmHZOvA",
+      "title": "Luxury Handmade Shoes Stitching | ASMR Craftsmanship",
+      "channel": "Leather Craft",
+      "niche": "mens_fashion___footwear",
+      "view_count": 13450258,
+      "scouted_at": "2026-08-20T09:18:00+07:00",
+      "learned_style_file": "effects/learned_styles/bespoke_leather_sole_stitching_asmr.json",
+      "style_name": "Bespoke Leather Sole Stitching ASMR"
+    },
+    {
+      "video_id": "gzCvOvZ6IHM",
+      "url": "http://www.youtube.com/watch?v=gzCvOvZ6IHM",
+      "title": "Like The Crunch? #shorts #woodwork #asmrsounds #oddlysatisfying #satisfying #chisel #sharp",
+      "channel": "Studio Live Edge",
+      "niche": "asmr_build",
+      "view_count": 43543098,
+      "scouted_at": "2026-08-21T09:03:00+07:00",
+      "learned_style_file": "effects/learned_styles/asmr_chisel_wood_shaving.json",
+      "style_name": "Ultra-Sharp Chisel Wood Shaving ASMR"
+    },
+    {
+      "video_id": "O2U5Rhp2HDE",
+      "url": "http://www.youtube.com/watch?v=O2U5Rhp2HDE",
+      "title": "Iced coffee always ☕️ #coffee #icedcoffee #shorts #morning #asmr #aesthetic #breakfast",
+      "channel": "Victoria Ortega",
+      "niche": "lifestyle___fashion_aesthetics",
+      "view_count": 12285785,
+      "scouted_at": "2026-08-22T09:55:00+07:00",
+      "learned_style_file": "effects/learned_styles/cozy_minimalist_iced_latte_routine.json",
+      "style_name": "Cozy Minimalist Iced Latte Routine"
+    }
+  ]
+}

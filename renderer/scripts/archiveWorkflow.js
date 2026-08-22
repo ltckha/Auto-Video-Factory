@@ -34,6 +34,10 @@ function archiveSuccessfulRender(workflow, log) {
   const postPath = path.join(projectDir, "post.txt");
   fs.writeFileSync(postPath, buildPostText(workflow.timeline || {}), "utf8");
   log(`Tạo post.txt thành công: ${postPath}`);
+
+  // Tự động dọn sạch file tạm ghép/tách trong incoming/temp_concat/
+  cleanupIncomingTempConcat(workflow.incomingDir, log);
+
   log(`Moved to archive: project=${workflow.projectId} dir=${projectDir}`);
 }
 
@@ -49,6 +53,25 @@ function archiveFailedRender(workflow, log) {
 
   // Xóa WAV voice files khỏi incoming khi render thất bại
   moveVoiceWavFiles(workflow.incomingDir, workflow.projectId, projectDir, log);
+
+  // Dọn sạch file tạm ghép/tách trong incoming/temp_concat/
+  cleanupIncomingTempConcat(workflow.incomingDir, log);
+}
+
+function cleanupIncomingTempConcat(incomingDir, log) {
+  try {
+    const tempConcatDir = path.join(incomingDir, "temp_concat");
+    if (fs.existsSync(tempConcatDir)) {
+      for (const entry of fs.readdirSync(tempConcatDir)) {
+        if (entry === ".DS_Store") continue;
+        const fullPath = path.join(tempConcatDir, entry);
+        fs.rmSync(fullPath, { recursive: true, force: true });
+      }
+      log(`[Cleanup] Đã dọn dẹp sạch sẽ toàn bộ file tạm ghép/tách trong: ${tempConcatDir}`);
+    }
+  } catch (err) {
+    log(`[Cleanup] WARN: Không thể dọn dẹp temp_concat: ${err.message}`);
+  }
 }
 
 function deleteIncomingInputVideo(inputVideo, incomingDir, projectId, log) {
