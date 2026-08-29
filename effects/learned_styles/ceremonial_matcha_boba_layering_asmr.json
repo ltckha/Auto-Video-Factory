@@ -1,0 +1,71 @@
+{
+  "style_name": "Ceremonial Matcha Boba Layering ASMR",
+  "category_niche": "lifestyle___fashion_aesthetics",
+  "source_video_id": "P0VDMW__3tA",
+  "source_url": "http://www.youtube.com/watch?v=P0VDMW__3tA",
+  "source_title": "matcha latte asmr 🍵",
+  "source_channel": "Leanna",
+  "style_dna": {
+    "pacing": {
+      "average_scene_duration_s": 1.5,
+      "pacing_speed": "rapid_step_sync",
+      "rhythm_type": "tactile_action_sequence"
+    },
+    "hook_3s": {
+      "strategy": "Instant spin of branded matcha tin on luxury marble countertop followed by crisp tactile metal pull-ring popping and vibrant green powder sifting.",
+      "energy": "aesthetic_satisfying",
+      "focus": "culinary_craft"
+    },
+    "color_grading": {
+      "lighting": "natural_diffused_high_key",
+      "color_palette": ["#1A4D2E", "#E8F5E9", "#F7F7F7", "#3E2723"],
+      "contrast": "clean_crisp_bright",
+      "mood": "aesthetic_calming_zen"
+    },
+    "typography_and_cards": {
+      "layout": "minimal_or_none",
+      "style": "clean_unobstructed_frame",
+      "emphasis": "focus_on_physical_tactile_action"
+    },
+    "micro_effects": [
+      {
+        "name": "Matcha Sift Powder Drift",
+        "camera_motion": "drift",
+        "intent": "tactile_showcase",
+        "focus": "texture",
+        "intensity": 0.75,
+        "timing_s": "0.0s - 3.0s"
+      },
+      {
+        "name": "Layered Ombre Pour Cascade",
+        "camera_motion": "push_in",
+        "intent": "reveal_impact",
+        "focus": "action",
+        "intensity": 0.85,
+        "timing_s": "5.0s - 8.0s"
+      },
+      {
+        "name": "Glass Straw Swirl Snap",
+        "camera_motion": "snap",
+        "intent": "actioncut",
+        "focus": "action",
+        "intensity": 0.9,
+        "timing_s": "8.0s - 11.0s"
+      }
+    ],
+    "audio_and_asmr": {
+      "has_bgm": false,
+      "sfx_cues": [
+        "tin spin on marble counter",
+        "metal seal pull pop",
+        "sifter mesh metal spoon scrape",
+        "bamboo chasen whisk rapid swish",
+        "ice cube clatter",
+        "milk stream splash",
+        "thick matcha pour swirl",
+        "glass straw plunging into boba pearls"
+      ],
+      "dominant_frequency": "tactile_high_clarity_organic"
+    }
+  }
+}

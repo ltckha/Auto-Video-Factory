@@ -29,101 +29,38 @@
   ],
   "few_shot_examples": [
     {
-      "scene_type": "highlight",
-      "duration_range": "24.0s - 51.0s",
-      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Không lời thoại, nhịp độ âm thanh chuyển sang tiếng gõ búa cao su đều đặn, tiếng kéo khóa đệm và khoan gỗ mượt mà.",
-      "suggested_text_effect": "none",
-      "suggested_subtitle_style": "none",
-      "suggested_advanced_effect": {
-        "name": "ASMR Snap-to-Grid Build",
-        "intent": "satisfying_reveal",
-        "mood": "satisfying",
-        "pacing": "fast",
-        "focus": "detail",
-        "camera_motion": "static",
-        "intensity": 0.9
-      },
-      "suggested_transition_out": {
-        "type": "fade",
-        "duration": 0.3
-      }
-    },
-    {
-      "scene_type": "outro",
-      "duration_range": "51.0s - 60.0s",
-      "visual_description": "[GENERIC_SCENE_TYPE: outro] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Không lời thoại, chỉ có tiếng sóng biển vỗ nhẹ bên ngoài kết hợp âm thanh tĩnh lặng, sang trọng của nội thất cao cấp.",
-      "suggested_text_effect": "none",
-      "suggested_subtitle_style": "none",
-      "suggested_advanced_effect": {
-        "name": "Seamless Portal Interior Glide",
-        "intent": "luxury_reveal",
-        "mood": "luxury",
-        "pacing": "slow",
-        "focus": "product",
-        "camera_motion": "zoom_in_out",
-        "intensity": 0.8
-      },
-      "suggested_transition_out": {
-        "type": "fade",
-        "duration": 0.5
-      }
-    },
-    {
-      "scene_type": "hook",
-      "suggested_advanced_effect": {
-        "name": "Tactile Chisel Slice",
-        "intent": "reveal_impact",
-        "camera_motion": "push_in",
-        "focus": "texture",
-        "intensity": 0.9,
-        "mood": "satisfying",
-        "pacing": "fast"
-      },
-      "duration_range": "0.0s - 2.0s",
-      "suggested_subtitle_style": "none",
-      "suggested_text_effect": "none",
-      "suggested_transition_out": {
-        "duration": 0.15,
-        "type": "fade"
-      },
-      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Silent voiceover, crisp high-frequency wood slicing sound."
-    },
-    {
       "scene_type": "body",
       "suggested_advanced_effect": {
-        "name": "Wood Curl Snap",
+        "name": "Metal Burr Curl Shiver",
         "intent": "actioncut",
-        "camera_motion": "snap",
+        "camera_motion": "shake",
         "focus": "action",
         "intensity": 0.85,
         "mood": "satisfying",
         "pacing": "dynamic"
       },
-      "duration_range": "2.0s - 10.0s",
+      "duration_range": "2.5s - 8.0s",
       "suggested_subtitle_style": "none",
       "suggested_text_effect": "none",
       "suggested_transition_out": {
-        "duration": 0.2,
-        "type": "wipe_left"
+        "duration": 0.15,
+        "type": "wipe_right"
       },
       "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Rhythmic crunching and shaving curl popping sounds."
+      "voice_rhythm": "High-frequency friction sizzle and micro-metal curl peeling sounds."
     },
     {
       "scene_type": "highlight",
       "suggested_advanced_effect": {
-        "name": "Macro Grain Drift",
+        "name": "Precision Edge Glide",
         "intent": "premium_showcase",
         "camera_motion": "drift",
-        "focus": "texture",
-        "intensity": 0.7,
+        "focus": "product",
+        "intensity": 0.8,
         "mood": "premium",
         "pacing": "slow"
       },
-      "duration_range": "10.0s - 13.0s",
+      "duration_range": "8.0s - 12.0s",
       "suggested_subtitle_style": "none",
       "suggested_text_effect": "none",
       "suggested_transition_out": {
@@ -131,7 +68,70 @@
         "type": "fade"
       },
       "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Smooth resonant tool rest audio with polished wooden surface reveal."
+      "voice_rhythm": "Clean finished bevel stroke with deep resonant metallic ring."
+    },
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Seamless Tenon Interlock Slide",
+        "intent": "reveal_impact",
+        "camera_motion": "push_in",
+        "focus": "product",
+        "intensity": 0.85,
+        "mood": "satisfying",
+        "pacing": "medium"
+      },
+      "duration_range": "0.0s - 4.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Frictionless glide of seasoned oak into walnut mortise followed by a deep wooden lock resonance."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Resonant Key Wedge Tap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.9,
+        "mood": "focused",
+        "pacing": "fast"
+      },
+      "duration_range": "4.0s - 12.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "wipe_right"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Crisp percussive palm taps seating the hardwood locking key wedge flush with the joint."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Mortise Parer Shaving Glide",
+        "intent": "satisfying",
+        "camera_motion": "drift",
+        "focus": "texture",
+        "intensity": 0.8,
+        "mood": "calm",
+        "pacing": "slow"
+      },
+      "duration_range": "12.0s - 35.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.25,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Ultra-sharp Japanese chisel shaving end-grain wood fibers with crisp paper-thin curls."
     }
   ]
 }

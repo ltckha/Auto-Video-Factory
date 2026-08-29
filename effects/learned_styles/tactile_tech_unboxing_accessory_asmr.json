@@ -1,0 +1,102 @@
+{
+  "style_profile": {
+    "name": "Tactile Tech Unboxing & Accessory Assembly ASMR",
+    "category_niche": "product_showcase",
+    "average_scene_duration_s": 2.0,
+    "pacing_speed": "dynamic",
+    "hook_strategy": "Direct top-down unboxing starting with acoustic tapping on shopping bag, fast unboxing box pull, and immediate reveal of the sleek product on a clean white diffused studio setup.",
+    "preferred_font_layout": "Bold clean centered title badge on hook ('Product Unboxing'), followed by zero subtitle overlay during hands-on assembly to keep full focus on product textures and acoustic ASMR.",
+    "transition_rules": [
+      "Step-by-step modular micro-cuts synced directly to physical tactile actions (pull-tab tear, screen peel, alcohol wipe, glass snap, case fit)",
+      "Macro top-down lock-in camera angles with subtle dynamic push-in on power-on and finish reveals"
+    ]
+  },
+  "few_shot_examples": [
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Pull-Tab Peel Drift",
+        "intent": "reveal_impact",
+        "camera_motion": "drift",
+        "focus": "product",
+        "intensity": 0.85,
+        "mood": "satisfying",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 3.0s",
+      "suggested_subtitle_style": "Bold clean white badge centered in lower-third",
+      "suggested_text_effect": "pop_in",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Binaural bag tap and crisp cardboard unboxing pull-tab tear sound."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Tactile Lens Protector Snap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.8,
+        "mood": "satisfying",
+        "pacing": "dynamic"
+      },
+      "duration_range": "3.0s - 45.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.2,
+        "type": "wipe_left"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Satisfying screen film peel, alcohol wipe squeak, and tempered glass attachment click."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Display Power-On Glow Pulse",
+        "intent": "premium_showcase",
+        "camera_motion": "push_in",
+        "focus": "product",
+        "intensity": 0.75,
+        "mood": "premium",
+        "pacing": "slow"
+      },
+      "duration_range": "45.0s - 59.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.4,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Resonant case snap and vibrant display hello screen power-on chime."
+    }
+  ],
+  "learned_novel_effects": [
+    {
+      "effect_name": "Pull-Tab Peel Drift",
+      "camera_motion": "drift",
+      "description": "Smooth lateral camera drift tracking the exact motion of peeling a package security pull-tab.",
+      "recommended_intensity": 0.85,
+      "visual_intent": "reveal_impact"
+    },
+    {
+      "effect_name": "Tactile Lens Protector Snap",
+      "camera_motion": "snap",
+      "description": "Instant micro camera snap perfectly aligned with the mechanical click of snapping on a protective lens or case.",
+      "recommended_intensity": 0.8,
+      "visual_intent": "actioncut"
+    },
+    {
+      "effect_name": "Display Power-On Glow Pulse",
+      "camera_motion": "push_in",
+      "description": "Slow majestic push-in capturing the illumination of a fresh OLED display greeting screen.",
+      "recommended_intensity": 0.75,
+      "visual_intent": "premium_showcase"
+    }
+  ]
+}

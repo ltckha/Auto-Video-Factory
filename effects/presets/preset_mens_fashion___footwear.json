@@ -15,107 +15,107 @@
     {
       "scene_type": "body",
       "suggested_advanced_effect": {
-        "name": "Sunlight Shadow Shift",
-        "intent": "premium_showcase",
+        "name": "Flannel Buffing Velocity Glide",
+        "intent": "reveal_impact",
         "camera_motion": "drift",
         "focus": "texture",
-        "intensity": 0.7,
-        "mood": "premium",
+        "intensity": 0.8,
+        "mood": "satisfying",
         "pacing": "dynamic"
       },
-      "duration_range": "1.5s - 10.0s",
-      "suggested_subtitle_style": "Clean white font with thin outline at the lower middle",
-      "suggested_text_effect": "Typewriter fade",
+      "duration_range": "3.0s - 48.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
       "suggested_transition_out": {
-        "duration": 0.3,
+        "duration": 0.2,
         "type": "wipe_right"
       },
       "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Upbeat instrumental music pacing."
+      "voice_rhythm": "Sizzling cream application, leather squeaks, and high-speed whipping cloth buffing."
     },
     {
       "scene_type": "highlight",
       "suggested_advanced_effect": {
-        "name": "Macro Detail Zoom",
-        "intent": "luxury_soft",
+        "name": "Mirror Gloss Glare Reveal",
+        "intent": "luxury_reveal",
         "camera_motion": "push_in",
-        "focus": "logo",
-        "intensity": 0.6,
-        "mood": "premium",
+        "focus": "product",
+        "intensity": 0.9,
+        "mood": "luxury",
         "pacing": "slow"
       },
-      "duration_range": "10.0s - 15.0s",
-      "suggested_subtitle_style": "Elegant minimalist sans-serif",
-      "suggested_text_effect": "Slide up reveal",
+      "duration_range": "48.0s - 60.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
       "suggested_transition_out": {
         "duration": 0.4,
         "type": "fade"
       },
       "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Deep, warm voiceover describing the craftsmanship."
+      "voice_rhythm": "Flawless glass-like reflection on cognac toe cap with final satisfying snap."
     },
     {
       "scene_type": "hook",
       "suggested_advanced_effect": {
-        "name": "Tactile Awl Pierce",
-        "intent": "reveal_impact",
+        "name": "French Iron Tooth Alignment Push",
+        "intent": "precision_craft",
         "camera_motion": "push_in",
-        "focus": "texture",
+        "focus": "product",
         "intensity": 0.85,
         "mood": "satisfying",
-        "pacing": "dynamic"
+        "pacing": "fast"
       },
-      "duration_range": "0.0s - 2.5s",
-      "suggested_subtitle_style": "No subtitle to preserve visual impact",
-      "suggested_text_effect": "None",
+      "duration_range": "0.0s - 3.5s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
       "suggested_transition_out": {
-        "duration": 0.25,
+        "duration": 0.1,
         "type": "fade"
       },
       "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Crisp awl piercing and leather creaking ASMR sound."
+      "voice_rhythm": "Crisp metallic tap and delicate steel tooth positioning along the edge crease."
     },
     {
       "scene_type": "body",
       "suggested_advanced_effect": {
-        "name": "Rhythmic Stitch Pull",
-        "intent": "premium_showcase",
-        "camera_motion": "drift",
-        "focus": "texture",
-        "intensity": 0.75,
-        "mood": "premium",
-        "pacing": "medium"
+        "name": "Tactile Prong Punch Snap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.9,
+        "mood": "energetic",
+        "pacing": "fast"
       },
-      "duration_range": "2.5s - 10.0s",
-      "suggested_subtitle_style": "Clean white font with thin outline at the lower middle",
-      "suggested_text_effect": "Typewriter fade",
+      "duration_range": "3.5s - 7.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
       "suggested_transition_out": {
-        "duration": 0.3,
-        "type": "wipe_right"
+        "duration": 0.15,
+        "type": "fade"
       },
       "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Rhythmic thread pulling tension sound."
+      "voice_rhythm": "Deep resonant leather puncture thud followed by rhythmic tooth withdrawal pop."
     },
     {
       "scene_type": "highlight",
       "suggested_advanced_effect": {
-        "name": "Welt Finish Showcase",
-        "intent": "luxury_soft",
-        "camera_motion": "cinematic_zoom",
-        "focus": "product",
-        "intensity": 0.7,
+        "name": "Perforated Stitch Line Reveal Glide",
+        "intent": "product_showcase",
+        "camera_motion": "drift",
+        "focus": "texture",
+        "intensity": 0.8,
         "mood": "premium",
-        "pacing": "slow"
+        "pacing": "dynamic"
       },
-      "duration_range": "10.0s - 15.0s",
-      "suggested_subtitle_style": "Elegant minimalist sans-serif",
-      "suggested_text_effect": "Slide up reveal",
+      "duration_range": "7.0s - 10.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
       "suggested_transition_out": {
-        "duration": 0.4,
+        "duration": 0.3,
         "type": "fade"
       },
       "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Warm resonant outro tone highlighting bespoke quality."
+      "voice_rhythm": "Smooth tactile finger brush across flawless slanted French stitching diamond holes."
     }
   ]
 }

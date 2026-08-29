@@ -1,0 +1,102 @@
+{
+  "style_profile": {
+    "name": "Master Artisan Mirror Shoeshine ASMR",
+    "category_niche": "mens_fashion___footwear",
+    "average_scene_duration_s": 1.5,
+    "pacing_speed": "pulse",
+    "hook_strategy": "Instant action start with artisan cuffing client pants and immediately unleashing rhythmic horsehair brush strokes on cognac leather, hooking viewers with loud tactile percussive ASMR.",
+    "preferred_font_layout": "Zero subtitle clutter to keep 100% visual focus on hand craftsmanship, dynamic brush technique, and mirror glaze reflection.",
+    "transition_rules": [
+      "Dynamic jump cuts locked precisely to physical brush slap rhythms and cloth snaps",
+      "Macro top-down angle transition into extreme close-up toe cap mirror shine reveal"
+    ]
+  },
+  "few_shot_examples": [
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Percussive Brush Slap",
+        "intent": "actioncut",
+        "camera_motion": "shake",
+        "focus": "action",
+        "intensity": 0.85,
+        "mood": "energetic",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 3.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Rapid horsehair brush taps on stiff leather shoe."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Flannel Buffing Velocity Glide",
+        "intent": "reveal_impact",
+        "camera_motion": "drift",
+        "focus": "texture",
+        "intensity": 0.8,
+        "mood": "satisfying",
+        "pacing": "dynamic"
+      },
+      "duration_range": "3.0s - 48.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.2,
+        "type": "wipe_right"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Sizzling cream application, leather squeaks, and high-speed whipping cloth buffing."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Mirror Gloss Glare Reveal",
+        "intent": "luxury_reveal",
+        "camera_motion": "push_in",
+        "focus": "product",
+        "intensity": 0.9,
+        "mood": "luxury",
+        "pacing": "slow"
+      },
+      "duration_range": "48.0s - 60.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.4,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Flawless glass-like reflection on cognac toe cap with final satisfying snap."
+    }
+  ],
+  "learned_novel_effects": [
+    {
+      "effect_name": "Percussive Brush Slap",
+      "camera_motion": "shake",
+      "description": "Subtle camera jitter synchronized to rapid rhythmic brush strikes across stiff leather surfaces.",
+      "recommended_intensity": 0.85,
+      "visual_intent": "actioncut"
+    },
+    {
+      "effect_name": "Flannel Buffing Velocity Glide",
+      "camera_motion": "drift",
+      "description": "High-speed linear tracking following the rhythmic back-and-forth friction of a polishing cloth.",
+      "recommended_intensity": 0.8,
+      "visual_intent": "reveal_impact"
+    },
+    {
+      "effect_name": "Mirror Gloss Glare Reveal",
+      "camera_motion": "push_in",
+      "description": "Slow, cinematic push-in highlighting the high-gloss mirror glaze reflection on polished leather.",
+      "recommended_intensity": 0.9,
+      "visual_intent": "luxury_reveal"
+    }
+  ]
+}

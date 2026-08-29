@@ -1,0 +1,102 @@
+{
+  "style_profile": {
+    "name": "Precision Japanese Mortise-Tenon Wood Joinery ASMR",
+    "category_niche": "asmr_build",
+    "average_scene_duration_s": 2.5,
+    "pacing_speed": "deliberate_tactile",
+    "hook_strategy": "Zero-tolerance macro slide of a contrasting white oak tenon gliding into a dark walnut mortise with a deep resonant acoustic lock.",
+    "preferred_font_layout": "100% clean frame with zero subtitle clutter to maintain absolute focus on wood grain alignment and tactile joinery physics.",
+    "transition_rules": [
+      "Smooth macro slide matching the insertion vector of the wooden joints",
+      "Dynamic acoustic cuts synchronized to wooden mallet taps and end-grain paring chisel shavings"
+    ]
+  },
+  "few_shot_examples": [
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Seamless Tenon Interlock Slide",
+        "intent": "reveal_impact",
+        "camera_motion": "push_in",
+        "focus": "product",
+        "intensity": 0.85,
+        "mood": "satisfying",
+        "pacing": "medium"
+      },
+      "duration_range": "0.0s - 4.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Frictionless glide of seasoned oak into walnut mortise followed by a deep wooden lock resonance."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Resonant Key Wedge Tap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.9,
+        "mood": "focused",
+        "pacing": "fast"
+      },
+      "duration_range": "4.0s - 12.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "wipe_right"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Crisp percussive palm taps seating the hardwood locking key wedge flush with the joint."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Mortise Parer Shaving Glide",
+        "intent": "satisfying",
+        "camera_motion": "drift",
+        "focus": "texture",
+        "intensity": 0.8,
+        "mood": "calm",
+        "pacing": "slow"
+      },
+      "duration_range": "12.0s - 35.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.25,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Ultra-sharp Japanese chisel shaving end-grain wood fibers with crisp paper-thin curls."
+    }
+  ],
+  "learned_novel_effects": [
+    {
+      "effect_name": "Seamless Tenon Interlock Slide",
+      "camera_motion": "push_in",
+      "description": "Macro camera push aligned with the sliding insertion axis of high-precision interlocking timber joints.",
+      "recommended_intensity": 0.85,
+      "visual_intent": "reveal_impact"
+    },
+    {
+      "effect_name": "Resonant Key Wedge Tap",
+      "camera_motion": "snap",
+      "description": "Immediate snap accentuating physical locking wedge impacts and mechanical joint rigidity.",
+      "recommended_intensity": 0.9,
+      "visual_intent": "actioncut"
+    },
+    {
+      "effect_name": "Mortise Parer Shaving Glide",
+      "camera_motion": "drift",
+      "description": "Slow lateral drift tracking clean chisel passes slicing through end-grain wood pores.",
+      "recommended_intensity": 0.8,
+      "visual_intent": "satisfying"
+    }
+  ]
+}

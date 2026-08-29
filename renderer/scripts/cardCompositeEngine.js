@@ -65,6 +65,11 @@ function generateCompositeCardImage(params) {
     videoH = 1920,
   } = params;
 
+  // Nếu là style "none" hoặc text rỗng -> Bỏ qua tạo thẻ card
+  if (!text || text.trim() === "" || text.trim().toLowerCase() === "none" || presetName === "none") {
+    return null;
+  }
+
   if (!fs.existsSync(TEMP_DIR)) {
     fs.mkdirSync(TEMP_DIR, { recursive: true });
   }

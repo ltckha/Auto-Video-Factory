@@ -1,0 +1,46 @@
+{
+  "project_id": "VID_20260811_082156",
+  "engine": "hybrid",
+  "renderer_version": "m6.2.0",
+  "style": "asmr_craft",
+  "brand": "yen_leather",
+  "platform": "tiktok",
+  "output_file": "/Volumes/Media/Auto-Video-Factory/VID_20260811_082156/VID_20260811_082156.mp4",
+  "video_metrics": {
+    "resolution": "1080x1920",
+    "fps": 30,
+    "duration_s": 17,
+    "file_size_mb": 42.12
+  },
+  "audio_metrics": {
+    "sample_rate": 48000,
+    "channels": 2,
+    "audio_duration_s": 16.981333,
+    "audio_sync_drift_ms": 18.67,
+    "sync_status": "CODEC_ALIGNED"
+  },
+  "performance": {
+    "render_time_ms": 29102,
+    "render_time_s": 29.1,
+    "memory_rss_mb": 44.3
+  },
+  "resilience": {
+    "fallback_triggered": false,
+    "retry_count": 0
+  },
+  "environment": {
+    "os_type": "Darwin",
+    "os_release": "25.5.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu_model": "Apple M4",
+    "cpu_count": 10,
+    "node_version": "v26.0.0",
+    "ffmpeg_version": "ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers",
+    "hardware_acceleration": "h264_videotoolbox (Apple Silicon M4)",
+    "total_memory_gb": "16.0 GB",
+    "free_memory_gb": "3.4 GB"
+  },
+  "created_at": "2026-08-28T07:47:09.849Z",
+  "status": "SUCCESS"
+}

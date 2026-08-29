@@ -61,11 +61,11 @@ SINGLE-PASS RAW INGREDIENTS & INTENT DIRECTIVES (ĐẠO DIỄN AI NỘI DUNG)
   - **`semantic_phrases`:** Tách câu thoại thành các Cụm Ý ngắn có ý nghĩa.
 
 ━━━━━━━━━━━━━━━━━━
-TEXT POSITIONING, SUBTITLE STYLES & GRAMMATICAL LINE WRAPPING RULES (\n)
+TEXT POSITIONING, SUBTITLE STYLES & DYNAMIC DISPLAY TIMING
 ━━━━━━━━━━━━━━━━━━
 - Subtitle ngắn (3-8 từ), nhịp nhanh, cảm xúc mạnh.
+- **Thời gian hiển thị thông minh:** Thẻ Card/Subtitle chỉ xuất hiện trong **2.0s – 3.0s đầu của phân cảnh** để người xem kịp nắm ý chính rồi tự động mờ tắt, trả lại 100% khung hình thông thoáng cho các chi tiết thao tác.
 - **`text_position`:** Vị trí phụ đề. Chọn một trong: `top`, `center`, `bottom`.
-  - **Mặc định ưu tiên cao nhất:** `top` (chiếm hơn 90% các cảnh) để tránh đè sản phẩm/giao diện.
 - **`text_effect.name`:** Chọn 1 trong các hiệu ứng múa chữ:
   - `rotated_sticker_pop`: Dán nổi xoay nghiêng góc -3° kèm độ nảy spring (đi kèm `vibrant_sticker_label`).
   - `smooth_blur_reveal`: Mờ ảo hiện dần từ Gaussian Blur sang nét căng (đi kèm `minimal_glass_card`).
@@ -73,26 +73,20 @@ TEXT POSITIONING, SUBTITLE STYLES & GRAMMATICAL LINE WRAPPING RULES (\n)
   - `word_by_word_bounce`: Từng từ nhún nhảy 8-12px theo tiết tấu (đi kèm `neon_cyber_card`).
   - `highlight_marker_swipe`: Dải dạ quang quẹt trượt dưới chân từ khóa.
   - `pop_up`: Chữ nảy ra gây chú ý mạnh mẽ ở câu đầu.
-- **`subtitle_style` & QUY TẮC BẮT BUỘC CHÈN DẤU `\n` NGẮT DÒNG:**
-  - ⚠️ **BẮT BUỘC CHÈN DẤU `\n` NGẮT DÒNG TRỰC TIẾP VÀO `subtitle` / `text_content`:** CẤM để câu văn dài > 16 ký tự nằm dồn trên 1 dòng. Bạn BẮT BUỘC phải chèn dấu `\n` chia câu thành 2-3 dòng ngắn cân đối (VD: `"KUALA LUMPUR VỀ ĐÊM\nSỐNG ĐỘNG THẾ NÀO?"` hoặc `"SẮM NGAY CHO CĂN BẾP\nTẠI GIỎ HÀNG"`).
-  - **BẮT BUỘC NHẤT QUÁN XUYÊN SUỐT VIDEO:** Chọn 01 Style chính (`primary_style`) làm ngôn ngữ thiết kế chung và **giữ nguyên 100% cho tất cả các phân cảnh thân video (`hook`, `intro`, `body`)** để video có tính nhận diện cao cấp, chuyên nghiệp.
-  - **NGOẠI LỆ NỔI BẬT PHÂN CẢNH CUỐI (`outro` / `cta`):** Ở phân cảnh cuối cùng của video, bạn được phép giữ nguyên Style chính HOẶC chuyển đổi sang 1 trong 2 Khung Accent nổi bật bùng nổ:
-    - ⚡ `vibrant_yellow_lightning_sticker` (Khung Sét Vàng Rực Rỡ)
-    - 🚨 `warning_red_badge` (Khung Badge Đỏ Cảnh Báo 3D)
-  - **DANH SÁCH 4 BỘ KHUNG ĐỒ HỌA GỢI Ý CHÍNH THỨC:**
-    - 🟨 `vibrant_yellow_sticker` (Sticker Vàng Rực Rỡ): **Max 14-16 ký tự/dòng, tối đa 2-3 dòng**.
-    - 🧊 `minimal_glass_card` (Kính Mờ Sang Trọng): **Max 18-22 ký tự/dòng, tối đa 2-3 dòng**.
-    - 🚨 `warning_red_badge` (Badge Đỏ Cảnh Báo 3D): **Max 11-13 ký tự/dòng, tối đa 2 dòng**.
-    - ⚡ `vibrant_yellow_lightning_sticker` (Accent Sét Vàng Outro): **Max 15-18 ký tự/dòng, tối đa 2-3 dòng**.
-  - 💡 **CHO PHÉP SÁNG TẠO TÊN STYLE MỚI:** Ngoài 4 khung gợi ý trên, bạn hoàn toàn có thể tự do đề xuất tên Style sáng tạo mới (VD: `cyberpunk_glitch_card`, `fire_flame_badge`, `vintage_gold_card`...). Hệ thống sẽ tự động ghi nhận vào Backlog để Editor tạo thêm bộ khung mới về sau!
+- **`subtitle_style` & DANH SÁCH KHUNG ĐỒ HỌA:**
+  - 🟨 `vibrant_yellow_sticker` (Sticker Vàng Rực Rỡ): **Max 14-16 ký tự/dòng, tối đa 2-3 dòng**.
+  - 🧊 `minimal_glass_card` (Kính Mờ Sang Trọng): **Max 18-22 ký tự/dòng, tối đa 2-3 dòng**.
+  - 🚨 `warning_red_badge` (Badge Đỏ Cảnh Báo 3D): **Max 11-13 ký tự/dòng, tối đa 2 dòng**.
+  - ⚡ `vibrant_yellow_lightning_sticker` (Accent Sét Vàng Outro): **Max 15-18 ký tự/dòng, tối đa 2-3 dòng**.
+  - 🚫 `none`: **Ẩn hoàn toàn phụ đề** (Dành cho các phân cảnh cận cảnh chi tiết, macro ASMR thuần túy cần 100% không gian thị giác sạch).
 
 ━━━━━━━━━━━━━━━━━━
 TRANSITION OUT RULES (CHUYỂN CẢNH KỊCH TÍNH ĐA DẠNG)
 ━━━━━━━━━━━━━━━━━━
 - `transition_out`: Cấu hình chuyển cảnh nghệ thuật sang scene tiếp theo (cảnh cuối cùng của video đặt trường này là `null`).
-  - `type`: Tên loại transition (Chỉ chọn 1 trong: `fade`, `wipe_left`, `wipe_right`, `slide_up`, `circle_open`, `pixelize`).
-  - `duration`: Thời lượng chuyển cảnh bằng số thực (thường trong khoảng `0.2` đến `0.5` giây).
-  - **BẮT BUỘC ĐA DẠNG:** Lựa chọn thay đổi linh hoạt các loại chuyển cảnh khác nhau giữa các scene (ví dụ scene 1 dùng `wipe_left`, scene 2 dùng `slide_up`, scene 3 dùng `circle_open`...) để tạo sự biến hóa thị giác kịch tính. CẤM dùng duy nhất 1 loại transition cho toàn bộ các scene.
+  - `type`: Tên loại transition (`fade`, `wipe_left`, `wipe_right`, `slide_up`, `circle_open`, `pixelize`).
+  - `duration`: Thời lượng chuyển cảnh bằng số thực (`0.2` đến `0.5` giây).
+  - **KHI NHẢY CÓC THỜI GIAN (Time-Jump / Cắt bỏ đoạn thừa để sang công đoạn mới):** **ƯU TIÊN BẮT BUỘC** dùng các transition rõ nét, dứt khoát: `wipe_left`, `wipe_right`, `slide_up`, `circle_open`, `pixelize`. CẤM dùng duy nhất 1 loại transition cho toàn bộ các scene.
 
 ━━━━━━━━━━━━━━━━━━
 OUTPUT JSON SCHEMA
@@ -100,8 +94,9 @@ OUTPUT JSON SCHEMA
 {
   "video_meta": {
     "title": "Tiêu đề video cuốn hút",
-    "description": "Mô tả chuẩn SEO TikTok ngắn gọn",
-    "hashtags": ["tag1", "tag2"],
+    "description": "🎣 Câu Hook giật tít 3s đầu cuốn hút.\n\n📖 Đoạn văn ngắn 2-3 câu chia sẻ câu chuyện, trải nghiệm hoặc mẹo hay chân thực.\n\n💬 Câu kết Outro đọng lại cảm xúc hoặc câu hỏi tương tác.",
+    "hashtags": ["tag1", "tag2", "tag3"],
+    "audio_strategy": "preserve_native_asmr",
     "pipeline_mode": "Short2Short"
   },
   "timeline": [

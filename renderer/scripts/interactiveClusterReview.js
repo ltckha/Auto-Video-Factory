@@ -12,19 +12,20 @@ async function reviewAndEditClusters(clusters) {
   console.log("==================================================");
 
   clusters.forEach((c, idx) => {
-    const timeStr = (c.timecodes || [])
+    const title = c.video_meta?.title || c.cluster_title || c.title || `Video Ngắn #${idx + 1}`;
+    const scenes = c.timeline || c.timecodes || [];
+    const timeStr = scenes
       .map((t) => `${t.start_s !== undefined ? t.start_s : (t.start || "0")}s - ${t.end_s !== undefined ? t.end_s : (t.end || "0")}s`)
-      .join(", ");
-    console.log(`\n [${idx + 1}] 🎬 Short #${idx + 1}: ${c.cluster_title || "Video Ngắn"}`);
-    if (c.core_value_type) {
-      console.log(`     💎 Giá trị cốt lõi : [${c.core_value_type}]`);
+      .join(" | ");
+    const totalDur = scenes.reduce((sum, sc) => sum + ((Number(sc.end_s || sc.end) || 0) - (Number(sc.start_s || sc.start) || 0)), 0);
+
+    console.log(`\n [${idx + 1}] 🎬 Short #${idx + 1}: ${title}`);
+    console.log(`     ⏱️ Mốc thời gian  : ${timeStr || "Tự động"} (~${totalDur.toFixed(1)}s, 1.0x Chuẩn)`);
+    if (c.video_meta?.audio_strategy || c.audio_strategy) {
+      console.log(`     🎵 Âm thanh       : [${c.video_meta?.audio_strategy || c.audio_strategy}]`);
     }
-    console.log(`     ⏱️ Mốc thời gian  : ${timeStr || "Tự động"}`);
-    if (c.hook_highlight) {
-      console.log(`     🎣 Móc câu (Hook)  : ${c.hook_highlight}`);
-    }
-    if (c.narrative_focus) {
-      console.log(`     🎯 Định hướng     : ${c.narrative_focus}`);
+    if (c.hook_highlight || scenes[0]?.subtitle) {
+      console.log(`     🎣 Móc câu (Hook)  : ${c.hook_highlight || scenes[0]?.subtitle}`);
     }
   });
 

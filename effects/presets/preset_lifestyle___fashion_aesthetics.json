@@ -13,69 +13,6 @@
   },
   "few_shot_examples": [
     {
-      "scene_type": "hook",
-      "suggested_advanced_effect": {
-        "name": "Multi-Grid Beat Decay",
-        "intent": "reveal_impact",
-        "camera_motion": "static",
-        "focus": "product",
-        "intensity": 0.8,
-        "mood": "satisfying",
-        "pacing": "pulse"
-      },
-      "duration_range": "0.0s - 3.0s",
-      "suggested_subtitle_style": "Playful handwritten text stickers in pink, blue, and yellow shades",
-      "suggested_text_effect": "Fading sticker popping animation",
-      "suggested_transition_out": {
-        "duration": 0.4,
-        "type": "fade"
-      },
-      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Upbeat romantic background track with distinct, punchy rhythm beats"
-    },
-    {
-      "scene_type": "highlight",
-      "suggested_advanced_effect": {
-        "name": "Full-Screen Rhythmic Tap Focus",
-        "intent": "premium_showcase",
-        "camera_motion": "drift",
-        "focus": "product",
-        "intensity": 0.6,
-        "mood": "premium",
-        "pacing": "dynamic"
-      },
-      "duration_range": "3.0s - 15.0s",
-      "suggested_subtitle_style": "Minimalist center frame alignment",
-      "suggested_text_effect": "None",
-      "suggested_transition_out": {
-        "duration": 0.3,
-        "type": "fade"
-      },
-      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Instrumental rhythm progression without speech"
-    },
-    {
-      "scene_type": "hook",
-      "suggested_advanced_effect": {
-        "name": "Aesthetic Glass Clink Impact",
-        "intent": "reveal_impact",
-        "camera_motion": "snap",
-        "focus": "product",
-        "intensity": 0.8,
-        "mood": "satisfying",
-        "pacing": "fast"
-      },
-      "duration_range": "0.0s - 2.0s",
-      "suggested_subtitle_style": "Delicate lowercase white sans-serif in middle third",
-      "suggested_text_effect": "fade_in",
-      "suggested_transition_out": {
-        "duration": 0.15,
-        "type": "fade"
-      },
-      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
-      "voice_rhythm": "Crisp glass clink and tactile box opening ASMR sound."
-    },
-    {
       "scene_type": "body",
       "suggested_advanced_effect": {
         "name": "Ice Cube Drop Cascade",
@@ -116,6 +53,132 @@
       },
       "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
       "voice_rhythm": "Creamy milk swirl and rhythmic glass straw stirring sound."
+    },
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Inverted Motion Match-Cut",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.95,
+        "mood": "energetic",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 4.5s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Building vocal riser and rapid acrobatic handstand kickoff."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Rotational Roll Blur Snap",
+        "intent": "reveal_impact",
+        "camera_motion": "shake",
+        "focus": "character",
+        "intensity": 0.85,
+        "mood": "satisfying",
+        "pacing": "fast"
+      },
+      "duration_range": "4.5s - 7.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Explosive bass drop landing exactly as three-piece tailored suit snaps into view."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Confident Stride Push-In",
+        "intent": "fashion_showcase",
+        "camera_motion": "push_in",
+        "focus": "product",
+        "intensity": 0.8,
+        "mood": "premium",
+        "pacing": "dynamic"
+      },
+      "duration_range": "7.0s - 10.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Smooth rhythmic swagger walk-forward displaying full tailored suit silhouette."
+    },
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Matcha Sift Powder Drift",
+        "intent": "tactile_showcase",
+        "camera_motion": "drift",
+        "focus": "texture",
+        "intensity": 0.75,
+        "mood": "satisfying",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 3.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Crisp tactile tin pull pop and delicate green powder sifting ASMR."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Layered Ombre Pour Cascade",
+        "intent": "reveal_impact",
+        "camera_motion": "push_in",
+        "focus": "action",
+        "intensity": 0.85,
+        "mood": "aesthetic",
+        "pacing": "pulse"
+      },
+      "duration_range": "5.0s - 8.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.2,
+        "type": "wipe_right"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Velvety whisked matcha cascading over cold oat milk and ice cubes."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Glass Straw Swirl Snap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.9,
+        "mood": "satisfying",
+        "pacing": "dynamic"
+      },
+      "duration_range": "8.0s - 11.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Glass straw plunging through boba pearls and ice with a crisp swirl clink."
     }
   ]
 }

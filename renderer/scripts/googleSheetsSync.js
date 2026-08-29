@@ -101,56 +101,8 @@ async function syncProjectToSheet(projectData) {
 }
 
 async function syncScenesToSheet(projectId, scenes) {
-  if (!scenes || !Array.isArray(scenes)) return;
-
-  const rows = [];
-  for (const s of scenes) {
-    const textEffectName = typeof s.text_effect === "object" ? s.text_effect?.name : s.text_effect;
-    const advEffectName = typeof s.advanced_effect === "object" ? s.advanced_effect?.name : s.advanced_effect;
-    const transOutType = s.transition_out ? `${s.transition_out.type} (${s.transition_out.duration}s)` : "none";
-
-    const startVal = s.start_s !== undefined ? s.start_s : s.start;
-    const endVal = s.end_s !== undefined ? s.end_s : s.end;
-    const durVal = s.duration_s !== undefined ? s.duration_s : s.duration;
-
-    const subtitleText = s.text_content || s.subtitle || s.text || "";
-    const voiceText = s.voice || s.voiceover || "";
-    const visualText = s.visual_description || s.visual_cue || s.description || "";
-    const styleText = `${s.subtitle_style || "default"} (${s.text_position || "bottom"})`;
-    const effectText = `${advEffectName || "none"} (${s.advanced_effect?.camera_motion || "static"})`;
-
-    rows.push([
-      projectId,
-      s.scene_id || s.id || "",
-      s.scene_type || "body",
-      `${startVal || 0}s - ${endVal || 0}s`,
-      `${durVal || 0}s`,
-      subtitleText,
-      voiceText,
-      visualText,
-      styleText,
-      effectText,
-      transOutType
-    ]);
-  }
-
-  // 1. Direct Google Sheets API v4
-  try {
-    await sheetsClient.appendValues("Video-Factory-SCENES!A1", rows);
-    console.log(`[GoogleSheetDirect] ✅ Đã ghi ${rows.length} phân cảnh vào Google Sheets (Tab Video-Factory-SCENES).`);
-  } catch (err) {
-    console.warn(`[GoogleSheetDirect] WARN: Lỗi ghi scenes vào Google Sheets: ${err.message}`);
-  }
-
-  // 2. Local CSV Backup
-  const csvPath = path.join(BACKUP_DIR, "scenes_detail.csv");
-  const headers = [
-    "Project ID", "Scene ID", "Scene Type", "Time (Start-End)", "Target Duration",
-    "Subtitle", "Voice Text", "Visual Cue", "Subtitle Style", "Advanced Effect", "Transition Out"
-  ];
-  for (const r of rows) {
-    appendCsvLine(csvPath, headers, r);
-  }
+  // Đã bỏ tab Video-Factory-SCENES theo yêu cầu người dùng
+  return;
 }
 
 async function syncAnalyticsToSheet() {

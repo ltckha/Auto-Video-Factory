@@ -1,0 +1,6 @@
+node_modules/
+.remotion/
+temp_media/
+public/source_video.mp4
+out/*.mp4
+.DS_Store

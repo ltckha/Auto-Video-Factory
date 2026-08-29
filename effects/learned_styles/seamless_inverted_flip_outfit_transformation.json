@@ -1,0 +1,102 @@
+{
+  "style_profile": {
+    "name": "Seamless Inverted Flip Outfit Transformation",
+    "category_niche": "lifestyle___fashion_aesthetics",
+    "average_scene_duration_s": 2.5,
+    "pacing_speed": "fast",
+    "hook_strategy": "Casual streetwear walk-in initiating an abrupt acrobatic handstand flip directly toward camera, hooking viewers with high-energy physical stunt that match-cuts at the peak roll into a bespoke formal suit.",
+    "preferred_font_layout": "Zero subtitle clutter to maintain absolute focus on fluid kinetic motion, match-cut alignment, and dramatic wardrobe transformation.",
+    "transition_rules": [
+      "Frame-perfect kinetic match-cut locked at the lowest apex of the inverted body roll",
+      "Dynamic beat drop synchronization amplifying the instant outfit switch"
+    ]
+  },
+  "few_shot_examples": [
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Inverted Motion Match-Cut",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.95,
+        "mood": "energetic",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 4.5s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Building vocal riser and rapid acrobatic handstand kickoff."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Rotational Roll Blur Snap",
+        "intent": "reveal_impact",
+        "camera_motion": "shake",
+        "focus": "character",
+        "intensity": 0.85,
+        "mood": "satisfying",
+        "pacing": "fast"
+      },
+      "duration_range": "4.5s - 7.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Explosive bass drop landing exactly as three-piece tailored suit snaps into view."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Confident Stride Push-In",
+        "intent": "fashion_showcase",
+        "camera_motion": "push_in",
+        "focus": "product",
+        "intensity": 0.8,
+        "mood": "premium",
+        "pacing": "dynamic"
+      },
+      "duration_range": "7.0s - 10.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Smooth rhythmic swagger walk-forward displaying full tailored suit silhouette."
+    }
+  ],
+  "learned_novel_effects": [
+    {
+      "effect_name": "Inverted Motion Match-Cut",
+      "camera_motion": "snap",
+      "description": "Ultra-fast frame match cut triggered at the apex of an acrobatic flip to seamlessly swap character outfits.",
+      "recommended_intensity": 0.95,
+      "visual_intent": "actioncut"
+    },
+    {
+      "effect_name": "Rotational Roll Blur Snap",
+      "camera_motion": "shake",
+      "description": "Micro impact shake and rotational momentum blur concealing the split-second transition seam.",
+      "recommended_intensity": 0.85,
+      "visual_intent": "reveal_impact"
+    },
+    {
+      "effect_name": "Confident Stride Push-In",
+      "camera_motion": "push_in",
+      "description": "Dynamic forward camera push accentuating the finished outfit silhouette and posture.",
+      "recommended_intensity": 0.8,
+      "visual_intent": "fashion_showcase"
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "video_meta": {
+    "title": "KHÁM PHÁ VƯỜN CÂY GIỐNG MỚI TRỒNG CHUẨN KỸ THUẬT",
+    "description": "🎣 Tham quan khu vườn mới trồng quy mô rộng lớn phủ bạt hiện đại.\n\n📖 Hành trình dạo quanh trang trại với hàng cây giống xanh tốt được quy hoạch bài bản dưới ánh nắng ấm áp.\n\n💬 Bạn thấy mô hình canh tác phủ bạt này thế nào, hãy để lại ý kiến nhé!",
+    "hashtags": [
+      "nongnghiep",
+      "vuoncay",
+      "trongcay",
+      "cuocsongnongthon",
+      "nongnghiepsach"
+    ],
+    "pipeline_mode": "Long2Short",
+    "created_at": "2026-08-29 19:41:43",
+    "input_file": "/Volumes/Media/Camera/OsmoNano/202606/DJI_20260623091005_0009_D.MP4",
+    "original_duration_s": 144.4
+  },
+  "timeline": [
+    {
+      "scene_id": "scene_001",
+      "scene_type": "hook",
+      "start_s": 0,
+      "end_s": 8,
+      "duration_s": 4,
+      "title": "Toàn cảnh lối vào vườn",
+      "story_importance": 0.9,
+      "key_moments": [
+        2
+      ],
+      "speed_strategy": "ramp",
+      "render_priority": "compress",
+      "subtitle": "KHÁM PHÁ VƯỜN CÂY GIỐNG MỚI",
+      "subtitle_style": "vibrant_yellow_sticker",
+      "text_position": "top",
+      "voice": "Hôm nay cùng mình dạo một vòng tham quan khu vườn mới xuống giống nhé.",
+      "visual_cue": "Góc quay bước vào trang trại phủ bạt đen dưới trời xanh",
+      "text_effect": {
+        "name": "Pop-up",
+        "description": "Chữ nảy nhẹ tạo chú ý"
+      },
+      "advanced_effect": {
+        "name": "Cinematic Zoom",
+        "intent": "reveal_impact",
+        "mood": "energetic",
+        "pacing": "dynamic",
+        "focus": "reveal",
+        "camera_motion": "push_in",
+        "intensity": 0.8,
+        "description": "Zoom tiến vào không gian vườn rộng"
+      },
+      "hook_strength": 0.85,
+      "visual_energy": 0.75,
+      "retention_score": 0.8,
+      "confidence": 0.9,
+      "include": true,
+      "transition_out": {
+        "type": "wipe_left",
+        "duration": 0.3
+      }
+    },
+    {
+      "scene_id": "scene_002",
+      "scene_type": "body",
+      "start_s": 8,
+      "end_s": 30,
+      "duration_s": 5,
+      "title": "Đi qua khu nhà kính",
+      "story_importance": 0.4,
+      "key_moments": [
+        15
+      ],
+      "speed_strategy": "jumpcut",
+      "render_priority": "compress",
+      "subtitle": "",
+      "subtitle_style": "none",
+      "text_position": "bottom",
+      "voice": "",
+      "visual_cue": "Đoạn di chuyển dọc hông nhà kính",
+      "text_effect": {
+        "name": "Slide In",
+        "description": "Trượt nhẹ"
+      },
+      "advanced_effect": {
+        "name": "Fast Motion",
+        "intent": "satisfying_cut",
+        "mood": "soft",
+        "pacing": "fast",
+        "focus": "reveal",
+        "camera_motion": "drift",
+        "intensity": 0.5,
+        "description": "Lướt nhanh qua khu vực nhà kính"
+      },
+      "hook_strength": 0.3,
+      "visual_energy": 0.4,
+      "retention_score": 0.4,
+      "confidence": 0.85,
+      "include": false,
+      "transition_out": {
+        "type": "fade",
+        "duration": 0.2
+      }
+    },
+    {
+      "scene_id": "scene_003",
+      "scene_type": "body",
+      "start_s": 30,
+      "end_s": 85,
+      "duration_s": 10,
+      "title": "Khu vực cây trồng rộng lớn",
+      "story_importance": 0.85,
+      "key_moments": [
+        45
+      ],
+      "speed_strategy": "adaptive",
+      "render_priority": "keep",
+      "subtitle": "HỆ THỐNG PHỦ BẠT CHUẨN KỸ THUẬT",
+      "subtitle_style": "minimal_glass_card",
+      "text_position": "top",
+      "voice": "Toàn bộ diện tích được phủ bạt cẩn thận giúp hạn chế cỏ dại và giữ ẩm tối ưu.",
+      "visual_cue": "Góc quay rộng các hàng cây con đâm chồi trên nền bạt",
+      "text_effect": {
+        "name": "Slide In",
+        "description": "Trượt mềm mại từ trái sang"
+      },
+      "advanced_effect": {
+        "name": "Smooth Transition",
+        "intent": "premium_showcase",
+        "mood": "satisfying",
+        "pacing": "medium",
+        "focus": "texture",
+        "camera_motion": "drift",
+        "intensity": 0.7,
+        "description": "Trôi mượt theo bước chân khảo sát"
+      },
+      "hook_strength": 0.7,
+      "visual_energy": 0.7,
+      "retention_score": 0.85,
+      "confidence": 0.9,
+      "include": true,
+      "transition_out": {
+        "type": "slide_up",
+        "duration": 0.3
+      }
+    },
+    {
+      "scene_id": "scene_004",
+      "scene_type": "body",
+      "start_s": 85,
+      "end_s": 95,
+      "duration_s": 6,
+      "title": "Cận cảnh cây giống",
+      "story_importance": 0.95,
+      "key_moments": [
+        88
+      ],
+      "speed_strategy": "uniform",
+      "render_priority": "keep",
+      "subtitle": "CÂY GIỐNG PHÁT TRIỂN KHỎE MẠNH",
+      "subtitle_style": "vibrant_yellow_sticker",
+      "text_position": "bottom",
+      "voice": "Từng cây con đều phát triển rất xanh tốt và vững chắc.",
+      "visual_cue": "Tay quan sát và kiểm tra bộ lá của cây giống",
+      "text_effect": {
+        "name": "Bounce",
+        "description": "Nảy chữ sinh động"
+      },
+      "advanced_effect": {
+        "name": "Zoom In Focus",
+        "intent": "dramatic_focus",
+        "mood": "premium",
+        "pacing": "slow",
+        "focus": "hand_action",
+        "camera_motion": "push_in",
+        "intensity": 0.85,
+        "description": "Tập trung chi tiết vào sức sống của mầm cây"
+      },
+      "hook_strength": 0.8,
+      "visual_energy": 0.8,
+      "retention_score": 0.9,
+      "confidence": 0.95,
+      "include": true,
+      "transition_out": {
+        "type": "fade",
+        "duration": 0.3
+      }
+    },
+    {
+      "scene_id": "scene_005",
+      "scene_type": "conclusion",
+      "start_s": 125,
+      "end_s": 144,
+      "duration_s": 10,
+      "title": "Toàn cảnh đồi núi và khu vườn",
+      "story_importance": 0.9,
+      "key_moments": [
+        135
+      ],
+      "speed_strategy": "adaptive",
+      "render_priority": "keep",
+      "subtitle": "HƯỚNG TỚI MÙA BỘI THU",
+      "subtitle_style": "vibrant_yellow_lightning_sticker",
+      "text_position": "top",
+      "voice": "Hi vọng khu vườn nhỏ này sẽ mang lại một mùa thu hoạch thật rực rỡ.",
+      "visual_cue": "Quang cảnh núi đồi và khoảng trời mây xanh ngắt bao quanh vườn",
+      "text_effect": {
+        "name": "Glow",
+        "description": "Phát sáng nhẹ nhàng"
+      },
+      "advanced_effect": {
+        "name": "Epic Reveal",
+        "intent": "emotional_pause",
+        "mood": "emotional",
+        "pacing": "slow",
+        "focus": "reveal",
+        "camera_motion": "push_out",
+        "intensity": 0.75,
+        "description": "Mở rộng góc nhìn toàn cảnh thiên nhiên tươi đẹp"
+      },
+      "hook_strength": 0.75,
+      "visual_energy": 0.75,
+      "retention_score": 0.85,
+      "confidence": 0.92,
+      "include": true,
+      "transition_out": {
+        "type": "fade",
+        "duration": 0.5
+      }
+    }
+  ],
+  "audio_config": {
+    "bgm_mood": "chill",
+    "bgm_url": "",
+    "enable_sfx": true
+  }
+}

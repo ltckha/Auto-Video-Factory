@@ -1,0 +1,102 @@
+{
+  "style_profile": {
+    "name": "Hydraulic Press Stress & Destruction Showcase",
+    "category_niche": "product_showcase",
+    "average_scene_duration_s": 2.2,
+    "pacing_speed": "dynamic",
+    "hook_strategy": "Industrial heavy machinery stage setup with high-contrast caution hazard base, placing product under a massive suspended hydraulic piston creating instant suspense and anticipation of extreme physical destruction.",
+    "preferred_font_layout": "Zero subtitle clutter to maintain absolute viewer focus on structural deformation physics and explosive acoustic impact.",
+    "transition_rules": [
+      "Slow-burn hydraulic descent building tension into an explosive split-second deformation match-cut",
+      "Macro level close-up tracking the physical yield point of the material under extreme tonnage"
+    ]
+  },
+  "few_shot_examples": [
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Hydraulic Compression Descent",
+        "intent": "reveal_impact",
+        "camera_motion": "push_in",
+        "focus": "product",
+        "intensity": 0.8,
+        "mood": "suspenseful",
+        "pacing": "slow"
+      },
+      "duration_range": "0.0s - 4.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Low-frequency hydraulic motor hum and solid product placement tap on steel anvil."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Catastrophic Yield Impact Snap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.95,
+        "mood": "energetic",
+        "pacing": "fast"
+      },
+      "duration_range": "4.0s - 11.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "wipe_right"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "High-tension metallic creak collapsing into an explosive structural buckling crunch."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Pancake Flattening Shake",
+        "intent": "destruction_showcase",
+        "camera_motion": "shake",
+        "focus": "texture",
+        "intensity": 0.9,
+        "mood": "satisfying",
+        "pacing": "dynamic"
+      },
+      "duration_range": "11.0s - 15.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Deep resonant compression hiss and final pancake disc deformation reveal."
+    }
+  ],
+  "learned_novel_effects": [
+    {
+      "effect_name": "Hydraulic Compression Descent",
+      "camera_motion": "push_in",
+      "description": "Slow, suspenseful forward push matching the steady downward velocity of a heavy industrial hydraulic ram.",
+      "recommended_intensity": 0.8,
+      "visual_intent": "reveal_impact"
+    },
+    {
+      "effect_name": "Catastrophic Yield Impact Snap",
+      "camera_motion": "snap",
+      "description": "Instant camera snap zoom triggered at the exact millisecond of physical structural failure under maximum load.",
+      "recommended_intensity": 0.95,
+      "visual_intent": "actioncut"
+    },
+    {
+      "effect_name": "Pancake Flattening Shake",
+      "camera_motion": "shake",
+      "description": "Heavy low-frequency impact vibration accentuating extreme tonnage compression and total material flattening.",
+      "recommended_intensity": 0.9,
+      "visual_intent": "destruction_showcase"
+    }
+  ]
+}

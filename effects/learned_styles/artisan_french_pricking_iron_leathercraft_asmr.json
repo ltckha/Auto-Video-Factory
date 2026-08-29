@@ -1,0 +1,102 @@
+{
+  "style_profile": {
+    "name": "Artisan French Pricking Iron Leathercraft ASMR",
+    "category_niche": "mens_fashion___footwear",
+    "average_scene_duration_s": 2.0,
+    "pacing_speed": "dynamic",
+    "hook_strategy": "Ultra-close macro view of gleaming polished steel pricking chisel teeth aligning with mathematical precision along a pristine matte black leather crease line, hooking viewers with extreme craftsman tactile perfection.",
+    "preferred_font_layout": "Zero subtitle clutter to maintain absolute viewer focus on tool sharpness, leather texture, and satisfying hole perforation acoustics.",
+    "transition_rules": [
+      "Macro level push-in tracking the multi-prong chisel alignment into the leather groove",
+      "Dynamic snap transition triggered at the exact moment of punch penetration and tooth release"
+    ]
+  },
+  "few_shot_examples": [
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "French Iron Tooth Alignment Push",
+        "intent": "precision_craft",
+        "camera_motion": "push_in",
+        "focus": "product",
+        "intensity": 0.85,
+        "mood": "satisfying",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 3.5s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Crisp metallic tap and delicate steel tooth positioning along the edge crease."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Tactile Prong Punch Snap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.9,
+        "mood": "energetic",
+        "pacing": "fast"
+      },
+      "duration_range": "3.5s - 7.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Deep resonant leather puncture thud followed by rhythmic tooth withdrawal pop."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Perforated Stitch Line Reveal Glide",
+        "intent": "product_showcase",
+        "camera_motion": "drift",
+        "focus": "texture",
+        "intensity": 0.8,
+        "mood": "premium",
+        "pacing": "dynamic"
+      },
+      "duration_range": "7.0s - 10.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Smooth tactile finger brush across flawless slanted French stitching diamond holes."
+    }
+  ],
+  "learned_novel_effects": [
+    {
+      "effect_name": "French Iron Tooth Alignment Push",
+      "camera_motion": "push_in",
+      "description": "Macro camera push tracking multi-tooth stitching chisel alignment directly into the pre-grooved leather channel.",
+      "recommended_intensity": 0.85,
+      "visual_intent": "precision_craft"
+    },
+    {
+      "effect_name": "Tactile Prong Punch Snap",
+      "camera_motion": "snap",
+      "description": "Crisp kinetic snap matching the physical penetration and clean withdrawal of leathercraft pricking irons.",
+      "recommended_intensity": 0.9,
+      "visual_intent": "actioncut"
+    },
+    {
+      "effect_name": "Perforated Stitch Line Reveal Glide",
+      "camera_motion": "drift",
+      "description": "Smooth macro horizontal drift highlighting the pristine symmetry of newly punched hand-stitching holes.",
+      "recommended_intensity": 0.8,
+      "visual_intent": "product_showcase"
+    }
+  ]
+}

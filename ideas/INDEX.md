@@ -16,6 +16,7 @@ Thư mục này lưu trữ tất cả các ý tưởng, cải tiến kỹ thuậ
 | **IDEA-007** | Next-Gen Dynamic Subtitle Typography, Badges & Overlays | Đồ Họa Lớp Phủ & Múa Chữ (Kinetic Overlays) | ✅ **Hoàn Thành** | 06/08/2026 | [IDEA_007_dynamic_subtitle_typography.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_007_dynamic_subtitle_typography.md) |
 | **IDEA-008** | Video Style Cohesion & Card Transparency Positioning Rules | Quy Tắc Nhất Quán Brand & Độ Trong Suốt Khung | ✅ **Hoàn Thành** | 06/08/2026 | [IDEA_008_video_style_cohesion_and_transparency_rules.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_008_video_style_cohesion_and_transparency_rules.md) |
 | **IDEA-009** | Closed-Loop AI Video Quality Audit & Self-Learning Engine | AI Đánh Giá Video & Tự Động Học Sau Render | 💡 **Đang Nghiên Cứu** | 06/08/2026 | [IDEA_009_closed_loop_ai_video_qa_and_self_learning.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_009_closed_loop_ai_video_qa_and_self_learning.md) |
+| **IDEA-010** | Tối Ưu Smart Proxy 1x Dựa Trên Ngưỡng Dung Lượng File (>200MB) | Tiền xử lý Video (Pre-Processing) | 💡 **Đã Lưu / Sẵn Sàng Triển Khai** | 24/08/2026 | [IDEA_010_smart_proxy_filesize_threshold.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_010_smart_proxy_filesize_threshold.md) |
 
 ---
 

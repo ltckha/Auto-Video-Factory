@@ -112,20 +112,26 @@ if [ $GEN_STATUS -eq 0 ]; then
     echo ""
     echo "=================================================="
     echo "⚡ BẠN CÓ MUỐN TIẾN HÀNH RENDER DỰ ÁN NGAY KHÔNG?"
-    echo "   [1] Có   - Tiến hành Render & Gửi ra NAS ngay (Mặc định - Tự động chọn sau 10s)"
-    echo "   [2] Không - Thoát và để render sau"
+    echo "   [1] Remotion Hybrid Mới (Mặc định - Tự động chọn sau 10s, có Fallback an toàn)"
+    echo "   [2] FFmpeg Legacy Cũ   (Dựng video theo engine cũ)"
+    echo "   [3] Thoát và để render sau"
     echo "=================================================="
     echo ""
     read -t 10 -p "Nhập lựa chọn của bạn [Mặc định 1 (tự động sau 10s)]: " RENDER_CHOICE
 
-    if [ "$RENDER_CHOICE" != "2" ]; then
-        echo ""
-        echo "🚀 Đang tiến hành Render dự án (Tự động kích hoạt)..."
-        echo "--------------------------------------------------"
-        node renderer/scripts/render.js
-    else
+    if [ "$RENDER_CHOICE" = "3" ]; then
         echo ""
         echo "💡 Đã lưu kịch bản. Bạn có thể mở render.command để dựng video bất cứ lúc nào."
+    elif [ "$RENDER_CHOICE" = "2" ]; then
+        echo ""
+        echo "🚀 Đang tiến hành Render qua FFmpeg Legacy Cũ..."
+        echo "--------------------------------------------------"
+        RENDER_ENGINE=legacy node renderer-remotion/scripts/render_orchestrator.js
+    else
+        echo ""
+        echo "🚀 Đang tiến hành Render qua Remotion Hybrid Mới (Có Fallback an toàn)..."
+        echo "--------------------------------------------------"
+        RENDER_ENGINE=hybrid node renderer-remotion/scripts/render_orchestrator.js
     fi
 fi
 

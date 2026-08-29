@@ -1,0 +1,46 @@
+{
+  "project_id": "DJI_20260317111039_0019_D",
+  "engine": "hybrid",
+  "renderer_version": "m6.2.0",
+  "style": "asmr_craft",
+  "brand": "yen_leather",
+  "platform": "tiktok",
+  "output_file": "/Volumes/Media/Auto-Video-Factory/DJI_20260317111039_0019_D/DJI_20260317111039_0019_D.mp4",
+  "video_metrics": {
+    "resolution": "1080x1920",
+    "fps": 30,
+    "duration_s": 47,
+    "file_size_mb": 240.67
+  },
+  "audio_metrics": {
+    "sample_rate": 48000,
+    "channels": 2,
+    "audio_duration_s": 46.997333,
+    "audio_sync_drift_ms": 2.67,
+    "sync_status": "CODEC_ALIGNED"
+  },
+  "performance": {
+    "render_time_ms": 138462,
+    "render_time_s": 138.5,
+    "memory_rss_mb": 44.5
+  },
+  "resilience": {
+    "fallback_triggered": false,
+    "retry_count": 0
+  },
+  "environment": {
+    "os_type": "Darwin",
+    "os_release": "25.5.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu_model": "Apple M4",
+    "cpu_count": 10,
+    "node_version": "v26.0.0",
+    "ffmpeg_version": "ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers",
+    "hardware_acceleration": "h264_videotoolbox (Apple Silicon M4)",
+    "total_memory_gb": "16.0 GB",
+    "free_memory_gb": "2.4 GB"
+  },
+  "created_at": "2026-08-28T06:27:05.728Z",
+  "status": "SUCCESS"
+}

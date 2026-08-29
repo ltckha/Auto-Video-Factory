@@ -302,10 +302,27 @@ async function main() {
   }
   let systemInstruction = fs.readFileSync(promptPath, "utf8");
 
-  // Nếu là Mode Cluster / Video Dài (> 5m) -> Tạo Smart Proxy 1x 720p siêu nhẹ (giữ 100% âm thanh & mốc giây)
+  // Đo dung lượng video gốc
+  let fileSizeMB = 0;
+  try {
+    const fileStats = fs.statSync(absoluteVideoPath);
+    fileSizeMB = fileStats.size / (1024 * 1024);
+  } catch (statErr) {
+    // Không block nếu lỗi đọc dung lượng
+  }
+
+  console.log(`[VideoProfile] 📹 Độ dài: ${dur.toFixed(1)}s | Dung lượng: ${fileSizeMB.toFixed(1)} MB`);
+
+  // Nếu là Mode Cluster / Video Dài (> 5m) / Dung Lượng Lớn (> 200MB) -> Tạo Smart Proxy 1x 720p siêu nhẹ (giữ 100% âm thanh & mốc giây)
   let fileToUpload = absoluteVideoPath;
-  if (isClusterMode || dur > 300) {
-    console.log(`[SmartProxy] Tự động tạo Smart Proxy 1x 720p siêu nhẹ cho video dài (${dur.toFixed(1)}s)...`);
+  const shouldCreateProxy = isClusterMode || dur > 300 || fileSizeMB > 200;
+  if (shouldCreateProxy) {
+    const reason = isClusterMode
+      ? "Chế độ Chùm Shorts"
+      : dur > 300
+      ? `Thời lượng dài (${dur.toFixed(1)}s > 5m)`
+      : `Dung lượng lớn (${fileSizeMB.toFixed(1)}MB > 200MB)`;
+    console.log(`[SmartProxy] ⚡ Tự động tạo Smart Proxy 1x 720p siêu nhẹ do: ${reason}...`);
     fileToUpload = generateSmartProxy1x(absoluteVideoPath, TEMP_WORK_DIR);
   }
 
@@ -395,7 +412,7 @@ async function main() {
 
     if (isClusterMode) {
       // XỬ LÝ MODE CLUSTER (PASS 1 & PASS 2 DÀNH CHO VIDEO DÀI/BATCH SHORTS)
-      console.log("[AI] [Pass 1] Đang gửi yêu cầu gom cụm điểm sáng sang Gemini AI...");
+      console.log("[AI] [DirectHighlightCutter] Đang gửi yêu cầu phân tích & trích xuất chùm Video Ngắn sang Gemini AI...");
       const clusterResponse = await generateContentWithRetryFallback(
         ai,
         HEAVY_MODELS,
@@ -406,7 +423,7 @@ async function main() {
               mimeType: fileState.mimeType,
             },
           },
-          "Hãy phân tích toàn bộ video, tái cấu trúc video dài thành danh sách từ 2 đến 5 Video Ngắn Hoàn Chỉnh Độc Lập (có cấu trúc câu chuyện hoàn chỉnh: Hook 3s -> Nội Dung -> Kết Bài).",
+          "Hãy phân tích toàn bộ video, trích xuất tất cả các đoạn Video Ngắn Độc Lập giá trị nhất (mỗi video 30s-55s, tốc độ 1.0x chuẩn tự nhiên) kèm đầy đủ kịch bản phân cảnh và bài viết Social Post.",
         ],
         {
           systemInstruction: systemInstruction,
@@ -414,53 +431,60 @@ async function main() {
         }
       );
 
-      const clusterData = JSON.parse(clusterResponse.text || "{}");
-      let clusters = clusterData.clusters || [];
-      console.log(`[Pass 1] ✅ Đã phát hiện ${clusters.length} Cụm Video Ngắn Độc Lập đắt giá!`);
+      const rawData = JSON.parse(clusterResponse.text || "{}");
+      let shorts = rawData.shorts || rawData.clusters || [];
+      console.log(`[DirectHighlightCutter] ✅ Đã phát hiện ${shorts.length} Video Ngắn Độc Lập hoàn chỉnh!`);
 
-      if (clusters.length === 0) {
-        console.warn("[Pass 1] Cảnh báo: Không tìm thấy cụm điểm sáng nào, fallback về mode Long2Short chuẩn.");
+      if (shorts.length === 0) {
+        console.warn("[DirectHighlightCutter] Cảnh báo: Không tìm thấy video ngắn nào, fallback về mode Long2Short chuẩn.");
       } else {
-        // NÂNG CẤP HUMAN-IN-THE-LOOP: Cho phép con người Review, chỉnh mốc thời gian & Tiêu đề/Nội dung trước Pass 2
+        // NÂNG CẤP HUMAN-IN-THE-LOOP: Cho phép con người Review, chỉnh mốc thời gian & Tiêu đề/Nội dung
         const { reviewAndEditClusters } = require("./interactiveClusterReview");
-        clusters = await reviewAndEditClusters(clusters);
+        shorts = await reviewAndEditClusters(shorts);
 
-        // Pass 2: Đọc prompt Long2Short chuẩn để sinh từng file JSON kịch bản độc lập
-        const stdPromptPath = path.join(PROMPTS_DIR, "long2short_generator_prompt.md");
-        const stdInstruction = fs.readFileSync(stdPromptPath, "utf8");
-
-        for (let idx = 0; idx < clusters.length; idx++) {
-          const c = clusters[idx];
+        for (let idx = 0; idx < shorts.length; idx++) {
+          const s = shorts[idx];
           const subProjectId = `${projectId}_short${String(idx + 1).padStart(2, "0")}`;
-          console.log(`\n[Pass 2] (${idx + 1}/${clusters.length}) Đang tạo kịch bản Timeline JSON riêng cho Short: '${subProjectId}' (${c.cluster_title})...`);
+          const title = s.video_meta?.title || s.cluster_title || s.title || `Short #${idx + 1}`;
+          console.log(`\n[DirectHighlightCutter] (${idx + 1}/${shorts.length}) Đang tạo kịch bản Timeline JSON: '${subProjectId}' (${title})...`);
 
-          const focusText = c.narrative_focus ? ` (Tập trung: ${c.narrative_focus})` : "";
-          const promptMsg = `Hãy tạo kịch bản Timeline JSON hoàn chỉnh cho Video Ngắn Độc Lập '${c.cluster_title}'${focusText} sử dụng các mốc thời gian sau từ video gốc:\n${JSON.stringify(c.timecodes, null, 2)}`;
-          const subResponse = await generateContentWithRetryFallback(
-            ai,
-            HEAVY_MODELS,
-            [
-              {
-                fileData: {
-                  fileUri: fileState.uri,
-                  mimeType: fileState.mimeType,
-                },
-              },
-              promptMsg,
-            ],
-            {
-              systemInstruction: stdInstruction + activePresetContext,
-              responseMimeType: "application/json",
-              responseSchema: RESPONSE_SCHEMA,
-            }
-          );
+          let subTimelineJson = {
+            video_meta: s.video_meta || {
+              title: title,
+              description: s.narrative_focus || "",
+              hashtags: s.recommended_hashtags || [],
+              audio_strategy: s.audio_strategy || "preserve_native_asmr",
+              has_original_music: s.has_original_music !== undefined ? s.has_original_music : true,
+            },
+            audio_config: s.audio_config || {
+              has_original_music: s.has_original_music !== undefined ? s.has_original_music : true,
+              bgm_mood: s.audio_strategy === "mix_bgm" ? (s.audio_config?.bgm_mood || "chill") : "none",
+              audio_strategy: s.audio_strategy || "preserve_native_asmr"
+            },
+            timeline: s.timeline || (s.timecodes || []).map((tc, scIdx) => ({
+              scene_id: `scene_${String(scIdx + 1).padStart(3, "0")}`,
+              scene_type: scIdx === 0 ? "hook" : (scIdx === s.timecodes.length - 1 ? "conclusion" : "body"),
+              start_s: tc.start_s !== undefined ? tc.start_s : tc.start,
+              end_s: tc.end_s !== undefined ? tc.end_s : tc.end,
+              duration_s: (tc.end_s !== undefined ? tc.end_s : tc.end) - (tc.start_s !== undefined ? tc.start_s : tc.start),
+              subtitle: tc.description || "",
+              subtitle_style: scIdx === 0 ? "vibrant_yellow_sticker" : "minimal_glass_card",
+              text_position: "top",
+              text_effect: { name: scIdx === 0 ? "Pop-up" : "Slide In" },
+              transition_out: scIdx === s.timecodes.length - 1 ? null : { type: "wipe_left", duration: 0.3 }
+            }))
+          };
 
-          let subTimelineJson = JSON.parse(subResponse.text || "{}");
+          // Đảm bảo duration_s = end_s - start_s (100% tốc độ 1.0x chuẩn tự nhiên, không tua nhanh)
+          subTimelineJson.timeline.forEach((sc) => {
+            sc.duration_s = Number(((sc.end_s || 0) - (sc.start_s || 0)).toFixed(2));
+            if (!sc.speed_strategy) sc.speed_strategy = "uniform";
+            if (!sc.render_priority) sc.render_priority = "keep";
+          });
+
           subTimelineJson = validateAndFixTimelineTimestamps(subTimelineJson, absoluteVideoPath);
 
           const nowCreatedAt = getLocalDateTime();
-          subTimelineJson.video_meta = subTimelineJson.video_meta || {};
-          subTimelineJson.video_meta.title = c.cluster_title || subTimelineJson.video_meta.title;
           subTimelineJson.video_meta.pipeline_mode = "LongHighlightClusters";
           subTimelineJson.video_meta.created_at = nowCreatedAt;
           subTimelineJson.video_meta.input_file = absoluteVideoPath;
@@ -468,7 +492,7 @@ async function main() {
           fs.mkdirSync(INCOMING_DIR, { recursive: true });
           const subOutputPath = path.join(INCOMING_DIR, `${subProjectId}.json`);
           fs.writeFileSync(subOutputPath, JSON.stringify(subTimelineJson, null, 2), "utf8");
-          console.log(`[Timeline] ✅ Đã sinh thành công file kịch bản độc lập: ${subOutputPath}`);
+          console.log(`[Timeline] ✅ Đã sinh thành công file kịch bản độc lập (1.0x Chuẩn): ${subOutputPath}`);
 
           // Sao chép video nguồn vào incoming cho từng short cụm để sẵn sàng render
           const subVideoPath = path.join(INCOMING_DIR, `${subProjectId}.mp4`);
@@ -479,8 +503,8 @@ async function main() {
           try {
             const videoMeta = subTimelineJson.video_meta || {};
             const scenes = subTimelineJson.timeline || [];
-            const shortDur = scenes.reduce((acc, s) => acc + (Number(s.duration_s) || 0), 0);
-            const effectsUsed = [...new Set(scenes.map((s) => s.advanced_effect?.name).filter(Boolean))].join(", ");
+            const shortDur = scenes.reduce((acc, sc) => acc + (Number(sc.duration_s) || 0), 0);
+            const effectsUsed = [...new Set(scenes.map((sc) => sc.advanced_effect?.name).filter(Boolean))].join(", ");
             const captionText = `${videoMeta.description || ""} ${(videoMeta.hashtags || []).map((h) => `#${h}`).join(" ")}`.trim();
 
             let origDurSec = null;
@@ -496,7 +520,7 @@ async function main() {
               pipelineMode: "LongHighlightClusters",
               status: "🤖 Timeline Ready",
               inputFile: absoluteVideoPath,
-              title: videoMeta.title || c.cluster_title || "",
+              title: videoMeta.title || title,
               captionHashtags: captionText,
               originalDuration: origDurationFormatted,
               shortDuration: `${shortDur.toFixed(1)}s`,
@@ -508,7 +532,6 @@ async function main() {
               renderedAt: "",
             });
 
-            await syncScenesToSheet(subProjectId, scenes);
             console.log(`[GoogleSheet] ✅ Đã đồng bộ kịch bản '${subProjectId}' sang Google Sheet!`);
           } catch (sheetErr) {
             console.warn(`[GoogleSheet] WARN: Không thể đồng bộ Google Sheet: ${sheetErr.message}`);
@@ -620,7 +643,6 @@ async function main() {
         renderedAt: "",
       });
 
-      await syncScenesToSheet(projectId, scenes);
       console.log("[GoogleSheet] Đã đồng bộ kịch bản mới sang Google Sheet & CSV Backup thành công!");
     } catch (sheetErr) {
       console.warn(`[GoogleSheet] WARN: Không thể đồng bộ Google Sheet: ${sheetErr.message}`);

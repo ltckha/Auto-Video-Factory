@@ -647,7 +647,8 @@ function buildVideoFilters(scene, cardResult = null, cardInputIndex = 1) {
 
   if (cardResult && cardResult.compositePath && fs.existsSync(cardResult.compositePath)) {
     const { overlayX, overlayY } = cardResult;
-    const cardOverlay = `[vbase][${cardInputIndex}:v]overlay=${overlayX}:${overlayY},format=yuv420p`;
+    const cardDuration = Math.min(scene.duration || 3.0, 2.5);
+    const cardOverlay = `[vbase][${cardInputIndex}:v]overlay=${overlayX}:${overlayY}:enable='lte(t,${cardDuration.toFixed(2)})',format=yuv420p`;
     return `[0:v]${baseFilterStr}[vbase];${cardOverlay}`;
   }
 
@@ -692,12 +693,13 @@ function collectTextCues(scene) {
   const cues = [];
   const defaultEffect = scene.textEffect;
   const sceneText = scene.subtitle || scene.caption || scene.text || scene.title;
+  const isNoneStyle = String(scene.subtitleStyle || scene.subtitle_style || "").toLowerCase() === "none";
 
-  if (sceneText) {
+  if (sceneText && !isNoneStyle && String(sceneText).toLowerCase() !== "none") {
     cues.push({
       text: String(sceneText),
       start: 0,
-      end: scene.duration,
+      end: Math.min(scene.duration, 2.5),
       effect: defaultEffect,
       subtitle_style: scene.subtitleStyle,
       text_position: scene.textPosition,
@@ -1529,7 +1531,8 @@ function buildTemporalWarpFilterComplex(scene, segments, cardResult = null, card
     const hookFilterStr = scene.openingHook ? buildOpeningHookFilters(scene).join(",") : "";
     const filterChain = [baseFilterStr, hookFilterStr].filter(Boolean).join(",");
     const vbaseChain = filterChain ? `[twcat]${filterChain}[vtwbase];[vtwbase]` : `[twcat]`;
-    const cardOverlay = `${vbaseChain}[${cardInputIndex}:v]overlay=${overlayX}:${overlayY},format=yuv420p[vout]`;
+    const cardDuration = Math.min(scene.duration || 3.0, 2.5);
+    const cardOverlay = `${vbaseChain}[${cardInputIndex}:v]overlay=${overlayX}:${overlayY}:enable='lte(t,${cardDuration.toFixed(2)})',format=yuv420p[vout]`;
 
     return [...segmentFilters, concatFilter, cardOverlay].join(";");
   }
@@ -1745,12 +1748,22 @@ async function renderCurrentProject() {
 
   // Bổ sung BGM Audio Mix nếu có cấu hình audio_config trong timeline JSON
   try {
+    const videoMeta = timeline.video_meta || {};
     const audioConfig = timeline.audio_config || {};
-    const hasOriginalMusic = audioConfig.has_original_music === true;
-    const bgmMood = audioConfig.bgm_mood || (hasOriginalMusic ? "none" : "chill");
+    const audioStrategy = String(audioConfig.audio_strategy || videoMeta.audio_strategy || timeline.audio_strategy || "").toLowerCase();
 
-    if (hasOriginalMusic || bgmMood === "none") {
-      log(`[AudioEngine] 🎵 Video gốc ĐÃ CÓ SẴN NHẠC NỀN / ÂM THANH -> Tự động giữ nguyên 100% âm thanh gốc, KHÔNG chèn đè nhạc ngoài.`);
+    // Kiểm tra đa tầng: nếu phát hiện có nhạc gốc, có âm thanh ASMR, hoặc chiến lược preserve -> KHÔNG chèn BGM
+    const hasOriginalMusic = audioConfig.has_original_music === true || 
+                             videoMeta.has_original_music === true || 
+                             timeline.has_original_music === true ||
+                             audioStrategy.includes("preserve") || 
+                             audioStrategy.includes("native") || 
+                             audioStrategy.includes("asmr");
+
+    const bgmMood = audioConfig.bgm_mood || videoMeta.bgm_mood || timeline.bgm_mood || "none";
+
+    if (hasOriginalMusic || bgmMood === "none" || audioStrategy === "preserve_native_asmr") {
+      log(`[AudioEngine] 🎵 Video gốc ĐÃ CÓ SẴN NHẠC NỀN / ÂM THANH ASMR -> Giữ nguyên 100% âm thanh gốc, TUYỆT ĐỐI KHÔNG chèn đè nhạc ngoài.`);
     } else {
       const bgmTrack = resolveBgmTrack(bgmMood, audioConfig.bgm_url);
       if (bgmTrack && bgmTrack.path && fs.existsSync(bgmTrack.path)) {
@@ -1817,9 +1830,8 @@ async function renderCurrentProject() {
       renderedAt: getLocalDateTime(),
     });
 
-    await syncScenesToSheet(videoId, scenes);
     await syncAnalyticsToSheet();
-    log(`[GoogleSheet] Đã đồng bộ trạng thái 🎬 Rendered, SCENES_DETAIL và Output File (${archivedOutputFile}) sang Google Sheet & CSV Backup.`);
+    log(`[GoogleSheet] Đã đồng bộ trạng thái 🎬 Rendered và Output File (${archivedOutputFile}) sang Google Sheet & CSV Backup.`);
   } catch (sheetErr) {
     log(`WARN: Lỗi đồng bộ Google Sheet: ${sheetErr.message}`);
   }

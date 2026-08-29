@@ -1,0 +1,144 @@
+{
+  "style_profile": {
+    "name": "Tactile Tech Unboxing & Accessory Assembly ASMR",
+    "category_niche": "product_showcase",
+    "average_scene_duration_s": 2,
+    "pacing_speed": "dynamic",
+    "hook_strategy": "Direct top-down unboxing starting with acoustic tapping on shopping bag, fast unboxing box pull, and immediate reveal of the sleek product on a clean white diffused studio setup.",
+    "preferred_font_layout": "Bold clean centered title badge on hook ('Product Unboxing'), followed by zero subtitle overlay during hands-on assembly to keep full focus on product textures and acoustic ASMR.",
+    "transition_rules": [
+      "Step-by-step modular micro-cuts synced directly to physical tactile actions (pull-tab tear, screen peel, alcohol wipe, glass snap, case fit)",
+      "Macro top-down lock-in camera angles with subtle dynamic push-in on power-on and finish reveals"
+    ]
+  },
+  "learned_novel_effects": [
+    {
+      "effect_name": "Pull-Tab Peel Drift",
+      "visual_intent": "reveal_impact",
+      "camera_motion": "drift",
+      "recommended_intensity": 0.85,
+      "description": "Smooth lateral camera drift tracking the exact motion of peeling a package security pull-tab."
+    },
+    {
+      "effect_name": "Tactile Lens Protector Snap",
+      "visual_intent": "actioncut",
+      "camera_motion": "snap",
+      "recommended_intensity": 0.8,
+      "description": "Instant micro camera snap perfectly aligned with the mechanical click of snapping on a protective lens or case."
+    },
+    {
+      "effect_name": "Display Power-On Glow Pulse",
+      "visual_intent": "premium_showcase",
+      "camera_motion": "push_in",
+      "recommended_intensity": 0.75,
+      "description": "Slow majestic push-in capturing the illumination of a fresh OLED display greeting screen."
+    }
+  ],
+  "few_shot_examples": [
+    {
+      "scene_type": "body",
+      "duration_range": "3.0s - 45.0s",
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Satisfying screen film peel, alcohol wipe squeak, and tempered glass attachment click.",
+      "suggested_text_effect": "none",
+      "suggested_subtitle_style": "none",
+      "suggested_advanced_effect": {
+        "name": "Tactile Lens Protector Snap",
+        "intent": "actioncut",
+        "mood": "satisfying",
+        "pacing": "dynamic",
+        "focus": "action",
+        "camera_motion": "snap",
+        "intensity": 0.8
+      },
+      "suggested_transition_out": {
+        "type": "wipe_left",
+        "duration": 0.2
+      }
+    },
+    {
+      "scene_type": "highlight",
+      "duration_range": "45.0s - 59.0s",
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Resonant case snap and vibrant display hello screen power-on chime.",
+      "suggested_text_effect": "none",
+      "suggested_subtitle_style": "none",
+      "suggested_advanced_effect": {
+        "name": "Display Power-On Glow Pulse",
+        "intent": "premium_showcase",
+        "mood": "premium",
+        "pacing": "slow",
+        "focus": "product",
+        "camera_motion": "push_in",
+        "intensity": 0.75
+      },
+      "suggested_transition_out": {
+        "type": "fade",
+        "duration": 0.4
+      }
+    },
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Hydraulic Compression Descent",
+        "intent": "reveal_impact",
+        "camera_motion": "push_in",
+        "focus": "product",
+        "intensity": 0.8,
+        "mood": "suspenseful",
+        "pacing": "slow"
+      },
+      "duration_range": "0.0s - 4.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Low-frequency hydraulic motor hum and solid product placement tap on steel anvil."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Catastrophic Yield Impact Snap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.95,
+        "mood": "energetic",
+        "pacing": "fast"
+      },
+      "duration_range": "4.0s - 11.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "wipe_right"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "High-tension metallic creak collapsing into an explosive structural buckling crunch."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Pancake Flattening Shake",
+        "intent": "destruction_showcase",
+        "camera_motion": "shake",
+        "focus": "texture",
+        "intensity": 0.9,
+        "mood": "satisfying",
+        "pacing": "dynamic"
+      },
+      "duration_range": "11.0s - 15.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Deep resonant compression hiss and final pancake disc deformation reveal."
+    }
+  ]
+}

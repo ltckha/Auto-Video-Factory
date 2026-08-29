@@ -1,0 +1,102 @@
+{
+  "style_profile": {
+    "name": "Macro Tungsten Carbide Blade Honing ASMR",
+    "category_niche": "asmr_build",
+    "average_scene_duration_s": 1.8,
+    "pacing_speed": "pulse",
+    "hook_strategy": "Wide shot of knife slicing into sharpener against pitch-black void, immediately jumping into extreme 100x microscope macro view of tungsten carbide teeth peeling curled metal burrs off the steel edge with high-frequency acoustic scrape.",
+    "preferred_font_layout": "Zero subtitle clutter to maintain absolute visual immersion in the micro-level metal peeling physics and acoustic resonance.",
+    "transition_rules": [
+      "Wide-to-extreme-macro jump cut on initial tool engagement",
+      "Directional linear slide tracking the steel blade apex as it passes between tungsten carbide v-notches"
+    ]
+  },
+  "few_shot_examples": [
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Macro Apex Scrape Push",
+        "intent": "reveal_impact",
+        "camera_motion": "push_in",
+        "focus": "texture",
+        "intensity": 0.9,
+        "mood": "satisfying",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 2.5s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Sharp metallic bite and ultra-crisp blade draw ASMR."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Metal Burr Curl Shiver",
+        "intent": "actioncut",
+        "camera_motion": "shake",
+        "focus": "action",
+        "intensity": 0.85,
+        "mood": "satisfying",
+        "pacing": "dynamic"
+      },
+      "duration_range": "2.5s - 8.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "wipe_right"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "High-frequency friction sizzle and micro-metal curl peeling sounds."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Precision Edge Glide",
+        "intent": "premium_showcase",
+        "camera_motion": "drift",
+        "focus": "product",
+        "intensity": 0.8,
+        "mood": "premium",
+        "pacing": "slow"
+      },
+      "duration_range": "8.0s - 12.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Clean finished bevel stroke with deep resonant metallic ring."
+    }
+  ],
+  "learned_novel_effects": [
+    {
+      "effect_name": "Macro Apex Scrape Push",
+      "camera_motion": "push_in",
+      "description": "Extreme micro-macro camera push tracking the friction point between carbide teeth and steel apex.",
+      "recommended_intensity": 0.9,
+      "visual_intent": "reveal_impact"
+    },
+    {
+      "effect_name": "Metal Burr Curl Shiver",
+      "camera_motion": "shake",
+      "description": "High-frequency micro-jitter mimicking the physical vibration of metal shavings detaching under pressure.",
+      "recommended_intensity": 0.85,
+      "visual_intent": "actioncut"
+    },
+    {
+      "effect_name": "Precision Edge Glide",
+      "camera_motion": "drift",
+      "description": "Smooth lateral camera pan matching the continuous motion of an ultra-sharp blade finish pass.",
+      "recommended_intensity": 0.8,
+      "visual_intent": "premium_showcase"
+    }
+  ]
+}

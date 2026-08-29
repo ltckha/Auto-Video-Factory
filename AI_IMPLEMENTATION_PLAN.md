@@ -1,38 +1,51 @@
-# KẾ HOẠCH PHÁT TRIỂN: HỆ THỐNG PROMPT AI & FLOW N8N (LEARNING & GENERATOR)
+# 🎬 AUTO-VIDEO-FACTORY - AI IMPLEMENTATION PLAN
 
-Tài liệu này lưu trữ lại kế hoạch thiết kế cho hệ thống AI Video Scene Generator tích hợp cơ chế học phong cách dựng video thông qua n8n.
+> **Trạng thái hiện tại:** `PHASE M6.2 — REAL PRODUCTION & PROGRESSIVE DESIGN EXPANSION (ACTIVE 🟢)`  
+> **Tài liệu đặc tả chính thức & Nhật ký:** Xem [`PHASE_M6_2_CHARTER.md`](PHASE_M6_2_CHARTER.md)
 
 ---
 
-## 1. Thiết kế Luồng Tích hợp n8n
+## 🗺️ LỘ TRÌNH TỔNG THỂ (ROADMAP STATUS)
 
-```mermaid
-graph TD
-  subgraph Flow 1: Sinh Timeline và Dựng Video
-    A[Video gốc & Yêu cầu] -->|Đưa vào n8n| B(Node Gọi Gemini)
-    B -->|Sử dụng timeline_generator_prompt.md| C[JSON Timeline gốc]
-    C --> D(Node phân tích bổ trợ: render_analyzer_prompt.md)
-    D -->|Tối ưu hóa| E[JSON Timeline chuẩn]
-    E -->|Ghi vào thư mục incoming/| F[Hệ thống Render hiện tại]
-  end
-
-  subgraph Flow 2: Học phong cách từ Video Mẫu
-    V[Video Mẫu Tốt] -->|Phân tích mô tả trong n8n| L(Node học tập: video_style_learning_prompt.md)
-    L -->|Xuất ra Few-shot JSON| M[Lưu vào effects/few_shot_examples.json]
-    M -->|Bổ sung làm ví dụ mẫu cho prompt| B
-  end
+```text
+[✓] R0–R3 : Foundation & Stress Matrix 10/10       — PASS ✅
+[✓] M1    : Remotion Design Layer v1              — PASS ✅
+[✓] M2    : Design System Foundation (Tokens)     — PASS ✅
+[✓] M3    : Motion Registry (Primitives)          — PASS ✅
+[✓] M4    : Visual Identity & Brand DNA Catalog   — PASS ✅
+[✓] M5    : Production Validation & A/B Benchmark — PASS ✅
+[✓] M5.5  : Production Gate & AI Fuzzing Audit    — PASS 100% [GO 🟢]
+[✓] M6.0  : Architecture & Production Freeze      — PASS ✅
+[✓] M6.1  : Batch Harness & Manifest Generator    — PASS ✅
+[🟢] M6.2 : Real Production & Progressive Design   — ĐANG CHẠY (ACTIVE 🟢)
+    ├─ [✓] Core Design Kit Tier 1 (4 Styles + Badges + Overlays)
+    ├─ [✓] Google Fonts Embedded (Playfair, Paytone One, Montserrat)
+    ├─ [✓] Phase M6.2-LK (Legacy Knowledge Migration: 231 Mappings + Stats)
+    ├─ [✓] Dynamic Learned Styles Ingestion (Continuous Daily Learning)
+    ├─ [✓] End-to-End Post-Render (NAS Sync + Google Sheets + Cleanup)
+    ├─ [✓] Native Scene Audio Slicing & Chained atempo Speed Parity
+    ├─ [✓] Dynamic BGM Volume Ducking (25% Voiceover / 50% Normal / 85% Fast)
+    ├─ [✓] True-Color BT.709 Bitstream Tagging (Bảo toàn màu sắc gốc 100%)
+    ├─ [✓] Compact File Size Optimization (CRF=20 chuẩn nén Render cũ)
+    └─ [🟢] Continuous Real Video Production & Progressive Tier 2 Expansion
+[🔒] M6.3 : Human Visual & Technical Audit        — CHỜ NGHIỆM THU
+[🔒] M6.4 : Reliability & Recovery Resilience     — CHỜ NGHIỆM THU
+[🔒] M6.5 : Controlled Hybrid Default             — CHỜ NGHIỆM THU
+[🔒] M6.6 : Final Production Acceptance [GO/NO-GO]
 ```
 
 ---
 
-## 2. Cấu trúc thư mục Prompt
-Toàn bộ các prompt được lưu trữ tập trung tại thư mục `renderer/prompts/` để bạn có thể tải động hoặc copy/paste sang n8n:
-- **[timeline_generator_prompt.md](file:///Users/khan/Library/CloudStorage/Nextcloud-ltckha@nc․giayhainancy․vn/Share_Folder/Long2Short/renderer/prompts/timeline_generator_prompt.md):** Nhận video mô tả và sinh ra JSON timeline chuẩn.
-- **[video_style_learning_prompt.md](file:///Users/khan/Library/CloudStorage/Nextcloud-ltckha@nc․giayhainancy․vn/Share_Folder/Long2Short/renderer/prompts/video_style_learning_prompt.md):** Nhận đầu vào video mẫu thành công để học cách sinh hiệu ứng chữ, hiệu ứng chuyển cảnh và nhịp điệu.
-- **[render_analyzer_prompt.md](file:///Users/khan/Library/CloudStorage/Nextcloud-ltckha@nc․giayhainancy․vn/Share_Folder/Long2Short/renderer/prompts/render_analyzer_prompt.md):** Bổ trợ cho render, kiểm tra tính hợp lệ của timeline trước khi đưa vào hàng đợi `incoming/`.
+## 🎯 CƠ CHẾ SẢN XUẤT THỰC CHIẾN (M6.2 WORKFLOW)
 
----
-
-## 3. Nguyên lý học máy liên tục (Learning Mechanism)
-- Khi AI học được các hiệu ứng mới từ video mẫu thông qua Flow 2 trên n8n, các cấu trúc JSON mẫu (Few-shot) sẽ được ghi lại.
-- Các hiệu ứng chữ hay hiệu ứng chuyển cảnh mới (dù chưa được định nghĩa cứng trong code) khi được đưa vào timeline render sẽ tự động kích hoạt bộ lọc heuristics/similarity trong `effectLearning.js` để tìm ra cấu trúc render tương thích nhất (hoặc sử dụng làm gợi ý để lập trình viên mở rộng `effects.js` sau này).
+1. **Phân tích:** Mở `generate.command` $\rightarrow$ Kéo thả video $\rightarrow$ Gemini AI phân tích tạo Timeline JSON.
+2. **Render:** Tự động đếm lùi 10s và kích hoạt Hybrid Engine qua:
+   ```bash
+   RENDER_ENGINE=hybrid node renderer-remotion/scripts/render_orchestrator.js <project_id>
+   ```
+3. **Tự động Hậu kỳ:** Xuất MP4 (CRF=20, BT.709, Dynamic BGM Audio Ducking) $\rightarrow$ Đẩy file về NAS kèm `post.txt` $\rightarrow$ Đồng bộ Google Sheets $\rightarrow$ Dọn sạch rác `incoming/`.
+4. **Kiểm toán Manifest:** Tự động tạo `out/manifests/<project_id>_manifest.json`.
+5. **Human Review & Sửa lỗi theo phân loại:**
+   * 🔴 **P0 (Blocker):** Sửa ngay ở tầng gốc + tạo Regression test case.
+   * 🟡 **P1 (Quality):** Ghi nhận, lặp lại $\ge 2-3$ lần mới sửa có hệ thống.
+   * 🟢 **P2 (Enhancement):** Bổ sung Primitive mới vào Core Design Kit.
