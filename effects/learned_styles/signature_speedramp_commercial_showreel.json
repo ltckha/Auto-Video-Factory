@@ -1,0 +1,118 @@
+{
+  "style_profile": {
+    "name": "Signature Speedramp Commercial & Interior Showreel",
+    "category_niche": "commercial_interior_food_showreel",
+    "average_scene_duration_s": 2.2,
+    "pacing_speed": "speedramp_u_curve",
+    "hook_strategy": "Cú giật tốc độ chữ U: Vút nhanh (Whip In) -> Phanh gấp Slow-mo tại tâm điểm món ăn/decor đẹp nhất -> Vút nhanh (Whip Out) sang cảnh kế tiếp đúng nhịp Drop âm nhạc.",
+    "preferred_font_layout": "Khung kính mờ minimal_glass_card hoặc nhãn dán vibrant_yellow_sticker đặt gọn gàng ở Top/Bottom, chữ nảy theo từng nhịp Kick/Snare.",
+    "transition_rules": [
+      "Match Cut đồng bộ hướng: Cú máy trước lia sang phải thì cú máy sau bắt đầu bằng lia sang phải để tạo cảm giác chuyển động One-shot liền mạch.",
+      "Whip Pan & Snap Zoom chuyển cảnh kết hợp Motion Blur làm mịn các đoạn tăng tốc.",
+      "Âm thanh: Bắt buộc chèn Whoosh/Swish ở các pha vút tốc độ và Deep Impact/Kick khi phanh lại ở điểm vàng thị giác."
+    ],
+    "color_and_lighting": {
+      "tone": "Warm & Cozy (Cam, vàng ấm, nâu gỗ)",
+      "contrast": "High Contrast làm nổi bật vân gỗ, bề mặt thạch cao và độ bóng của đồ ăn/nước uống",
+      "lighting": "Glow/Bloom nhẹ ở các nguồn đèn rọi, đèn chùm và ánh sáng tự nhiên qua cửa kính"
+    },
+    "cinematography_rules": {
+      "layering": "Sử dụng vật thể tiền cảnh (tán lá, quạt cây, khung cửa sổ) làm mờ Foreground để tăng chiều sâu 3D",
+      "shot_variety": "Đan xen liên tục Macro Close-up (chi tiết món ăn) và Medium/Wide Shot (toàn cảnh không gian)"
+    }
+  },
+  "few_shot_examples": [
+    {
+      "scene_type": "hook",
+      "duration_range": "0.0s - 3.0s",
+      "suggested_advanced_effect": {
+        "name": "Whip-In Speedramp Hero Reveal",
+        "intent": "reveal_impact",
+        "camera_motion": "snap",
+        "focus": "product",
+        "intensity": 0.95,
+        "mood": "energetic",
+        "pacing": "fast",
+        "speed_strategy": "ramp",
+        "description": "Vút nhanh gia tốc từ ngoài vào và khựng lại ngắm trọn vẹn điểm nhấn chính"
+      },
+      "suggested_subtitle_style": "vibrant_yellow_sticker",
+      "suggested_text_effect": "Pop-up",
+      "suggested_transition_out": {
+        "duration": 0.25,
+        "type": "wipe_left"
+      },
+      "visual_description": "Cú máy vút nhanh xuyên qua tán lá tiền cảnh, phanh gấp slow-mo cận cảnh món ăn/decor đặc trưng",
+      "voice_rhythm": "Tiếng Whoosh vút gió mạnh mẽ nối tiếp bằng tiếng nhạc kick drop giòn giã."
+    },
+    {
+      "scene_type": "body",
+      "duration_range": "3.0s - 8.0s",
+      "suggested_advanced_effect": {
+        "name": "Macro Texture Glide Slowmo",
+        "intent": "premium_showcase",
+        "camera_motion": "macro_push",
+        "focus": "texture",
+        "intensity": 0.8,
+        "mood": "satisfying",
+        "pacing": "medium",
+        "speed_strategy": "adaptive",
+        "description": "Lướt cận cảnh chi tiết chất liệu món ăn hoặc vân gỗ decor với chiều sâu tiền cảnh mờ"
+      },
+      "suggested_subtitle_style": "minimal_glass_card",
+      "suggested_text_effect": "Slide In",
+      "suggested_transition_out": {
+        "duration": 0.2,
+        "type": "slide_up"
+      },
+      "visual_description": "Góc quay Macro cận cảnh bề mặt món ăn/đồ uống sốt chảy hoặc vân gỗ bóng bẩy, ánh sáng ấm",
+      "voice_rhythm": "Âm thanh tiếng lách cách pha chế thực địa kết hợp nhịp bass êm dịu."
+    },
+    {
+      "scene_type": "highlight",
+      "duration_range": "8.0s - 14.0s",
+      "suggested_advanced_effect": {
+        "name": "Match-Cut Kinetic Space Reveal",
+        "intent": "dynamic_pacing",
+        "camera_motion": "drift",
+        "focus": "space",
+        "intensity": 0.85,
+        "mood": "luxurious",
+        "pacing": "fast",
+        "speed_strategy": "ramp",
+        "description": "Lia máy đồng bộ hướng chuyển động bao quát không gian quán"
+      },
+      "suggested_subtitle_style": "minimal_glass_card",
+      "suggested_text_effect": "Bounce",
+      "suggested_transition_out": {
+        "duration": 0.25,
+        "type": "wipe_right"
+      },
+      "visual_description": "Lia máy từ quầy bar nối tiếp lướt sang mảng tường mốc thời gian và toàn cảnh quán",
+      "voice_rhythm": "Nhịp vút tốc độ đồng điệu với tiếng snare của bài nhạc."
+    },
+    {
+      "scene_type": "conclusion",
+      "duration_range": "14.0s - 18.0s",
+      "suggested_advanced_effect": {
+        "name": "Accelerating Pullout Brand Lock",
+        "intent": "call_to_action",
+        "camera_motion": "pull_out",
+        "focus": "brand",
+        "intensity": 0.9,
+        "mood": "inspiring",
+        "pacing": "medium",
+        "speed_strategy": "uniform",
+        "description": "Lùi máy mượt mà bao quát toàn bộ thương hiệu và chốt lại lời kêu gọi"
+      },
+      "suggested_subtitle_style": "warning_red_badge",
+      "suggested_text_effect": "Pop-up",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "Toàn cảnh mặt tiền quán qua khung cửa kính kết hợp thẻ kêu gọi trải nghiệm",
+      "voice_rhythm": "Nhạc nền ngân vang kết thúc trọn vẹn showreel."
+    }
+  ]
+}
