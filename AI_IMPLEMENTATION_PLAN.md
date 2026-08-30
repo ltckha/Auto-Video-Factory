@@ -27,6 +27,10 @@
     ├─ [✓] Dynamic BGM Volume Ducking (25% Voiceover / 50% Normal / 85% Fast)
     ├─ [✓] True-Color BT.709 Bitstream Tagging (Bảo toàn màu sắc gốc 100%)
     ├─ [✓] Compact File Size Optimization (CRF=20 chuẩn nén Render cũ)
+    ├─ [✓] Batch Queue Multi-Shorts Runner (short01, short02, short03 queue)
+    ├─ [✓] TransitionSeries & Visual Full Coverage (Zero Black Frames at Tail)
+    ├─ [✓] Audio Smooth Outro Decrescendo (afade=t=out 0.6s êm ái đoạn kết)
+    ├─ [✓] Effects Analytics Tab Realtime Sync (Video-Factory-EFFECTS Tab)
     └─ [🟢] Continuous Real Video Production & Progressive Tier 2 Expansion
 [🔒] M6.3 : Human Visual & Technical Audit        — CHỜ NGHIỆM THU
 [🔒] M6.4 : Reliability & Recovery Resilience     — CHỜ NGHIỆM THU
@@ -43,7 +47,7 @@
    ```bash
    RENDER_ENGINE=hybrid node renderer-remotion/scripts/render_orchestrator.js <project_id>
    ```
-3. **Tự động Hậu kỳ:** Xuất MP4 (CRF=20, BT.709, Dynamic BGM Audio Ducking) $\rightarrow$ Đẩy file về NAS kèm `post.txt` $\rightarrow$ Đồng bộ Google Sheets $\rightarrow$ Dọn sạch rác `incoming/`.
+3. **Tự động Hậu kỳ:** Xuất MP4 (CRF=20, BT.709, Dynamic BGM Audio Ducking, Outro Decrescendo) $\rightarrow$ Đẩy file về NAS kèm `post.txt` $\rightarrow$ Đồng bộ Google Sheets (Cả 2 tab) $\rightarrow$ Dọn sạch rác `incoming/`.
 4. **Kiểm toán Manifest:** Tự động tạo `out/manifests/<project_id>_manifest.json`.
 5. **Human Review & Sửa lỗi theo phân loại:**
    * 🔴 **P0 (Blocker):** Sửa ngay ở tầng gốc + tạo Regression test case.

@@ -1,17 +1,19 @@
 import { DesignToken } from "../styles/tokens";
-import { resolveCreativeSpecification, PlatformType } from "../styles/creativeResolver";
+import { resolveCreativeSpecification } from "../styles/creativeResolver";
 import { resolveStyleToken } from "../styles/styleResolver";
-import { BrandDnaProfile } from "../brand/brandDna";
+import { BrandDnaProfile, PlatformType } from "../brand/brandDna";
 import { adaptLegacyKnowledgeToMotion } from "../knowledge/legacyAdapter";
 
 export interface TimelineScene {
-  scene_id: string;
-  scene_type: "hook" | "body" | "conclusion" | "outro" | "intro" | "highlight" | "cta";
-  start_s: number;
-  end_s: number;
-  duration_s: number;
-  title?: string;
-  subtitle: string;
+  scene_id?: string;
+  scene_type?: string;
+  start_s?: number;
+  end_s?: number;
+  duration_s?: number;
+  start?: number;
+  end?: number;
+  duration?: number;
+  subtitle?: string;
   subtitle_style?: string;
   text_position?: "top" | "center" | "bottom";
   text_effect?: {
@@ -62,6 +64,11 @@ export interface AdaptedScene {
   intensity: number;
   brand: BrandDnaProfile;
   platform: PlatformType;
+  transitionOut?: {
+    type: string;
+    duration: number;
+  } | null;
+  speedStrategy?: string;
 }
 
 export function adaptTimelineToRemotion(
@@ -84,6 +91,8 @@ export function adaptTimelineToRemotion(
 
   // 2. Resolve Master Video Spec
   const globalSpec = resolveCreativeSpecification({
+    brand,
+    platform,
     content: {
       title: meta.title,
       hashtags: meta.hashtags,
@@ -91,16 +100,13 @@ export function adaptTimelineToRemotion(
     },
     intent: {
       style: meta.style,
-      energy: 0.65,
     },
-    brand,
-    platform,
   });
 
   const scenes: AdaptedScene[] = activeTimeline.map((sc, idx) => {
-    const targetDurSec = Number(sc.duration_s !== undefined ? sc.duration_s : (sc as any).duration) || 3.0;
-    const startSec = Number(sc.start_s !== undefined ? sc.start_s : (sc as any).start) || 0;
-    const endSec = Number(sc.end_s !== undefined ? sc.end_s : (sc as any).end) || (startSec + targetDurSec);
+    const startSec = Number(sc.start_s !== undefined ? sc.start_s : sc.start) || 0;
+    const targetDurSec = Number(sc.duration_s !== undefined ? sc.duration_s : sc.duration) || 3.0;
+    const endSec = Number(sc.end_s !== undefined ? sc.end_s : sc.end) || (startSec + targetDurSec);
 
     const sourceDurSec = Math.max(0.1, endSec - startSec);
     // Exact Speedup Playback Rate
@@ -153,6 +159,13 @@ export function adaptTimelineToRemotion(
       intensity: sceneIntensity,
       brand: globalSpec.brand,
       platform: globalSpec.platform,
+      transitionOut: sc.transition_out
+        ? {
+            type: String(sc.transition_out.type || "fade").toLowerCase(),
+            duration: Number(sc.transition_out.duration) || 0.3,
+          }
+        : null,
+      speedStrategy: sc.speed_strategy || "uniform",
     };
   });
 

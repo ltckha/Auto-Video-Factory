@@ -1,56 +1,57 @@
 {
   "video_meta": {
-    "title": "KHÁM PHÁ VƯỜN CÂY GIỐNG MỚI TRỒNG CHUẨN KỸ THUẬT",
-    "description": "🎣 Tham quan khu vườn mới trồng quy mô rộng lớn phủ bạt hiện đại.\n\n📖 Hành trình dạo quanh trang trại với hàng cây giống xanh tốt được quy hoạch bài bản dưới ánh nắng ấm áp.\n\n💬 Bạn thấy mô hình canh tác phủ bạt này thế nào, hãy để lại ý kiến nhé!",
+    "title": "Nghệ Thuật Đục Lỗ Da Thủ Công - Cực Kỳ Thỏa Mãn",
+    "description": "🎣 Bạn đã bao giờ tò mò về quy trình tạo nên những đường đục sắc nét trên sản phẩm da thủ công chưa?\n\n📖 Cùng ngắm nhìn từng thao tác căn chỉnh khuôn kim loại và nhịp búa gõ dứt khoát trên chất liệu da cao cấp. Sự tỉ mỉ trong từng milimét chính là bí quyết tạo nên độ bền đẹp cho những chiếc túi da chế tác riêng.\n\n💬 Bạn thích cảm giác hoàn thiện thủ công tỉ mỉ này chứ, hãy để lại chia sẻ bên dưới nhé!",
     "hashtags": [
-      "nongnghiep",
-      "vuoncay",
-      "trongcay",
-      "cuocsongnongthon",
-      "nongnghiepsach"
+      "dathong",
+      "leathercraft",
+      "dothucong",
+      "asmr",
+      "handmade",
+      "nghethuatda"
     ],
     "pipeline_mode": "Long2Short",
-    "created_at": "2026-08-29 19:41:43",
-    "input_file": "/Volumes/Media/Camera/OsmoNano/202606/DJI_20260623091005_0009_D.MP4",
-    "original_duration_s": 144.4
+    "created_at": "2026-08-30 14:15:31",
+    "input_file": "/Volumes/NextCloud/Note10/YenLeather/20260617_094012.mp4",
+    "original_duration_s": 182.8
   },
   "timeline": [
     {
       "scene_id": "scene_001",
       "scene_type": "hook",
       "start_s": 0,
-      "end_s": 8,
+      "end_s": 15,
       "duration_s": 4,
-      "title": "Toàn cảnh lối vào vườn",
-      "story_importance": 0.9,
+      "title": "Căn Chỉnh Khuôn Đục Góc Da",
+      "story_importance": 0.95,
       "key_moments": [
-        2
+        10.5
       ],
       "speed_strategy": "ramp",
       "render_priority": "compress",
-      "subtitle": "KHÁM PHÁ VƯỜN CÂY GIỐNG MỚI",
+      "subtitle": "BÍ QUYẾT ĐỤC LỖ DA CHUẨN XÁC",
       "subtitle_style": "vibrant_yellow_sticker",
       "text_position": "top",
-      "voice": "Hôm nay cùng mình dạo một vòng tham quan khu vườn mới xuống giống nhé.",
-      "visual_cue": "Góc quay bước vào trang trại phủ bạt đen dưới trời xanh",
+      "voice": "Để có những góc cắt hoàn hảo trên đồ da thủ công, bước định vị khuôn đục cực kỳ quan trọng.",
+      "visual_cue": "Cận cảnh người thợ đặt khuôn kim loại hình ô vuông lên mép miếng da màu nâu và dùng búa cao su gõ dứt khoát.",
       "text_effect": {
         "name": "Pop-up",
-        "description": "Chữ nảy nhẹ tạo chú ý"
+        "description": "Chữ xuất hiện nảy bật thu hút chú ý ngay giây đầu"
       },
       "advanced_effect": {
-        "name": "Cinematic Zoom",
+        "name": "Satisfying Impact",
         "intent": "reveal_impact",
-        "mood": "energetic",
-        "pacing": "dynamic",
-        "focus": "reveal",
+        "mood": "satisfying",
+        "pacing": "fast",
+        "focus": "hand_action",
         "camera_motion": "push_in",
-        "intensity": 0.8,
-        "description": "Zoom tiến vào không gian vườn rộng"
+        "intensity": 0.85,
+        "description": "Thu phóng nhanh vào khoảnh khắc búa đập xuống khuôn đục"
       },
-      "hook_strength": 0.85,
-      "visual_energy": 0.75,
-      "retention_score": 0.8,
-      "confidence": 0.9,
+      "hook_strength": 0.92,
+      "visual_energy": 0.85,
+      "retention_score": 0.9,
+      "confidence": 0.95,
       "include": true,
       "transition_out": {
         "type": "wipe_left",
@@ -60,40 +61,40 @@
     {
       "scene_id": "scene_002",
       "scene_type": "body",
-      "start_s": 8,
-      "end_s": 30,
-      "duration_s": 5,
-      "title": "Đi qua khu nhà kính",
-      "story_importance": 0.4,
+      "start_s": 20,
+      "end_s": 35,
+      "duration_s": 6,
+      "title": "Đục Lỗ Đối Xứng Miếng Da Nâu",
+      "story_importance": 0.85,
       "key_moments": [
-        15
+        29
       ],
-      "speed_strategy": "jumpcut",
+      "speed_strategy": "adaptive",
       "render_priority": "compress",
-      "subtitle": "",
-      "subtitle_style": "none",
-      "text_position": "bottom",
-      "voice": "",
-      "visual_cue": "Đoạn di chuyển dọc hông nhà kính",
+      "subtitle": "CĂN CHỈNH TỪNG MILIMÉT",
+      "subtitle_style": "minimal_glass_card",
+      "text_position": "top",
+      "voice": "Từng nhát búa cần lực vừa đủ để tạo đường viền sắc nét mà không làm rách xơ da.",
+      "visual_cue": "Người thợ xoay đầu còn lại của mảnh da, căn lề tỉ mỉ rồi gõ búa tạo lỗ vuông đối xứng.",
       "text_effect": {
         "name": "Slide In",
-        "description": "Trượt nhẹ"
+        "description": "Chữ trượt nhẹ từ bên hông vào mượt mà"
       },
       "advanced_effect": {
-        "name": "Fast Motion",
+        "name": "Precision Focus",
         "intent": "satisfying_cut",
-        "mood": "soft",
-        "pacing": "fast",
-        "focus": "reveal",
+        "mood": "satisfying",
+        "pacing": "medium",
+        "focus": "hand_action",
         "camera_motion": "drift",
-        "intensity": 0.5,
-        "description": "Lướt nhanh qua khu vực nhà kính"
+        "intensity": 0.7,
+        "description": "Theo dõi chuyển động bàn tay thợ khi đo vị trí"
       },
-      "hook_strength": 0.3,
-      "visual_energy": 0.4,
-      "retention_score": 0.4,
-      "confidence": 0.85,
-      "include": false,
+      "hook_strength": 0.75,
+      "visual_energy": 0.78,
+      "retention_score": 0.82,
+      "confidence": 0.92,
+      "include": true,
       "transition_out": {
         "type": "fade",
         "duration": 0.2
@@ -102,42 +103,42 @@
     {
       "scene_id": "scene_003",
       "scene_type": "body",
-      "start_s": 30,
-      "end_s": 85,
-      "duration_s": 10,
-      "title": "Khu vực cây trồng rộng lớn",
-      "story_importance": 0.85,
+      "start_s": 45,
+      "end_s": 60,
+      "duration_s": 6,
+      "title": "Tách Phần Da Thừa",
+      "story_importance": 0.8,
       "key_moments": [
-        45
+        51
       ],
-      "speed_strategy": "adaptive",
+      "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "HỆ THỐNG PHỦ BẠT CHUẨN KỸ THUẬT",
+      "subtitle": "TÁCH CHI TIẾT SẮC NÉT",
       "subtitle_style": "minimal_glass_card",
-      "text_position": "top",
-      "voice": "Toàn bộ diện tích được phủ bạt cẩn thận giúp hạn chế cỏ dại và giữ ẩm tối ưu.",
-      "visual_cue": "Góc quay rộng các hàng cây con đâm chồi trên nền bạt",
+      "text_position": "bottom",
+      "voice": "Sau khi gõ, phần da thừa bên trong lỗ đục được nhấc ra gọn gàng.",
+      "visual_cue": "Bàn tay nhấc khuôn đục ra khỏi tấm da nâu và gỡ mẩu da nhỏ đã cắt hoàn thành.",
       "text_effect": {
-        "name": "Slide In",
-        "description": "Trượt mềm mại từ trái sang"
+        "name": "Typewriter",
+        "description": "Gõ từng chữ tạo nét thủ công cổ điển"
       },
       "advanced_effect": {
-        "name": "Smooth Transition",
+        "name": "Detail Showcase",
         "intent": "premium_showcase",
-        "mood": "satisfying",
+        "mood": "premium",
         "pacing": "medium",
         "focus": "texture",
-        "camera_motion": "drift",
-        "intensity": 0.7,
-        "description": "Trôi mượt theo bước chân khảo sát"
+        "camera_motion": "static",
+        "intensity": 0.65,
+        "description": "Cố định ống kính cận cảnh đường cắt da sạch sẽ"
       },
       "hook_strength": 0.7,
-      "visual_energy": 0.7,
-      "retention_score": 0.85,
+      "visual_energy": 0.75,
+      "retention_score": 0.8,
       "confidence": 0.9,
       "include": true,
       "transition_out": {
-        "type": "slide_up",
+        "type": "wipe_right",
         "duration": 0.3
       }
     },
@@ -145,38 +146,80 @@
       "scene_id": "scene_004",
       "scene_type": "body",
       "start_s": 85,
-      "end_s": 95,
-      "duration_s": 6,
-      "title": "Cận cảnh cây giống",
-      "story_importance": 0.95,
+      "end_s": 100,
+      "duration_s": 7,
+      "title": "Thao Tác Trên Tấm Da Xám",
+      "story_importance": 0.88,
       "key_moments": [
-        88
+        92
       ],
-      "speed_strategy": "uniform",
-      "render_priority": "keep",
-      "subtitle": "CÂY GIỐNG PHÁT TRIỂN KHỎE MẠNH",
-      "subtitle_style": "vibrant_yellow_sticker",
-      "text_position": "bottom",
-      "voice": "Từng cây con đều phát triển rất xanh tốt và vững chắc.",
-      "visual_cue": "Tay quan sát và kiểm tra bộ lá của cây giống",
+      "speed_strategy": "adaptive",
+      "render_priority": "compress",
+      "subtitle": "ÁP DỤNG CHO MỌI CHẤT DA",
+      "subtitle_style": "minimal_glass_card",
+      "text_position": "top",
+      "voice": "Chuyển sang phom da tiếp theo, thao tác đục tiếp tục được lặp lại nhịp nhàng và chuẩn xác.",
+      "visual_cue": "Người thợ lấy mảnh da màu xám xước, tiếp tục đặt khuôn inox vuông và gõ búa cao su.",
       "text_effect": {
         "name": "Bounce",
-        "description": "Nảy chữ sinh động"
+        "description": "Chữ nảy nhẹ tạo tiết tấu năng động"
       },
       "advanced_effect": {
-        "name": "Zoom In Focus",
-        "intent": "dramatic_focus",
-        "mood": "premium",
-        "pacing": "slow",
+        "name": "Dynamic Motion",
+        "intent": "energetic_demo",
+        "mood": "energetic",
+        "pacing": "dynamic",
         "focus": "hand_action",
-        "camera_motion": "push_in",
-        "intensity": 0.85,
-        "description": "Tập trung chi tiết vào sức sống của mầm cây"
+        "camera_motion": "pulse",
+        "intensity": 0.75,
+        "description": "Nhịp xung theo từng cú búa đập"
       },
-      "hook_strength": 0.8,
-      "visual_energy": 0.8,
-      "retention_score": 0.9,
-      "confidence": 0.95,
+      "hook_strength": 0.78,
+      "visual_energy": 0.82,
+      "retention_score": 0.85,
+      "confidence": 0.94,
+      "include": true,
+      "transition_out": {
+        "type": "circle_open",
+        "duration": 0.3
+      }
+    },
+    {
+      "scene_id": "scene_005",
+      "scene_type": "body",
+      "start_s": 105,
+      "end_s": 165,
+      "duration_s": 8,
+      "title": "Hoàn Thành Và Cất Dụng Cụ",
+      "story_importance": 0.82,
+      "key_moments": [
+        155
+      ],
+      "speed_strategy": "ramp",
+      "render_priority": "compress",
+      "subtitle": "GỌN GÀNG VÀ CHUYÊN NGHIỆP",
+      "subtitle_style": "minimal_glass_card",
+      "text_position": "bottom",
+      "voice": "Sau khi đục xong các vị trí, thợ thủ công thu dọn khuôn đục gọn gàng vào hộp dụng cụ.",
+      "visual_cue": "Đột đục cuối cùng hoàn tất trên tấm da xám, thợ đóng nắp hộp đục inox chuyên nghiệp.",
+      "text_effect": {
+        "name": "Glow",
+        "description": "Phát sáng nhẹ nhàng tăng vẻ tinh tế"
+      },
+      "advanced_effect": {
+        "name": "Craft Clean",
+        "intent": "satisfying_cut",
+        "mood": "satisfying",
+        "pacing": "fast",
+        "focus": "packaging",
+        "camera_motion": "push_out",
+        "intensity": 0.6,
+        "description": "Lùi ống kính nhẹ khi hộp dụng cụ được đóng lại"
+      },
+      "hook_strength": 0.72,
+      "visual_energy": 0.7,
+      "retention_score": 0.78,
+      "confidence": 0.91,
       "include": true,
       "transition_out": {
         "type": "fade",
@@ -184,50 +227,50 @@
       }
     },
     {
-      "scene_id": "scene_005",
+      "scene_id": "scene_006",
       "scene_type": "conclusion",
-      "start_s": 125,
-      "end_s": 144,
-      "duration_s": 10,
-      "title": "Toàn cảnh đồi núi và khu vườn",
+      "start_s": 168,
+      "end_s": 182,
+      "duration_s": 5,
+      "title": "Trưng Bày Các Mảnh Da Đã Đục",
       "story_importance": 0.9,
       "key_moments": [
-        135
+        175
       ],
-      "speed_strategy": "adaptive",
+      "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "HƯỚNG TỚI MÙA BỘI THU",
+      "subtitle": "SẮC NÉT TRONG TỪNG CHI TIẾT",
       "subtitle_style": "vibrant_yellow_lightning_sticker",
-      "text_position": "top",
-      "voice": "Hi vọng khu vườn nhỏ này sẽ mang lại một mùa thu hoạch thật rực rỡ.",
-      "visual_cue": "Quang cảnh núi đồi và khoảng trời mây xanh ngắt bao quanh vườn",
+      "text_position": "bottom",
+      "voice": "Mỗi đường nét được chăm chút đều chứa đựng tâm huyết của người thợ chế tác.",
+      "visual_cue": "Khung cảnh mặt bàn làm việc ngăn nắp với các tấm da đã hoàn thành bước đục góc sắc nét.",
       "text_effect": {
-        "name": "Glow",
-        "description": "Phát sáng nhẹ nhàng"
+        "name": "Pop-up",
+        "description": "Nổi bật dòng kết thúc gây ấn tượng"
       },
       "advanced_effect": {
-        "name": "Epic Reveal",
-        "intent": "emotional_pause",
-        "mood": "emotional",
+        "name": "Final Showcase",
+        "intent": "premium_showcase",
+        "mood": "premium",
         "pacing": "slow",
         "focus": "reveal",
-        "camera_motion": "push_out",
-        "intensity": 0.75,
-        "description": "Mở rộng góc nhìn toàn cảnh thiên nhiên tươi đẹp"
+        "camera_motion": "drift",
+        "intensity": 0.8,
+        "description": "Quét camera chậm hiển thị toàn bộ thành quả làm việc"
       },
-      "hook_strength": 0.75,
+      "hook_strength": 0.8,
       "visual_energy": 0.75,
-      "retention_score": 0.85,
-      "confidence": 0.92,
+      "retention_score": 0.88,
+      "confidence": 0.96,
       "include": true,
       "transition_out": {
         "type": "fade",
-        "duration": 0.5
+        "duration": 0.4
       }
     }
   ],
   "audio_config": {
-    "bgm_mood": "chill",
+    "bgm_mood": "satisfying",
     "bgm_url": "",
     "enable_sfx": true
   }

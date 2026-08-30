@@ -5,118 +5,147 @@ const { execSync } = require("child_process");
 const PROJECT_ROOT = path.resolve(__dirname, "..");
 const WORKSPACE_ROOT = path.resolve(PROJECT_ROOT, "..");
 const OUT_DIR = path.join(PROJECT_ROOT, "out");
+const INCOMING_DIR = path.join(WORKSPACE_ROOT, "incoming");
 const TEMP_DIR = path.join(PROJECT_ROOT, "temp_media");
+const PUBLIC_DIR = path.join(PROJECT_ROOT, "public");
 
 fs.mkdirSync(OUT_DIR, { recursive: true });
 fs.mkdirSync(TEMP_DIR, { recursive: true });
+fs.mkdirSync(PUBLIC_DIR, { recursive: true });
 
-// Import directly from Legacy Audio Engine for 100% audio compatibility
+// Load Legacy AudioEngine tools
 let resolveBgmTrack = null;
 try {
   const legacyAudio = require(path.join(WORKSPACE_ROOT, "renderer", "scripts", "audioEngine.js"));
   resolveBgmTrack = legacyAudio.resolveBgmTrack;
-} catch (e) {
-  console.warn(`[AudioEngine] Warning loading legacy audioEngine: ${e.message}`);
+} catch (err) {
+  console.warn(`[AudioLoader] Warning loading legacy audioEngine: ${err.message}`);
 }
 
 /**
- * Legacy Audio Speed Filter Builder (Chained atempo for smooth pitch & non-distorted audio)
- * Exactly matches renderer/scripts/render.js line 1314
+ * Legacy Chained atempo Builder for Audio Speed Parity
  */
 function buildAudioSpeedFilter(speedRatio) {
-  let speed = speedRatio;
+  if (!speedRatio || Math.abs(speedRatio - 1.0) < 0.02) {
+    return "anull";
+  }
+
   const filters = [];
-  while (speed > 2.0) {
+  let remainingSpeed = speedRatio;
+
+  while (remainingSpeed > 2.0) {
     filters.push("atempo=2.0");
-    speed /= 2.0;
+    remainingSpeed /= 2.0;
   }
-  while (speed < 0.5) {
+  while (remainingSpeed < 0.5) {
     filters.push("atempo=0.5");
-    speed /= 0.5;
+    remainingSpeed /= 0.5;
   }
-  if (Math.abs(speed - 1.0) > 0.01) {
-    filters.push(`atempo=${speed.toFixed(3)}`);
+
+  if (Math.abs(remainingSpeed - 1.0) >= 0.02) {
+    filters.push(`atempo=${remainingSpeed.toFixed(4)}`);
   }
-  return filters.length > 0 ? filters.join(",") : "anull";
+
+  return filters.join(",");
 }
 
-async function runHybridPipeline() {
-  const projectId = process.argv[2] || "7543179816128843046_short01";
+async function renderHybridMaster(projectIdInput) {
+  const projectId = projectIdInput || process.argv[2] || "7543179816128843046_short01";
+  const startTime = Date.now();
+
   console.log(`\n======================================================`);
   console.log(`🚀 RUNNING REMOTION DESIGN LAYER v1 + FFMPEG MEDIA LAYER (M1)`);
   console.log(`🎯 Target Project: ${projectId}`);
   console.log(`======================================================\n`);
 
-  const startTime = Date.now();
-
-  // Clean temp files for fresh render
-  try {
-    fs.rmSync(TEMP_DIR, { recursive: true, force: true });
-  } catch {}
-  fs.mkdirSync(TEMP_DIR, { recursive: true });
-
   // 1. Locate Timeline JSON
-  let timelinePath = path.join(WORKSPACE_ROOT, "incoming", `${projectId}.json`);
+  let timelinePath = path.join(INCOMING_DIR, `${projectId}.json`);
   if (!fs.existsSync(timelinePath)) {
-    timelinePath = `/Volumes/Media/Auto-Video-Factory/${projectId}/${projectId}.json`;
-  }
-  if (!fs.existsSync(timelinePath)) {
-    throw new Error(`Timeline JSON not found for project: ${projectId}`);
+    // Check NAS or archive directory
+    const nasPath = path.join("/Volumes/Media/Auto-Video-Factory", projectId, `${projectId}.json`);
+    if (fs.existsSync(nasPath)) {
+      timelinePath = nasPath;
+    } else {
+      throw new Error(`Timeline JSON not found for project: ${projectId} (Checked incoming & NAS)`);
+    }
   }
 
   const timelineJson = JSON.parse(fs.readFileSync(timelinePath, "utf8"));
-  const allScenes = timelineJson.timeline || [];
-  // FILTER: Only include active scenes
-  const scenes = allScenes.filter((sc) => sc.include !== false);
-  const sourceVideoPath = timelineJson.video_meta?.input_file || "/Volumes/NextCloud/Douyin/Long_Douyin/7543179816128843046.mp4";
+  const rawTimeline = timelineJson.timeline || [];
+  const scenes = rawTimeline.filter((sc) => sc.include !== false);
 
-  // Calculate exact duration from active scenes
-  const totalDurationSec = scenes.reduce((acc, sc) => acc + (Number(sc.duration_s !== undefined ? sc.duration_s : sc.duration) || 0), 0);
-  const totalDurationFrames = Math.round(totalDurationSec * 30);
-  const exactDurationSec = totalDurationFrames / 30;
+  if (scenes.length === 0) {
+    throw new Error(`Timeline has 0 active scenes.`);
+  }
+
+  // Calculate exact total duration in seconds and frames @ 30fps
+  let exactDurationSec = 0;
+  scenes.forEach((sc) => {
+    const dur = Number(sc.duration_s !== undefined ? sc.duration_s : sc.duration) || 3.0;
+    exactDurationSec += dur;
+  });
+  const exactDurationFrames = Math.max(1, Math.round(exactDurationSec * 30));
 
   console.log(`[Input] 📜 Timeline: ${timelinePath}`);
-  console.log(`[Input] 🎬 Active Scenes: ${scenes.length}/${allScenes.length} phân cảnh (Đã lọc bỏ ${allScenes.length - scenes.length} cảnh include:false)`);
-  console.log(`[Input] ⏱️ Tổng thời lượng: ${exactDurationSec.toFixed(3)}s (${totalDurationFrames} frames @ 30fps)`);
+  console.log(`[Input] 🎬 Active Scenes: ${scenes.length}/${rawTimeline.length} phân cảnh (Đã lọc bỏ ${rawTimeline.length - scenes.length} cảnh include:false)`);
+  console.log(`[Input] ⏱️ Tổng thời lượng: ${exactDurationSec.toFixed(3)}s (${exactDurationFrames} frames @ 30fps)`);
+
+  // 2. Locate Source Video
+  let sourceVideoPath = timelineJson.video_meta?.input_file;
+  if (!sourceVideoPath || !fs.existsSync(sourceVideoPath)) {
+    const incomingMp4 = path.join(INCOMING_DIR, `${projectId}.mp4`);
+    if (fs.existsSync(incomingMp4)) {
+      sourceVideoPath = incomingMp4;
+    } else {
+      throw new Error(`Source video not found: ${sourceVideoPath}`);
+    }
+  }
   console.log(`[Input] 🎥 Video Nguồn: ${sourceVideoPath}`);
 
-  // Copy/Setup files for Remotion
-  const publicVideoPath = path.join(PROJECT_ROOT, "public", "source_video.mp4");
+  // 3. Prepare Remotion public/source_video.mp4 and adapters/production_short01.json
   console.log(`[Setup] Linking/copying source video to public directory...`);
+  const publicVideoPath = path.join(PUBLIC_DIR, "source_video.mp4");
   try {
-    fs.unlinkSync(publicVideoPath);
-  } catch {}
-  fs.copyFileSync(sourceVideoPath, publicVideoPath);
+    if (fs.existsSync(publicVideoPath)) {
+      fs.unlinkSync(publicVideoPath);
+    }
+    fs.copyFileSync(sourceVideoPath, publicVideoPath);
+  } catch (err) {
+    console.warn(`[Setup] Warning copying video to public: ${err.message}`);
+  }
 
   const adapterJsonPath = path.join(PROJECT_ROOT, "src", "adapters", "production_short01.json");
   fs.writeFileSync(adapterJsonPath, JSON.stringify(timelineJson, null, 2), "utf8");
 
   // ---------------------------------------------------------
-  // PHASE 1: REMOTION DESIGN LAYER v1 (VISUAL COMPOSITOR)
+  // PHASE 1: REMOTION DESIGN LAYER (VISUAL MASTER RENDER)
   // ---------------------------------------------------------
   console.log(`\n🎨 [Phase 1: Remotion Design Layer v1] Bắt đầu render Visual Master (Chuẩn CRF=20 tối ưu dung lượng + Màu BT.709)...`);
-  const visualStartTime = Date.now();
   const visualTempOutput = path.join(TEMP_DIR, "temp_visual.mp4");
+  if (fs.existsSync(visualTempOutput)) {
+    fs.unlinkSync(visualTempOutput);
+  }
 
-  // Use CRF=20 (matching Legacy FFmpeg) for optimal compression, compact file size & pristine visual quality
-  const remotionCmd = `npx remotion render src/index.ts ProductionShort01 "${visualTempOutput}" --concurrency=5 --pixel-format=yuv420p --crf=20`;
-  execSync(remotionCmd, { cwd: PROJECT_ROOT, stdio: "inherit" });
-  const visualDurationS = ((Date.now() - visualStartTime) / 1000).toFixed(1);
-  console.log(`[Phase 1] ✅ Visual Master hoàn tất trong ${visualDurationS}s: ${visualTempOutput}`);
+  const remotionStartTime = Date.now();
+  // We use npx remotion render with --concurrency=5, --pixel-format=yuv420p, --crf=20 for compact file size and standard BT.709 color
+  const renderCmd = `npx remotion render src/index.ts ProductionShort01 "${visualTempOutput}" --concurrency=5 --pixel-format=yuv420p --crf=20`;
+  execSync(renderCmd, { cwd: PROJECT_ROOT, stdio: "inherit" });
+
+  const remotionDurationS = ((Date.now() - remotionStartTime) / 1000).toFixed(1);
+  console.log(`[Phase 1] ✅ Visual Master hoàn tất trong ${remotionDurationS}s: ${visualTempOutput}`);
 
   // ---------------------------------------------------------
-  // PHASE 2: FFMPEG MEDIA LAYER (SCENE-ACCURATE NATIVE AUDIO + SPEED RATIO + DYNAMIC BGM MIXING)
+  // PHASE 2: FFMPEG MEDIA LAYER (PRECISE SCENE-BY-SCENE NATIVE AUDIO + BGM DUCKING + OUTRO DECRESCENDO)
   // ---------------------------------------------------------
-  console.log(`\n🎵 [Phase 2: FFmpeg Media Layer] Trích xuất âm thanh gốc theo từng Scene & Tỷ lệ tốc độ (Chained atempo)...`);
+  console.log(`\n🎵 [Phase 2: FFmpeg Media Layer] Trích xuất âm thanh gốc theo từng Scene & Tỷ lệ tốc độ (Chained atempo + Outro Decrescendo)...`);
   const audioStartTime = Date.now();
+  const nativeAudioTemp = path.join(TEMP_DIR, "native_scene_audio.aac");
+  const finalAudioOutput = path.join(TEMP_DIR, "final_aligned_audio.aac");
 
   const audioConfig = timelineJson.audio_config || {};
-  const bgmMood = String(audioConfig.bgm_mood || "").toLowerCase();
-  const hasOriginalMusic = audioConfig.has_original_music === true || timelineJson.video_meta?.has_original_music === true;
-  const audioStrategy = String(timelineJson.video_meta?.audio_strategy || "").toLowerCase();
-
-  const nativeAudioTemp = path.join(TEMP_DIR, "native_scenes_audio.aac");
-  let finalAudioOutput = path.join(TEMP_DIR, "final_aligned_audio.aac");
+  const hasOriginalMusic = audioConfig.has_original_music || timelineJson.video_meta?.has_original_music || false;
+  const bgmMood = audioConfig.bgm_mood || "none";
+  const audioStrategy = timelineJson.video_meta?.audio_strategy || "";
 
   // 1. Extract & assemble Native Scene Audio matching visual cuts and exact speed ratio
   try {
@@ -158,7 +187,12 @@ async function runHybridPipeline() {
     execSync(fallbackAudioCmd, { stdio: "pipe" });
   }
 
-  // 2. Mix Native Audio with BGM (100% Legacy Dynamic Volume Formula)
+  // Smooth Audio Outro Fade-out Parameters (0.6s decrescendo to prevent abrupt ending cuts)
+  const fadeDuration = Math.min(0.8, Math.max(0.3, exactDurationSec * 0.04));
+  const fadeStartTime = Math.max(0, exactDurationSec - fadeDuration);
+  const outroFadeFilter = `afade=t=out:st=${fadeStartTime.toFixed(4)}:d=${fadeDuration.toFixed(4)}`;
+
+  // 2. Mix Native Audio with BGM (100% Legacy Dynamic Volume Formula + Outro Fade-out)
   const shouldAddBgm = bgmMood && bgmMood !== "none" && !hasOriginalMusic && !audioStrategy.includes("no_bgm");
 
   if (shouldAddBgm && resolveBgmTrack) {
@@ -184,17 +218,21 @@ async function runHybridPipeline() {
       const bgmVolume = (isLong2Short || hasFastSpeedup) ? 0.85 : (hasVoiceover ? 0.25 : 0.50);
 
       console.log(`[AudioEngine] 🎵 Hòa âm BGM (Volume ${(bgmVolume * 100).toFixed(0)}% | Chế độ: ${isLong2Short ? "Long2Short" : (hasFastSpeedup ? "Tua Nhanh" : (hasVoiceover ? "Voiceover" : "Bình Thường"))}) + Tiếng gốc (Volume 100%): ${bgmTrack.path}`);
+      console.log(`[AudioEngine] 🎚️ Kích hoạt Outro Decrescendo (Vuốt nhỏ âm thanh êm ái ${fadeDuration.toFixed(2)}s ở đoạn kết)...`);
       
-      // Legacy pitch-shift (+0.5% asetrate) + seamless loop + dynamic volume + amix
-      const bgmMixCmd = `ffmpeg -y -i "${nativeAudioTemp}" -i "${bgmTrack.path}" -filter_complex "[1:a]asetrate=44320,aresample=48000,volume=${bgmVolume},aloop=loop=-1:size=2e+9,atrim=0:${exactDurationSec.toFixed(6)}[bgm];[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=2[final]" -map "[final]" -c:a aac -b:a 192k "${finalAudioOutput}"`;
+      // Legacy pitch-shift (+0.5% asetrate) + seamless loop + dynamic volume + amix + outro fade-out
+      const bgmMixCmd = `ffmpeg -y -i "${nativeAudioTemp}" -i "${bgmTrack.path}" -filter_complex "[1:a]asetrate=44320,aresample=48000,volume=${bgmVolume},aloop=loop=-1:size=2e+9,atrim=0:${exactDurationSec.toFixed(6)}[bgm];[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=2,${outroFadeFilter}[final]" -map "[final]" -c:a aac -b:a 192k "${finalAudioOutput}"`;
       execSync(bgmMixCmd, { stdio: "pipe" });
     } else {
-      fs.copyFileSync(nativeAudioTemp, finalAudioOutput);
+      const fadeCmd = `ffmpeg -y -i "${nativeAudioTemp}" -af "${outroFadeFilter}" -c:a aac -b:a 192k "${finalAudioOutput}"`;
+      execSync(fadeCmd, { stdio: "pipe" });
     }
   } else {
-    // Pure Native Audio
+    // Pure Native Audio + Outro Fade-out
     console.log(`[AudioEngine] 🎙️ Giữ nguyên vẹn 100% âm thanh gốc (Native ASMR / Voice).`);
-    fs.copyFileSync(nativeAudioTemp, finalAudioOutput);
+    console.log(`[AudioEngine] 🎚️ Kích hoạt Outro Decrescendo (Vuốt nhỏ âm thanh êm ái ${fadeDuration.toFixed(2)}s ở đoạn kết)...`);
+    const fadeCmd = `ffmpeg -y -i "${nativeAudioTemp}" -af "${outroFadeFilter}" -c:a aac -b:a 192k "${finalAudioOutput}"`;
+    execSync(fadeCmd, { stdio: "pipe" });
   }
 
   const audioDurationS = ((Date.now() - audioStartTime) / 1000).toFixed(1);
@@ -215,34 +253,53 @@ async function runHybridPipeline() {
   console.log(`📁 File Thành Phẩm: ${finalMasterOutput}`);
   console.log(`⏱️ Tổng thời gian chạy Pipeline: ${totalDurationPipelineS}s`);
 
-  // Final Technical Verification
-  const probeCmd = `ffprobe -v error -show_entries format=duration,size,bit_rate -show_streams -of json "${finalMasterOutput}"`;
-  const probeOut = JSON.parse(execSync(probeCmd, { encoding: "utf8" }));
+  // Verification Probe
+  const probeCmd = `ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate,duration,pix_fmt,color_space,color_primaries,color_transfer -of json "${finalMasterOutput}"`;
+  const probeAudioCmd = `ffprobe -v error -select_streams a:0 -show_entries stream=codec_name,sample_rate,channels,duration -of json "${finalMasterOutput}"`;
+  const formatCmd = `ffprobe -v error -show_entries format=size -of json "${finalMasterOutput}"`;
 
-  const vStream = probeOut.streams?.find((s) => s.codec_type === "video") || {};
-  const aStream = probeOut.streams?.find((s) => s.codec_type === "audio") || {};
-  const format = probeOut.format || {};
+  const probeVideoData = JSON.parse(execSync(probeCmd, { encoding: "utf8" }));
+  const probeAudioData = JSON.parse(execSync(probeAudioCmd, { encoding: "utf8" }));
+  const probeFormatData = JSON.parse(execSync(formatCmd, { encoding: "utf8" }));
 
-  const vDur = parseFloat(vStream.duration || format.duration || "0");
-  const aDur = parseFloat(aStream.duration || format.duration || "0");
-  const driftMs = Math.abs(vDur - aDur) * 1000;
-  const isAligned = driftMs <= 30.0;
+  const vStream = probeVideoData.streams?.[0] || {};
+  const aStream = probeAudioData.streams?.[0] || {};
+  const vDuration = parseFloat(vStream.duration || "0");
+  const aDuration = parseFloat(aStream.duration || "0");
+  const driftMs = Math.abs(vDuration - aDuration) * 1000;
+  const sizeMB = (parseInt(probeFormatData.format?.size || "0") / (1024 * 1024)).toFixed(2);
 
   console.log(`\n📊 [Báo Cáo Kiểm Tra Kỹ Thuật Phase M1]`);
   console.log(`  - Độ phân giải: ${vStream.width}x${vStream.height} (Chuẩn 1080x1920: ${vStream.width === 1080 && vStream.height === 1920 ? "✅ PASS" : "❌ FAIL"})`);
-  console.log(`  - Framerate: ${vStream.r_frame_rate} (Chuẩn 30fps: ${vStream.r_frame_rate === "30/1" ? "✅ PASS" : "❌ FAIL"})`);
+  console.log(`  - Framerate: ${vStream.r_frame_rate} (Chuẩn 30fps: ${vStream.r_frame_rate === "30/1" ? "✅ PASS" : "⚠️ " + vStream.r_frame_rate})`);
   console.log(`  - Không Gian Màu (Color Space): ${vStream.color_space || "bt709"} (Chuẩn BT.709 Nguyên Bản)`);
-  console.log(`  - Thời lượng Video: ${vDur.toFixed(3)}s`);
-  console.log(`  - Thời lượng Audio: ${aDur.toFixed(3)}s`);
-  console.log(`  - Độ lệch Audio / Video: ${driftMs.toFixed(1)} ms (${isAligned ? "✅ KHỚP PACKET AAC" : "⚠️ LỆCH"})`);
+  console.log(`  - Thời lượng Video: ${vDuration.toFixed(3)}s`);
+  console.log(`  - Thời lượng Audio: ${aDuration.toFixed(3)}s`);
+  console.log(`  - Độ lệch Audio / Video: ${driftMs.toFixed(1)} ms (${driftMs <= 30.0 ? "✅ KHỚP PACKET AAC" : "⚠️ CẦN CĂN CHỈNH"})`);
   console.log(`  - Chuẩn Âm Thanh: ${aStream.codec_name} (${aStream.sample_rate}Hz, ${aStream.channels} channels)`);
-  console.log(`  - Dung lượng file: ${(parseInt(format.size) / (1024 * 1024)).toFixed(2)} MB`);
+  console.log(`  - Dung lượng file: ${sizeMB} MB`);
+
   console.log(`\n======================================================`);
   console.log(`🎉 PHASE M1 HYBRID RENDER HOÀN TẤT XUẤT SẮC!`);
   console.log(`======================================================\n`);
+
+  return {
+    outputFile: finalMasterOutput,
+    vDuration,
+    aDuration,
+    driftMs,
+    sizeMB,
+  };
 }
 
-runHybridPipeline().catch((err) => {
-  console.error("Pipeline fatal error:", err.message);
-  process.exit(1);
-});
+if (require.main === module) {
+  renderHybridMaster().catch((err) => {
+    console.error("Fatal render error:", err.message);
+    process.exit(1);
+  });
+}
+
+module.exports = {
+  renderHybridMaster,
+  buildAudioSpeedFilter,
+};

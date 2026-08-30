@@ -10,6 +10,7 @@ const MANIFEST_DIR = path.join(OUT_DIR, "manifests");
 const INCOMING_DIR = path.join(WORKSPACE_ROOT, "incoming");
 const NAS_MOUNT_DIR = "/Volumes/Media/Auto-Video-Factory";
 const LOCAL_ARCHIVE_DIR = path.join(WORKSPACE_ROOT, "archive");
+const STATS_PATH = path.join(WORKSPACE_ROOT, "effects", "effect_success_stats.json");
 
 fs.mkdirSync(MANIFEST_DIR, { recursive: true });
 
@@ -33,6 +34,48 @@ function resolveArchiveDir() {
     }
   }
   return LOCAL_ARCHIVE_DIR;
+}
+
+function updateEffectSuccessStats(timelineJson, isSuccess) {
+  if (!timelineJson || !Array.isArray(timelineJson.timeline)) return;
+  try {
+    let stats = {};
+    if (fs.existsSync(STATS_PATH)) {
+      stats = JSON.parse(fs.readFileSync(STATS_PATH, "utf8"));
+    }
+
+    const scenes = timelineJson.timeline.filter((s) => s.include !== false);
+    for (const sc of scenes) {
+      // 1. Track Subtitle Style
+      if (sc.subtitle_style && sc.subtitle_style !== "none") {
+        const key = `subtitle_style:${sc.subtitle_style}`;
+        if (!stats[key]) stats[key] = { success: 0, fail: 0 };
+        if (isSuccess) stats[key].success++;
+        else stats[key].fail++;
+      }
+
+      // 2. Track Transition Out
+      if (sc.transition_out && sc.transition_out.type) {
+        const key = `transition_out:${sc.transition_out.type}`;
+        if (!stats[key]) stats[key] = { success: 0, fail: 0 };
+        if (isSuccess) stats[key].success++;
+        else stats[key].fail++;
+      }
+
+      // 3. Track Camera Motion / Advanced Effect
+      const effName = sc.advanced_effect?.name || sc.camera_motion;
+      if (effName && effName !== "none") {
+        const key = `advanced_effect:${effName}`;
+        if (!stats[key]) stats[key] = { success: 0, fail: 0 };
+        if (isSuccess) stats[key].success++;
+        else stats[key].fail++;
+      }
+    }
+
+    fs.writeFileSync(STATS_PATH, JSON.stringify(stats, null, 2), "utf8");
+  } catch (err) {
+    console.warn(`[EffectStats] WARN: Lỗi cập nhật effect_success_stats.json: ${err.message}`);
+  }
 }
 
 function collectEnvironmentDiagnostics() {
@@ -92,28 +135,17 @@ function probeMasterMedia(outputFilePath) {
   }
 }
 
-function resolveLatestProjectId() {
-  if (fs.existsSync(INCOMING_DIR)) {
-    const jsonFiles = fs
-      .readdirSync(INCOMING_DIR)
-      .filter((f) => f.endsWith(".json") && !f.startsWith("."))
-      .map((f) => ({
-        name: f,
-        time: fs.statSync(path.join(INCOMING_DIR, f)).mtimeMs,
-      }))
-      .sort((a, b) => b.time - a.time);
-
-    if (jsonFiles.length > 0) {
-      return jsonFiles[0].name.replace(".json", "");
-    }
-  }
-  return "7543179816128843046_short01";
+function getPendingProjectList() {
+  if (!fs.existsSync(INCOMING_DIR)) return [];
+  return fs
+    .readdirSync(INCOMING_DIR)
+    .filter((f) => f.endsWith(".json") && !f.startsWith("."))
+    .map((f) => f.replace(".json", ""))
+    .sort();
 }
 
-async function orchestrateRender(projectIdInput) {
-  const projectId = projectIdInput || process.argv[2] || resolveLatestProjectId();
+async function orchestrateRenderSingle(projectId) {
   const renderEngine = (process.env.RENDER_ENGINE || "hybrid").toLowerCase().trim();
-
   const startTime = Date.now();
   const diagnostics = collectEnvironmentDiagnostics();
 
@@ -180,18 +212,20 @@ async function orchestrateRender(projectIdInput) {
       }
     }
 
+    // Secondary: Automatic Fallback to Legacy if Hybrid Fails
     if (!renderSuccess) {
-      console.error(`\n[Orchestrator] 🚨 HYBRID ENGINE FAILED SAU ${maxAttempts} LẦN THỬ!`);
-      console.log(`[Orchestrator] 🛡️ KÍCH HOẠT FALLBACK AN TOÀN: Chuyển giao sang FFmpeg Legacy Renderer...`);
+      console.warn(`\n[Orchestrator] 🚨 HYBRID ENGINE FAILED SAU ${maxAttempts} LẦN THỬ!`);
+      console.log(`[Orchestrator] 🔄 TỰ ĐỘNG CHUYỂN HƯỚNG SANG FFmpeg Legacy Lifeboat Fallback...`);
       fallbackTriggered = true;
-      engineUsed = "legacy";
-      const legacyScript = path.join(WORKSPACE_ROOT, "renderer", "scripts", "render.js");
+      engineUsed = "legacy_fallback";
+
       try {
+        const legacyScript = path.join(WORKSPACE_ROOT, "renderer", "scripts", "render.js");
         execSync(`node "${legacyScript}" "${projectId}"`, { stdio: "inherit" });
         finalOutputFile = path.join(projectArchiveDir, `${projectId}.mp4`);
-      } catch (fallbackErr) {
+      } catch (legacyErr) {
+        console.error(`[Orchestrator] ❌ FATAL: Cả Hybrid và Legacy Fallback đều thất bại: ${legacyErr.message}`);
         status = "FAILED";
-        console.error(`[Orchestrator] 💥 FATAL: Cả 2 Engine đều thất bại: ${fallbackErr.message}`);
       }
     }
   }
@@ -249,7 +283,7 @@ async function orchestrateRender(projectIdInput) {
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), "utf8");
 
   // -------------------------------------------------------------
-  // POST-RENDER: ARCHIVE, GOOGLE SHEETS SYNC & CLEANUP
+  // POST-RENDER: ARCHIVE, GOOGLE SHEETS SYNC, EFFECTS ANALYTICS & CLEANUP
   // -------------------------------------------------------------
   if (status === "SUCCESS") {
     console.log(`\n📦 [Post-Render 1/3] Đẩy file thành phẩm về Thư mục NAS/Archive: ${projectArchiveDir}...`);
@@ -281,9 +315,9 @@ async function orchestrateRender(projectIdInput) {
       console.warn(`[Post-Render] WARN: Lỗi sao chép file sang archive: ${e.message}`);
     }
 
-    // 5. Update Google Sheets
+    // 5. Update Google Sheets (Auto-Video-Factory tab + Video-Factory-EFFECTS tab)
     if (googleSheetsSync && timelineJson) {
-      console.log(`\n📊 [Post-Render 2/3] Cập nhật tiến độ lên Google Sheets (Tab Auto-Video-Factory)...`);
+      console.log(`\n📊 [Post-Render 2/3] Cập nhật tiến độ lên Google Sheets (Tab Auto-Video-Factory & Video-Factory-EFFECTS)...`);
       try {
         const meta = timelineJson.video_meta || {};
         const hashtagsStr = Array.isArray(meta.hashtags) ? meta.hashtags.map(t => t.startsWith("#") ? t : `#${t}`).join(" ") : "";
@@ -299,12 +333,16 @@ async function orchestrateRender(projectIdInput) {
           outputFile: path.join(projectArchiveDir, `${projectId}.mp4`),
           renderedAt: new Date().toLocaleString("vi-VN"),
         });
+
+        // Record effect stats & update Video-Factory-EFFECTS tab
+        updateEffectSuccessStats(timelineJson, true);
+        await googleSheetsSync.syncAnalyticsToSheet();
       } catch (sheetErr) {
         console.warn(`[GoogleSheetSync] WARN: Lỗi đồng bộ Google Sheets: ${sheetErr.message}`);
       }
     }
 
-    // 6. Cleanup Workspace & Incoming Debris
+    // 6. Cleanup Workspace & Incoming Debris for THIS project
     console.log(`\n🧹 [Post-Render 3/3] Tiến hành dọn dẹp file tạm và rác ổ đĩa...`);
     try {
       // Remove incoming JSON if it exists
@@ -320,20 +358,18 @@ async function orchestrateRender(projectIdInput) {
       }
 
       // Remove incoming WAV voices
-      const incomingFiles = fs.readdirSync(INCOMING_DIR);
-      for (const f of incomingFiles) {
-        if (f.startsWith(`${projectId}_`) && f.endsWith(".wav")) {
-          fs.unlinkSync(path.join(INCOMING_DIR, f));
+      if (fs.existsSync(INCOMING_DIR)) {
+        const incomingFiles = fs.readdirSync(INCOMING_DIR);
+        for (const f of incomingFiles) {
+          if (f.startsWith(`${projectId}_`) && f.endsWith(".wav")) {
+            fs.unlinkSync(path.join(INCOMING_DIR, f));
+          }
         }
       }
 
-      // Clean temp_concat
-      const tempConcatDir = path.join(INCOMING_DIR, "temp_concat");
-      if (fs.existsSync(tempConcatDir)) {
-        for (const entry of fs.readdirSync(tempConcatDir)) {
-          if (entry === ".DS_Store") continue;
-          fs.rmSync(path.join(tempConcatDir, entry), { recursive: true, force: true });
-        }
+      // Clean local out MP4 to save disk
+      if (fs.existsSync(finalOutputFile) && finalOutputFile.startsWith(OUT_DIR)) {
+        try { fs.unlinkSync(finalOutputFile); } catch {}
       }
 
       // Clean public/source_video.mp4
@@ -342,7 +378,7 @@ async function orchestrateRender(projectIdInput) {
         fs.unlinkSync(publicVideo);
       }
 
-      console.log(`[Cleanup] ✨ Đã dọn dẹp sạch sẽ toàn bộ file tạm và rác bộ nhớ!`);
+      console.log(`[Cleanup] ✨ Đã dọn dẹp sạch sẽ toàn bộ file tạm của dự án ${projectId}!`);
     } catch (cleanErr) {
       console.warn(`[Cleanup] WARN: Lỗi dọn dẹp: ${cleanErr.message}`);
     }
@@ -360,14 +396,56 @@ async function orchestrateRender(projectIdInput) {
   return manifest;
 }
 
+async function orchestrateMain() {
+  const explicitProject = process.argv[2];
+  if (explicitProject) {
+    await orchestrateRenderSingle(explicitProject);
+    return;
+  }
+
+  const pendingProjects = getPendingProjectList();
+  if (pendingProjects.length === 0) {
+    console.log(`[Orchestrator] ℹ️ Không tìm thấy kịch bản JSON nào đang chờ trong incoming/. Chạy dự án mẫu...`);
+    await orchestrateRenderSingle("7543179816128843046_short01");
+    return;
+  }
+
+  console.log(`\n======================================================`);
+  console.log(`📦 BATCH QUEUE DETECTED: Phát hiện ${pendingProjects.length} dự án đang chờ trong incoming/`);
+  console.log(`🎯 Danh sách: ${pendingProjects.join(", ")}`);
+  console.log(`======================================================\n`);
+
+  for (let i = 0; i < pendingProjects.length; i++) {
+    const projId = pendingProjects[i];
+    console.log(`\n======================================================`);
+    console.log(`🎬 [TIẾN TRÌNH HÀNG ĐỢI ${i + 1}/${pendingProjects.length}] Bắt đầu render: ${projId}`);
+    console.log(`======================================================`);
+    await orchestrateRenderSingle(projId);
+  }
+
+  // Clean temp_concat after entire batch completes
+  const tempConcatDir = path.join(INCOMING_DIR, "temp_concat");
+  if (fs.existsSync(tempConcatDir)) {
+    for (const entry of fs.readdirSync(tempConcatDir)) {
+      if (entry === ".DS_Store") continue;
+      try { fs.rmSync(path.join(tempConcatDir, entry), { recursive: true, force: true }); } catch {}
+    }
+  }
+
+  console.log(`\n======================================================`);
+  console.log(`🎉 ĐÃ HOÀN TẤT RENDER TOÀN BỘ ${pendingProjects.length} DỰ ÁN TRONG HÀNG ĐỢI!`);
+  console.log(`======================================================\n`);
+}
+
 if (require.main === module) {
-  orchestrateRender().catch((err) => {
+  orchestrateMain().catch((err) => {
     console.error("Fatal Orchestrator error:", err.message);
     process.exit(1);
   });
 }
 
 module.exports = {
-  orchestrateRender,
+  orchestrateRender: orchestrateRenderSingle,
+  orchestrateMain,
   collectEnvironmentDiagnostics,
 };

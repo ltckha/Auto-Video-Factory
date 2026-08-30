@@ -96,6 +96,11 @@ $$\text{Design Primitive} \longrightarrow \text{Motion Registry} \longrightarrow
 | **7. Bảo Toàn Chuẩn Màu Gốc BT.709 True-Color** | Gỡ bỏ các lớp phủ đục màn hình (`WarmLightLeakOverlay`, `FilmGrainOverlay`), ép chuẩn màu `--pixel-format=yuv420p` và nhúng VUI Metadata `h264_metadata` (BT.709 + Limited TV Range). | Màu sắc video sau render trong trẻo, tươi tắn, không bị bợt hay lệch ma trận BT.470BG. |
 | **8. Tối Ưu Hóa Chuẩn Nén Dung Lượng (`CRF=20`)** | Tích hợp tham số nén `--crf=20` của Render cũ vào Remotion Render CLI. | Giảm $70\% - 80\%$ dung lượng video ($240\text{MB} \rightarrow 20-35\text{MB}$), render nhanh hơn và tối ưu tải lên MXH. |
 | **9. Âm Lượng Động & Audio Ducking Chuẩn Legacy** | Tích hợp công thức `(isLong2Short \|\| hasFastSpeedup) ? 0.85 : (hasVoiceover ? 0.25 : 0.50)` của Render Cũ. | Nhạc BGM tự động lùi xuống $25\%$ khi có tiếng người nói (Voiceover) để thoại to rõ nét, và tự đẩy lên $50\%-85\%$ khi quay cảnh/tua nhanh để tạo sự sôi động. |
+| **10. Hàng Đợi Render Hàng Loạt (Batch Queue Runner)** | Nâng cấp `render_orchestrator.js` tự động phát hiện và xếp hàng render toàn bộ $N$ kịch bản JSON (`short01`, `short02`, `short03`) trong `incoming/`. | Giải quyết triệt để vấn đề chỉ render 1 short khi xuất chùm video ngắn. |
+| **11. Chuyển Cảnh Toàn Diện Remotion `TransitionSeries`** | Tích hợp `@remotion/transitions` với bộ giải mã `resolveTransitionPresentation` (`fade`, `wipe` 4 hướng, `slide` 4 hướng, `flip` 3D). | Mượt mà $100\%$ không lo giật lag hay văng lỗi khi AI yêu cầu chuyển cảnh. |
+| **12. Bù Trừ Thời Lượng Chuyển Cảnh Triệt Tiêu Frame Đen** | Bổ sung công thức `sequenceDurationInFrames = durationInFrames + transDurFrames` trong `FullTimelineVideo.tsx`. | Loại bỏ hoàn toàn hiện tượng hụt hình / lộ màn hình đen ở cuối video. |
+| **13. Vuốt Nhỏ Âm Thanh Kết Bài (Smooth Outro Decrescendo)** | Tích hợp bộ lọc `afade=t=out:st=END-0.6:d=0.6` vào `render_hybrid.js`. | Âm thanh thực địa và BGM êm dần về 0dB ở 0.6s cuối, triệt tiêu hoàn toàn tiếng ngắt "rụp". |
+| **14. Tự Động Ghi Nhận Tab `Video-Factory-EFFECTS`** | Thống kê số lần sử dụng thành công của `subtitle_style`, `transition_out`, `camera_motion` vào `effect_success_stats.json` và đồng bộ trực tiếp lên Google Sheets API v4 sau mỗi lần render. | Giữ nguyên vẹn toàn bộ hệ thống phân tích dữ liệu hiệu ứng cho người dùng. |
 
 ---
 
@@ -113,6 +118,10 @@ M6.2  Real Production Learning Loop    🟢 ACTIVE
       ├─ Dynamic BGM Volume Ducking    ✅ COMPLETE (100% Legacy Formula)
       ├─ True-Color BT.709 & Overlays  ✅ COMPLETE (Pristine Camera Colors)
       ├─ Compact File Size Compression ✅ COMPLETE (CRF=20 Optimization)
+      ├─ Batch Queue Multi-Shorts      ✅ COMPLETE (short01, short02, short03 queue)
+      ├─ TransitionSeries & Coverage   ✅ COMPLETE (Fade, Wipe, Slide, Flip & Zero Black Frames)
+      ├─ Smooth Outro Audio Decrescendo✅ COMPLETE (afade=t=out 0.6s)
+      ├─ Effects Analytics Tab Sync    ✅ COMPLETE (Video-Factory-EFFECTS Tab)
       ├─ Real Production Videos        🟢 Ongoing (Chạy video hàng ngày)
       └─ Progressive Enhancement       🟢 Ongoing (Đắp thêm Tier 2 khi cần)
 

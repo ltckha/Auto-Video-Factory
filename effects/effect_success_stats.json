@@ -69,7 +69,7 @@
     "fail": 0
   },
   "transition_out:fade": {
-    "success": 105,
+    "success": 109,
     "fail": 0
   },
   "advanced_effect:zoomin": {
@@ -155,5 +155,93 @@
   "subtitle_style:vibrantyellowsticker": {
     "success": 17,
     "fail": 1
+  },
+  "subtitle_style:vibrant_yellow_sticker": {
+    "success": 2,
+    "fail": 0
+  },
+  "transition_out:wipe_left": {
+    "success": 3,
+    "fail": 0
+  },
+  "advanced_effect:Satisfying Timewarp": {
+    "success": 1,
+    "fail": 0
+  },
+  "subtitle_style:minimal_glass_card": {
+    "success": 11,
+    "fail": 0
+  },
+  "transition_out:slide_up": {
+    "success": 2,
+    "fail": 0
+  },
+  "advanced_effect:Dramatic Focus": {
+    "success": 1,
+    "fail": 0
+  },
+  "transition_out:wipe_right": {
+    "success": 3,
+    "fail": 0
+  },
+  "advanced_effect:Precision Showcase": {
+    "success": 1,
+    "fail": 0
+  },
+  "transition_out:circle_open": {
+    "success": 3,
+    "fail": 0
+  },
+  "advanced_effect:Luxury Focus": {
+    "success": 1,
+    "fail": 0
+  },
+  "subtitle_style:vibrant_yellow_lightning_sticker": {
+    "success": 2,
+    "fail": 0
+  },
+  "advanced_effect:Epic Reveal Outro": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:texture_reveal": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:hardware_focus": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:ruler_alignment": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:final_layout": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Satisfying Impact": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Precision Focus": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Detail Showcase": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Dynamic Motion": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Craft Clean": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Final Showcase": {
+    "success": 1,
+    "fail": 0
   }
 }
