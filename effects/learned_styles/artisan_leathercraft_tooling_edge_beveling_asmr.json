@@ -1,0 +1,71 @@
+{
+  "style_name": "Artisan Leathercraft Tooling & Edge Beveling ASMR",
+  "category_niche": "mens_fashion___footwear",
+  "source_video_id": "gAGETNdTtJg",
+  "source_url": "http://www.youtube.com/watch?v=gAGETNdTtJg",
+  "source_title": "Leather ASMR",
+  "source_channel": "MorrisonMade Leather",
+  "style_dna": {
+    "pacing": {
+      "average_scene_duration_s": 2.2,
+      "pacing_speed": "rhythmic_artisan_craft_flow",
+      "rhythm_type": "modular_multi_tool_action_cuts"
+    },
+    "hook_3s": {
+      "strategy": "Close-up knife unsheathing action: Drawing a razor-sharp skiving blade from its carbon wooden sheath with audible scraping friction and a bold title badge ('Leather ASMR').",
+      "energy": "high_tactile_curiosity",
+      "focus": "artisan_tool_readiness"
+    },
+    "color_grading": {
+      "lighting": "bright_studio_tabletop_diffused",
+      "color_palette": ["#8D5524", "#4E2716", "#C68B59", "#D4AF37"],
+      "contrast": "rich_leather_grain_vs_metallic_steel_and_brass",
+      "mood": "satisfying_bespoke_workshop_luxury"
+    },
+    "typography_and_cards": {
+      "layout": "centered_bottom_left_badge_hook",
+      "style": "clean_cyan_rounded_badge_white_text",
+      "emphasis": "zero_overlay_during_crafting_sequence"
+    },
+    "micro_effects": [
+      {
+        "name": "Sheath Unsheathe Blade Glide",
+        "camera_motion": "push_in",
+        "intent": "reveal_impact",
+        "focus": "product",
+        "intensity": 0.85,
+        "timing_s": "0.0s - 2.0s"
+      },
+      {
+        "name": "Edge Bevel Ribbon Curl",
+        "camera_motion": "drift",
+        "intent": "precision_craft",
+        "focus": "texture",
+        "intensity": 0.8,
+        "timing_s": "19.0s - 25.0s"
+      },
+      {
+        "name": "Percussive Rivet Mallet Snap",
+        "camera_motion": "snap",
+        "intent": "actioncut",
+        "focus": "action",
+        "intensity": 0.9,
+        "timing_s": "39.0s - 43.0s"
+      }
+    ],
+    "audio_and_asmr": {
+      "has_bgm": false,
+      "sfx_cues": [
+        "metallic blade unsheathing friction",
+        "crisp veg-tan leather fiber slicing",
+        "brass edge groover glide sound",
+        "heavy hydraulic press stamping thud",
+        "continuous edge beveling strand scraping",
+        "rotary blade roll cut on acrylic ruler",
+        "percussive mallet on steel setter strikes",
+        "thread singe flame snap"
+      ],
+      "dominant_frequency": "ultra_crisp_leather_tooling_acoustics"
+    }
+  }
+}

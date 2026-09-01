@@ -61,9 +61,20 @@ SINGLE-PASS RAW INGREDIENTS & INTENT DIRECTIVES (ĐẠO DIỄN AI NỘI DUNG)
   - **`semantic_phrases`:** Tách câu thoại thành các Cụm Ý ngắn có ý nghĩa.
 
 ━━━━━━━━━━━━━━━━━━
-TEXT POSITIONING, SUBTITLE STYLES & DYNAMIC DISPLAY TIMING
+TEXT POSITIONING, SUBTITLE STYLES, `\n` LINE BREAKS & DYNAMIC DISPLAY TIMING
 ━━━━━━━━━━━━━━━━━━
-- Subtitle ngắn (3-8 từ), nhịp nhanh, cảm xúc mạnh.
+- Subtitle viết **IN HOA HOÀN TOÀN**, ngắn gọn (3-8 từ), nhịp nhanh, cảm xúc mạnh.
+- **✨ BẮT BUỘC CHÈN `\n` ĐỂ PHÂN TÁCH DÒNG CÓ NHỊP ĐIỆU (TYPOGRAPHY HIERARCHY):**
+  - Mọi subtitle từ 4 từ trở lên hoặc $> 14$ ký tự **BẮT BUỘC chèn ký tự `\n`** để chia thành 2 dòng bất đối xứng (dòng ngắn đắt giá sẽ được phóng to nổi bật):
+    - **Dòng 1:** Chủ đề / Thao tác chính (2-3 từ).
+    - **Dòng 2:** Điểm nhấn cảm xúc / Punchline / Từ đắt giá (1-2 từ ngắn để render chữ to hơn cực kỳ bắt mắt).
+  - *Ví dụ chuẩn:*
+    - `"LƯỢN PHỐ ĐÊM\nCỰC CHILL"`
+    - `"CÂY GIỐNG MỚI\nBUNG ĐỌT KHỎE"`
+    - `"ĐỤC LỖ DA\nCỰC THỎA MÃN"`
+    - `"BÍ QUYẾT\nLÀM DA THỦ CÔNG"`
+    - `"TÁCH PHÔI DA\nCHUẨN TỪNG MILI"`
+  - 🚫 TUYỆT ĐỐI CẤM viết 1 dòng dài lê thê không có `\n`.
 - **Thời gian hiển thị thông minh:** Thẻ Card/Subtitle chỉ xuất hiện trong **2.0s – 3.0s đầu của phân cảnh** để người xem kịp nắm ý chính rồi tự động mờ tắt, trả lại 100% khung hình thông thoáng cho các chi tiết thao tác.
 - **`text_position`:** Vị trí phụ đề. Chọn một trong: `top`, `center`, `bottom`.
 - **`text_effect.name`:** Chọn 1 trong các hiệu ứng múa chữ:

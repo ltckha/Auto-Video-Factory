@@ -1,0 +1,67 @@
+{
+  "style_name": "Satisfying Sneaker Sole Peel Protector Showcase",
+  "category_niche": "product_showcase",
+  "source_video_id": "bGSsQzQZbWw",
+  "source_url": "http://www.youtube.com/watch?v=bGSsQzQZbWw",
+  "source_title": "Amazon SneakerSoul Sole Protector 👀😳",
+  "source_channel": "Sneaker Soul",
+  "style_dna": {
+    "pacing": {
+      "average_scene_duration_s": 9.0,
+      "pacing_speed": "unbroken_satisfying_peel_reveal",
+      "rhythm_type": "continuous_single_take_tension_release"
+    },
+    "hook_3s": {
+      "strategy": "Instant high-contrast problem/solution hook: Showing a mud-and-gravel caked sneaker sole with a bold price contrast text hook ('I saved $15,000 with this $12 product') followed immediately by peeling the clear film to reveal immaculate virgin sole.",
+      "energy": "high_curiosity_satisfying",
+      "focus": "before_and_after_transformation"
+    },
+    "color_grading": {
+      "lighting": "natural_outdoor_daylight",
+      "color_palette": ["#0D47A1", "#FFFFFF", "#4E3629", "#8D6E63"],
+      "contrast": "dramatic_dirt_vs_pristine_contrast",
+      "mood": "satisfying_high_value_relief"
+    },
+    "typography_and_cards": {
+      "layout": "centered_top_third_headline",
+      "style": "bold_sans_serif_white_with_black_outline",
+      "emphasis": "extreme_economic_value_contrast"
+    },
+    "micro_effects": [
+      {
+        "name": "Tactile Sole Peel Reveal",
+        "camera_motion": "push_in",
+        "intent": "reveal_impact",
+        "focus": "action",
+        "intensity": 0.85,
+        "timing_s": "0.0s - 6.0s"
+      },
+      {
+        "name": "Filth-To-Fresh Contrast Snap",
+        "camera_motion": "snap",
+        "intent": "actioncut",
+        "focus": "action",
+        "intensity": 0.9,
+        "timing_s": "6.0s - 8.0s"
+      },
+      {
+        "name": "Pristine Outsole Drift",
+        "camera_motion": "drift",
+        "intent": "premium_showcase",
+        "focus": "product",
+        "intensity": 0.75,
+        "timing_s": "8.0s - 9.0s"
+      }
+    ],
+    "audio_and_asmr": {
+      "has_bgm": false,
+      "sfx_cues": [
+        "grit and dirt crunching friction",
+        "continuous adhesive sticky vinyl peel",
+        "satisfying film release snap",
+        "ambient outdoor nature air"
+      ],
+      "dominant_frequency": "tactile_peeling_acoustic_clarity"
+    }
+  }
+}

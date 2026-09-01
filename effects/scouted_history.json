@@ -1,5 +1,5 @@
 {
-  "last_niche_index": 3,
+  "last_niche_index": 1,
   "history": [
     {
       "video_id": "wYuSwmHZOvA",
@@ -121,6 +121,28 @@
       "scouted_at": "2026-08-29T13:12:00+07:00",
       "learned_style_file": "effects/learned_styles/ceremonial_matcha_boba_layering_asmr.json",
       "style_name": "Ceremonial Matcha Boba Layering ASMR"
+    },
+    {
+      "video_id": "bGSsQzQZbWw",
+      "url": "http://www.youtube.com/watch?v=bGSsQzQZbWw",
+      "title": "Amazon SneakerSoul Sole Protector 👀😳 #nike #sneakerprotection #soleprotector",
+      "channel": "Sneaker Soul",
+      "niche": "product_showcase",
+      "view_count": 80879393,
+      "scouted_at": "2026-08-31T13:26:00+07:00",
+      "learned_style_file": "effects/learned_styles/satisfying_sneaker_sole_peel_protector_showcase.json",
+      "style_name": "Satisfying Sneaker Sole Peel Protector Showcase"
+    },
+    {
+      "video_id": "gAGETNdTtJg",
+      "url": "http://www.youtube.com/watch?v=gAGETNdTtJg",
+      "title": "Leather ASMR",
+      "channel": "MorrisonMade Leather",
+      "niche": "mens_fashion___footwear",
+      "view_count": 14471712,
+      "scouted_at": "2026-09-01T13:44:00+07:00",
+      "learned_style_file": "effects/learned_styles/artisan_leathercraft_tooling_edge_beveling_asmr.json",
+      "style_name": "Artisan Leathercraft Tooling & Edge Beveling ASMR"
     }
   ]
 }

@@ -101,6 +101,8 @@ $$\text{Design Primitive} \longrightarrow \text{Motion Registry} \longrightarrow
 | **12. Bù Trừ Thời Lượng Chuyển Cảnh Triệt Tiêu Frame Đen** | Bổ sung công thức `sequenceDurationInFrames = durationInFrames + transDurFrames` trong `FullTimelineVideo.tsx`. | Loại bỏ hoàn toàn hiện tượng hụt hình / lộ màn hình đen ở cuối video. |
 | **13. Vuốt Nhỏ Âm Thanh Kết Bài (Smooth Outro Decrescendo)** | Tích hợp bộ lọc `afade=t=out:st=END-0.6:d=0.6` vào `render_hybrid.js`. | Âm thanh thực địa và BGM êm dần về 0dB ở 0.6s cuối, triệt tiêu hoàn toàn tiếng ngắt "rụp". |
 | **14. Tự Động Ghi Nhận Tab `Video-Factory-EFFECTS`** | Thống kê số lần sử dụng thành công của `subtitle_style`, `transition_out`, `camera_motion` vào `effect_success_stats.json` và đồng bộ trực tiếp lên Google Sheets API v4 sau mỗi lần render. | Giữ nguyên vẹn toàn bộ hệ thống phân tích dữ liệu hiệu ứng cho người dùng. |
+| **15. Chia Dòng `\n` & Typography Bất Đối Xứng (Uneven Scaling)** | Bắt buộc AI chèn `\n` chia phụ đề thành 2 dòng (Hành động + Punchline); nâng cấp `KineticText.tsx` tự động tăng cỡ chữ $+15\% \sim +20\%$ cho dòng ngắn đắt giá. | Chữ trên video nảy nhịp điệu phong cách Viral TikTok/CapCut, dòng ngắn đắt giá phóng to cực kỳ hút mắt. |
+| **16. Đề Xuất 3 Góc Ý Tưởng & Chọn Nhanh (3-Angle Creative Ideation)** | Tích hợp module `interactiveIdeationReview.js` vào `generateTimeline.js`. Gemini đề xuất 3 góc dựng (ASMR, Mẹo nghề, Kịch tính) kèm điểm viral; cho phép chọn trong 10s (có đếm lùi tự động). | Trao quyền đạo diễn cho người dùng lựa chọn góc tiếp cận hay nhất mà vẫn bảo đảm tính tự động hóa $100\%$. |
 
 ---
 
@@ -122,6 +124,8 @@ M6.2  Real Production Learning Loop    🟢 ACTIVE
       ├─ TransitionSeries & Coverage   ✅ COMPLETE (Fade, Wipe, Slide, Flip & Zero Black Frames)
       ├─ Smooth Outro Audio Decrescendo✅ COMPLETE (afade=t=out 0.6s)
       ├─ Effects Analytics Tab Sync    ✅ COMPLETE (Video-Factory-EFFECTS Tab)
+      ├─ Multi-line \n & Uneven Scaling✅ COMPLETE (Kinetic Typography Hierarchy)
+      ├─ 3-Angle Creative Ideation     ✅ COMPLETE (Interactive 10s Countdown Pick)
       ├─ Real Production Videos        🟢 Ongoing (Chạy video hàng ngày)
       └─ Progressive Enhancement       🟢 Ongoing (Đắp thêm Tier 2 khi cần)
 

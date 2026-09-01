@@ -116,6 +116,69 @@
       },
       "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
       "voice_rhythm": "Smooth tactile finger brush across flawless slanted French stitching diamond holes."
+    },
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Sheath Unsheathe Blade Glide",
+        "intent": "reveal_impact",
+        "camera_motion": "push_in",
+        "focus": "product",
+        "intensity": 0.85,
+        "mood": "satisfying",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 2.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Metallic blade friction drawing smoothly from wooden sheath."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Edge Bevel Ribbon Curl",
+        "intent": "precision_craft",
+        "camera_motion": "drift",
+        "focus": "texture",
+        "intensity": 0.8,
+        "mood": "satisfying",
+        "pacing": "dynamic"
+      },
+      "duration_range": "19.0s - 25.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.2,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Continuous peeling scrape of edge beveler producing curly leather ribbon."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Percussive Rivet Mallet Snap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.9,
+        "mood": "energetic",
+        "pacing": "fast"
+      },
+      "duration_range": "39.0s - 43.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Solid rhythmic mallet strikes on steel rivet punch locking custom wallet hardware."
     }
   ]
 }

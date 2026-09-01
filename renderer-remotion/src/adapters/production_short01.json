@@ -1,57 +1,99 @@
 {
   "video_meta": {
-    "title": "Nghệ Thuật Đục Lỗ Da Thủ Công - Cực Kỳ Thỏa Mãn",
-    "description": "🎣 Bạn đã bao giờ tò mò về quy trình tạo nên những đường đục sắc nét trên sản phẩm da thủ công chưa?\n\n📖 Cùng ngắm nhìn từng thao tác căn chỉnh khuôn kim loại và nhịp búa gõ dứt khoát trên chất liệu da cao cấp. Sự tỉ mỉ trong từng milimét chính là bí quyết tạo nên độ bền đẹp cho những chiếc túi da chế tác riêng.\n\n💬 Bạn thích cảm giác hoàn thiện thủ công tỉ mỉ này chứ, hãy để lại chia sẻ bên dưới nhé!",
+    "title": "ASMR Lái Xe Phố Núi Mưa Đêm - Nhịp Thở Bình Yên Giữa Lòng Đà Lạt",
+    "description": "🎣 Bạn đã bao giờ thả mình vào cảm giác ngồi trong ô tô ngắm nhìn phố núi chìm trong màn mưa êm đềm chưa?\n\n📖 Cùng mình lướt nhẹ qua những con dốc quen thuộc, lắng nghe nhịp gạt mưa đều đặn và ngắm nhìn những hàng quán lên đèn ấm áp. Âm thanh mộc mạc của mưa và dòng người qua lại mang đến sự tĩnh lặng khó tả.\n\n💬 Chiều mưa ở phố núi luôn có một sức hút rất riêng, chúc bạn có những phút giây thư giãn thật êm đềm nhé!",
     "hashtags": [
-      "dathong",
-      "leathercraft",
-      "dothucong",
-      "asmr",
-      "handmade",
-      "nghethuatda"
+      "asmrrain",
+      "dalatrain",
+      "laixemua",
+      "phonui",
+      "chillvibes",
+      "dalatlife"
     ],
     "pipeline_mode": "Long2Short",
-    "created_at": "2026-08-30 14:15:31",
-    "input_file": "/Volumes/NextCloud/Note10/YenLeather/20260617_094012.mp4",
-    "original_duration_s": 182.8
+    "created_at": "2026-09-01 19:18:29",
+    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260814_075954.mp4",
+    "original_duration_s": 87.4
   },
   "timeline": [
     {
       "scene_id": "scene_001",
       "scene_type": "hook",
       "start_s": 0,
-      "end_s": 15,
-      "duration_s": 4,
-      "title": "Căn Chỉnh Khuôn Đục Góc Da",
+      "end_s": 10,
+      "duration_s": 6,
+      "title": "Khởi đầu phố mưa",
       "story_importance": 0.95,
       "key_moments": [
-        10.5
+        2
       ],
-      "speed_strategy": "ramp",
-      "render_priority": "compress",
-      "subtitle": "BÍ QUYẾT ĐỤC LỖ DA CHUẨN XÁC",
-      "subtitle_style": "vibrant_yellow_sticker",
+      "speed_strategy": "uniform",
+      "render_priority": "keep",
+      "subtitle": "DẠO PHỐ MƯA\nBÌNH YÊN PHỐ NÚI",
+      "subtitle_style": "minimal_glass_card",
       "text_position": "top",
-      "voice": "Để có những góc cắt hoàn hảo trên đồ da thủ công, bước định vị khuôn đục cực kỳ quan trọng.",
-      "visual_cue": "Cận cảnh người thợ đặt khuôn kim loại hình ô vuông lên mép miếng da màu nâu và dùng búa cao su gõ dứt khoát.",
+      "voice": "Có những ngày phố núi chìm trong cơn mưa nhẹ, ngồi trong xe nghe tiếng gạt mưa thật dễ chịu.",
+      "visual_cue": "Góc nhìn từ kính chắn gió xe ô tô, mưa rơi lâm râm, cần gạt nước chuyển động qua lại giữa tuyến phố đông đúc.",
       "text_effect": {
-        "name": "Pop-up",
-        "description": "Chữ xuất hiện nảy bật thu hút chú ý ngay giây đầu"
+        "name": "Slide In",
+        "description": "Chữ trượt nhẹ từ trên xuống mềm mại"
       },
       "advanced_effect": {
-        "name": "Satisfying Impact",
-        "intent": "reveal_impact",
-        "mood": "satisfying",
-        "pacing": "fast",
-        "focus": "hand_action",
-        "camera_motion": "push_in",
-        "intensity": 0.85,
-        "description": "Thu phóng nhanh vào khoảnh khắc búa đập xuống khuôn đục"
+        "name": "Cinematic Rain Focus",
+        "intent": "cinematic_transition",
+        "mood": "soft",
+        "pacing": "slow",
+        "focus": "reveal",
+        "camera_motion": "drift",
+        "intensity": 0.6,
+        "description": "Tăng độ tương phản hạt mưa trên kính và làm mềm ánh sáng phố phường"
       },
-      "hook_strength": 0.92,
-      "visual_energy": 0.85,
-      "retention_score": 0.9,
+      "hook_strength": 0.9,
+      "visual_energy": 0.7,
+      "retention_score": 0.88,
       "confidence": 0.95,
+      "include": true,
+      "transition_out": {
+        "type": "fade",
+        "duration": 0.3
+      }
+    },
+    {
+      "scene_id": "scene_002",
+      "scene_type": "body",
+      "start_s": 10,
+      "end_s": 24,
+      "duration_s": 7,
+      "title": "Rẽ qua phố ngân hàng",
+      "story_importance": 0.85,
+      "key_moments": [
+        18
+      ],
+      "speed_strategy": "uniform",
+      "render_priority": "keep",
+      "subtitle": "TIẾNG GẠT MƯA\nNHỊP NHÀNG XUÔI DỐC",
+      "subtitle_style": "minimal_glass_card",
+      "text_position": "top",
+      "voice": "Xe thong thả ôm theo từng khúc ngoặt, lướt qua những bảng hiệu quen thuộc dưới màn mưa.",
+      "visual_cue": "Xe chuyển hướng lướt qua toà nhà Eximbank và các cửa hiệu hai bên đường, đường ướt phản chiếu ánh sáng.",
+      "text_effect": {
+        "name": "Glow",
+        "description": "Chữ phát sáng dịu nhẹ hợp khung cảnh mưa"
+      },
+      "advanced_effect": {
+        "name": "Smooth Street Glide",
+        "intent": "luxury_soft",
+        "mood": "satisfying",
+        "pacing": "medium",
+        "focus": "reveal",
+        "camera_motion": "push_in",
+        "intensity": 0.5,
+        "description": "Tạo chuyển động lướt mượt mà theo góc cua của xe"
+      },
+      "hook_strength": 0.75,
+      "visual_energy": 0.65,
+      "retention_score": 0.82,
+      "confidence": 0.92,
       "include": true,
       "transition_out": {
         "type": "wipe_left",
@@ -59,83 +101,83 @@
       }
     },
     {
-      "scene_id": "scene_002",
-      "scene_type": "body",
-      "start_s": 20,
-      "end_s": 35,
-      "duration_s": 6,
-      "title": "Đục Lỗ Đối Xứng Miếng Da Nâu",
-      "story_importance": 0.85,
+      "scene_id": "scene_003",
+      "scene_type": "transition",
+      "start_s": 24,
+      "end_s": 45,
+      "duration_s": 5,
+      "title": "Đoạn dừng chờ xe",
+      "story_importance": 0.4,
       "key_moments": [
-        29
+        30
       ],
-      "speed_strategy": "adaptive",
+      "speed_strategy": "jumpcut",
       "render_priority": "compress",
-      "subtitle": "CĂN CHỈNH TỪNG MILIMÉT",
-      "subtitle_style": "minimal_glass_card",
-      "text_position": "top",
-      "voice": "Từng nhát búa cần lực vừa đủ để tạo đường viền sắc nét mà không làm rách xơ da.",
-      "visual_cue": "Người thợ xoay đầu còn lại của mảnh da, căn lề tỉ mỉ rồi gõ búa tạo lỗ vuông đối xứng.",
+      "subtitle": "DÒNG NGUYÊN\nLƯU THÔNG TỪ TỪ",
+      "subtitle_style": "none",
+      "text_position": "bottom",
+      "voice": "",
+      "visual_cue": "Xe dừng chờ giao thông tĩnh không có nhiều chuyển động nổi bật.",
       "text_effect": {
-        "name": "Slide In",
-        "description": "Chữ trượt nhẹ từ bên hông vào mượt mà"
+        "name": "Pop-up",
+        "description": "Chữ hiện nhanh"
       },
       "advanced_effect": {
-        "name": "Precision Focus",
+        "name": "Time Compress",
         "intent": "satisfying_cut",
-        "mood": "satisfying",
-        "pacing": "medium",
-        "focus": "hand_action",
-        "camera_motion": "drift",
-        "intensity": 0.7,
-        "description": "Theo dõi chuyển động bàn tay thợ khi đo vị trí"
+        "mood": "soft",
+        "pacing": "fast",
+        "focus": "reveal",
+        "camera_motion": "static",
+        "intensity": 0.4,
+        "description": "Lược bỏ bớt khoảng thời gian đứng yên"
       },
-      "hook_strength": 0.75,
-      "visual_energy": 0.78,
-      "retention_score": 0.82,
-      "confidence": 0.92,
-      "include": true,
+      "hook_strength": 0.3,
+      "visual_energy": 0.4,
+      "retention_score": 0.5,
+      "confidence": 0.9,
+      "include": false,
       "transition_out": {
         "type": "fade",
         "duration": 0.2
       }
     },
     {
-      "scene_id": "scene_003",
+      "scene_id": "scene_004",
       "scene_type": "body",
       "start_s": 45,
       "end_s": 60,
-      "duration_s": 6,
-      "title": "Tách Phần Da Thừa",
-      "story_importance": 0.8,
+      "duration_s": 8,
+      "title": "Góc tiệm bánh và quán ăn",
+      "story_importance": 0.9,
       "key_moments": [
-        51
+        52
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "TÁCH CHI TIẾT SẮC NÉT",
-      "subtitle_style": "minimal_glass_card",
-      "text_position": "bottom",
-      "voice": "Sau khi gõ, phần da thừa bên trong lỗ đục được nhấc ra gọn gàng.",
-      "visual_cue": "Bàn tay nhấc khuôn đục ra khỏi tấm da nâu và gỡ mẩu da nhỏ đã cắt hoàn thành.",
+      "subtitle": "GÓC QUÁN QUEN\nẤM ÁP NGÀY MƯA",
+      "subtitle_style": "vibrant_yellow_sticker",
+      "text_position": "top",
+      "voice": "Những quán ăn nhỏ ven đường nghi ngút khói ấm, điểm nét chấm phá thân thương cho ngày mưa.",
+      "visual_cue": "Xe đi ngang Tiệm Bánh An Yên và các hàng quán bán bánh căn, bánh ướt lòng gà đặc trưng Đà Lạt.",
       "text_effect": {
         "name": "Typewriter",
-        "description": "Gõ từng chữ tạo nét thủ công cổ điển"
+        "description": "Chữ gõ từng từ ấm áp"
       },
       "advanced_effect": {
-        "name": "Detail Showcase",
+        "name": "Warm Storefront Highlight",
         "intent": "premium_showcase",
-        "mood": "premium",
+        "mood": "emotional",
         "pacing": "medium",
         "focus": "texture",
-        "camera_motion": "static",
-        "intensity": 0.65,
-        "description": "Cố định ống kính cận cảnh đường cắt da sạch sẽ"
+        "camera_motion": "drift",
+        "intensity": 0.7,
+        "description": "Làm nổi bật tông màu vàng ấm của bảng hiệu cửa hàng"
       },
-      "hook_strength": 0.7,
+      "hook_strength": 0.85,
       "visual_energy": 0.75,
-      "retention_score": 0.8,
-      "confidence": 0.9,
+      "retention_score": 0.87,
+      "confidence": 0.96,
       "include": true,
       "transition_out": {
         "type": "wipe_right",
@@ -143,134 +185,92 @@
       }
     },
     {
-      "scene_id": "scene_004",
-      "scene_type": "body",
-      "start_s": 85,
-      "end_s": 100,
-      "duration_s": 7,
-      "title": "Thao Tác Trên Tấm Da Xám",
-      "story_importance": 0.88,
+      "scene_id": "scene_005",
+      "scene_type": "transition",
+      "start_s": 60,
+      "end_s": 75,
+      "duration_s": 5,
+      "title": "Người dân dừng xe bên đường",
+      "story_importance": 0.5,
       "key_moments": [
-        92
+        68
       ],
-      "speed_strategy": "adaptive",
+      "speed_strategy": "jumpcut",
       "render_priority": "compress",
-      "subtitle": "ÁP DỤNG CHO MỌI CHẤT DA",
-      "subtitle_style": "minimal_glass_card",
-      "text_position": "top",
-      "voice": "Chuyển sang phom da tiếp theo, thao tác đục tiếp tục được lặp lại nhịp nhàng và chuẩn xác.",
-      "visual_cue": "Người thợ lấy mảnh da màu xám xước, tiếp tục đặt khuôn inox vuông và gõ búa cao su.",
+      "subtitle": "NHỊP SỐNG\nCHẬM RÃI",
+      "subtitle_style": "none",
+      "text_position": "bottom",
+      "voice": "",
+      "visual_cue": "Cảnh người dân dắt xe máy bên lề đường dưới mưa.",
       "text_effect": {
         "name": "Bounce",
-        "description": "Chữ nảy nhẹ tạo tiết tấu năng động"
+        "description": "Chữ nảy nhẹ"
       },
       "advanced_effect": {
-        "name": "Dynamic Motion",
-        "intent": "energetic_demo",
-        "mood": "energetic",
-        "pacing": "dynamic",
-        "focus": "hand_action",
-        "camera_motion": "pulse",
-        "intensity": 0.75,
-        "description": "Nhịp xung theo từng cú búa đập"
-      },
-      "hook_strength": 0.78,
-      "visual_energy": 0.82,
-      "retention_score": 0.85,
-      "confidence": 0.94,
-      "include": true,
-      "transition_out": {
-        "type": "circle_open",
-        "duration": 0.3
-      }
-    },
-    {
-      "scene_id": "scene_005",
-      "scene_type": "body",
-      "start_s": 105,
-      "end_s": 165,
-      "duration_s": 8,
-      "title": "Hoàn Thành Và Cất Dụng Cụ",
-      "story_importance": 0.82,
-      "key_moments": [
-        155
-      ],
-      "speed_strategy": "ramp",
-      "render_priority": "compress",
-      "subtitle": "GỌN GÀNG VÀ CHUYÊN NGHIỆP",
-      "subtitle_style": "minimal_glass_card",
-      "text_position": "bottom",
-      "voice": "Sau khi đục xong các vị trí, thợ thủ công thu dọn khuôn đục gọn gàng vào hộp dụng cụ.",
-      "visual_cue": "Đột đục cuối cùng hoàn tất trên tấm da xám, thợ đóng nắp hộp đục inox chuyên nghiệp.",
-      "text_effect": {
-        "name": "Glow",
-        "description": "Phát sáng nhẹ nhàng tăng vẻ tinh tế"
-      },
-      "advanced_effect": {
-        "name": "Craft Clean",
+        "name": "Pass By",
         "intent": "satisfying_cut",
-        "mood": "satisfying",
+        "mood": "soft",
         "pacing": "fast",
-        "focus": "packaging",
-        "camera_motion": "push_out",
-        "intensity": 0.6,
-        "description": "Lùi ống kính nhẹ khi hộp dụng cụ được đóng lại"
+        "focus": "reveal",
+        "camera_motion": "static",
+        "intensity": 0.4,
+        "description": "Trôi nhanh qua đoạn phụ"
       },
-      "hook_strength": 0.72,
-      "visual_energy": 0.7,
-      "retention_score": 0.78,
-      "confidence": 0.91,
-      "include": true,
+      "hook_strength": 0.4,
+      "visual_energy": 0.5,
+      "retention_score": 0.6,
+      "confidence": 0.88,
+      "include": false,
       "transition_out": {
         "type": "fade",
-        "duration": 0.3
+        "duration": 0.2
       }
     },
     {
       "scene_id": "scene_006",
       "scene_type": "conclusion",
-      "start_s": 168,
-      "end_s": 182,
-      "duration_s": 5,
-      "title": "Trưng Bày Các Mảnh Da Đã Đục",
+      "start_s": 75,
+      "end_s": 86,
+      "duration_s": 7,
+      "title": "Kết thúc hành trình dạo phố",
       "story_importance": 0.9,
       "key_moments": [
-        175
+        80
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "SẮC NÉT TRONG TỪNG CHI TIẾT",
+      "subtitle": "THƯ THÁI TẬN HƯỞNG\nGÓC PHỐ NÚI MƯA",
       "subtitle_style": "vibrant_yellow_lightning_sticker",
-      "text_position": "bottom",
-      "voice": "Mỗi đường nét được chăm chút đều chứa đựng tâm huyết của người thợ chế tác.",
-      "visual_cue": "Khung cảnh mặt bàn làm việc ngăn nắp với các tấm da đã hoàn thành bước đục góc sắc nét.",
+      "text_position": "top",
+      "voice": "Mong rằng chút âm thanh êm ả của buổi chiều mưa này sẽ mang đến cho bạn một quãng nghỉ thật bình yên.",
+      "visual_cue": "Chiếc xe taxi màu xanh ngọc lướt qua trước Quán Trang bánh ướt lòng gà, mưa vẫn rơi nhẹ trên kính xe.",
       "text_effect": {
-        "name": "Pop-up",
-        "description": "Nổi bật dòng kết thúc gây ấn tượng"
+        "name": "Slide In",
+        "description": "Chữ khép lại nhẹ nhàng"
       },
       "advanced_effect": {
-        "name": "Final Showcase",
-        "intent": "premium_showcase",
-        "mood": "premium",
+        "name": "Peaceful Soft Fade",
+        "intent": "emotional_pause",
+        "mood": "soft",
         "pacing": "slow",
         "focus": "reveal",
-        "camera_motion": "drift",
-        "intensity": 0.8,
-        "description": "Quét camera chậm hiển thị toàn bộ thành quả làm việc"
+        "camera_motion": "push_out",
+        "intensity": 0.6,
+        "description": "Làm mờ dần hiệu ứng hình ảnh mang lại cảm giác lắng đọng"
       },
       "hook_strength": 0.8,
-      "visual_energy": 0.75,
-      "retention_score": 0.88,
-      "confidence": 0.96,
+      "visual_energy": 0.7,
+      "retention_score": 0.85,
+      "confidence": 0.95,
       "include": true,
       "transition_out": {
         "type": "fade",
-        "duration": 0.4
+        "duration": 0.5
       }
     }
   ],
   "audio_config": {
-    "bgm_mood": "satisfying",
+    "bgm_mood": "none",
     "bgm_url": "",
     "enable_sfx": true
   }

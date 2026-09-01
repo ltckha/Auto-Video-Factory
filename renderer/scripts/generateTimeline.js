@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const { GoogleGenAI } = require("@google/genai");
 const { getLocalDateTime, syncProjectToSheet, syncScenesToSheet } = require("./googleSheetsSync");
+const { selectCreativeIdea } = require("./interactiveIdeationReview");
 
 const ROOT = path.resolve(__dirname, "..", "..");
 const INCOMING_DIR = path.join(ROOT, "incoming");
@@ -541,8 +542,81 @@ async function main() {
       }
     }
 
-    // CHẾ ĐỘ CHUẨN (SHORT2SHORT HOẶC LONG2SHORT CŨ)
-    console.log("[AI] Đang gửi yêu cầu phân tích video sang Gemini AI...");
+    // -------------------------------------------------------------
+    // CHẾ ĐỘ CHUẨN (SHORT2SHORT HOẶC LONG2SHORT): ĐỀ XUẤT 3 GÓC Ý TƯỞNG & CHỌN NHANH
+    // -------------------------------------------------------------
+    console.log("\n[Ideation] 🧠 Đang phân tích video để đề xuất 3 góc ý tưởng dựng sáng tạo...");
+
+    const ideationSchema = {
+      type: "OBJECT",
+      properties: {
+        ideas: {
+          type: "ARRAY",
+          items: {
+            type: "OBJECT",
+            properties: {
+              id: { type: "NUMBER" },
+              angle_name: { type: "STRING" },
+              hook_summary: { type: "STRING" },
+              style_direction: { type: "STRING" },
+              audio_strategy_detail: { type: "STRING" },
+              viral_score: { type: "NUMBER" },
+              creative_prompt_directive: { type: "STRING" },
+              is_recommended: { type: "BOOLEAN" }
+            },
+            required: ["id", "angle_name", "hook_summary", "style_direction", "audio_strategy_detail", "creative_prompt_directive"]
+          }
+        }
+      },
+      required: ["ideas"]
+    };
+
+    const ideationPrompt = `Bạn là một Đạo diễn & Biên tập viên Video Ngắn Viral hàng đầu (TikTok / Reels / Shorts).
+Hãy xem kỹ video trên và đề xuất đúng 3 GÓC Ý TƯỞNG DỰNG (Creative Story Angles) KHÁC BIỆT NHAU để người dùng lựa chọn:
+- Góc 1: Thường là góc mạnh nhất (ASMR Thỏa Mãn / Foley Thực Địa hoặc Hook Giật Gân Trực Diện).
+- Góc 2: Thường là góc Hướng dẫn / Mẹo Nghề / Giá Trị Thực Tế / Step-by-Step Tutorial.
+- Góc 3: Thường là góc Kịch tính / Khoe Thành Phẩm (Showcase) / Biến hình / Storytelling.
+
+Yêu cầu mỗi ý tưởng:
+- angle_name: Tên ý tưởng ngắn gọn, hấp dẫn kèm icon biểu tượng.
+- hook_summary: Tóm tắt 1 câu về cách mở đầu giật hook ở 3 giây đầu tiên.
+- style_direction: Phong cách hình ảnh (Cận cảnh Macro, Kính mờ sang trọng, Nhãn dán vàng 3D, Nhịp nhanh...).
+- audio_strategy_detail: Phong cách âm thanh (Giữ 100% tiếng ASMR thực tế, Giọng đọc chia sẻ + BGM chill, Nhạc sôi động...).
+- viral_score: Điểm đánh giá tiềm năng thu hút (từ 8.0 đến 9.8).
+- creative_prompt_directive: Lời chỉ dẫn cụ thể (2-3 câu) để áp dụng định hướng này vào việc cắt phân cảnh và viết kịch bản chi tiết ở bước sau.`;
+
+    let chosenIdeaDirective = "";
+    try {
+      const ideationResponse = await generateContentWithRetryFallback(
+        ai,
+        LITE_MODELS,
+        [
+          {
+            fileData: {
+              fileUri: fileState.uri,
+              mimeType: fileState.mimeType,
+            },
+          },
+          ideationPrompt,
+        ],
+        {
+          responseMimeType: "application/json",
+          responseSchema: ideationSchema,
+        }
+      );
+
+      const ideationData = JSON.parse(ideationResponse.text);
+      if (ideationData && Array.isArray(ideationData.ideas) && ideationData.ideas.length > 0) {
+        const chosenIdea = await selectCreativeIdea(ideationData.ideas);
+        if (chosenIdea && chosenIdea.creative_prompt_directive) {
+          chosenIdeaDirective = `\n\n━━━━━━━━━━━━━━━━━━\n🎯 ĐỊNH HƯỚNG Ý TƯỞNG ĐÃ ĐƯỢC NGƯỜI DÙNG LỰA CHỌN:\n- Tên Góc Ý Tưởng: ${chosenIdea.angle_name}\n- Chỉ Đạo Đạo Diễn: ${chosenIdea.creative_prompt_directive}\n━━━━━━━━━━━━━━━━━━\nHãy bám sát $100\%$ định hướng ý tưởng này khi chọn mốc thời gian, viết subtitle và dựng phân cảnh!`;
+        }
+      }
+    } catch (ideationErr) {
+      console.warn(`[Ideation] Warning: Bỏ qua bước chọn ý tưởng do gặp lỗi: ${ideationErr.message}. Tiếp tục quy trình chuẩn...`);
+    }
+
+    console.log("[AI] Đang gửi yêu cầu phân tích video & sinh Timeline JSON chi tiết sang Gemini AI...");
     const response = await generateContentWithRetryFallback(
       ai,
       HEAVY_MODELS,
@@ -556,7 +630,7 @@ async function main() {
         "Hãy thực hiện phân tích video trên và trả về kịch bản Timeline JSON chi tiết theo đúng cấu trúc quy chuẩn.",
       ],
       {
-        systemInstruction: systemInstruction + activePresetContext,
+        systemInstruction: systemInstruction + activePresetContext + chosenIdeaDirective,
         responseMimeType: "application/json",
         responseSchema: RESPONSE_SCHEMA,
       }

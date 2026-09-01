@@ -32,9 +32,20 @@ Nhiệm vụ của bạn là phân tích toàn diện một Video Dài (> 5 phú
 
 ---
 
-## 🎨 QUY CHUẨN THẺ CHỮ & PHỤ ĐỀ TRONG TỪNG SCENE
+## 🎨 QUY CHUẨN THẺ CHỮ, CHIA DÒNG `\n` & PHỤ ĐỀ TRONG TỪNG SCENE
 
 * **`subtitle`:** Viết IN HOA HOÀN TOÀN, ngắn gọn (3-8 từ).
+* **✨ BẮT BUỘC CHÈN `\n` ĐỂ PHÂN TÁCH DÒNG CÓ NHỊP ĐIỆU (TYPOGRAPHY HIERARCHY):**
+  - Mọi subtitle từ 4 từ trở lên hoặc $> 14$ ký tự **BẮT BUỘC chèn ký tự `\n`** để chia thành 2 dòng bất đối xứng (dòng ngắn đắt giá sẽ được render to hơn nổi bật):
+    - **Dòng 1:** Chủ đề / Hành động chính (2-3 từ).
+    - **Dòng 2:** Điểm nhấn cảm xúc / Punchline / Từ đắt giá (1-2 từ ngắn).
+  - *Ví dụ chuẩn:*
+    - `"LƯỢN PHỐ ĐÊM\nCỰC CHILL"`
+    - `"CÂY GIỐNG MỚI\nBUNG ĐỌT KHỎE"`
+    - `"ĐỤC LỖ DA\nCỰC THỎA MÃN"`
+    - `"BÍ QUYẾT\nLÀM DA THỦ CÔNG"`
+    - `"TÁCH PHÔI DA\nCHUẨN TỪNG MILI"`
+  - 🚫 TUYỆT ĐỐI CẤM viết 1 dòng dài lê thê không có `\n`.
 * **`subtitle_style`:** Chọn 1 trong các bộ khung đồ họa:
   * 🟨 `vibrant_yellow_sticker` (Sticker Vàng Rực Rỡ)
   * 🧊 `minimal_glass_card` (Kính Mờ Sang Trọng)
@@ -71,7 +82,7 @@ Chỉ trả về DUY NHẤT 1 block mã markdown `json` hợp lệ:
           "start_s": 10.0,
           "end_s": 16.0,
           "duration_s": 6.0,
-          "subtitle": "BÍ MẬT DƯỚI LÁ GAI KHỔNG LỒ",
+          "subtitle": "BÍ MẬT DƯỚI\nLÁ GAI KHỔNG LỒ",
           "subtitle_style": "vibrant_yellow_sticker",
           "text_position": "top",
           "text_effect": {
@@ -89,7 +100,7 @@ Chỉ trả về DUY NHẤT 1 block mã markdown `json` hợp lệ:
           "start_s": 16.0,
           "end_s": 38.0,
           "duration_s": 22.0,
-          "subtitle": "DÙNG DAO TRE TÁCH TỪNG CỦ MẸ",
+          "subtitle": "DÙNG DAO TRE\nTÁCH TỪNG CỦ MẸ",
           "subtitle_style": "minimal_glass_card",
           "text_position": "top",
           "text_effect": {
@@ -107,7 +118,7 @@ Chỉ trả về DUY NHẤT 1 block mã markdown `json` hợp lệ:
           "start_s": 38.0,
           "end_s": 63.0,
           "duration_s": 25.0,
-          "subtitle": "THU HOẠCH TRỌN VẸN ĐẦY CHẬU",
+          "subtitle": "THU HOẠCH TRỌN VẸN\nĐẦY CHẬU TƯƠI",
           "subtitle_style": "vibrant_yellow_lightning_sticker",
           "text_position": "top",
           "text_effect": {

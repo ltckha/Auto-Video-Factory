@@ -31,6 +31,8 @@
     ├─ [✓] TransitionSeries & Visual Full Coverage (Zero Black Frames at Tail)
     ├─ [✓] Audio Smooth Outro Decrescendo (afade=t=out 0.6s êm ái đoạn kết)
     ├─ [✓] Effects Analytics Tab Realtime Sync (Video-Factory-EFFECTS Tab)
+    ├─ [✓] Multi-line \n & Uneven Scaling (Kinetic Typography Hierarchy)
+    ├─ [✓] 3-Angle Creative Ideation & Quick-Pick (10s Countdown Selector)
     └─ [🟢] Continuous Real Video Production & Progressive Tier 2 Expansion
 [🔒] M6.3 : Human Visual & Technical Audit        — CHỜ NGHIỆM THU
 [🔒] M6.4 : Reliability & Recovery Resilience     — CHỜ NGHIỆM THU
