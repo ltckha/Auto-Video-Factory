@@ -17,6 +17,7 @@ Thư mục này lưu trữ tất cả các ý tưởng, cải tiến kỹ thuậ
 | **IDEA-008** | Video Style Cohesion & Card Transparency Positioning Rules | Quy Tắc Nhất Quán Brand & Độ Trong Suốt Khung | ✅ **Hoàn Thành** | 06/08/2026 | [IDEA_008_video_style_cohesion_and_transparency_rules.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_008_video_style_cohesion_and_transparency_rules.md) |
 | **IDEA-009** | Closed-Loop AI Video Quality Audit & Self-Learning Engine | AI Đánh Giá Video & Tự Động Học Sau Render | 💡 **Đang Nghiên Cứu** | 06/08/2026 | [IDEA_009_closed_loop_ai_video_qa_and_self_learning.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_009_closed_loop_ai_video_qa_and_self_learning.md) |
 | **IDEA-010** | Tối Ưu Smart Proxy 1x Dựa Trên Ngưỡng Dung Lượng File (>200MB) | Tiền xử lý Video (Pre-Processing) | 💡 **Đã Lưu / Sẵn Sàng Triển Khai** | 24/08/2026 | [IDEA_010_smart_proxy_filesize_threshold.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_010_smart_proxy_filesize_threshold.md) |
+| **IDEA-011** | Lưu Trữ File URI Gemini Để Tái Sử Dụng Khi Cần Tạo Lại Kịch Bản | Tối ưu hóa API & Trải nghiệm (API & UX) | 💡 **Đang Nghiên Cứu** | 01/09/2026 | [IDEA_011_gemini_file_uri_cache_and_reuse.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_011_gemini_file_uri_cache_and_reuse.md) |
 
 ---
 

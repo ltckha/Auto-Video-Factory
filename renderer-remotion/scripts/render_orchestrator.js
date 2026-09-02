@@ -321,12 +321,20 @@ async function orchestrateRenderSingle(projectId) {
       try {
         const meta = timelineJson.video_meta || {};
         const hashtagsStr = Array.isArray(meta.hashtags) ? meta.hashtags.map(t => t.startsWith("#") ? t : `#${t}`).join(" ") : "";
+        let fullCaptionText = "";
+        if (captionGenerator && timelineJson) {
+          fullCaptionText = captionGenerator.buildPostText(timelineJson);
+        } else {
+          const desc = meta.description || "";
+          fullCaptionText = `${desc}\n\n${hashtagsStr}`.trim();
+        }
+
         await googleSheetsSync.syncProjectToSheet({
           projectId,
           status: engineUsed === "hybrid" ? "🎬 Rendered (Remotion Hybrid)" : "🎬 Rendered (Legacy)",
           inputFile: meta.input_file || "",
           title: meta.title || "",
-          captionHashtags: hashtagsStr,
+          captionHashtags: fullCaptionText,
           originalDuration: meta.original_duration_s || "",
           shortDuration: manifest.video_metrics.duration_s || "",
           sceneCount: (timelineJson.timeline || []).length,

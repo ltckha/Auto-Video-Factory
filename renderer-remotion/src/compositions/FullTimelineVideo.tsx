@@ -5,6 +5,8 @@ import { fade } from "@remotion/transitions/fade";
 import { wipe } from "@remotion/transitions/wipe";
 import { slide } from "@remotion/transitions/slide";
 import { flip } from "@remotion/transitions/flip";
+import { irisCircle } from "../components/transitions/IrisCircleTransition";
+import { paperRip } from "../components/transitions/PaperRipTransition";
 import { adaptTimelineToRemotion, TimelineData, AdaptedScene } from "../adapters/timelineAdapter";
 import { VideoScene } from "../components/VideoScene";
 
@@ -13,12 +15,22 @@ import prodTimelineJson from "../adapters/production_short01.json";
 
 /**
  * Universal Transition Presentation Resolver for Remotion
- * Supports all prompt transitions: fade, wipe (4 directions), slide (4 directions), flip (3D), etc.
+ * Supports all prompt transitions: fade, wipe (4 directions), slide (4 directions), flip (3D), circle_open, paper_rip, etc.
  */
 function resolveTransitionPresentation(type?: string) {
   const clean = String(type || "").toLowerCase().trim();
 
-  // 1. Wipe transitions
+  // 1. Iris / Circle Open transitions (unboxing, reveal)
+  if (clean.includes("circle") || clean.includes("iris")) {
+    return irisCircle({ type: "open" });
+  }
+
+  // 2. Paper Rip transitions (craft, farm, scrap)
+  if (clean.includes("paper") || clean.includes("rip") || clean.includes("tear")) {
+    return paperRip({ direction: clean.includes("right") ? "from-right" : "from-left" });
+  }
+
+  // 3. Wipe transitions
   if (clean.includes("wipe_left") || clean.includes("wipeleft")) {
     return wipe({ direction: "from-left" });
   }
@@ -32,7 +44,7 @@ function resolveTransitionPresentation(type?: string) {
     return wipe({ direction: "from-bottom" });
   }
 
-  // 2. Slide transitions
+  // 4. Slide transitions
   if (clean.includes("slide_up") || clean.includes("slideup")) {
     return slide({ direction: "from-bottom" });
   }
@@ -46,12 +58,12 @@ function resolveTransitionPresentation(type?: string) {
     return slide({ direction: "from-left" });
   }
 
-  // 3. 3D Flip transitions
+  // 5. 3D Flip transitions
   if (clean.includes("flip")) {
     return flip({ direction: "from-left" });
   }
 
-  // 4. Default: Smooth cinematic crossfade (fade, dissolve, pixelize fallback)
+  // 6. Default: Smooth cinematic crossfade (fade, dissolve, pixelize fallback)
   return fade();
 }
 
@@ -88,7 +100,7 @@ export const FullTimelineVideo: React.FC<{
 
               {hasTransition && (
                 <TransitionSeries.Transition
-                  presentation={resolveTransitionPresentation(scene.transitionOut?.type)}
+                  presentation={resolveTransitionPresentation(scene.transitionOut?.type) as any}
                   timing={linearTiming({ durationInFrames: transDurFrames })}
                 />
               )}

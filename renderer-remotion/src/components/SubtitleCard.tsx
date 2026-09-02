@@ -3,7 +3,7 @@ import { useCurrentFrame, useVideoConfig } from "remotion";
 import { DesignToken } from "../styles/tokens";
 import { asmrCraftToken } from "../styles/asmrCraft";
 import { MotionComposer } from "../motion/motionRegistry";
-import { KineticText } from "./KineticText";
+import { KineticText, TextTreatment, TextComposition } from "./KineticText";
 import { ShimmerGlowOverlay } from "./overlays/AtmosphericOverlays";
 
 export interface SubtitleCardProps {
@@ -13,6 +13,9 @@ export interface SubtitleCardProps {
   position?: "top" | "center" | "bottom";
   displayDurationS?: number;
   intensity?: number;
+  treatment?: TextTreatment;
+  composition?: TextComposition;
+  stepNumber?: number | string;
 }
 
 export const SubtitleCard: React.FC<SubtitleCardProps> = ({
@@ -22,6 +25,9 @@ export const SubtitleCard: React.FC<SubtitleCardProps> = ({
   position = "top",
   displayDurationS = 2.5,
   intensity = 0.7,
+  treatment,
+  composition,
+  stepNumber,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -200,7 +206,15 @@ export const SubtitleCard: React.FC<SubtitleCardProps> = ({
           </>
         )}
 
-        <KineticText text={text} token={token} fontSize={fontSize} intensity={intensity} />
+        <KineticText
+          text={text}
+          token={token}
+          fontSize={fontSize}
+          intensity={intensity}
+          treatment={treatment}
+          composition={composition}
+          stepNumber={stepNumber}
+        />
       </div>
     </div>
   );

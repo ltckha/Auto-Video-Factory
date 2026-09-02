@@ -24,8 +24,9 @@ QUY TẮC LỌC BỎ CẢNH RÁC & CẢNH CHẾT (BẮT BUỘC "include": false)
 5. CHỈ ĐÁNH DẤU "include": true CHO CÁC CẢNH ĐẮT GIÁ: Cảnh có chuyển động rõ ràng (Reveal, cắm sạc, chạm thử, biến đổi, cắn đồ ăn, nổ hiệu ứng) hoặc visual_energy >= 0.7.
 
 ━━━━━━━━━━━━━━━━━━
-QUY TẮC QUY ĐỔI MỐC THỜI GIAN (BẮT BUỘC CHÍNH XÁC)
+QUY TẮC QUY ĐỔI MỐC THỜI GIAN (BẮT BUỘC CHÍNH XÁC & AGENTIC SUB-SECOND)
 ━━━━━━━━━━━━━━━━━━
+- **🌟 Cơ Chế Agentic Video Understanding:** Quét động thông minh, định vị mốc `start_s` và `end_s` chính xác tới từng số thập phân (ví dụ: `14.20`, `22.75`) bắt trúng cao trào âm thanh/hình ảnh.
 - Các trường `start_s` và `end_s` BẮT BUỘC phải là **tổng số giây thực tế dưới dạng số (float/number)**.
 - ⚠️ **CẤM VIẾT NGUYÊN MỐC PHÚT:GIÂY BỎ DẤU HAI CHẤM:**
   - CẤM ghi `113` cho 1 phút 13 giây (BẮT BUỘC phải quy đổi `1 * 60 + 13 = 73`).
@@ -44,9 +45,10 @@ QUY TẮC PHÂN LOẠI & ĐỒNG BỘ VOICEOVER (CỰC KỲ QUAN TRỌNG)
    - 🚫 **NGHIÊM CẤM TẤT CẢ CÁC CÂU KÊU GỌI HỐI HẢ / THÚC GIỤC GIAO DỊCH:** Tuyệt đối CẤM các câu giật gân hoặc thúc giục như *"Đừng mua nếu chưa xem"*, *"Sắm ngay kẻo hết"*, *"Bấm vào giỏ hàng bên dưới"*, *"Click ngay deal tốt"*.
    - 🚫 **TUYỆT ĐỐI CẤM SỬ DỤNG VĂN MẪU RẬP KHUÔN:** Cấm lặp lại cùng một câu văn mẫu giữa các video.
    - ✨ **KẾT BÀI SÁNG TẠO 100% ĐỘC BẢN:** Phân cảnh Outro/CTA cuối cùng BẮT BUỘC phải là câu kết riêng biệt gắn liền với ngữ cảnh thực tế của video.
-4. **Nhận diện Nhạc Nền Gốc (Audio / Music Detection):**
-   - Nếu video gốc **ĐÃ CÓ SẴN NHẠC NỀN / BÀI HÁT / ASMR HAY**: BẮT BUỘC đặt `"has_original_music": true` và `"bgm_mood": "none"`.
-   - Nếu video gốc **LÀ VIDEO CÂM HOẶC CHỈ CÓ TẠP ÂM MIC KHÔNG CÓ NHẠC**: Đặt `"has_original_music": false` và chọn `"bgm_mood"` (`chill`, `satisfying`, `energetic`).
+4. **Thẩm định Âm thanh 3 Tầng Thông Minh (Smart 3-Tier Audio Strategy):**
+   - 🎵 **TẦNG 1 — ĐÃ CÓ SẴN NHẠC NỀN HOẶC TIẾNG ASMR THỰC ĐỊA ĐẮT GIÁ:** (tiếng rọc dao, bóc vỏ, búa gõ đục da, tiếng nước chảy...): BẮT BUỘC đặt `"has_original_music": true`, `"bgm_mood": "none"`, `"audio_strategy": "preserve_native_asmr"` $\rightarrow$ **Giữ 100% âm thanh gốc, tuyệt đối không chèn thêm nhạc ngoài**.
+   - 🔇 **TẦNG 2 — VIDEO CÂM HOẶC KHÔNG CÓ TIẾNG NÓI:** Đặt `"has_original_music": false`, `"audio_strategy": "mix_bgm"` và chọn `"bgm_mood"` (`chill`, `satisfying`, `energetic`, `luxury`) $\rightarrow$ **Hệ thống tự động lồng ghép BGM phù hợp**.
+   - 🗣️ **TẦNG 3 — VIDEO CÓ TIẾNG NÓI TẠP / TIẾNG ỒN NGOẠI CẢNH (Noisy chatter, street noise, ambient voice):** Khi video có tiếng người lạ nói chuyện xì xào hoặc tạp âm gây nhiễu, đặt `"has_original_music": false`, `"audio_strategy": "suppress_ambient_voice_and_boost_bgm"`, chọn `"bgm_mood"` $\rightarrow$ **Hệ thống sẽ tự động ép giảm âm lượng tiếng ồn gốc xuống 30% và đẩy âm lượng BGM lên 85% để át tạp âm, mang lại âm thanh sạch sẽ, chuyên nghiệp**.
 5. **Danh sách scene_type hợp lệ** - Chỉ chọn 1 trong: `["hook", "intro", "body", "highlight", "outro", "cta"]`.
 
 ━━━━━━━━━━━━━━━━━━

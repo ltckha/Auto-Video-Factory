@@ -1,73 +1,64 @@
 # 🎬 Auto-Video-Factory - Project Status & Architecture
 
-> **Cập nhật mới nhất:** 21/08/2026
+> **Cập nhật mới nhất:** 02/09/2026
 
 ---
 
-## 1. 🌟 Kiến Trúc Hiện Tại (Current Architecture)
+## 1. 🌟 Kiến Trúc Hệ Thống Hiện Tại (Current Architecture)
 
-### 📊 Direct Google Sheets API v4 (100% Zero Google Apps Script)
+### 🧠 Động Cơ AI Kép (Gemini Model Routing & Priority)
+* **Model Phân Tích Video Chính (`heavy_video_analysis`):** Ưu tiên **`gemini-3.6-flash`** (ổn định, mượt mà), dự phòng cấp 1: `gemini-3.7-flash`, dự phòng cấp 2: `gemini-3.5-flash` / `gemini-3.0-flash`.
+* **Model Gợi Ý Ý Tưởng (`lightweight_tasks`):** Ưu tiên **`gemini-3.5-flash-lite`** (siêu tốc, hạn ngạch 500 RPD), dự phòng: `gemini-3.1-flash-lite`.
+* **Dynamic Video Processing Engine (Chuẩn Google AI Studio 01/09/2026):**
+  * **Video dài (> 5 phút / Mode `LongHighlightClusters`):** Kích hoạt `processing: "agentic"` để quét động thông minh, tua nhanh vùng chết và giảm $88\%$ token.
+  * **Video ngắn (< 5 phút / Short2Short / Long2Short):** Kích hoạt `processing: "static"` để quét frame-level liên tục tức thì với độ trễ thấp nhất.
+
+### 🧵 Kho Nguyên Vật Liệu Sáng Tạo (Creative Material Layer M6.2)
+* **100% Procedural Remotion Code ($< 1\text{MB}$ — Không làm phình dung lượng, sắc nét 4K):**
+  * 🧵 `StitchingThread`: Đường may chỉ xiên $45^\circ$ thủ công kèm lỗ đục quả trám 3D.
+  * ✏️ `HandMark`: Trọn bộ 8 nét vẽ tay tự nhiên (Circle, Arrow, Check Mark, Cross Mark, Scribble, Bracket Box, Underline, Highlight).
+  * 📜 `TornPaperBackground`: Thẻ giấy Kraft xé viền răng cưa mộc mạc.
+  * 📎 `PaperClip`: Kẹp giấy kim loại phản quang & Ghim đồng.
+  * 🏷️ `KraftTape`: Băng keo dán Washi mờ có góc nghiêng vật lý.
+  * 🔨 `EmbossStamp`: Dấu dập chìm nhiệt độ sâu 3D & Con dấu tròn chất lượng nén nảy lò xo (`press_rebound`).
+  * ↔️ `BeforeAfterSlider`: Thanh trượt phân đôi màn hình Trước & Sau phục hồi.
+  * 🏷️ `PriceTagBadge`: Tag giá thương mại nổi khối kèm giảm giá.
+  * 📏 `DimensionLine`: Thước đo milimet thông số độ dày da/kích thước.
+  * ✨ `LightSweep` & `SurfaceGrainOverlay`: Vệt sáng quét nổi khối vân da và hạt phim hữu cơ siêu mịn.
+* **4 Material Families:** `artisan_leather`, `organic_farm`, `product_showcase`, `editorial_look`.
+* **Âm Thanh Xúc Giác (Sonic Foley):** `leather_rub`, `stitch_pull`, `stamp_press`, `paper_tear`, `clip_click`, `whoosh_soft`.
+
+### 🛡️ Bảo Vệ Thương Hiệu Tuyệt Đối (Safe Brand Routing)
+* **Logo Chính Thức Đã Đăng Ký:**
+  * 👞 Hiệu Giày Hải Nancy: `renderer-remotion/src/brand/assets/logo_hai_nancy.png`
+  * 🧵 Yen HANDMADE LEATHER: `renderer-remotion/src/brand/assets/logo_yen_handmade_leather.png`
+* **Quy Tắc Bất Di Bất Dịch:**
+  * Tuyệt đối KHÔNG tự chế/bịa đặt tên thương hiệu.
+  * Chỉ chèn logo khi video được xác định chính xác $100\%$ thuộc thương hiệu đó.
+  * Video chia sẻ chung/ASMR: Giữ $100\%$ video sạch, không chèn logo bừa bãi.
+
+### 🎵 Hệ Thống Âm Thanh 3 Tầng Thông Minh (Smart 3-Tier Audio Strategy)
+* **Tầng 1 — Video Đã Có Nhạc Sẵn hoặc ASMR Thực Địa:** Gán `"has_original_music": true`, `"bgm_mood": "none"` $\rightarrow$ Giữ nguyên $100\%$ âm thanh gốc, **tuyệt đối không chèn đè nhạc ngoài**.
+* **Tầng 2 — Video Câm / Không Có Tiếng:** Gán `"has_original_music": false`, `"audio_strategy": "mix_bgm"` $\rightarrow$ Tự động lồng ghép nhạc nền BGM phù hợp mức âm lượng $50\%$.
+* **Tầng 3 — Video Có Tạp Âm / Voice Nói Chuyện Lạ Gây Nhiễu:** Gán `"audio_strategy": "suppress_ambient_voice_and_boost_bgm"` $\rightarrow$ Bộ trộn FFmpeg tự động ép giảm âm lượng tiếng ồn gốc xuống $30\%$ ($-10\text{dB}$) và đẩy âm lượng BGM lên $85\%$ để át tạp âm, mang lại âm thanh sạch sẽ, chuyên nghiệp.
+
+### 🧠 Đề Xuất Ý Tưởng Độc Bản 100% (Context-First Ideation Engine)
+* **Xóa Bỏ Hoàn Toàn Anchor Bias (Không Còn Ví Dụ Rập Khuôn):** AI bắt buộc bóc tách vật thể, hành động và điểm bất thường/đắt giá nhất của riêng video đó.
+* **Tăng `temperature: 0.85`:** Giúp AI bung vốn từ vựng phong phú, tạo ra 3 góc nhìn tương phản $180^\circ$ (Cảm giác/ASMR $\leftrightarrow$ Chuyên gia/Mẹo nghề $\leftrightarrow$ Kịch tính/Đánh giá trước-sau).
+
+### 📊 Direct Google Sheets API v4
 * **Kết nối:** Dùng trực tiếp Google Sheets API v4 qua `google-auth-library` kết hợp khóa xác thực `config/service_account.json`.
 * **Spreadsheet ID:** `1Xg67qhp1J_Izt7v5uDKRgKjdEZapX9giKJ_ym0OMJN4`
-* **Module điều khiển:** [`renderer/scripts/googleSheetsDirectClient.js`](renderer/scripts/googleSheetsDirectClient.js) và [`renderer/scripts/googleSheetsSync.js`](renderer/scripts/googleSheetsSync.js).
-* **Cơ chế:** 100% Dynamic Header Mapping (Dò tìm vị trí cột theo tên tiêu đề Hàng 1, miễn nhiễm lệch cột).
-* **Các Tab đồng bộ tự động:**
-  * `Auto-Video-Factory`: Cập nhật trạng thái video (`🎬 Rendered`, đường dẫn `video_path`, metadata).
-  * `Video-Factory-EFFECTS`: Bảng thống kê tỉ lệ thành công của các hiệu ứng nâng cao.
-  *(Đã loại bỏ tab `Video-Factory-SCENES` theo yêu cầu tối ưu hệ thống).*
-
-### 💾 Chuẩn Hóa Đường Dẫn Lưu Trữ NAS (Standardized Storage Path)
-* **Cấu trúc Thư mục Master:** Lưu trực tiếp tại `/Volumes/Media/Auto-Video-Factory/<projectId>/`
-  * `<projectId>.mp4` (File video thành phẩm chuẩn hóa, không còn hậu tố `_final`).
-  * `<projectId>.json` (File kịch bản timeline chi tiết).
-  * `post.txt` (File text tiêu đề, mô tả và hashtags phục vụ đăng bài).
-* **Đường dẫn ghi lên Google Sheets:** Cột `video_path` / `Output File` luôn có định dạng: `/Volumes/Media/Auto-Video-Factory/<projectId>/<projectId>.mp4`.
-
-### 🧠 Tối Ưu Smart Proxy 1x (Kích Hoạt Kép: Thời Lượng > 5m HOẶC Dung Lượng > 200MB)
-* **Cơ chế Smart Proxy 1x ([`renderer/scripts/smartProxyGenerator.js`](renderer/scripts/smartProxyGenerator.js)):**
-  * Tự động kích hoạt khi video **dài > 5 phút (300s)** HOẶC có **dung lượng file > 200MB** (video 4K/HDR nặng).
-  * Nén nhẹ về 720p siêu tốc bằng chip Apple M4 trong 3-5s (~30-50MB).
-  * Giữ **100% tốc độ 1x chuẩn và âm thanh tiếng nói gốc** (Xóa bỏ hoàn toàn Fast Preview 4x gây méo tiếng).
-  * Đảm bảo mốc thời gian `start_s` và `end_s` khớp 100.0% với video gốc.
-* **Động cơ Trích Xuất Phân Đoạn Trực Diện (Direct Highlight Cutter - Single-Pass 1.0x Natural Speed):**
-  1. *Linh hoạt số lượng:* Tự động trích xuất toàn bộ các Short độc lập có giá trị cao nhất dựa trên nội dung thực tế (không ép cứng số lượng).
-  2. *Dòng thời gian xuôi chiều & Không trùng lặp:* Các phân cảnh nối tiếp nhau (Short 1 ➔ Short 2 ➔ Short 3), lọc sạch hoàn toàn các vùng chết giữa các công đoạn.
-  3. *Tốc độ 1.0x tự nhiên (1:1 Natural Speed):* `duration_s = end_s - start_s` trong vùng vàng 30s-55s, **xóa bỏ hoàn toàn việc tua nhanh ép nén thời gian (no speedup distortion)**, bảo toàn 100% nhịp điệu tự nhiên và âm thanh ASMR thực tế.
-  4. *Đầy đủ dữ liệu trong 1 lần chạy:* Sinh sẵn phân cảnh con, thẻ chữ Kinetic Pop-up (hiện 2.5s rồi tắt), chuyển cảnh Fade/Wipe, bài viết Social Post hoàn chỉnh và đồng bộ ngay sang Google Sheets.
-
-### 🎵 Smart BGM Presence Detection (Chống Chèn Đè Nhạc)
-* **Nhận diện bằng AI ([`renderer/prompts/long2short_generator_prompt.md`](renderer/prompts/long2short_generator_prompt.md)):** AI tự động nghe kênh âm thanh. Nếu video gốc đã có sẵn nhạc nền/bài hát/ASMR hay ➔ Gán `"has_original_music": true`, `"bgm_mood": "none"`.
-* **Bộ lọc Render ([`renderer/scripts/render.js`](renderer/scripts/render.js)):** Khi phát hiện video đã có nhạc gốc ➔ Giữ nguyên 100% âm thanh gốc, **tuyệt đối không mix thêm nhạc ngoài**.
-
-### ✍️ Quy Tắc Outro / CTA Độc Bản (Chống Văn Mẫu)
-* Đã xóa bỏ hoàn toàn các câu ví dụ mẫu gây neo định kiến (như "Gói trọn bình yên trong từng chi tiết").
-* AI bắt buộc phải sáng tạo câu kết riêng biệt 100% theo đúng nội dung và cảm xúc của từng video.
-
-### 📝 Bài Viết Mạng Xã Hội Hoàn Chỉnh (`post.txt`)
-* File `post.txt` xuất bản ra NAS theo cấu trúc **Full Social Post** 3 phần:
-  * 🎣 **Mở bài (Hook Line):** 1–2 câu mở màn giật tít, khơi gợi tò mò.
-  * 📖 **Thân bài (Story & Value):** Đoạn văn 2–3 câu chia sẻ câu chuyện, kiến thức hoặc mẹo hay sâu sắc.
-  * 💬 **Lời kết (Outro / Engagement):** Câu kết đọng lại cảm xúc nhẹ nhàng hoặc câu hỏi kéo bình luận.
-  * 🏷️ **Hashtags:** Bộ 5–8 hashtags chuẩn ngách chuyên sâu.
-
-### ⏱️ Dynamic Subtitle Timing & Chuyển Cảnh Time-Jump Rõ Nét
-* **Hiển thị thông minh 2.5s đầu:** Thẻ Card/Subtitle chỉ xuất hiện trong **2.5s đầu của phân cảnh** để người xem kịp nắm thông điệp rồi tự động biến mất (`enable='lte(t, 2.5)'`), trả lại 100% không gian thị giác sạch sẽ cho các chi tiết thao tác ASMR.
-* **Hỗ trợ Style `none`:** Ẩn hoàn toàn phụ đề ở các cảnh cận cảnh macro ASMR.
-* **Chuyển cảnh Time-Jump rõ nét:** Khi cắt bỏ đoạn thừa để nhảy cóc sang công đoạn mới, ưu tiên dùng các hiệu ứng dứt khoát: `wipe_left`, `wipe_right`, `slide_up`, `circle_open`, `pixelize`.
+* **Tab `Auto-Video-Factory`:** Cập nhật trạng thái video (`🎬 Rendered`), `raw_caption` đầy đủ (Title + Hook + Story + Hashtags), cột `Effects Summary` ghi nhận toàn bộ hiệu ứng đã dùng.
 
 ---
 
-## 2. 🎨 Bộ Khung Đồ Họa Chính Thức & Quy Tắc Render
-
-* **4 Khung Đồ Họa PNG Chuẩn Hóa + Tùy chọn Ẩn:**
-  1. 🟨 `vibrant_yellow_sticker` (Sticker Vàng Rực Rỡ - Chữ Đen)
-  2. 🧊 `minimal_glass_card` (Kính Mờ Sang Trọng - **Chữ Trắng Sáng Tinh Khiết**)
-  3. 🚨 `warning_red_badge` (Badge Đỏ Cảnh Báo 3D - Chữ Trắng)
-  4. ⚡ `vibrant_yellow_lightning_sticker` (Sét Vàng Accent Outro)
-  5. 🚫 `none` (Ẩn hoàn toàn phụ đề cho cảnh quay cận cảnh ASMR)
+## 2. 📋 Master Effects Registry & Feedback Loop
+* Mọi hiệu ứng đang chạy, hàng đợi nâng cấp và danh sách cấm được quản lý tập trung tại:
+  👉 [`effects/EFFECTS_BACKLOG_AND_FEEDBACK.md`](effects/EFFECTS_BACKLOG_AND_FEEDBACK.md)
 
 ---
 
-## 3. 🛡️ Quy Tắc Làm Việc Của AI Assistant
-1. **BẮT BUỘC THẢO LUẬN TRƯỚC KHI LÀM (`always_consult_user_first.md`):** Luôn trình bày kế hoạch và xin ý kiến duyệt từ User trước khi sửa code hoặc chạy lệnh.
-2. **KHÔNG TỰ Ý PUSH GIT (`git_push_on_user_request_only.md`):** Chỉ thực hiện lệnh push Git khi User yêu cầu rõ ràng.
+## 3. 🛡️ QUY TẮC BẮT BUỘC DÀNH CHO AI ASSISTANT
+1. ⚠️ **BẮT BUỘC THẢO LUẬN & XIN PHÉP TRƯỚC KHI LÀM:** Tuyệt đối KHÔNG tự ý viết code, sửa code hay chạy lệnh can thiệp khi chưa thảo luận và nhận được sự đồng ý rõ ràng từ User.
+2. ⚠️ **TUYỆT ĐỐI KHÔNG TỰ Ý PUSH GIT:** Chỉ thực hiện lệnh `git push` hoặc `git commit` khi User trực tiếp ra lệnh trong lượt tương tác đó.

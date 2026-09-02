@@ -20,15 +20,18 @@ Nhiệm vụ của bạn là phân tích toàn diện một Video Dài (> 5 phú
 * 🚫 **TUYỆT ĐỐI CẤM:** Không được nhặt đi nhặt lại cùng một cảnh quay giữa các Short con. Không nhảy cóc giật lùi thời gian.
 * 🧹 **LỌC SẠCH VÙNG CHẾT:** Loại bỏ hoàn toàn các khoảng thời gian thừa, di chuyển máy, ngập ngừng giữa các phân đoạn.
 
-### 3. ⏱️ ĐỘ DÀI VÀNG & QUY TẮC TỐC ĐỘ 1.0X TỰ NHIÊN (BẮT BUỘC):
+### 3. 🌟 AGENTIC VIDEO UNDERSTANDING & ĐỘ DÀI VÀNG (BẮT BUỘC):
+* **Quét Động Thông Minh (Dynamic Scanning):** Lướt nhanh qua các đoạn tĩnh/thừa của video dài và tập trung token soi sâu vào các chùm cao trào hành động đắt giá nhất.
+* **Định Vị Mốc Thời Gian Chuẩn Xác Sub-Second:** Căn chỉnh `start_s` và `end_s` chính xác đến từng số thập phân (ví dụ: `45.20`, `78.60`) khớp đúng nhịp hành động.
 * **Độ dài mỗi Short:** Tổng thời lượng thực tế của mỗi Short BẮT BUỘC nằm trong khoảng **30 giây đến 55 giây** (tối đa 60 giây).
 * **TỐC ĐỘ 1.0X TỰ NHIÊN (CẤM TUA NHANH ÉP THỜI GIAN):**
   * Mọi phân cảnh con (`scene`) bên trong Short phải có: `duration_s = end_s - start_s`.
   * Giữ nguyên 100% tốc độ phát 1.0x tự nhiên của video gốc để bảo toàn nhịp điệu chân thực và âm thanh thao tác.
 
-### 4. 🎙️ THẨM ĐỊNH ÂM THANH THỰC TẾ (NATIVE ASMR AUDIO):
-* Nếu video có âm thanh thao tác/ASMR đắt giá (tiếng bóc tách giòn tan, dao kéo, chiên xào xèo xèo, đục gọt gỗ, tiếng nước, tiếng gõ búa...): BẮT BUỘC đặt `"audio_strategy": "preserve_native_asmr"` và `"has_original_music": true` (**giữ 100% âm thanh thực tế, không chèn đè nhạc ngoài**).
-* Nếu video câm hoặc chỉ có tạp âm rè vô nghĩa: Đặt `"audio_strategy": "mix_bgm"` và `"has_original_music": false`.
+### 4. 🎙️ THẨM ĐỊNH ÂM THANH 3 TẦNG THÔNG MINH (SMART 3-TIER AUDIO STRATEGY):
+* 🎵 **TẦNG 1 — ĐÃ CÓ SẴN NHẠC HOẶC TIẾNG ASMR THỰC ĐỊA ĐẮT GIÁ:** (tiếng rọc dao, bóc tách giòn tan, chiên xào xèo xèo, đục gọt da/gỗ, búa gõ...): BẮT BUỘC đặt `"has_original_music": true`, `"bgm_mood": "none"`, `"audio_strategy": "preserve_native_asmr"` $\rightarrow$ **Giữ 100% âm thanh thực tế, tuyệt đối không chèn thêm nhạc ngoài**.
+* 🔇 **TẦNG 2 — VIDEO CÂM HOẶC KHÔNG CÓ TIẾNG NÓI:** Đặt `"has_original_music": false`, `"audio_strategy": "mix_bgm"` và chọn `"bgm_mood"` $\rightarrow$ **Lồng ghép BGM phù hợp**.
+* 🗣️ **TẦNG 3 — VIDEO CÓ TIẾNG NÓI TẠP / TIẾNG ỒN NGOẠI CẢNH:** Đặt `"has_original_music": false`, `"audio_strategy": "suppress_ambient_voice_and_boost_bgm"`, chọn `"bgm_mood"` $\rightarrow$ **Ép giảm 30% âm lượng tiếng ồn gốc và đẩy BGM lên 85% để át tạp âm**.
 
 ---
 

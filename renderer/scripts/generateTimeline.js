@@ -16,8 +16,8 @@ const effectEnums = fs.existsSync(ENUMS_PATH) ? JSON.parse(fs.readFileSync(ENUMS
 
 const MODELS_CONFIG_PATH = path.join(ROOT, "renderer", "config", "geminiModelsConfig.json");
 const modelsConfig = fs.existsSync(MODELS_CONFIG_PATH) ? JSON.parse(fs.readFileSync(MODELS_CONFIG_PATH, "utf8")) : {};
-const HEAVY_MODELS = (modelsConfig.models && modelsConfig.models.heavy_video_analysis) || ["gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
-const LITE_MODELS = (modelsConfig.models && modelsConfig.models.lightweight_tasks) || ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.7-flash", "gemini-3.6-flash"];
+const HEAVY_MODELS = (modelsConfig.models && modelsConfig.models.heavy_video_analysis) || ["gemini-3.6-flash", "gemini-3.7-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
+const LITE_MODELS = (modelsConfig.models && modelsConfig.models.lightweight_tasks) || ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.6-flash", "gemini-3.7-flash"];
 
 const RESPONSE_SCHEMA = {
   type: "OBJECT",
@@ -327,6 +327,12 @@ async function main() {
     fileToUpload = generateSmartProxy1x(absoluteVideoPath, TEMP_WORK_DIR);
   }
 
+  // LỰA CHỌN CHẾ ĐỘ XỬ LÝ (DYNAMIC PROCESSING SELECTOR THEO CHUẨN GOOGLE):
+  // - Video Dài (> 5 phút / Mode Cluster) -> Dùng 'agentic' để tua nhanh, tiết kiệm 88% token và quét động
+  // - Video Ngắn (< 5 phút / Short2Short / Long2Short) -> Dùng 'static' để quét frame-level tức thì và độ trễ thấp
+  const videoProcessingMode = (dur > 300 || isClusterMode) ? "agentic" : "static";
+  console.log(`[VideoProcessing] ⚙️ Chế độ xử lý video: '${videoProcessingMode}' (${dur > 300 || isClusterMode ? "Video dài / Cluster -> 'agentic' Dynamic Scan" : "Video ngắn < 5m -> 'static' Frame-level Precision"})`);
+
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     console.error("Lỗi: Chưa thiết lập biến môi trường GEMINI_API_KEY.");
@@ -413,7 +419,7 @@ async function main() {
 
     if (isClusterMode) {
       // XỬ LÝ MODE CLUSTER (PASS 1 & PASS 2 DÀNH CHO VIDEO DÀI/BATCH SHORTS)
-      console.log("[AI] [DirectHighlightCutter] Đang gửi yêu cầu phân tích & trích xuất chùm Video Ngắn sang Gemini AI...");
+      console.log(`[AI] [VideoEngine] 🧠 Đang gửi yêu cầu phân tích & trích xuất chùm Video Ngắn (mode: ${videoProcessingMode}) sang Gemini AI...`);
       const clusterResponse = await generateContentWithRetryFallback(
         ai,
         HEAVY_MODELS,
@@ -423,8 +429,9 @@ async function main() {
               fileUri: fileState.uri,
               mimeType: fileState.mimeType,
             },
+            processing: videoProcessingMode,
           },
-          "Hãy phân tích toàn bộ video, trích xuất tất cả các đoạn Video Ngắn Độc Lập giá trị nhất (mỗi video 30s-55s, tốc độ 1.0x chuẩn tự nhiên) kèm đầy đủ kịch bản phân cảnh và bài viết Social Post.",
+          "Hãy phân tích toàn bộ video theo cơ chế Agentic Video Understanding (định vị mốc thời gian chuẩn xác mili-giây và phân tích động), trích xuất tất cả các đoạn Video Ngắn Độc Lập giá trị nhất (mỗi video 30s-55s, tốc độ 1.0x chuẩn tự nhiên) kèm đầy đủ kịch bản phân cảnh và bài viết Social Post.",
         ],
         {
           systemInstruction: systemInstruction,
@@ -571,19 +578,27 @@ async function main() {
       required: ["ideas"]
     };
 
-    const ideationPrompt = `Bạn là một Đạo diễn & Biên tập viên Video Ngắn Viral hàng đầu (TikTok / Reels / Shorts).
-Hãy xem kỹ video trên và đề xuất đúng 3 GÓC Ý TƯỞNG DỰNG (Creative Story Angles) KHÁC BIỆT NHAU để người dùng lựa chọn:
-- Góc 1: Thường là góc mạnh nhất (ASMR Thỏa Mãn / Foley Thực Địa hoặc Hook Giật Gân Trực Diện).
-- Góc 2: Thường là góc Hướng dẫn / Mẹo Nghề / Giá Trị Thực Tế / Step-by-Step Tutorial.
-- Góc 3: Thường là góc Kịch tính / Khoe Thành Phẩm (Showcase) / Biến hình / Storytelling.
+    const ideationPrompt = `Bạn là một Đạo diễn & Chuyên gia Sáng Tạo Nội Dung Video Ngắn Hàng Đầu.
+Nhiệm vụ của bạn là xem kỹ toàn bộ video trên và thực hiện 2 BƯỚC ĐỂ ĐỀ XUẤT ĐÚNG 3 GÓC Ý TƯỞNG DỰNG ĐỘC BẢN:
 
-Yêu cầu mỗi ý tưởng:
-- angle_name: Tên ý tưởng ngắn gọn, hấp dẫn kèm icon biểu tượng.
-- hook_summary: Tóm tắt 1 câu về cách mở đầu giật hook ở 3 giây đầu tiên.
-- style_direction: Phong cách hình ảnh (Cận cảnh Macro, Kính mờ sang trọng, Nhãn dán vàng 3D, Nhịp nhanh...).
-- audio_strategy_detail: Phong cách âm thanh (Giữ 100% tiếng ASMR thực tế, Giọng đọc chia sẻ + BGM chill, Nhạc sôi động...).
-- viral_score: Điểm đánh giá tiềm năng thu hút (từ 8.0 đến 9.8).
-- creative_prompt_directive: Lời chỉ dẫn cụ thể (2-3 câu) để áp dụng định hướng này vào việc cắt phân cảnh và viết kịch bản chi tiết ở bước sau.`;
+BƯỚC 1: BÓC TÁCH NGỮ CẢNH ĐỘC NHẤT (CONTEXT EXTRACTION)
+- Xác định chính xác: Vật thể/Nhân vật/Sản phẩm trung tâm trong video là gì?
+- Hành động cốt lõi của con người đang diễn ra trong video là gì?
+- Đâu là điểm thị giác hoặc âm thanh kỳ lạ/đắt giá nhất mà CHỈ RIÊNG VIDEO NÀY MỚI CÓ?
+
+BƯỚC 2: SÁNG TẠO 3 GÓC DỰNG ĐỘC BẢN TƯƠNG PHẢN TUYỆT ĐỐI (KHÔNG DÙNG VĂN MẪU RẬP KHUÔN)
+Dựa trực tiếp trên vật thể và bối cảnh ở Bước 1, hãy đề xuất 3 góc ý tưởng mang 3 phong cách và mục tiêu truyền thông hoàn toàn khác biệt:
+- Ý TƯỞNG 1 (Cảm giác & Xúc giác / Trải nghiệm chân thực): Tập trung trọn vẹn vào độ thỏa mãn của hành động, âm thanh thực tế, vẻ đẹp chi tiết của vật thể.
+- Ý TƯỞNG 2 (Kể chuyện / Chia sẻ góc nhìn / Bí quyết nghề): Đặt vấn đề, chia sẻ kiến thức chuyên môn, câu chuyện đằng sau hoặc mẹo thực chiến hữu ích.
+- Ý TƯỞNG 3 (Kịch tính / Nhanh gọn / Đánh giá & Kết quả trước-sau): Giật hook mạnh mẽ, nhịp độ dứt khoát, tập trung vào kết quả bất ngờ hoặc tính năng vượt trội.
+
+Yêu cầu từng trường dữ liệu:
+- angle_name: Tên ý tưởng độc bản, sắc sảo (gắn liền với tên vật thể/hành động thật trong video) kèm icon.
+- hook_summary: 1 câu mở màn giật tít đánh trúng tâm lý người xem trong 3 giây đầu.
+- style_direction: Phong cách hình ảnh và đồ họa cụ thể phù hợp với ý tưởng này.
+- audio_strategy_detail: Chiến lược âm thanh chi tiết (Giữ 100% âm thanh thực địa, lồng nhạc nền, hoặc xử lý tạp âm).
+- viral_score: Điểm tiềm năng thu hút (từ 8.2 đến 9.8).
+- creative_prompt_directive: Lời chỉ đạo đạo diễn cụ thể (2-3 câu) để áp dụng vào việc cắt phân cảnh và viết kịch bản chi tiết ở bước sau.`;
 
     let chosenIdeaDirective = "";
     try {
@@ -596,12 +611,14 @@ Yêu cầu mỗi ý tưởng:
               fileUri: fileState.uri,
               mimeType: fileState.mimeType,
             },
+            processing: videoProcessingMode,
           },
           ideationPrompt,
         ],
         {
           responseMimeType: "application/json",
           responseSchema: ideationSchema,
+          temperature: 0.85,
         }
       );
 
@@ -616,7 +633,7 @@ Yêu cầu mỗi ý tưởng:
       console.warn(`[Ideation] Warning: Bỏ qua bước chọn ý tưởng do gặp lỗi: ${ideationErr.message}. Tiếp tục quy trình chuẩn...`);
     }
 
-    console.log("[AI] Đang gửi yêu cầu phân tích video & sinh Timeline JSON chi tiết sang Gemini AI...");
+    console.log(`[AI] [VideoEngine] 🧠 Đang gửi yêu cầu phân tích video & sinh Timeline JSON (mode: ${videoProcessingMode}) sang Gemini AI...`);
     const response = await generateContentWithRetryFallback(
       ai,
       HEAVY_MODELS,
@@ -626,6 +643,7 @@ Yêu cầu mỗi ý tưởng:
             fileUri: fileState.uri,
             mimeType: fileState.mimeType,
           },
+          processing: videoProcessingMode,
         },
         "Hãy thực hiện phân tích video trên và trả về kịch bản Timeline JSON chi tiết theo đúng cấu trúc quy chuẩn.",
       ],

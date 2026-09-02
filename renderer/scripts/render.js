@@ -1771,16 +1771,24 @@ async function renderCurrentProject() {
         const isLong2Short = modeStr.includes("long2short");
         const hasVoiceover = scenes.some((s) => s.include !== false && s.voice && s.voice.trim().length > 0);
         const hasFastSpeedup = scenes.some((s) => s.include !== false && ((s.sourceDuration || s.duration) / s.duration >= 2.0));
-        // Đẩy BGM lên 85% KHI VÀ CHỈ KHI thuộc mode Long2Short hoặc có cảnh tua nhanh >= 2.0x.
-        // Nếu là video 1.0x bình thường không có voiceover -> BGM mức mặc định 50% (0.50). Nếu có thoại -> 25% (0.25).
-        const bgmVolume = (isLong2Short || hasFastSpeedup) ? 0.85 : (hasVoiceover ? 0.25 : 0.50);
-        log(`[AudioEngine] Đang chèn BGM [${bgmMood}] (Âm lượng BGM: ${(bgmVolume * 100).toFixed(0)}%) từ: ${bgmTrack.path}`);
+        const isSuppressNoise = audioStrategy.includes("suppress") || audioStrategy.includes("noisy") || audioStrategy.includes("ambient");
+
+        // Đẩy BGM lên 85% khi thuộc mode Long2Short, có cảnh tua nhanh, hoặc khi cần át tạp âm voice lạ
+        const bgmVolume = (isLong2Short || hasFastSpeedup || isSuppressNoise) ? 0.85 : (hasVoiceover ? 0.25 : 0.50);
+        const origVolume = isSuppressNoise ? 0.30 : 1.0;
+
+        if (isSuppressNoise) {
+          log(`[AudioEngine] 🔇 Phát hiện Tạp âm / Voice lạ -> Ép giảm âm lượng gốc xuống ${(origVolume * 100).toFixed(0)}% và Đẩy BGM lên ${(bgmVolume * 100).toFixed(0)}% để át tiếng ồn.`);
+        } else {
+          log(`[AudioEngine] Đang chèn BGM [${bgmMood}] (Âm lượng BGM: ${(bgmVolume * 100).toFixed(0)}%) từ: ${bgmTrack.path}`);
+        }
+
         const bgmTempOutput = path.join(TEMP_DIR, `${videoId}_bgm_mixed.mp4`);
-        const mixCmd = `ffmpeg -y -i "${outputPath}" -i "${bgmTrack.path}" -filter_complex "[1:a]asetrate=44320,aresample=44100,volume=${bgmVolume},aloop=loop=-1:size=2e+9[bgm];[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=2[aout]" -map 0:v -map "[aout]" -c:v copy -c:a aac -b:a 192k "${bgmTempOutput}"`;
+        const mixCmd = `ffmpeg -y -i "${outputPath}" -i "${bgmTrack.path}" -filter_complex "[0:a]volume=${origVolume}[clean_orig];[1:a]asetrate=44320,aresample=44100,volume=${bgmVolume},aloop=loop=-1:size=2e+9[bgm];[clean_orig][bgm]amix=inputs=2:duration=first:dropout_transition=2[aout]" -map 0:v -map "[aout]" -c:v copy -c:a aac -b:a 192k "${bgmTempOutput}"`;
         execSync(mixCmd, { stdio: "pipe" });
         if (fs.existsSync(bgmTempOutput)) {
           fs.renameSync(bgmTempOutput, outputPath);
-          log(`[AudioEngine] ✅ Đã chèn BGM Nhạc Nền thành công (Volume: ${(bgmVolume * 100).toFixed(0)}%) vào: ${outputPath}`);
+          log(`[AudioEngine] ✅ Đã chèn BGM Nhạc Nền thành công (BGM: ${(bgmVolume * 100).toFixed(0)}%, Orig: ${(origVolume * 100).toFixed(0)}%) vào: ${outputPath}`);
         }
         if (bgmTrack.isTemp && fs.existsSync(bgmTrack.path)) {
           try { fs.unlinkSync(bgmTrack.path); } catch {}

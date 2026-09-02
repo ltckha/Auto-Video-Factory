@@ -103,6 +103,10 @@ $$\text{Design Primitive} \longrightarrow \text{Motion Registry} \longrightarrow
 | **14. Tự Động Ghi Nhận Tab `Video-Factory-EFFECTS`** | Thống kê số lần sử dụng thành công của `subtitle_style`, `transition_out`, `camera_motion` vào `effect_success_stats.json` và đồng bộ trực tiếp lên Google Sheets API v4 sau mỗi lần render. | Giữ nguyên vẹn toàn bộ hệ thống phân tích dữ liệu hiệu ứng cho người dùng. |
 | **15. Chia Dòng `\n` & Typography Bất Đối Xứng (Uneven Scaling)** | Bắt buộc AI chèn `\n` chia phụ đề thành 2 dòng (Hành động + Punchline); nâng cấp `KineticText.tsx` tự động tăng cỡ chữ $+15\% \sim +20\%$ cho dòng ngắn đắt giá. | Chữ trên video nảy nhịp điệu phong cách Viral TikTok/CapCut, dòng ngắn đắt giá phóng to cực kỳ hút mắt. |
 | **16. Đề Xuất 3 Góc Ý Tưởng & Chọn Nhanh (3-Angle Creative Ideation)** | Tích hợp module `interactiveIdeationReview.js` vào `generateTimeline.js`. Gemini đề xuất 3 góc dựng (ASMR, Mẹo nghề, Kịch tính) kèm điểm viral; cho phép chọn trong 10s (có đếm lùi tự động). | Trao quyền đạo diễn cho người dùng lựa chọn góc tiếp cận hay nhất mà vẫn bảo đảm tính tự động hóa $100\%$. |
+| **17. Kho Vật Liệu Xúc Giác (Creative Materials M6.2)** | Triển khai 10 Procedural Primitives ($100\%$ SVG/CSS, $< 1\text{MB}$): `StitchingThread`, `HandMark` (8 nét vẽ tay), `TornPaperBackground`, `PaperClip`, `KraftTape`, `EmbossStamp` 3D, `BeforeAfterSlider`, `PriceTagBadge`, `DimensionLine`, `LightSweep`. | Tái hiện cảm giác vật lý, xúc giác da mộc và chất vườn Đà Lạt mà không làm phình dung lượng hệ thống. |
+| **18. Mở Rộng Từ Vựng Chữ (Kinetic Typography Engine)** | Nâng cấp `KineticText.tsx` với 5 Treatments (`masked_slide`, `tracking_expand`, `typewriter`, `outlined_punch`, `word_pop`) và 4 Compositions (`editorial_eyebrow`, `bracketed_spec`, `step_flow`, `centered`). | Chữ trên video biến hóa đa dạng phong cách từ After Effects cao cấp đến Tạp chí thời trang và Nhật ký du lịch. |
+| **19. Chuyển Cảnh Mới (`circle_open` & `paper_rip`)** | Xây dựng `IrisCircleTransition.tsx` (Mở vòng tròn ống kính từ tâm) và `PaperRipTransition.tsx` (Xé giấy răng cưa thủ công). | Giải quyết triệt để cảnh mở nắp hộp unboxing, zoom soi chi tiết và phong cách thủ công. |
+| **20. Âm Thanh 3 Tầng & Safe Brand Resolver** | Tích hợp cơ chế ép giảm $30\%$ tiếng ồn/voice lạ ngoại cảnh + đẩy BGM $85\%$; bảo vệ thương hiệu Hải Nancy & YEN Leather với logo chính thức. | Âm thanh sạch sẽ chuyên nghiệp, an toàn bản quyền $100\%$. |
 
 ---
 
@@ -121,11 +125,15 @@ M6.2  Real Production Learning Loop    🟢 ACTIVE
       ├─ True-Color BT.709 & Overlays  ✅ COMPLETE (Pristine Camera Colors)
       ├─ Compact File Size Compression ✅ COMPLETE (CRF=20 Optimization)
       ├─ Batch Queue Multi-Shorts      ✅ COMPLETE (short01, short02, short03 queue)
-      ├─ TransitionSeries & Coverage   ✅ COMPLETE (Fade, Wipe, Slide, Flip & Zero Black Frames)
+      ├─ TransitionSeries & Coverage   ✅ COMPLETE (Fade, Wipe, Slide, Flip, Iris Circle, Paper Rip & Zero Black Frames)
       ├─ Smooth Outro Audio Decrescendo✅ COMPLETE (afade=t=out 0.6s)
       ├─ Effects Analytics Tab Sync    ✅ COMPLETE (Video-Factory-EFFECTS Tab)
       ├─ Multi-line \n & Uneven Scaling✅ COMPLETE (Kinetic Typography Hierarchy)
-      ├─ 3-Angle Creative Ideation     ✅ COMPLETE (Interactive 10s Countdown Pick)
+      ├─ 3-Angle Creative Ideation     ✅ COMPLETE (Context-First No-Template Engine)
+      ├─ Creative Material Layer M6.2  ✅ COMPLETE (10 Tactile Primitives & 4 Families)
+      ├─ Creative Vocabulary Inventory ✅ COMPLETE (Parametric Kinetic Type & Transitions)
+      ├─ Smart 3-Tier Audio Strategy   ✅ COMPLETE (ASMR, BGM Mix & Ambient Noise Suppression)
+      ├─ Safe Brand Resolver           ✅ COMPLETE (Official Logos & Safe Routing)
       ├─ Real Production Videos        🟢 Ongoing (Chạy video hàng ngày)
       └─ Progressive Enhancement       🟢 Ongoing (Đắp thêm Tier 2 khi cần)
 

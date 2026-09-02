@@ -1,56 +1,100 @@
 {
   "video_meta": {
-    "title": "ASMR Lái Xe Phố Núi Mưa Đêm - Nhịp Thở Bình Yên Giữa Lòng Đà Lạt",
-    "description": "🎣 Bạn đã bao giờ thả mình vào cảm giác ngồi trong ô tô ngắm nhìn phố núi chìm trong màn mưa êm đềm chưa?\n\n📖 Cùng mình lướt nhẹ qua những con dốc quen thuộc, lắng nghe nhịp gạt mưa đều đặn và ngắm nhìn những hàng quán lên đèn ấm áp. Âm thanh mộc mạc của mưa và dòng người qua lại mang đến sự tĩnh lặng khó tả.\n\n💬 Chiều mưa ở phố núi luôn có một sức hút rất riêng, chúc bạn có những phút giây thư giãn thật êm đềm nhé!",
+    "title": "✨ Unboxing Thỏa Mãn: Đập Hộp Kem Đánh Răng Trẻ Em Bristik",
+    "description": "📦 Trải nghiệm cảm giác unboxing cực thỏa mãn với bộ đôi kem đánh răng trẻ em Bristik!\n\nThao tác tay mượt mà từ đường rạch băng keo đến khi xé lớp bóng khí bảo vệ, hé lộ hai hương vị Amazing Strawberry và Super Blueberry siêu xinh xắn dành riêng cho bé.\n\nThiết kế bắt mắt, hương vị trái cây tự nhiên giúp bé hào hứng chăm sóc răng miệng mỗi ngày! 🦷✨",
     "hashtags": [
-      "asmrrain",
-      "dalatrain",
-      "laixemua",
-      "phonui",
-      "chillvibes",
-      "dalatlife"
+      "Bristik",
+      "UnboxingASMR",
+      "KemDanhRangTreEm",
+      "SatisfyingUnboxing",
+      "ChamSocRangMieng"
     ],
-    "pipeline_mode": "Long2Short",
-    "created_at": "2026-09-01 19:18:29",
-    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260814_075954.mp4",
-    "original_duration_s": 87.4
+    "pipeline_mode": "Short2Short",
+    "created_at": "2026-09-02 20:07:21",
+    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260815_090157.mp4",
+    "original_duration_s": 80.6
   },
   "timeline": [
     {
       "scene_id": "scene_001",
       "scene_type": "hook",
-      "start_s": 0,
-      "end_s": 10,
-      "duration_s": 6,
-      "title": "Khởi đầu phố mưa",
+      "start_s": 7,
+      "end_s": 18,
+      "duration_s": 11,
+      "title": "Rạch băng keo đập hộp",
       "story_importance": 0.95,
       "key_moments": [
-        2
+        8.5,
+        12,
+        16
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "DẠO PHỐ MƯA\nBÌNH YÊN PHỐ NÚI",
-      "subtitle_style": "minimal_glass_card",
+      "subtitle": "ĐẬP HỘP\nKEM ĐÁNH RĂNG BRISTIK",
+      "subtitle_style": "vibrant_yellow_sticker",
       "text_position": "top",
-      "voice": "Có những ngày phố núi chìm trong cơn mưa nhẹ, ngồi trong xe nghe tiếng gạt mưa thật dễ chịu.",
-      "visual_cue": "Góc nhìn từ kính chắn gió xe ô tô, mưa rơi lâm râm, cần gạt nước chuyển động qua lại giữa tuyến phố đông đúc.",
+      "voice": "Cùng đập hộp kiện hàng kem đánh răng trẻ em Bristik cực thỏa mãn này nhé!",
+      "visual_cue": "Tay cầm dao rọc giấy đường cắt sắc bén quanh hộp carton",
       "text_effect": {
-        "name": "Slide In",
-        "description": "Chữ trượt nhẹ từ trên xuống mềm mại"
+        "name": "Pop-up",
+        "description": "Chữ nảy ra gây chú ý ngay từ giây đầu tiên"
       },
       "advanced_effect": {
-        "name": "Cinematic Rain Focus",
-        "intent": "cinematic_transition",
-        "mood": "soft",
-        "pacing": "slow",
-        "focus": "reveal",
-        "camera_motion": "drift",
-        "intensity": 0.6,
-        "description": "Tăng độ tương phản hạt mưa trên kính và làm mềm ánh sáng phố phường"
+        "name": "sharp_knife_cut",
+        "intent": "satisfying_cut",
+        "mood": "satisfying",
+        "pacing": "fast",
+        "focus": "hand_action",
+        "camera_motion": "static",
+        "intensity": 0.9,
+        "description": "Đường rạch dao mượt mà dứt khoát trên băng keo"
       },
-      "hook_strength": 0.9,
-      "visual_energy": 0.7,
-      "retention_score": 0.88,
+      "hook_strength": 0.95,
+      "visual_energy": 0.88,
+      "retention_score": 0.92,
+      "confidence": 0.98,
+      "include": true,
+      "transition_out": {
+        "type": "wipe_left",
+        "duration": 0.3
+      }
+    },
+    {
+      "scene_id": "scene_002",
+      "scene_type": "body",
+      "start_s": 18,
+      "end_s": 24,
+      "duration_s": 6,
+      "title": "Mở nắp hộp lấy gói hàng",
+      "story_importance": 0.8,
+      "key_moments": [
+        19.5,
+        22
+      ],
+      "speed_strategy": "uniform",
+      "render_priority": "keep",
+      "subtitle": "MỞ HỘP CARTON\nLẤY SẢN PHẨM",
+      "subtitle_style": "minimal_glass_card",
+      "text_position": "top",
+      "voice": "Hộp được đóng gói cẩn thận với lớp chống sốc dày dặn.",
+      "visual_cue": "Hai tay mở nắp thùng và lấy cuộn bóng khí đựng hai hộp kem ra",
+      "text_effect": {
+        "name": "Slide In",
+        "description": "Phụ đề trượt nhẹ nhàng vào góc trên"
+      },
+      "advanced_effect": {
+        "name": "box_open_reveal",
+        "intent": "reveal_impact",
+        "mood": "playful",
+        "pacing": "medium",
+        "focus": "packaging",
+        "camera_motion": "push_in",
+        "intensity": 0.75,
+        "description": "Tập trung vào khoảnh khắc lộ diện lớp bao bọc bên trong"
+      },
+      "hook_strength": 0.7,
+      "visual_energy": 0.75,
+      "retention_score": 0.8,
       "confidence": 0.95,
       "include": true,
       "transition_out": {
@@ -59,124 +103,41 @@
       }
     },
     {
-      "scene_id": "scene_002",
+      "scene_id": "scene_003",
       "scene_type": "body",
-      "start_s": 10,
-      "end_s": 24,
-      "duration_s": 7,
-      "title": "Rẽ qua phố ngân hàng",
+      "start_s": 27,
+      "end_s": 36,
+      "duration_s": 9,
+      "title": "Bóc lớp bọc chống sốc",
       "story_importance": 0.85,
       "key_moments": [
-        18
+        29,
+        34
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "TIẾNG GẠT MƯA\nNHỊP NHÀNG XUÔI DỐC",
+      "subtitle": "BỎ LỚP CHỐNG SỐC\nLỘ 2 MÙI SIÊU XỊN",
       "subtitle_style": "minimal_glass_card",
-      "text_position": "top",
-      "voice": "Xe thong thả ôm theo từng khúc ngoặt, lướt qua những bảng hiệu quen thuộc dưới màn mưa.",
-      "visual_cue": "Xe chuyển hướng lướt qua toà nhà Eximbank và các cửa hiệu hai bên đường, đường ướt phản chiếu ánh sáng.",
+      "text_position": "bottom",
+      "voice": "Dùng dao rạch nhẹ lớp xốp hơi để lộ hai hộp sản phẩm màu sắc rực rỡ.",
+      "visual_cue": "Dao rạch bóng xốp hơi và tháo bỏ bao ni lông chống sốc",
       "text_effect": {
-        "name": "Glow",
-        "description": "Chữ phát sáng dịu nhẹ hợp khung cảnh mưa"
+        "name": "Bounce",
+        "description": "Chữ nẩy nhẹ tạo nhịp điệu sinh động"
       },
       "advanced_effect": {
-        "name": "Smooth Street Glide",
-        "intent": "luxury_soft",
+        "name": "bubble_wrap_peel",
+        "intent": "satisfying_cut",
         "mood": "satisfying",
         "pacing": "medium",
-        "focus": "reveal",
-        "camera_motion": "push_in",
-        "intensity": 0.5,
-        "description": "Tạo chuyển động lướt mượt mà theo góc cua của xe"
-      },
-      "hook_strength": 0.75,
-      "visual_energy": 0.65,
-      "retention_score": 0.82,
-      "confidence": 0.92,
-      "include": true,
-      "transition_out": {
-        "type": "wipe_left",
-        "duration": 0.3
-      }
-    },
-    {
-      "scene_id": "scene_003",
-      "scene_type": "transition",
-      "start_s": 24,
-      "end_s": 45,
-      "duration_s": 5,
-      "title": "Đoạn dừng chờ xe",
-      "story_importance": 0.4,
-      "key_moments": [
-        30
-      ],
-      "speed_strategy": "jumpcut",
-      "render_priority": "compress",
-      "subtitle": "DÒNG NGUYÊN\nLƯU THÔNG TỪ TỪ",
-      "subtitle_style": "none",
-      "text_position": "bottom",
-      "voice": "",
-      "visual_cue": "Xe dừng chờ giao thông tĩnh không có nhiều chuyển động nổi bật.",
-      "text_effect": {
-        "name": "Pop-up",
-        "description": "Chữ hiện nhanh"
-      },
-      "advanced_effect": {
-        "name": "Time Compress",
-        "intent": "satisfying_cut",
-        "mood": "soft",
-        "pacing": "fast",
-        "focus": "reveal",
-        "camera_motion": "static",
-        "intensity": 0.4,
-        "description": "Lược bỏ bớt khoảng thời gian đứng yên"
-      },
-      "hook_strength": 0.3,
-      "visual_energy": 0.4,
-      "retention_score": 0.5,
-      "confidence": 0.9,
-      "include": false,
-      "transition_out": {
-        "type": "fade",
-        "duration": 0.2
-      }
-    },
-    {
-      "scene_id": "scene_004",
-      "scene_type": "body",
-      "start_s": 45,
-      "end_s": 60,
-      "duration_s": 8,
-      "title": "Góc tiệm bánh và quán ăn",
-      "story_importance": 0.9,
-      "key_moments": [
-        52
-      ],
-      "speed_strategy": "uniform",
-      "render_priority": "keep",
-      "subtitle": "GÓC QUÁN QUEN\nẤM ÁP NGÀY MƯA",
-      "subtitle_style": "vibrant_yellow_sticker",
-      "text_position": "top",
-      "voice": "Những quán ăn nhỏ ven đường nghi ngút khói ấm, điểm nét chấm phá thân thương cho ngày mưa.",
-      "visual_cue": "Xe đi ngang Tiệm Bánh An Yên và các hàng quán bán bánh căn, bánh ướt lòng gà đặc trưng Đà Lạt.",
-      "text_effect": {
-        "name": "Typewriter",
-        "description": "Chữ gõ từng từ ấm áp"
-      },
-      "advanced_effect": {
-        "name": "Warm Storefront Highlight",
-        "intent": "premium_showcase",
-        "mood": "emotional",
-        "pacing": "medium",
         "focus": "texture",
-        "camera_motion": "drift",
-        "intensity": 0.7,
-        "description": "Làm nổi bật tông màu vàng ấm của bảng hiệu cửa hàng"
+        "camera_motion": "static",
+        "intensity": 0.85,
+        "description": "Thao tác bóc xốp hơi mượt mà kích thích thị giác"
       },
-      "hook_strength": 0.85,
-      "visual_energy": 0.75,
-      "retention_score": 0.87,
+      "hook_strength": 0.8,
+      "visual_energy": 0.82,
+      "retention_score": 0.85,
       "confidence": 0.96,
       "include": true,
       "transition_out": {
@@ -185,92 +146,132 @@
       }
     },
     {
-      "scene_id": "scene_005",
-      "scene_type": "transition",
-      "start_s": 60,
-      "end_s": 75,
-      "duration_s": 5,
-      "title": "Người dân dừng xe bên đường",
-      "story_importance": 0.5,
+      "scene_id": "scene_004",
+      "scene_type": "body",
+      "start_s": 41,
+      "end_s": 52,
+      "duration_s": 11,
+      "title": "Đập hộp tuýp Amazing Strawberry",
+      "story_importance": 0.9,
       "key_moments": [
-        68
+        44,
+        48
       ],
-      "speed_strategy": "jumpcut",
-      "render_priority": "compress",
-      "subtitle": "NHỊP SỐNG\nCHẬM RÃI",
-      "subtitle_style": "none",
-      "text_position": "bottom",
-      "voice": "",
-      "visual_cue": "Cảnh người dân dắt xe máy bên lề đường dưới mưa.",
+      "speed_strategy": "uniform",
+      "render_priority": "keep",
+      "subtitle": "AMAZING STRAWBERRY\nVỊ DÂU TÂY THƠM NGỌT",
+      "subtitle_style": "vibrant_yellow_sticker",
+      "text_position": "top",
+      "voice": "Đầu tiên là tuýp Amazing Strawberry vị dâu tây thơm ngọt dịu nhẹ.",
+      "visual_cue": "Mở hộp giấy màu đỏ và lấy tuýp kem Bristik dâu ra xoay nhẹ",
       "text_effect": {
-        "name": "Bounce",
-        "description": "Chữ nảy nhẹ"
+        "name": "Pop-up",
+        "description": "Nổi bật dòng tên sản phẩm dâu tây"
       },
       "advanced_effect": {
-        "name": "Pass By",
-        "intent": "satisfying_cut",
-        "mood": "soft",
-        "pacing": "fast",
-        "focus": "reveal",
-        "camera_motion": "static",
-        "intensity": 0.4,
-        "description": "Trôi nhanh qua đoạn phụ"
+        "name": "strawberry_tube_showcase",
+        "intent": "premium_showcase",
+        "mood": "playful",
+        "pacing": "medium",
+        "focus": "product",
+        "camera_motion": "push_in",
+        "intensity": 0.8,
+        "description": "Cận cảnh chi tiết tuýp kem đánh răng vị dâu tây"
       },
-      "hook_strength": 0.4,
-      "visual_energy": 0.5,
-      "retention_score": 0.6,
-      "confidence": 0.88,
-      "include": false,
+      "hook_strength": 0.85,
+      "visual_energy": 0.85,
+      "retention_score": 0.88,
+      "confidence": 0.97,
+      "include": true,
       "transition_out": {
-        "type": "fade",
-        "duration": 0.2
+        "type": "slide_up",
+        "duration": 0.3
+      }
+    },
+    {
+      "scene_id": "scene_005",
+      "scene_type": "body",
+      "start_s": 57,
+      "end_s": 70,
+      "duration_s": 13,
+      "title": "Đập hộp tuýp Super Blueberry",
+      "story_importance": 0.9,
+      "key_moments": [
+        60,
+        65
+      ],
+      "speed_strategy": "uniform",
+      "render_priority": "keep",
+      "subtitle": "SUPER BLUEBERRY\nVỊ VIỆT QUẤT CỰC MÁT",
+      "subtitle_style": "vibrant_yellow_sticker",
+      "text_position": "top",
+      "voice": "Tiếp theo là Super Blueberry vị việt quất tươi mát cực kỳ dễ thương.",
+      "visual_cue": "Mở hộp màu vàng nắp vàng và rút tuýp kem việt quất ra khoe chi tiết",
+      "text_effect": {
+        "name": "Glow",
+        "description": "Chữ phát sáng thu hút ánh nhìn vào phiên bản việt quất"
+      },
+      "advanced_effect": {
+        "name": "blueberry_tube_showcase",
+        "intent": "premium_showcase",
+        "mood": "playful",
+        "pacing": "medium",
+        "focus": "product",
+        "camera_motion": "push_in",
+        "intensity": 0.8,
+        "description": "Cận cảnh tuýp kem việt quất với thiết kế sinh động"
+      },
+      "hook_strength": 0.85,
+      "visual_energy": 0.86,
+      "retention_score": 0.89,
+      "confidence": 0.97,
+      "include": true,
+      "transition_out": {
+        "type": "circle_open",
+        "duration": 0.4
       }
     },
     {
       "scene_id": "scene_006",
       "scene_type": "conclusion",
-      "start_s": 75,
-      "end_s": 86,
-      "duration_s": 7,
-      "title": "Kết thúc hành trình dạo phố",
-      "story_importance": 0.9,
+      "start_s": 77,
+      "end_s": 80,
+      "duration_s": 3,
+      "title": "Tổng quan bộ đôi Bristik",
+      "story_importance": 0.95,
       "key_moments": [
-        80
+        78.5
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "THƯ THÁI TẬN HƯỞNG\nGÓC PHỐ NÚI MƯA",
-      "subtitle_style": "vibrant_yellow_lightning_sticker",
-      "text_position": "top",
-      "voice": "Mong rằng chút âm thanh êm ả của buổi chiều mưa này sẽ mang đến cho bạn một quãng nghỉ thật bình yên.",
-      "visual_cue": "Chiếc xe taxi màu xanh ngọc lướt qua trước Quán Trang bánh ướt lòng gà, mưa vẫn rơi nhẹ trên kính xe.",
+      "subtitle": "BỘ ĐÔI CHĂM SÓC\nRĂNG MIỆNG CHO BÉ",
+      "subtitle_style": "vibrant_yellow_sticker",
+      "text_position": "bottom",
+      "voice": "Bộ đôi hoàn hảo giúp bé yêu thích việc đánh răng mỗi ngày!",
+      "visual_cue": "Hai vỏ hộp Bristik xếp ngay ngắn cạnh nhau trên thảm cắt",
       "text_effect": {
-        "name": "Slide In",
-        "description": "Chữ khép lại nhẹ nhàng"
+        "name": "Bounce",
+        "description": "Chữ nhún nhảy chốt lại video đầy cảm xúc"
       },
       "advanced_effect": {
-        "name": "Peaceful Soft Fade",
-        "intent": "emotional_pause",
-        "mood": "soft",
+        "name": "final_pair_display",
+        "intent": "reveal_impact",
+        "mood": "premium",
         "pacing": "slow",
-        "focus": "reveal",
-        "camera_motion": "push_out",
-        "intensity": 0.6,
-        "description": "Làm mờ dần hiệu ứng hình ảnh mang lại cảm giác lắng đọng"
+        "focus": "packaging",
+        "camera_motion": "static",
+        "intensity": 0.9,
+        "description": "Hiển thị chỉn chu bộ đôi sản phẩm trên nền khung hình"
       },
-      "hook_strength": 0.8,
-      "visual_energy": 0.7,
-      "retention_score": 0.85,
-      "confidence": 0.95,
-      "include": true,
-      "transition_out": {
-        "type": "fade",
-        "duration": 0.5
-      }
+      "hook_strength": 0.9,
+      "visual_energy": 0.8,
+      "retention_score": 0.9,
+      "confidence": 0.99,
+      "include": true
     }
   ],
   "audio_config": {
-    "bgm_mood": "none",
+    "bgm_mood": "satisfying",
     "bgm_url": "",
     "enable_sfx": true
   }

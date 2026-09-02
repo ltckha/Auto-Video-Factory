@@ -46,6 +46,7 @@ export const SampleScene: React.FC<{
 
 import { FullTimelineVideo } from "./compositions/FullTimelineVideo";
 import { MotionCatalogPreview } from "./compositions/MotionCatalogPreview";
+import { MaterialCatalogPreview } from "./compositions/MaterialCatalogPreview";
 import { adaptTimelineToRemotion } from "./adapters/timelineAdapter";
 import prodTimelineJson from "./adapters/production_short01.json";
 
@@ -69,6 +70,14 @@ export const RemotionRoot: React.FC = () => {
         id="MotionCatalogPreview"
         component={MotionCatalogPreview}
         durationInFrames={540}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="MaterialCatalogPreview"
+        component={MaterialCatalogPreview}
+        durationInFrames={150}
         fps={30}
         width={1080}
         height={1920}

@@ -88,6 +88,15 @@ Toàn bộ các Prompt System phục vụ cho việc tích hợp n8n được l�
 - [ideas/IDEA_005_ai_hybrid_dream_hook.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_005_ai_hybrid_dream_hook.md): Spec chi tiết cho ý tưởng **IDEA-005** (Pipeline Video AI Hybrid: Quay thật + Cảnh AI Dream Hook 3s).
 - [ideas/IDEA_006_intent_driven_micro_effects.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_006_intent_driven_micro_effects.md): Spec chi tiết cho ý tưởng **IDEA-006** (Intent-Driven Editing & Micro-Effects Engine CapCut/TikTok 2026).
 - [ideas/IDEA_007_dynamic_subtitle_typography.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_007_dynamic_subtitle_typography.md): Spec chi tiết cho ý tưởng **IDEA-007** (Next-Gen Dynamic Subtitle Typography, Badges & Overlay Stickers Engine).
+- [ideas/IDEA_011_gemini_file_uri_cache_and_reuse.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_011_gemini_file_uri_cache_and_reuse.md): Spec chi tiết cho ý tưởng **IDEA-011** (Lưu Gemini File URI để tái sử dụng phân tích).
+- [effects/EFFECTS_BACKLOG_AND_FEEDBACK.md](file:///Users/khan/Developer/Auto-Video-Factory/effects/EFFECTS_BACKLOG_AND_FEEDBACK.md): Danh mục Tổng Kho Hiệu Ứng & Phân Loại Duyệt Tác Vụ.
+
+---
+
+## 7. 🛡️ NGUYÊN TẮC CỐT LÕI CỦA AI ASSISTANT (STRICT RULES)
+1. ⚠️ **BẮT BUỘC THẢO LUẬN TRƯỚC KHI LÀM:** Tuyệt đối KHÔNG tự ý viết code, sửa code hay can thiệp hệ thống khi chưa thảo luận và nhận được sự phê duyệt rõ ràng từ User.
+2. ⚠️ **KHÔNG TỰ Ý PUSH GIT:** Chỉ thực hiện `git push` hoặc `git commit` khi User trực tiếp yêu cầu trong câu lệnh của lượt tương tác đó.
+
 
 
 

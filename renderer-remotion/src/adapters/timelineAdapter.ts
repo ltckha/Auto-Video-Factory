@@ -1,7 +1,7 @@
 import { DesignToken } from "../styles/tokens";
-import { resolveCreativeSpecification } from "../styles/creativeResolver";
+import { resolveCreativeSpecification, PlatformType } from "../styles/creativeResolver";
 import { resolveStyleToken } from "../styles/styleResolver";
-import { BrandDnaProfile, PlatformType } from "../brand/brandDna";
+import { BrandDnaProfile } from "../brand/brandDna";
 import { adaptLegacyKnowledgeToMotion } from "../knowledge/legacyAdapter";
 
 export interface TimelineScene {
@@ -26,6 +26,8 @@ export interface TimelineScene {
   } | null;
   advanced_effect?: any;
   speed_strategy?: string;
+  visual_cue?: string;
+  visual_intent?: string;
   include?: boolean;
 }
 
@@ -50,6 +52,8 @@ export interface TimelineData {
   };
 }
 
+import { TextTreatment, TextComposition } from "../components/KineticText";
+
 export interface AdaptedScene {
   id: string;
   type: string;
@@ -69,6 +73,14 @@ export interface AdaptedScene {
     duration: number;
   } | null;
   speedStrategy?: string;
+  visualCue?: string;
+  visualIntent?: string;
+  textEffect?: {
+    name?: string;
+    description?: string;
+  };
+  textTreatment?: TextTreatment;
+  textComposition?: TextComposition;
 }
 
 export function adaptTimelineToRemotion(
@@ -145,6 +157,29 @@ export function adaptTimelineToRemotion(
       ? Number(sc.advanced_effect.intensity)
       : motionChoice.intensity || globalSpec.intensity;
 
+    // 5. Dynamic Text Treatment Resolution from JSON
+    const textEffectName = String(sc.text_effect?.name || "").toLowerCase().trim();
+    let textTreatment: TextTreatment = "word_pop";
+    if (textEffectName.includes("mask") || textEffectName.includes("slide")) {
+      textTreatment = "masked_slide";
+    } else if (textEffectName.includes("track") || textEffectName.includes("expand") || textEffectName.includes("letter")) {
+      textTreatment = "tracking_expand";
+    } else if (textEffectName.includes("type") || textEffectName.includes("write") || textEffectName.includes("gõ")) {
+      textTreatment = "typewriter";
+    } else if (textEffectName.includes("outline") || textEffectName.includes("stroke") || textEffectName.includes("punch")) {
+      textTreatment = "outlined_punch";
+    }
+
+    // 6. Dynamic Composition Resolution from JSON
+    let textComposition: TextComposition = "centered";
+    if (sceneSubStyle.includes("eyebrow") || (sc.subtitle && sc.subtitle.includes("\n") && sceneSubStyle === "minimal_glass_card")) {
+      textComposition = "editorial_eyebrow";
+    } else if (sceneSubStyle.includes("bracket") || textEffectName.includes("bracket")) {
+      textComposition = "bracketed_spec";
+    } else if (sceneSubStyle.includes("step") || String(sc.subtitle || "").toLowerCase().includes("bước")) {
+      textComposition = "step_flow";
+    }
+
     return {
       id: sc.scene_id || `scene_${idx}`,
       type: sc.scene_type || "body",
@@ -166,6 +201,11 @@ export function adaptTimelineToRemotion(
           }
         : null,
       speedStrategy: sc.speed_strategy || "uniform",
+      visualCue: sc.visual_cue,
+      visualIntent: sc.visual_intent,
+      textEffect: sc.text_effect,
+      textTreatment,
+      textComposition,
     };
   });
 
