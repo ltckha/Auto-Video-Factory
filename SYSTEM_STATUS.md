@@ -14,12 +14,11 @@ Tài liệu này đóng vai trò là **Bộ nhớ Trạng thái Cục bộ (Loca
 
 ## 2. Các Mốc Chỉnh sửa & Cấu hình Quan trọng (Status: Đang Hoạt Động Tốt)
 
-### 📌 Danh Sách Lệnh Command Gọn Gàng (Executable Commands)
+### 📌 Danh Sách 2 Lệnh Command Cốt Lõi Tinh Gọn (Executable Commands)
 - **`generate.command`:** [generate.command](file:///Users/khan/Developer/Auto-Video-Factory/generate.command) — Phân tích video, chọn mode 5 tầng & sinh kịch bản JSON.
-- **`render.command`:** [render.command](file:///Users/khan/Developer/Auto-Video-Factory/render.command) — Dựng video thành phẩm từ kịch bản JSON.
-- **`learn.command`:** [learn.command](file:///Users/khan/Developer/Auto-Video-Factory/learn.command) — Học phong cách dựng từ video mẫu.
-- **`sync.command`:** [sync.command](file:///Users/khan/Developer/Auto-Video-Factory/sync.command) — Đồng bộ dự án.
-- **Quyền hạn:** Tất cả đã được cấp quyền `chmod +x` chuẩn trên macOS.
+- **`render.command`:** [render.command](file:///Users/khan/Developer/Auto-Video-Factory/render.command) — Dựng video thành phẩm từ kịch bản JSON (Hybrid Remotion + FFmpeg).
+- **Quyền hạn:** Cả 2 lệnh đã được cấp quyền `chmod +x` chuẩn trên macOS.
+- **Tri thức Học Tập:** Hệ thống tự động hấp thụ $100\%$ các style JSON nạp hàng ngày tại [`effects/learned_styles/`](file:///Users/khan/Developer/Auto-Video-Factory/effects/learned_styles).
 
 ### 📌 Chuẩn hóa Âm thanh (Audio Normalization)
 - **Vị trí:** [render.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/render.js) (hàm `renderScene` và `renderTemporalWarpScene`).
@@ -68,13 +67,13 @@ Tài liệu này đóng vai trò là **Bộ nhớ Trạng thái Cục bộ (Loca
 
 ## 4. Hệ thống Prompt AI & n8n Integration
 
-Toàn bộ các Prompt System phục vụ cho việc tích hợp n8n được lưu trữ tập trung tại thư mục `renderer/prompts/`:
+Toàn bộ các Prompt System phục vụ cho việc tạo kịch bản JSON được lưu trữ tập trung tại thư mục `renderer/prompts/`:
 
-| File Prompt | Nhiệm vụ | Bản Backup |
+| File Prompt | Nhiệm vụ | Cơ Chế Nổi Bật |
 | :--- | :--- | :--- |
-| [timeline_generator_prompt.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/timeline_generator_prompt.md) | Nhận diện/Cắt cảnh, gán hiệu ứng chữ & chuyển cảnh tạo JSON Timeline | [timeline_generator_prompt.v1.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/backups/timeline_generator_prompt.v1.md) |
-| [video_style_learning_prompt.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/video_style_learning_prompt.md) | Phân tích phong cách dựng từ video mẫu | [video_style_learning_prompt.v1.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/backups/video_style_learning_prompt.v1.md) |
-| [render_analyzer_prompt.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/render_analyzer_prompt.md) | QA/Rà soát và tối ưu hóa JSON Timeline trước khi render | [render_analyzer_prompt.v1.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/backups/render_analyzer_prompt.v1.md) |
+| [long2short_generator_prompt.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/long2short_generator_prompt.md) | Chuyển đổi video dài thành Short độc lập | Sub-second precision, Smart 3-Tier Audio, Typography Hierarchy |
+| [short2short_generator_prompt.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/short2short_generator_prompt.md) | Tối ưu hóa & remix video ngắn | Fast-paced editing, Text Treatments, Dynamic Compositions |
+| [long_highlight_cluster_prompt.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/long_highlight_cluster_prompt.md) | Trích xuất chùm Highlights độc lập | Agentic Scanning Mode, 1.0x Natural Speed |
 
 ---
 

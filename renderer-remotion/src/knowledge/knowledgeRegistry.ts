@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+
 export interface KnowledgeCandidate {
   primitiveId: "macro_push" | "punch_zoom" | "drift_cam" | "snap_zoom";
   confidence: number; // 0.0 -> 1.0
@@ -41,37 +44,35 @@ try {
   } catch {}
 }
 
-// Ingest all style recipes from learned_styles
-const knownStyleKeys = [
-  "artisan_french_pricking_iron_leathercraft_asmr",
-  "asmr_architectural_satisfying_build",
-  "asmr_chisel_wood_shaving",
-  "bespoke_leather_sole_stitching_asmr",
-  "cozy_minimalist_iced_latte_routine",
-  "dynamic_loafer_showcase",
-  "hydraulic_press_stress_destruction_showcase",
-  "macro_carbide_blade_honing_asmr",
-  "master_artisan_mirror_shoeshine_asmr",
-  "precision_japanese_mortise_tenon_joinery_asmr",
-  "romantic_lifestyle_split-collage",
-  "seamless_inverted_flip_outfit_transformation",
-  "tactile_tech_unboxing_accessory_asmr",
+// Dynamically auto-scan all daily style recipes from effects/learned_styles/
+const possibleEffectsDirs = [
+  path.resolve(__dirname, "../../../../effects/learned_styles"),
+  path.resolve(__dirname, "../../../effects/learned_styles"),
+  path.resolve(process.cwd(), "effects/learned_styles"),
 ];
 
-for (const key of knownStyleKeys) {
-  try {
-    const data = require(`../../../../effects/learned_styles/${key}.json`);
-    if (data?.style_profile) {
-      staticLearnedStyles[key] = data.style_profile;
-    }
-  } catch {
-    try {
-      const data = require(`../../../effects/learned_styles/${key}.json`);
-      if (data?.style_profile) {
-        staticLearnedStyles[key] = data.style_profile;
-      }
-    } catch {}
+let stylesDir = "";
+for (const dir of possibleEffectsDirs) {
+  if (fs.existsSync(dir)) {
+    stylesDir = dir;
+    break;
   }
+}
+
+if (stylesDir) {
+  try {
+    const files = fs.readdirSync(stylesDir).filter((f) => f.endsWith(".json"));
+    for (const file of files) {
+      const key = file.replace(/\.json$/, "");
+      try {
+        const content = fs.readFileSync(path.join(stylesDir, file), "utf8");
+        const data = JSON.parse(content);
+        if (data?.style_profile) {
+          staticLearnedStyles[key] = data.style_profile;
+        }
+      } catch {}
+    }
+  } catch {}
 }
 
 export function loadLegacyKnowledge(): LegacyKnowledgeData {
@@ -90,101 +91,50 @@ function normalizeKey(str: string): string {
     .replace(/\s+/g, " ");
 }
 
-export function queryKnowledgeRegistry(
-  semanticName: string,
-  category = "general"
-): KnowledgeCandidate[] {
-  const { learnedEffects, effectStats, learnedStyles } = loadLegacyKnowledge();
-  const normalizedQuery = normalizeKey(semanticName);
+/**
+ * Intelligent Semantic Knowledge Engine
+ */
+export function queryKnowledgeRegistry(query: string): KnowledgeCandidate[] {
+  const normQuery = normalizeKey(query);
+  const legacy = loadLegacyKnowledge();
   const candidates: KnowledgeCandidate[] = [];
 
-  if (!normalizedQuery) {
-    return [
-      {
-        primitiveId: "macro_push",
-        confidence: 0.5,
-        source: "fallback",
-        recommendedIntensity: 0.5,
-      },
-    ];
-  }
+  // 1. Direct Semantic Exact/Fuzzy Match from 231+ mappings
+  if (normQuery) {
+    for (const [rawKey, targetMotion] of Object.entries(legacy.learnedEffects)) {
+      const normRaw = normalizeKey(rawKey);
+      if (normRaw && (normQuery.includes(normRaw) || normRaw.includes(normQuery))) {
+        let primitiveId: KnowledgeCandidate["primitiveId"] = "macro_push";
+        if (targetMotion.includes("punch") || targetMotion.includes("zoom")) {
+          primitiveId = "punch_zoom";
+        } else if (targetMotion.includes("drift")) {
+          primitiveId = "drift_cam";
+        }
 
-  // 1. Direct Semantic Match
-  let matchedLegacyEffect = learnedEffects[normalizedQuery];
+        const stats = legacy.effectStats[rawKey];
+        const successRate = stats ? stats.success / Math.max(1, stats.success + stats.fail) : 0.9;
 
-  // 2. Style Recipe Keyword Search (e.g., leathercraft, shoeshine, latte)
-  for (const [styleKey, profile] of Object.entries(learnedStyles)) {
-    const keyNorm = normalizeKey(styleKey);
-    const nicheNorm = normalizeKey(profile.category_niche);
-    if (normalizedQuery.includes(keyNorm) || normalizedQuery.includes(nicheNorm)) {
-      if (keyNorm.includes("asmr") || keyNorm.includes("leather") || keyNorm.includes("shoeshine")) {
         candidates.push({
-          primitiveId: "macro_push",
-          confidence: 0.92,
-          source: "style_recipe",
-          recommendedIntensity: 0.40,
+          primitiveId,
+          confidence: 0.95,
+          source: "semantic_match",
+          recommendedIntensity: primitiveId === "punch_zoom" ? 0.85 : 0.7,
+          historicalSuccessRate: successRate,
         });
-      } else if (keyNorm.includes("dynamic") || keyNorm.includes("unboxing") || keyNorm.includes("press")) {
-        candidates.push({
-          primitiveId: "punch_zoom",
-          confidence: 0.90,
-          source: "style_recipe",
-          recommendedIntensity: 0.85,
-        });
-      }
-      break;
-    }
-  }
-
-  // 3. Fuzzy Substring Matching in learned_effects
-  if (!matchedLegacyEffect && candidates.length === 0) {
-    const keys = Object.keys(learnedEffects);
-    for (const k of keys) {
-      if (normalizedQuery.includes(k) || k.includes(normalizedQuery)) {
-        matchedLegacyEffect = learnedEffects[k];
-        break;
       }
     }
   }
 
-  // 4. Map legacy effect name to modern Remotion Primitive
-  if (matchedLegacyEffect) {
-    const legacyKey = matchedLegacyEffect.toLowerCase();
-    const statKey = `advanced_effect:${legacyKey}`;
-    const stats = (effectStats as any)[statKey] || (effectStats as any)[legacyKey];
-    const successRate = stats ? stats.success / Math.max(1, stats.success + stats.fail) : 0.9;
-
-    if (legacyKey.includes("zoomsoft") || legacyKey.includes("cinematic") || legacyKey.includes("push")) {
+  // 2. Style Recipe Context Match
+  for (const [styleKey, profile] of Object.entries(legacy.learnedStyles)) {
+    const normStyle = normalizeKey(styleKey + " " + (profile.name || "") + " " + (profile.category_niche || ""));
+    if (normQuery && normStyle.includes(normQuery)) {
+      const isFast = profile.pacing_speed === "fast" || profile.category_niche?.includes("destruction");
       candidates.push({
-        primitiveId: "macro_push",
-        confidence: 0.95 * successRate,
-        source: "semantic_match",
-        recommendedIntensity: 0.45,
-        historicalSuccessRate: successRate,
-      });
-    } else if (legacyKey.includes("overshoot") || legacyKey.includes("snap") || legacyKey.includes("zoomin")) {
-      candidates.push({
-        primitiveId: "punch_zoom",
-        confidence: 0.90 * successRate,
-        source: "semantic_match",
-        recommendedIntensity: 0.85,
-        historicalSuccessRate: successRate,
-      });
-    } else if (legacyKey.includes("drift") || legacyKey.includes("pan") || legacyKey.includes("smooth")) {
-      candidates.push({
-        primitiveId: "drift_cam",
-        confidence: 0.85 * successRate,
-        source: "semantic_match",
-        recommendedIntensity: 0.55,
-        historicalSuccessRate: successRate,
-      });
-    } else {
-      candidates.push({
-        primitiveId: "snap_zoom",
-        confidence: 0.80 * successRate,
-        source: "semantic_match",
-        recommendedIntensity: 0.70,
-        historicalSuccessRate: successRate,
+        primitiveId: isFast ? "punch_zoom" : "macro_push",
+        confidence: 0.88,
+        source: "style_recipe",
+        recommendedIntensity: isFast ? 0.9 : 0.65,
       });
     }
   }
@@ -192,9 +142,9 @@ export function queryKnowledgeRegistry(
   if (candidates.length === 0) {
     candidates.push({
       primitiveId: "macro_push",
-      confidence: 0.6,
+      confidence: 0.70,
       source: "fallback",
-      recommendedIntensity: 0.5,
+      recommendedIntensity: 0.65,
     });
   }
 

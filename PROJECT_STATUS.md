@@ -51,6 +51,11 @@
 * **Spreadsheet ID:** `1Xg67qhp1J_Izt7v5uDKRgKjdEZapX9giKJ_ym0OMJN4`
 * **Tab `Auto-Video-Factory`:** Cập nhật trạng thái video (`🎬 Rendered`), `raw_caption` đầy đủ (Title + Hook + Story + Hashtags), cột `Effects Summary` ghi nhận toàn bộ hiệu ứng đã dùng.
 
+### 📌 Bộ 2 Lệnh Command Cốt Lõi Tinh Gọn (Root Executable Commands)
+* 🎬 **`generate.command`:** Phân tích video, đề xuất ý tưởng & tạo kịch bản JSON.
+* 🚀 **`render.command`:** Dựng video thành phẩm tự động (Hybrid Remotion + FFmpeg).
+* 🧠 **Hấp thụ tri thức phong cách tự động:** Toàn bộ các file style JSON mới do người dùng nạp hàng ngày tại [`effects/learned_styles/`](file:///Users/khan/Developer/Auto-Video-Factory/effects/learned_styles) được Remotion tự động quét và nạp $100\%$ vào kho dữ liệu mà không cần can thiệp thủ công.
+
 ---
 
 ## 2. 📋 Master Effects Registry & Feedback Loop
