@@ -329,6 +329,19 @@ async function orchestrateRenderSingle(projectId) {
           fullCaptionText = `${desc}\n\n${hashtagsStr}`.trim();
         }
 
+        const BRAND_DISPLAY_MAP = {
+          hieu_giay_hai_nancy: "Hiệu giày Hải Nancy",
+          yen_handmade_leather: "Yen Handmade Leather",
+          mua_chuan_xai_lau: "Mua Chuẩn Xài Lâu",
+          yenyen_deals: "YenYen Deals",
+          macadamia_hai_nancy: "Macadamia Hải Nancy",
+          o_da_lat_vay_thoi: "Ờ Đà Lạt vậy thôi",
+          elegant_steps: "Elegant Steps",
+          yenyen_farm: "YenYen Farm",
+          yenyen_forest_farm: "YenYen Forest Farm",
+        };
+        const resolvedBrandName = meta.brand_name || BRAND_DISPLAY_MAP[meta.brand] || (meta.brand && meta.brand !== "general" ? meta.brand : "");
+
         await googleSheetsSync.syncProjectToSheet({
           projectId,
           status: engineUsed === "hybrid" ? "🎬 Rendered (Remotion Hybrid)" : "🎬 Rendered (Legacy)",
@@ -340,6 +353,12 @@ async function orchestrateRenderSingle(projectId) {
           sceneCount: (timelineJson.timeline || []).length,
           outputFile: path.join(projectArchiveDir, `${projectId}.mp4`),
           renderedAt: new Date().toLocaleString("vi-VN"),
+          brandFb: resolvedBrandName,
+          brandYt: resolvedBrandName,
+          brandIg: resolvedBrandName,
+          brandTt: resolvedBrandName,
+          brandShopee: resolvedBrandName,
+          brandZalo: resolvedBrandName,
         });
 
         // Record effect stats & update Video-Factory-EFFECTS tab
