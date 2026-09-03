@@ -55,15 +55,27 @@ Mọi Agent thu thập (dù từ Nguồn 1 hay Nguồn 2 trong Spark) đều ph�
     "pacing_speed": "slow_glide | fast | dynamic | medium | pulse",
     "motion_graph": "fast_in_slow_out | ease_in_out | linear | spring",
     "hook_strategy": "Chiến lược mở màn 3s đầu (ví dụ: worm_eye_low_angle_push_in)",
-    "preferred_font_layout": "minimal_glass_card | vibrant_yellow_sticker | warning_red_badge | editorial_eyebrow",
+    "preferred_font_layout": "minimal_glass_card | vibrant_yellow_sticker | warning_red_badge | washi_tape | editorial_line | price_tag_pill | neon_glow",
+    "graphic_text_frame": {
+      "frame_type": "washi_tape | editorial_line | price_tag_pill | neon_glow | minimal_glass_card | vibrant_yellow_sticker | none",
+      "background_color": "#f5eee1",
+      "border_style": "1px dashed #b8a892",
+      "text_color": "#251a12"
+    },
+    "sfx_strategy": {
+      "scene_cut_sfx": "whoosh | paper_tear | none",
+      "text_reveal_sfx": "pop | ding | typewriter_click | none",
+      "impact_sfx": "bass_drop | riser | none"
+    },
     "audio_strategy": "Mô tả âm thanh (ví dụ: ultra_slowed_phonk_sub_bass, native_asmr)",
-    "recommended_camera_motion": "cinematic_glide_zoom | macro_push | punch_zoom | drift_cam | static",
+    "recommended_camera_motion": "cinematic_glide_zoom | macro_push | punch_zoom | drift_cam | push_out | static",
     "impact_effect": "micro_jitter_on_beat | flash_white | rgb_shift | none",
     "color_grading": {
-      "mood": "dark_moody_teal_orange | warm_cinema | clean_minimal",
+      "mood": "dark_moody | teal_orange | warm_cinema | nightclub_cold | clean_minimal",
       "contrast": "+15%",
       "shadows": "-15%",
-      "sharpen": "+25%"
+      "sharpen": "+25%",
+      "temp": "-10 (xanh lạnh)"
     },
     "description": "Mô tả chi tiết bằng tiếng Việt hoặc tiếng Anh về nét đặc trưng của phong cách để Local Style Retriever dùng so khớp từ khóa."
   }

@@ -1,6 +1,6 @@
 # 🎬 Auto-Video-Factory - Project Status & Architecture
 
-> **Cập nhật mới nhất:** 02/09/2026
+> **Cập nhật mới nhất:** 03/09/2026 — Hoàn thành Remotion Hybrid M6.2, Tự động nhận diện 9 Brand, Bộ 8 Khung Chữ Đồ Họa & Cơ Chế Tự Tiến Hóa (Self-Evolution).
 
 ---
 
@@ -13,57 +13,52 @@
   * **Video dài (> 5 phút / Mode `LongHighlightClusters`):** Kích hoạt `processing: "agentic"` để quét động thông minh, tua nhanh vùng chết và giảm $88\%$ token.
   * **Video ngắn (< 5 phút / Short2Short / Long2Short):** Kích hoạt `processing: "static"` để quét frame-level liên tục tức thì với độ trễ thấp nhất.
 
-### 🧵 Kho Nguyên Vật Liệu Sáng Tạo (Creative Material Layer M6.2)
-* **100% Procedural Remotion Code ($< 1\text{MB}$ — Không làm phình dung lượng, sắc nét 4K):**
-  * 🧵 `StitchingThread`: Đường may chỉ xiên $45^\circ$ thủ công kèm lỗ đục quả trám 3D.
-  * ✏️ `HandMark`: Trọn bộ 8 nét vẽ tay tự nhiên (Circle, Arrow, Check Mark, Cross Mark, Scribble, Bracket Box, Underline, Highlight).
-  * 📜 `TornPaperBackground`: Thẻ giấy Kraft xé viền răng cưa mộc mạc.
-  * 📎 `PaperClip`: Kẹp giấy kim loại phản quang & Ghim đồng.
-  * 🏷️ `KraftTape`: Băng keo dán Washi mờ có góc nghiêng vật lý.
-  * 🔨 `EmbossStamp`: Dấu dập chìm nhiệt độ sâu 3D & Con dấu tròn chất lượng nén nảy lò xo (`press_rebound`).
-  * ↔️ `BeforeAfterSlider`: Thanh trượt phân đôi màn hình Trước & Sau phục hồi.
-  * 🏷️ `PriceTagBadge`: Tag giá thương mại nổi khối kèm giảm giá.
-  * 📏 `DimensionLine`: Thước đo milimet thông số độ dày da/kích thước.
-  * ✨ `LightSweep` & `SurfaceGrainOverlay`: Vệt sáng quét nổi khối vân da và hạt phim hữu cơ siêu mịn.
-* **4 Material Families:** `artisan_leather`, `organic_farm`, `product_showcase`, `editorial_look`.
-* **Âm Thanh Xúc Giác (Sonic Foley):** `leather_rub`, `stitch_pull`, `stamp_press`, `paper_tear`, `clip_click`, `whoosh_soft`.
+### 🏷️ Hệ Thống 9 Thương Hiệu Tự Động (9-Brand Ecosystem from Google Sheets Status Tab)
+* **Đồng bộ trực tiếp:** Nạp danh mục 9 thương hiệu chính thức vào bộ não Gemini AI để tự động nhận diện ngách nội dung từ video gốc:
+  1. `hieu_giay_hai_nancy`: Giày da nam công sở, phục hồi giày, đánh xi dưỡng bóng da, đóng giày.
+  2. `yen_handmade_leather`: Đồ da may tay thủ công cao cấp (chỉ may xiên, ví da, thắt lưng, túi xách bespoke).
+  3. `mua_chuan_xai_lau`: Đập hộp, review độ bền, phụ kiện công nghệ (ốp lưng MagSafe, cáp sạc, đồ gia dụng).
+  4. `yenyen_deals`: Săn sale, deals hời, review sản phẩm giá tốt, affiliate.
+  5. `macadamia_hai_nancy`: Hạt mắc ca sấy nứt vỏ, nông sản sấy đặc sản Tây Nguyên.
+  6. `o_da_lat_vay_thoi`: Phong cách sống Đà Lạt, du lịch, sương mù, cà phê chill, homestay.
+  7. `elegant_steps`: Giày thời trang nữ/nam, phong cách bước đi thanh lịch, dạo phố.
+  8. `yenyen_farm`: Nông trại hữu cơ, trồng trọt và thu hoạch rau củ quả.
+  9. `yenyen_forest_farm`: Nông nghiệp dưới tán rừng, thảo mộc, sinh thái tự nhiên.
+  10. `general`: Nội dung đời thường, tự do (giữ video sạch $100\%$, không logo).
 
-### 🛡️ Bảo Vệ Thương Hiệu Tuyệt Đối (Safe Brand Routing)
-* **Logo Chính Thức Đã Đăng Ký:**
-  * 👞 Hiệu Giày Hải Nancy: `renderer-remotion/src/brand/assets/logo_hai_nancy.png`
-  * 🧵 Yen HANDMADE LEATHER: `renderer-remotion/src/brand/assets/logo_yen_handmade_leather.png`
-* **Quy Tắc Bất Di Bất Dịch:**
-  * Tuyệt đối KHÔNG tự chế/bịa đặt tên thương hiệu.
-  * Chỉ chèn logo khi video được xác định chính xác $100\%$ thuộc thương hiệu đó.
-  * Video chia sẻ chung/ASMR: Giữ $100\%$ video sạch, không chèn logo bừa bãi.
+### 🎨 Bộ 8 Khung Chữ Đồ Họa Sáng Tạo (8 Graphic Subtitle Presets)
+* **Nhóm Đồ Họa Truyền Thống:**
+  * 🟨 `vibrant_yellow_sticker`: Nhãn dán vàng 3D, viền đen dày, bóng đổ cứng nổi bật.
+  * 🧊 `minimal_glass_card`: Kính mờ sang trọng, viền mỏng thanh lịch.
+  * 🚨 `warning_red_badge`: Thẻ đỏ cảnh báo, viền vàng kim sắc sảo.
+  * ⚡ `vibrant_yellow_lightning_sticker`: Nhãn dán vàng tia sét năng lượng cao.
+* **Nhóm Đồ Họa Mới Tinh (03/09/2026):**
+  * 📜 `washi_tape`: Dải băng dính giấy kraft be nhạt `#f5eee1`, viền nét đứt mộc mạc, chữ nâu espresso `#251a12`. Chuẩn đồ da may tay YEN Leather.
+  * 📰 `editorial_line`: Nền trong suốt $100\%$, chữ trắng lớn sang trọng kèm 1 vạch line vàng kim $6\text{px}$ mép trái. Chuẩn thời trang cao cấp Hải Nancy, Elegant Steps.
+  * 🛍️ `price_tag_pill`: Thẻ bo tròn viên thuốc gradient cam lửa `#FF6B00`, viền vàng kim, chữ trắng nổi khối. Chuẩn Mua Chuẩn Xài Lâu, YenYen Deals.
+  * 💡 `neon_glow`: Khung kính phát quang viền neon cyan `#00F0FF` tỏa sáng 2 lớp. Chuẩn Phonk Slowed.
 
-### 🎵 Hệ Thống Âm Thanh 3 Tầng Thông Minh (Smart 3-Tier Audio Strategy)
-* **Tầng 1 — Video Đã Có Nhạc Sẵn hoặc ASMR Thực Địa:** Gán `"has_original_music": true`, `"bgm_mood": "none"` $\rightarrow$ Giữ nguyên $100\%$ âm thanh gốc, **tuyệt đối không chèn đè nhạc ngoài**.
-* **Tầng 2 — Video Câm / Không Có Tiếng:** Gán `"has_original_music": false`, `"audio_strategy": "mix_bgm"` $\rightarrow$ Tự động lồng ghép nhạc nền BGM phù hợp mức âm lượng $50\%$.
-* **Tầng 3 — Video Có Tạp Âm / Voice Nói Chuyện Lạ Gây Nhiễu:** Gán `"audio_strategy": "suppress_ambient_voice_and_boost_bgm"` $\rightarrow$ Bộ trộn FFmpeg tự động ép giảm âm lượng tiếng ồn gốc xuống $30\%$ ($-10\text{dB}$) và đẩy âm lượng BGM lên $85\%$ để át tạp âm, mang lại âm thanh sạch sẽ, chuyên nghiệp.
+### 🎥 Chuyển Động Máy Quay & Đồ Thị Graphs (CapCut Ease Out)
+* **Đồ thị Ease Out toán học:** $Progress = 1 - (1 - t)^{2.5}$ đến $1 - (1 - t)^3$ trong `cameraPrimitives.ts`:
+  * `cinematic_glide_zoom`: Lướt nhanh dứt khoát lúc đầu rồi hãm phanh trôi cực êm ở cuối cảnh.
+  * `push_out`: Lùi máy quay từ cận cảnh ra toàn cảnh, co giãn độ lùi theo `intensity` ($0.1 \rightarrow 1.0$).
+  * `macro_push`: Zoom đẩy từ từ vào chi tiết thao tác tay (chuẩn ASMR).
+  * `punch_zoom`: Zoom nảy bật lò xo dồn dập (chuẩn mở màn Hook).
+  * `drift_cam`: Trôi ngang bồng bềnh êm ái (chuẩn cảnh thiên nhiên Đà Lạt).
 
-### 🧠 Đề Xuất Ý Tưởng Độc Bản 100% (Context-First Ideation Engine)
-* **Xóa Bỏ Hoàn Toàn Anchor Bias (Không Còn Ví Dụ Rập Khuôn):** AI bắt buộc bóc tách vật thể, hành động và điểm bất thường/đắt giá nhất của riêng video đó.
-* **Tăng `temperature: 0.85`:** Giúp AI bung vốn từ vựng phong phú, tạo ra 3 góc nhìn tương phản $180^\circ$ (Cảm giác/ASMR $\leftrightarrow$ Chuyên gia/Mẹo nghề $\leftrightarrow$ Kịch tính/Đánh giá trước-sau).
+### 🔲 Bố Cục Chia Màn Hình & Chỉnh Màu Điện Ảnh
+* **`MultiScreenSplit`:** Chia đôi khung hình song song (`top_bottom` hoặc `left_right`) đồng bộ 2 góc máy (toàn cảnh & cận cảnh thao tác).
+* **`micro_jitter_on_beat`:** Vi chấn rung nảy $\pm 2\text{px}$ đến $3.5\text{px}$ đúng lúc âm bass đập xuống.
+* **`CinematicColorGrade`:** 4 bộ lọc CSS filter siêu nhẹ ($0\%$ lag): `dark_moody`, `teal_orange`, `warm_cinema`, `clean_minimal`.
+
+### 🔄 Cơ Chế Tự Tiến Hóa & Hàng Đợi Nâng Cấp (Self-Evolution Flywheel)
+* **Runtime Telemetry (`effectGapTelemetry.js`):** Tự động soi kịch bản khi render.
+* **Safe Fallback:** Nếu AI sáng tạo ra hiệu ứng mới chưa có code, hệ thống tự động thế chỗ bằng hiệu ứng an toàn để video vẫn render đẹp $100\%$.
+* **Auto-Logger:** Tự động ghi nhận hiệu ứng mới vào bảng `🚨 PHẦN 3: HÀNG ĐỢI NÂNG CẤP` trong [`EFFECTS_BACKLOG_AND_FEEDBACK.md`](file:///Users/khan/Developer/Auto-Video-Factory/effects/EFFECTS_BACKLOG_AND_FEEDBACK.md) để người dùng duyệt nâng cấp cho lần sau.
 
 ### 📊 Direct Google Sheets API v4
-* **Kết nối:** Dùng trực tiếp Google Sheets API v4 qua `google-auth-library` kết hợp khóa xác thực `config/service_account.json`.
-* **Spreadsheet ID:** `1Xg67qhp1J_Izt7v5uDKRgKjdEZapX9giKJ_ym0OMJN4`
-* **Tab `Auto-Video-Factory`:** Cập nhật trạng thái video (`🎬 Rendered`), `raw_caption` đầy đủ (Title + Hook + Story + Hashtags), cột `Effects Summary` ghi nhận toàn bộ hiệu ứng đã dùng.
-
-### 📌 Bộ 2 Lệnh Command Cốt Lõi Tinh Gọn (Root Executable Commands)
-* 🎬 **`generate.command`:** Phân tích video, đề xuất ý tưởng & tạo kịch bản JSON.
-* 🚀 **`render.command`:** Dựng video thành phẩm tự động (Hybrid Remotion + FFmpeg).
-* 🧠 **Hấp thụ tri thức phong cách tự động:** Toàn bộ các file style JSON do Agent trong Spark nạp hàng ngày (tự động theo lịch hoặc theo yêu cầu) tại [`effects/learned_styles/`](file:///Users/khan/Developer/Auto-Video-Factory/effects/learned_styles) được Remotion và `styleRetriever.js` tự động quét và nạp $100\%$ vào kịch bản mà không cần can thiệp thủ công. Chi tiết xem tại: 👉 [`effects/STYLE_LEARNING_SYSTEM.md`](effects/STYLE_LEARNING_SYSTEM.md).
-
----
-
-## 2. 📋 Master Effects Registry & Feedback Loop
-* Mọi hiệu ứng đang chạy, hàng đợi nâng cấp và danh sách cấm được quản lý tập trung tại:
-  👉 [`effects/EFFECTS_BACKLOG_AND_FEEDBACK.md`](effects/EFFECTS_BACKLOG_AND_FEEDBACK.md)
-
----
-
-## 3. 🛡️ QUY TẮC BẮT BUỘC DÀNH CHO AI ASSISTANT
-1. ⚠️ **BẮT BUỘC THẢO LUẬN & XIN PHÉP TRƯỚC KHI LÀM:** Tuyệt đối KHÔNG tự ý viết code, sửa code hay chạy lệnh can thiệp khi chưa thảo luận và nhận được sự đồng ý rõ ràng từ User.
-2. ⚠️ **TUYỆT ĐỐI KHÔNG TỰ Ý PUSH GIT:** Chỉ thực hiện lệnh `git push` hoặc `git commit` khi User trực tiếp ra lệnh trong lượt tương tác đó.
+* **Đồng bộ 2 chiều:** Tự động cập nhật tiến độ render, thời gian chạy, dung lượng, và phân tích hiệu ứng lên bảng tính Google Sheet tại:
+  `https://docs.google.com/spreadsheets/d/1Xg67qhp1J_Izt7v5uDKRgKjdEZapX9giKJ_ym0OMJN4/edit`
+  * Tab `Auto-Video-Factory`: Nhật ký dự án sản xuất.
+  * Tab `Video-Factory-EFFECTS`: Bảng thống kê tần suất và tỷ lệ thành công của các hiệu ứng.
+  * Tab `Status`: Bảng trạng thái vận hành của 9 thương hiệu.

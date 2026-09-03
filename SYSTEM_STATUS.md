@@ -1,104 +1,77 @@
 # BẢN ĐỒ NGỮ CẢNH HỆ THỐNG (SYSTEM STATUS & CONTEXT MAP)
 
-Tài liệu này đóng vai trò là **Bộ nhớ Trạng thái Cục bộ (Local State Memory)** để các AI Assistant (như Gemini, Claude) đọc nhanh mỗi khi khởi động phiên làm việc mới, giúp nắm bắt ngay tình trạng hệ thống mà không cần quét lại toàn bộ mã nguồn.
+> **Cập nhật mới nhất:** 03/09/2026 — Động cơ Remotion Hybrid M6.2, Nhận diện 9 Brand, 8 Khung chữ đồ họa & Cơ chế Tự tiến hóa.
+
+Tài liệu này đóng vai trò là **Bộ nhớ Trạng thái Cục bộ (Local State Memory)** để các AI Assistant đọc nhanh mỗi khi khởi động phiên làm việc mới, giúp nắm bắt ngay tình trạng hệ thống mà không cần quét lại toàn bộ mã nguồn.
 
 ---
 
 ## 1. Tổng quan Dự án
 - **Tên dự án:** Auto-Video-Factory (hoặc AI-Video-Factory).
-- **Mục tiêu:** Tự động cắt ghép, dựng video ngắn (Short-form, TikTok, Reels) từ video dài hoặc kịch bản thông qua timeline JSON và ffmpeg.
-- **Công nghệ chính:** NodeJS (ES6/CommonJS), FFmpeg, FFprobe.
-- **Môi trường chạy:** macOS (Apple Silicon), lưu trữ trực tiếp trên thư mục mount Nextcloud (`/Users/khan/Developer/Auto-Video-Factory`).
+- **Mục tiêu:** Tự động cắt ghép, dựng video ngắn (Short-form, TikTok, Reels) từ video dài hoặc kịch bản thông qua timeline JSON, Remotion và FFmpeg.
+- **Công nghệ chính:** NodeJS (ES6/CommonJS), Remotion v4 (React-based Video Renderer), FFmpeg, FFprobe.
+- **Môi trường chạy:** macOS (Apple Silicon M4), lưu trữ trực tiếp trên thư mục mount Nextcloud (`/Users/khan/Developer/Auto-Video-Factory`) và xuất file Master về NAS (`/Volumes/Media/Auto-Video-Factory`).
 
 ---
 
 ## 2. Các Mốc Chỉnh sửa & Cấu hình Quan trọng (Status: Đang Hoạt Động Tốt)
 
 ### 📌 Danh Sách 2 Lệnh Command Cốt Lõi Tinh Gọn (Executable Commands)
-- **`generate.command`:** [generate.command](file:///Users/khan/Developer/Auto-Video-Factory/generate.command) — Phân tích video, chọn mode 5 tầng & sinh kịch bản JSON.
-- **`render.command`:** [render.command](file:///Users/khan/Developer/Auto-Video-Factory/render.command) — Dựng video thành phẩm từ kịch bản JSON (Hybrid Remotion + FFmpeg).
+- **`generate.command`:** [generate.command](file:///Users/khan/Developer/Auto-Video-Factory/generate.command) — Phân tích video, chọn mode 5 tầng, khớp Style Recipe đã học từ TikTok, và sinh kịch bản JSON.
+- **`render.command`:** [render.command](file:///Users/khan/Developer/Auto-Video-Factory/render.command) — Dựng video thành phẩm từ kịch bản JSON qua **Remotion Hybrid Mới** (có fallback FFmpeg Legacy an toàn).
 - **Quyền hạn:** Cả 2 lệnh đã được cấp quyền `chmod +x` chuẩn trên macOS.
-- **Tri thức Học Tập:** Hệ thống tự động hấp thụ $100\%$ các style JSON nạp hàng ngày tại [`effects/learned_styles/`](file:///Users/khan/Developer/Auto-Video-Factory/effects/learned_styles).
 
-### 📌 Chuẩn hóa Âm thanh (Audio Normalization)
-- **Vị trí:** [render.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/render.js) (hàm `renderScene` và `renderTemporalWarpScene`).
-- **Logic hoạt động:**
-  - Sử dụng `ffprobe` (`hasAudioStream`) để kiểm tra nếu video gốc không có tiếng, hệ thống tự động chèn luồng âm thanh tĩnh bằng bộ lọc `anullsrc`.
-  - Các phân cảnh tua nhanh/chậm (`renderTemporalWarpScene`) tự động chèn thêm silent audio đúng thời lượng thay vì sử dụng `-an` (tắt tiếng).
-  - Mục tiêu: Đảm bảo 100% các scene con đầu ra đều chứa track audio chuẩn hóa (AAC, Stereo, 44100Hz, 160k) để ghép nối (`concat`) không bị lỗi.
+### 📌 Hệ Thống 9 Thương Hiệu Tự Động (Google Sheets Status Tab Sync)
+- Tự động nhận diện và gán chính xác $100\%$ tên Brand vào `video_meta.brand`:
+  * `hieu_giay_hai_nancy` (Hiệu giày Hải Nancy)
+  * `yen_handmade_leather` (Yen Handmade Leather)
+  * `mua_chuan_xai_lau` (Mua Chuẩn Xài Lâu)
+  * `yenyen_deals` (YenYen Deals)
+  * `macadamia_hai_nancy` (Macadamia Hải Nancy)
+  * `o_da_lat_vay_thoi` (Ờ Đà Lạt vậy thôi)
+  * `elegant_steps` (Elegant Steps)
+  * `yenyen_farm` (YenYen Farm)
+  * `yenyen_forest_farm` (YenYen Forest Farm)
+  * `general` (Tổng Quát / Không Nhãn Hàng)
 
-### 📌 Ghép Voice WAV per-Scene (Voice Audio Injection)
-- **Vị trí:** [render.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/render.js) (hàm `resolveVoiceWav` + `renderScene`).
-- **Cách hoạt động:** n8n sinh file `.wav` voice cho từng scene và đặt vào thư mục `incoming/` theo quy ước đặt tên `{projectId}_{scene_id}.wav` (ví dụ: `20260708_183534_scene_001.wav`). Trước khi render mỗi scene, hệ thống tự động tìm file WAV tương ứng:
-  - **Có WAV** → ghép WAV làm audio track duy nhất (video channel từ mp4, audio channel từ wav), dùng `-shortest` để đồng bộ thời lượng.
-  - **Không có WAV + video có audio** → giữ nguyên audio gốc của video.
-  - **Không có WAV + video không có audio** → chèn silent audio (`anullsrc`).
-- **⚠️ Lưu ý:** Không tự ý sửa logic 3 nhánh này để tránh lỗi mismatch audio khi concat.
+### 📌 Bộ 8 Khung Chữ Đồ Họa (Subtitle Card Styles)
+- Hỗ trợ toàn diện 8 kiểu khung chữ trong Remotion:
+  * `vibrant_yellow_sticker`
+  * `minimal_glass_card`
+  * `warning_red_badge`
+  * `vibrant_yellow_lightning_sticker`
+  * `washi_tape` (Khung băng dính mộc mạc)
+  * `editorial_line` (Khung tạp chí thanh lịch)
+  * `price_tag_pill` (Thẻ bo tròn viên thuốc TMĐT)
+  * `neon_glow` (Khung kính phát quang neon cyan)
 
-### 📌 Tự động Dọn dẹp Tài nguyên (Temp Cleanup)
-- **Vị trí:** [render.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/render.js) (hàm `cleanupTempDir`).
-- **Logic hoạt động:** Xóa toàn bộ file tạm (`.mp4`, `.txt`, `.txt` phụ đề) ngay sau khi render thành công hoặc thất bại. Chỉ giữ lại thư mục `temp/fontconfig` để tối ưu hóa cache font chữ cho các lần render tiếp theo.
+### 📌 Kỹ Xảo Remotion & Chuyển Động Điện Ảnh
+- **Camera Motions:** `cinematic_glide_zoom` (CapCut Graphs Ease Out), `push_out` (co giãn theo intensity), `macro_push`, `punch_zoom`, `drift_cam`.
+- **Transitions:** `circle_open` (iris), `paper_rip` (xé giấy), `flip` (lật 3D), `wipe_left/right/up/down`, `slide_up/down`, `fade`.
+- **Layout:** `MultiScreenSplit` chia đôi màn hình trên/dưới hoặc trái/phải.
+- **Micro Shake:** `micro_jitter_on_beat` vi chấn rung nảy theo nhịp bass.
+- **Cinematic Color Grading:** `dark_moody`, `teal_orange`, `warm_cinema`, `clean_minimal`.
 
----
-
-## 3. Bản đồ Script NodeJS (`renderer/scripts/`)
-
-| File | Kích thước | Vai trò | Hàm / Logic quan trọng |
-| :--- | :---: | :--- | :--- |
-| [render.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/render.js) | ~44KB | **Cốt lõi.** Điều phối toàn bộ quy trình render: đọc timeline JSON, dựng lệnh ffmpeg, ghép cảnh (`concat`), quản lý hàng đợi `incoming/` | `renderScene`, `renderTemporalWarpScene`, `hasAudioStream` (chèn `anullsrc`), `cleanupTempDir`, `archiveSuccessfulRender`, `handleProjectFailure` |
-| [effects.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/effects.js) | ~28KB | Registry toàn bộ hiệu ứng hình ảnh: zoom, shake, speed ramp, cinematic... Chứa hàm xây dựng tham số filter ffmpeg cho từng effect | `normalizeAdvancedEffect`, `buildEffectArgs`, `ADVANCED_EFFECT_ENUMS` — load động từ `config/effectEnums.json` |
-| [effectLearning.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/effectLearning.js) | ~10KB | **Học máy hiệu ứng.** Ánh xạ tên hiệu ứng tùy ý từ AI sang tên hiệu ứng hợp lệ trong registry. Lưu vào `effects/learned_effects.json` | `resolveLearnedAdvancedEffect`, `initializeEffectLearning`, `learnFrequentFallbacksFromLogs`, `matchHeuristic`, `matchSimilarity` |
-| [syncPromptEnums.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/syncPromptEnums.js) | ~1KB | Đồng bộ danh sách enum từ `config/effectEnums.json` vào `prompts/timeline_generator_prompt.md`. Chạy: `npm run sync-prompt` | Inject section `ENUM_VALID_VALUES` vào cuối prompt để AI biết các giá trị hợp lệ |
-| [subtitleStyles.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/subtitleStyles.js) | ~10KB | Registry toàn bộ kiểu phụ đề: font, màu sắc, border, shadow, vị trí. Tương ứng với các `subtitle_style` trong prompt | `resolveSubtitleStyle`, `normalizeStyleKey` — ánh xạ `hook_bold`, `neon_glow`, `framed_card`, `gold_caption`, `cta_red` |
-| [subtitleLayoutEngine.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/subtitleLayoutEngine.js) | ~3.6KB | Tính toán bố cục an toàn (safe zone) để phụ đề không che sản phẩm, tự wrap chữ nếu quá dài | `prepareSubtitleLayout` — tính `safeX`, `safeBottom`, `baseFontSize` theo độ phân giải thực tế |
-| [textPositionEngine.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/textPositionEngine.js) | ~0.7KB | Chuẩn hóa giá trị `text_position` đầu vào (`top`, `center`, `bottom`). Fallback về `bottom` nếu giá trị không hợp lệ | `normalizePosition` |
-| [fontRegistry.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/fontRegistry.js) | ~3.4KB | Quét và đăng ký font chữ từ hệ thống macOS | `resolveFont` — dùng để ffmpeg tìm font khi vẽ chữ lên video |
-| [captionGenerator.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/captionGenerator.js) | ~0.7KB | Sinh nội dung caption/post text từ `video_meta` của timeline JSON để dùng cho mạng xã hội | `buildPostText` — đọc `title`, `description`, `hashtags` từ `video_meta` |
-| [archiveWorkflow.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/archiveWorkflow.js) | ~2.3KB | Quản lý vòng đời project sau khi render xong: di chuyển video thành phẩm sang `rendered/` hoặc `failed/`, tạo folder archive có timestamp | `createWorkflowContext`, `archiveSuccessfulRender`, `handleProjectFailure` |
-| [google_apps_script.js](file:///Users/khan/Developer/Auto-Video-Factory/renderer/scripts/google_apps_script.js) | ~7.3KB | Mã Google Apps Script tự động tạo Dashboard trên Google Sheet (Tab Projects Tracker, Scenes Detail, Effects Analytics) | `doPost`, `ensureSheetsAndHeaders`, `updateProjectTracker` |
-
-**Config file:**
-| [effectEnums.json](file:///Users/khan/Developer/Auto-Video-Factory/renderer/config/effectEnums.json) | ~0.5KB | **Single Source of Truth** cho toàn bộ enum của `advanced_effect` | Được `effects.js` load động và `syncPromptEnums.js` dùng để inject vào prompt |
-
-> [!NOTE]
-> **Luồng thực thi cơ bản:** `render.js` → đọc `incoming/*.json` → gọi `effects.js` + `effectLearning.js` để dịch hiệu ứng → gọi `subtitleStyles.js` + `subtitleLayoutEngine.js` + `fontRegistry.js` để dựng subtitle → thực thi `ffmpeg` → dọn dẹp tạm bằng `cleanupTempDir` → lưu kết quả bằng `archiveWorkflow.js`.
+### 📌 Cơ Chế Tự Tiến Hóa (Self-Evolution Flywheel)
+- `effectGapTelemetry.js` tự động phát hiện hiệu ứng mới chưa có code khi render.
+- Tự động áp dụng Safe Fallback để video luôn xuất xưởng đẹp $100\%$.
+- Tự động ghi nhận hiệu ứng mới vào `effects/EFFECTS_BACKLOG_AND_FEEDBACK.md` để người dùng duyệt nâng cấp.
 
 ---
 
-## 4. Hệ thống Prompt AI & n8n Integration
+## 3. Bản đồ Script NodeJS Chính
 
-Toàn bộ các Prompt System phục vụ cho việc tạo kịch bản JSON được lưu trữ tập trung tại thư mục `renderer/prompts/`:
-
-| File Prompt | Nhiệm vụ | Cơ Chế Nổi Bật |
+| File | Vai trò | Hàm / Logic quan trọng |
 | :--- | :--- | :--- |
-| [long2short_generator_prompt.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/long2short_generator_prompt.md) | Chuyển đổi video dài thành Short độc lập | Sub-second precision, Smart 3-Tier Audio, Typography Hierarchy |
-| [short2short_generator_prompt.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/short2short_generator_prompt.md) | Tối ưu hóa & remix video ngắn | Fast-paced editing, Text Treatments, Dynamic Compositions |
-| [long_highlight_cluster_prompt.md](file:///Users/khan/Developer/Auto-Video-Factory/renderer/prompts/long_highlight_cluster_prompt.md) | Trích xuất chùm Highlights độc lập | Agentic Scanning Mode, 1.0x Natural Speed |
+| `renderer-remotion/scripts/render_orchestrator.js` | **Tổng đạo diễn render.** Điều phối Primary Remotion Hybrid Engine & Fallback an toàn. | `orchestrateRenderSingle`, `probeMasterMedia`, `updateEffectSuccessStats` |
+| `renderer-remotion/scripts/render_hybrid.js` | **Động cơ Hybrid.** Dựng Visual bằng Remotion + Xử lý Audio bằng FFmpeg. | `renderHybridVideo`, `inspectTimelineAndRecordGaps` |
+| `renderer/scripts/generateTimeline.js` | **Đạo diễn AI.** Tương tác Gemini AI, chọn ý tưởng, khớp Style Recipe đã học. | `generateTimeline`, `RESPONSE_SCHEMA`, `findBestMatchingStyle` |
+| `renderer/scripts/styleRetriever.js` | **Bộ truy xuất Style cục bộ.** Đọc offline kho `effects/learned_styles/` trong $3\text{ms}$. | `findBestMatchingStyle`, `scoreStyleMatch`, `SYNONYM_MAP` |
+| `renderer/scripts/effectGapTelemetry.js` | **Hộp đen theo dõi kỹ xảo.** Tự động ghi nhận hiệu ứng thiếu code vào Backlog. | `inspectTimelineAndRecordGaps`, `KNOWN_CAMERA_MOTIONS` |
+| `renderer/scripts/googleSheetsDirectClient.js` | **Đồng bộ Google Sheets trực tiếp.** Ghi nhật ký tiến độ qua Service Account v4. | `appendValues`, `updateValues`, `getValues` |
 
 ---
 
----
-
-## 6. Thư Mục Quản Lý Ý Tưởng & Lộ Trình (Ideas Backlog)
-- [ideas/INDEX.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/INDEX.md): Bảng quản lý tổng hợp trạng thái các ý tưởng & tính năng đang nghiên cứu/triển khai.
-- [ideas/IDEA_001_long_video_and_multi_clips.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_001_long_video_and_multi_clips.md): Spec chi tiết cho ý tưởng **IDEA-001** (Xử lý video dài >5m & Ghép chùm clips ngắn).
-- [ideas/IDEA_002_copyright_safe_audio_and_bgm.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_002_copyright_safe_audio_and_bgm.md): Spec chi tiết cho ý tưởng **IDEA-002** (Hệ thống âm thanh 3 tầng & Nhạc nền an toàn bản quyền).
-- [ideas/IDEA_003_dynamic_overlay_stickers.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_003_dynamic_overlay_stickers.md): Spec chi tiết cho ý tưởng **IDEA-003** (🔄 Đã hợp nhất vào IDEA-007).
-- [ideas/IDEA_005_ai_hybrid_dream_hook.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_005_ai_hybrid_dream_hook.md): Spec chi tiết cho ý tưởng **IDEA-005** (Pipeline Video AI Hybrid: Quay thật + Cảnh AI Dream Hook 3s).
-- [ideas/IDEA_006_intent_driven_micro_effects.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_006_intent_driven_micro_effects.md): Spec chi tiết cho ý tưởng **IDEA-006** (Intent-Driven Editing & Micro-Effects Engine CapCut/TikTok 2026).
-- [ideas/IDEA_007_dynamic_subtitle_typography.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_007_dynamic_subtitle_typography.md): Spec chi tiết cho ý tưởng **IDEA-007** (Next-Gen Dynamic Subtitle Typography, Badges & Overlay Stickers Engine).
-- [ideas/IDEA_011_gemini_file_uri_cache_and_reuse.md](file:///Users/khan/Developer/Auto-Video-Factory/ideas/IDEA_011_gemini_file_uri_cache_and_reuse.md): Spec chi tiết cho ý tưởng **IDEA-011** (Lưu Gemini File URI để tái sử dụng phân tích).
-- [effects/EFFECTS_BACKLOG_AND_FEEDBACK.md](file:///Users/khan/Developer/Auto-Video-Factory/effects/EFFECTS_BACKLOG_AND_FEEDBACK.md): Danh mục Tổng Kho Hiệu Ứng & Phân Loại Duyệt Tác Vụ.
-
----
-
-## 7. 🛡️ NGUYÊN TẮC CỐT LÕI CỦA AI ASSISTANT (STRICT RULES)
+## 4. 🛡️ NGUYÊN TẮC CỐT LÕI CỦA AI ASSISTANT (STRICT RULES)
 1. ⚠️ **BẮT BUỘC THẢO LUẬN TRƯỚC KHI LÀM:** Tuyệt đối KHÔNG tự ý viết code, sửa code hay can thiệp hệ thống khi chưa thảo luận và nhận được sự phê duyệt rõ ràng từ User.
-2. ⚠️ **KHÔNG TỰ Ý PUSH GIT:** Chỉ thực hiện `git push` hoặc `git commit` khi User trực tiếp yêu cầu trong câu lệnh của lượt tương tác đó.
-
-
-
-
-
-
-
+2. ⚠️ **KHÔNG TỰ Ý PUSH GIT:** Chỉ thực hiện `git push` khi User trực tiếp yêu cầu trong câu lệnh của lượt tương tác đó (bằng cú pháp như "đẩy lên git đi bạn").
