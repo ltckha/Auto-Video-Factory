@@ -1,54 +1,54 @@
 {
   "video_meta": {
-    "title": "Đập hộp kẹo mút vitamin Hàn Quốc thỏa mãn từng giác quan 📦✨",
-    "description": "📦 Trải nghiệm đập hộp lốc kẹo mút Vitamin Hàn Quốc cực kỳ thỏa mãn mắt nhìn!\n\n🍭 Từng chiếc kẹo đầy màu sắc, cung cấp đủ loại dưỡng chất cần thiết cho bé yêu mỗi ngày mà không lo hại răng.\n\n👇 Các mẹ đã bổ sung vị nào cho bé nhà mình chưa, chia sẻ ngay dưới đây nhé!",
+    "title": "Đập Hộp Ốp Lưng MagSafe Siêu Xịn",
+    "description": "Bóc seal ốp lưng MagSafe cực đỉnh cho iPhone. Cảm giác cầm nắm đầm tay, viền bảo vệ chắc chắn.",
     "hashtags": [
-      "keomutvitamin",
       "unboxing",
-      "reviewanngon",
-      "happyvitamin",
-      "chamsocbeyeu"
+      "oplungiphone",
+      "magsafe",
+      "phukiendienthoai"
     ],
     "pipeline_mode": "Short2Short",
-    "created_at": "2026-09-03 14:41:22",
-    "input_file": "/Users/khan/Developer/Auto-Video-Factory/incoming/temp_concat/combined_master_1788421099041.mp4",
-    "original_duration_s": 54.5
+    "created_at": "2026-09-03 14:51:47",
+    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260816_100506.mp4",
+    "original_duration_s": 56.7
   },
   "timeline": [
     {
       "scene_id": "scene_001",
       "scene_type": "hook",
-      "start_s": 0,
-      "end_s": 3.5,
-      "duration_s": 3.5,
-      "title": "Rạch băng keo khui hộp",
+      "start_s": 9.5,
+      "end_s": 13.5,
+      "duration_s": 4,
+      "title": "Khui ốp lưng đầu tiên",
       "story_importance": 0.95,
       "key_moments": [
-        1.5
+        10.2,
+        12
       ],
-      "speed_strategy": "adaptive",
+      "speed_strategy": "jumpcut",
       "render_priority": "keep",
-      "subtitle": "ĐẬP HỘP\nSIÊU PHẨM",
+      "subtitle": "ĐẬP HỘP\nỐP LƯNG MỚI",
       "subtitle_style": "vibrant_yellow_sticker",
       "text_position": "top",
-      "voice": "Hộp bưu phẩm mong chờ nhất tuần này đã về rồi đây cả nhà ơi!",
-      "visual_cue": "Tay rọc dứt khoát đường băng keo trên hộp các-tông",
+      "voice": "Khui hàng ốp lưng mới về tay xem có xịn không nhé!",
+      "visual_cue": "Rút chiếc ốp lưng màu xám viền cam lộ diện từ phong bì chuyển phát.",
       "text_effect": {
         "name": "Pop-up",
-        "description": "Nảy chữ nhanh theo nhịp cắt dao"
+        "description": "Nảy nhanh thu hút chú ý"
       },
       "advanced_effect": {
-        "name": "impact_zoom",
+        "name": "reveal_pop",
         "intent": "reveal_impact",
-        "mood": "satisfying",
+        "mood": "energetic",
         "pacing": "fast",
-        "focus": "hand_action",
+        "focus": "reveal",
         "camera_motion": "snap",
         "intensity": 0.85,
-        "description": "Nhịp zoom nhẹ theo tiếng rọc dao sắc bén"
+        "description": "Hiệu ứng xuất hiện nhanh dứt khoát"
       },
-      "hook_strength": 0.95,
-      "visual_energy": 0.8,
+      "hook_strength": 0.92,
+      "visual_energy": 0.85,
       "retention_score": 0.9,
       "confidence": 0.95,
       "include": true,
@@ -60,122 +60,131 @@
     {
       "scene_id": "scene_002",
       "scene_type": "body",
-      "start_s": 11,
-      "end_s": 15,
-      "duration_s": 4,
-      "title": "Lôi lốc kẹo rực rỡ ra",
+      "start_s": 24,
+      "end_s": 33.5,
+      "duration_s": 9.5,
+      "title": "Mở lớp bảo vệ & so sánh 2 mẫu",
       "story_importance": 0.85,
       "key_moments": [
-        13
+        25,
+        31
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "KẸO MÚT\nVITAMIN HÀN QUỐC",
+      "subtitle": "CHẤT LIỆU CAO CẤP\nFORM CỰC CHUẨN",
       "subtitle_style": "minimal_glass_card",
-      "text_position": "bottom",
-      "voice": "Cả một lốc kẹo mút vitamin Hàn Quốc đủ sắc màu rực rỡ hiện ra cực kì thích mắt.",
-      "visual_cue": "Tay kéo nguyên một dải kẹo được xếp gọn gàng trong túi nilon ra khỏi hộp giấy",
+      "text_position": "top",
+      "voice": "Chất liệu hoàn thiện nhám mịn, vòng MagSafe gia công rất sắc nét.",
+      "visual_cue": "Lột lớp xốp bảo vệ và đặt song song hai chiếc ốp để so sánh mặt lưng.",
       "text_effect": {
-        "name": "Bounce",
-        "description": "Hiệu ứng chữ nảy nhẹ nhàng"
+        "name": "Slide In",
+        "description": "Trượt mượt mà từ trên xuống"
       },
       "advanced_effect": {
-        "name": "vibrant_pop",
+        "name": "texture_showcase",
         "intent": "premium_showcase",
-        "mood": "playful",
+        "mood": "premium",
         "pacing": "medium",
-        "focus": "reveal",
-        "camera_motion": "push_in",
-        "intensity": 0.75,
-        "description": "Zoom nhẹ cận cảnh dải màu sắc sinh động"
+        "focus": "texture",
+        "camera_motion": "drift",
+        "intensity": 0.7,
+        "description": "Quay cận chất liệu và chi tiết mặt lưng"
       },
       "hook_strength": 0.75,
-      "visual_energy": 0.85,
-      "retention_score": 0.8,
-      "confidence": 0.9,
+      "visual_energy": 0.78,
+      "retention_score": 0.82,
+      "confidence": 0.92,
       "include": true,
       "transition_out": {
         "type": "slide_up",
-        "duration": 0.4
+        "duration": 0.3
       }
     },
     {
       "scene_id": "scene_003",
       "scene_type": "body",
-      "start_s": 15,
-      "end_s": 44.5,
-      "duration_s": 29.5,
-      "title": "Lọc bỏ đoạn bé đếm kẹo chậm",
-      "story_importance": 0.1,
-      "key_moments": [],
-      "speed_strategy": "jumpcut",
-      "render_priority": "compress",
-      "subtitle": "",
-      "subtitle_style": "none",
-      "text_position": "center",
-      "voice": "",
-      "visual_cue": "Bé đếm từng chiếc kẹo lặp đi lặp lại gây loãng nhịp độ video",
+      "start_s": 42,
+      "end_s": 50.5,
+      "duration_s": 8.5,
+      "title": "Lắp thử lên điện thoại",
+      "story_importance": 0.9,
+      "key_moments": [
+        43.5,
+        49
+      ],
+      "speed_strategy": "uniform",
+      "render_priority": "keep",
+      "subtitle": "LẮP VỪA KHÍT\nCẦM CỰC ĐÃ TAY",
+      "subtitle_style": "vibrant_yellow_sticker",
+      "text_position": "top",
+      "voice": "Lắp vào máy vừa khít từng góc cạnh, cầm trên tay cảm giác đầm và chắc chắn.",
+      "visual_cue": "Ấn điện thoại iPhone vào ốp lưng và lật mặt sau ngắm nghía chi tiết viền cam.",
       "text_effect": {
-        "name": "Typewriter",
-        "description": "Không hiển thị"
+        "name": "Bounce",
+        "description": "Nảy nhẹ tạo nhịp điệu"
       },
       "advanced_effect": {
-        "name": "skip_dead_time",
-        "intent": "tension_build",
-        "mood": "soft",
-        "pacing": "slow",
-        "focus": "product",
-        "camera_motion": "static",
-        "intensity": 0,
-        "description": "Lọc bỏ phân cảnh thừa không bổ sung thông tin mới"
+        "name": "fit_demo",
+        "intent": "energetic_demo",
+        "mood": "satisfying",
+        "pacing": "medium",
+        "focus": "hand_action",
+        "camera_motion": "push_in",
+        "intensity": 0.75,
+        "description": "Zoom nhẹ vào thao tác ốp máy"
       },
-      "hook_strength": 0.1,
-      "visual_energy": 0.2,
-      "retention_score": 0.1,
-      "confidence": 0.95,
-      "include": false
+      "hook_strength": 0.8,
+      "visual_energy": 0.82,
+      "retention_score": 0.85,
+      "confidence": 0.94,
+      "include": true,
+      "transition_out": {
+        "type": "circle_open",
+        "duration": 0.35
+      }
     },
     {
       "scene_id": "scene_004",
       "scene_type": "conclusion",
-      "start_s": 44.5,
-      "end_s": 53,
-      "duration_s": 8.5,
-      "title": "Cận cảnh các dòng vị kẹo mút",
-      "story_importance": 0.9,
+      "start_s": 51,
+      "end_s": 56,
+      "duration_s": 5,
+      "title": "Trưng bày thành phẩm",
+      "story_importance": 0.8,
       "key_moments": [
-        48
+        54
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "5 VÌ THƠM NGON\nĐỦ CHẤT CHO BÉ",
-      "subtitle_style": "vibrant_yellow_lightning_sticker",
-      "text_position": "center",
-      "voice": "Nào là Canxi, Lysine, Vitamin C đầy đủ luôn. Bé vừa thích mê vị hoa quả lại vừa được bổ sung vi chất bảo vệ sức khỏe nữa đấy.",
-      "visual_cue": "Bàn tay xòe 5 thanh kẹo mút các màu tím, xanh lá, xanh dương, đỏ, vàng rực rỡ khoe trọn bao bì",
+      "subtitle": "TRẢI NGHIỆM\nQUÁ ƯNG Ý",
+      "subtitle_style": "minimal_glass_card",
+      "text_position": "bottom",
+      "voice": "Một chiếc ốp vừa bảo vệ tốt lại còn sang xịn thế này thì quá đáng tiền.",
+      "visual_cue": "Đặt hai chiếc ốp ngay ngắn trên bàn làm việc hoàn tất màn mở hộp.",
       "text_effect": {
         "name": "Glow",
-        "description": "Chữ sáng bừng lấp lánh theo độ rực rỡ của kẹo"
+        "description": "Phát sáng nhẹ nhàng"
       },
       "advanced_effect": {
-        "name": "premium_macro",
+        "name": "outro_still",
         "intent": "premium_showcase",
-        "mood": "premium",
-        "pacing": "dynamic",
+        "mood": "satisfying",
+        "pacing": "slow",
         "focus": "product",
-        "camera_motion": "pulse",
-        "intensity": 0.9,
-        "description": "Cận cảnh sắc nét từng nhãn mác vị kẹo mút xịn xò"
+        "camera_motion": "static",
+        "intensity": 0.6,
+        "description": "Dừng hình khoe trọn hai mẫu ốp"
       },
-      "hook_strength": 0.8,
-      "visual_energy": 0.9,
-      "retention_score": 0.88,
-      "confidence": 0.98,
+      "hook_strength": 0.7,
+      "visual_energy": 0.7,
+      "retention_score": 0.78,
+      "confidence": 0.9,
       "include": true
     }
   ],
   "audio_config": {
-    "bgm_mood": "satisfying",
+    "bgm_mood": "chill",
+    "bgm_url": "",
     "enable_sfx": true
   }
 }

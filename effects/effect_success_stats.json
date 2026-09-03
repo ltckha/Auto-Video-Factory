@@ -157,7 +157,7 @@
     "fail": 1
   },
   "subtitle_style:vibrant_yellow_sticker": {
-    "success": 29,
+    "success": 31,
     "fail": 0
   },
   "transition_out:wipe_left": {
@@ -169,11 +169,11 @@
     "fail": 0
   },
   "subtitle_style:minimal_glass_card": {
-    "success": 55,
+    "success": 57,
     "fail": 0
   },
   "transition_out:slide_up": {
-    "success": 19,
+    "success": 20,
     "fail": 0
   },
   "advanced_effect:Dramatic Focus": {
@@ -181,7 +181,7 @@
     "fail": 0
   },
   "transition_out:wipe_right": {
-    "success": 17,
+    "success": 18,
     "fail": 0
   },
   "advanced_effect:Precision Showcase": {
@@ -189,7 +189,7 @@
     "fail": 0
   },
   "transition_out:circle_open": {
-    "success": 11,
+    "success": 12,
     "fail": 0
   },
   "advanced_effect:Luxury Focus": {
@@ -501,6 +501,22 @@
     "fail": 0
   },
   "advanced_effect:premium_macro": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:reveal_pop": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:texture_showcase": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:fit_demo": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:outro_still": {
     "success": 1,
     "fail": 0
   }

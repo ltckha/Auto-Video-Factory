@@ -51,6 +51,17 @@ const SYNONYM_MAP = {
   "ca phe": ["coffee", "latte", "iced", "routine", "cafe"],
   matcha: ["matcha", "boba", "tea", "drink"],
 
+  // Tech / Phone Accessories
+  "op lung": ["case", "accessory", "tech", "unboxing", "magsafe", "tactile"],
+  op: ["case", "accessory", "cover"],
+  "dien thoai": ["phone", "tech", "iphone", "gadget"],
+  iphone: ["phone", "tech", "gadget", "case"],
+  magsafe: ["magsafe", "tech", "accessory", "case"],
+  "boc seal": ["peel", "unboxing", "seal", "tactile", "tear"],
+  seal: ["peel", "seal", "unboxing", "tactile"],
+  "bien hoa": ["transformation", "speedramp", "flip", "transition"],
+  "bien hinh": ["transformation", "outfit", "speedramp", "flip"],
+
   // Style / Motion
   "dien anh": ["cinematic", "film", "moody", "dark"],
   phonk: ["phonk", "slowed", "sub", "bass", "glide"],

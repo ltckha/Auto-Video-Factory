@@ -372,52 +372,6 @@ async function main() {
     }
     console.log("[Poll] Video đã sẵn sàng hoạt động!");
 
-    // Nhận diện Ngách Nội Dung & Nạp Master Preset nếu đạt độ tin cậy >= 0.7
-    let activePresetContext = "";
-    try {
-      console.log("[NicheDetect] Đang nhận diện ngách nội dung & nhịp độ video gốc...");
-      const nicheResponse = await generateContentWithRetryFallback(
-        ai,
-        LITE_MODELS,
-        [
-          {
-            fileData: {
-              fileUri: fileState.uri,
-              mimeType: fileState.mimeType,
-            },
-          },
-          "Phân tích ngắn gọn video và trả về JSON chứa category (ngách nội dung: tech_unboxing, asmr_build, affiliate_sales, fashion_lifestyle, food_cooking, diy_home, general_viral), pacing (fast_impact hoặc cinematic_slow) và niche_confidence (số thực từ 0.0 đến 1.0).",
-        ],
-        {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: "OBJECT",
-            properties: {
-              category: { type: "STRING" },
-              pacing: { type: "STRING" },
-              niche_confidence: { type: "NUMBER" },
-            },
-            required: ["category", "pacing", "niche_confidence"],
-          },
-        }
-      );
-
-      const nicheData = JSON.parse(nicheResponse.text || "{}");
-      const category = (nicheData.category || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9_-]/g, "_").toLowerCase().trim();
-      const confidence = Number(nicheData.niche_confidence) || 0;
-
-      if (category && confidence >= 0.7) {
-        const presetPath = path.join(ROOT, "effects", "presets", `preset_${category}.json`);
-        if (fs.existsSync(presetPath)) {
-          console.log(`[NicheDetect] Đã chọn Master Preset: ${category} (Độ tin cậy: ${confidence})`);
-          const presetContent = fs.readFileSync(presetPath, "utf8");
-          activePresetContext = `\n\n━━━━━━━━━━━━━━━━━━\nMASTER NICHE FEW-SHOT PRESET (${category.toUpperCase()})\n━━━━━━━━━━━━━━━━━━\nHãy tham khảo cấu trúc nhịp độ, vị trí chữ và hiệu ứng từ Preset Ngách dưới đây khi sinh timeline:\n${presetContent}\n`;
-        }
-      }
-    } catch (nicheErr) {
-      console.warn(`[NicheDetect] WARN: Lỗi nhận diện ngách (${nicheErr.message}) — dùng prompt chuẩn, không nạp preset`);
-    }
-
     if (isClusterMode) {
       // XỬ LÝ MODE CLUSTER (PASS 1 & PASS 2 DÀNH CHO VIDEO DÀI/BATCH SHORTS)
       console.log(`[AI] [VideoEngine] 🧠 Đang gửi yêu cầu phân tích & trích xuất chùm Video Ngắn (mode: ${videoProcessingMode}) sang Gemini AI...`);
@@ -625,27 +579,28 @@ Yêu cầu từng trường dữ liệu:
 
       const ideationData = JSON.parse(ideationResponse.text);
       if (ideationData && Array.isArray(ideationData.ideas) && ideationData.ideas.length > 0) {
+        // ⚡ ĐỐI CHIẾU STYLE CHO TỪNG Ý TƯỞNG TRƯỚC KHI HIỂN THỊ CHO NGƯỜI DÙNG
+        ideationData.ideas.forEach((item) => {
+          const queryText = [
+            item.angle_name || "",
+            item.hook_summary || "",
+            item.style_direction || "",
+            item.creative_prompt_directive || "",
+            path.basename(absoluteVideoPath)
+          ].join(" ");
+          item.matchedStyle = findBestMatchingStyle(queryText);
+        });
+
         const chosenIdea = await selectCreativeIdea(ideationData.ideas);
         if (chosenIdea && chosenIdea.creative_prompt_directive) {
           chosenIdeaDirective = `\n\n━━━━━━━━━━━━━━━━━━\n🎯 ĐỊNH HƯỚNG Ý TƯỞNG ĐÃ ĐƯỢC NGƯỜI DÙNG LỰA CHỌN:\n- Tên Góc Ý Tưởng: ${chosenIdea.angle_name}\n- Chỉ Đạo Đạo Diễn: ${chosenIdea.creative_prompt_directive}\n━━━━━━━━━━━━━━━━━━\nHãy bám sát $100\%$ định hướng ý tưởng này khi chọn mốc thời gian, viết subtitle và dựng phân cảnh!`;
 
-          // ⚡ LOCAL STYLE RETRIEVER: Match against learned_styles
-          const queryText = [
-            chosenIdea.angle_name || "",
-            chosenIdea.hook_summary || "",
-            chosenIdea.style_direction || "",
-            chosenIdea.creative_prompt_directive || "",
-            path.basename(absoluteVideoPath)
-          ].join(" ");
-
-          const matchedStyle = findBestMatchingStyle(queryText);
+          const matchedStyle = chosenIdea.matchedStyle;
           if (matchedStyle && matchedStyle.profile) {
-            console.log(`\n[StyleRetriever] 🎯 Bắt trúng Style Recipe mẫu: "${matchedStyle.name}" (Độ khớp: ${(matchedStyle.score * 100).toFixed(1)}%)`);
-            console.log(`[StyleRetriever] 💡 ${matchedStyle.reason}`);
-
+            console.log(`[StyleRetriever] 🎯 Áp dụng Style Recipe mẫu: "${matchedStyle.name}" (Độ khớp: ${(matchedStyle.score * 100).toFixed(1)}%)`);
             chosenIdeaDirective += `\n\n━━━━━━━━━━━━━━━━━━\n🎨 CÔNG THỨC DỰNG ĐÃ HỌC TỪ VIRAL VIDEO (LEARNED STYLE RECIPE):\n- Phong Cách Mẫu: ${matchedStyle.name} ("${matchedStyle.id}")\n- Thời lượng trung bình mỗi phân cảnh: ${matchedStyle.profile.average_scene_duration_s || 4}s\n- Nhịp độ cắt (Pacing): ${matchedStyle.profile.pacing_speed || "medium"}\n- Chuyển động camera ưu tiên: ${matchedStyle.profile.recommended_camera_motion || "macro_push"}\n${matchedStyle.profile.motion_graph ? `- Đồ thị chuyển động: ${matchedStyle.profile.motion_graph}\n` : ""}${matchedStyle.profile.hook_strategy ? `- Chiến lược Hook: ${matchedStyle.profile.hook_strategy}\n` : ""}- Hãy gán trường "style" trong video_meta là "${matchedStyle.id}" và áp dụng các thông số trên vào từng phân cảnh!`;
           } else {
-            console.log("\n[StyleRetriever] ℹ️ Chủ đề độc lập, áp dụng phong cách tự do của đạo diễn.");
+            console.log(`[StyleRetriever] 🎨 Đạo diễn tự do sáng tạo theo ý tưởng đã chọn (Không ép khuôn bài mẫu).`);
           }
         }
       }
@@ -668,7 +623,7 @@ Yêu cầu từng trường dữ liệu:
         "Hãy thực hiện phân tích video trên và trả về kịch bản Timeline JSON chi tiết theo đúng cấu trúc quy chuẩn.",
       ],
       {
-        systemInstruction: systemInstruction + activePresetContext + chosenIdeaDirective,
+        systemInstruction: systemInstruction + chosenIdeaDirective,
         responseMimeType: "application/json",
         responseSchema: RESPONSE_SCHEMA,
       }
