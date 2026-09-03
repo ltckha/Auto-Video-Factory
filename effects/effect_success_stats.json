@@ -1,8 +1,8 @@
 {
   "_meta": {
     "bootstrapped": true,
-    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/DJI_20260317111039_0019_D_render.log",
-    "rr_index": 0
+    "last_log_scanned": "/Users/khan/Developer/Auto-Video-Factory/renderer/logs/VID_20260815_094046_batch_render.log",
+    "rr_index": 1
   },
   "speedup": {
     "success": 37,
@@ -49,7 +49,7 @@
     "fail": 0
   },
   "advanced_effect:zoomsoft": {
-    "success": 117,
+    "success": 118,
     "fail": 1
   },
   "subtitle_style:hookbold": {
@@ -81,11 +81,11 @@
     "fail": 0
   },
   "transition_out:slideup": {
-    "success": 105,
+    "success": 106,
     "fail": 1
   },
   "transition_out:wiperight": {
-    "success": 35,
+    "success": 36,
     "fail": 0
   },
   "subtitle_style:ctared": {
@@ -149,15 +149,15 @@
     "fail": 0
   },
   "subtitle_style:vibrantyellowlightningsticker": {
-    "success": 43,
+    "success": 44,
     "fail": 1
   },
   "subtitle_style:vibrantyellowsticker": {
-    "success": 17,
+    "success": 18,
     "fail": 1
   },
   "subtitle_style:vibrant_yellow_sticker": {
-    "success": 28,
+    "success": 29,
     "fail": 0
   },
   "transition_out:wipe_left": {
@@ -169,11 +169,11 @@
     "fail": 0
   },
   "subtitle_style:minimal_glass_card": {
-    "success": 54,
+    "success": 55,
     "fail": 0
   },
   "transition_out:slide_up": {
-    "success": 18,
+    "success": 19,
     "fail": 0
   },
   "advanced_effect:Dramatic Focus": {
@@ -181,7 +181,7 @@
     "fail": 0
   },
   "transition_out:wipe_right": {
-    "success": 16,
+    "success": 17,
     "fail": 0
   },
   "advanced_effect:Precision Showcase": {
@@ -197,7 +197,7 @@
     "fail": 0
   },
   "subtitle_style:vibrant_yellow_lightning_sticker": {
-    "success": 16,
+    "success": 17,
     "fail": 0
   },
   "advanced_effect:Epic Reveal Outro": {
@@ -485,6 +485,22 @@
     "fail": 0
   },
   "advanced_effect:final_pair_display": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:macropush": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:impact_zoom": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:vibrant_pop": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:premium_macro": {
     "success": 1,
     "fail": 0
   }

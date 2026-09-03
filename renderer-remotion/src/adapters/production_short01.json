@@ -1,144 +1,56 @@
 {
   "video_meta": {
-    "title": "✨ Unboxing Thỏa Mãn: Đập Hộp Kem Đánh Răng Trẻ Em Bristik",
-    "description": "📦 Trải nghiệm cảm giác unboxing cực thỏa mãn với bộ đôi kem đánh răng trẻ em Bristik!\n\nThao tác tay mượt mà từ đường rạch băng keo đến khi xé lớp bóng khí bảo vệ, hé lộ hai hương vị Amazing Strawberry và Super Blueberry siêu xinh xắn dành riêng cho bé.\n\nThiết kế bắt mắt, hương vị trái cây tự nhiên giúp bé hào hứng chăm sóc răng miệng mỗi ngày! 🦷✨",
+    "title": "Đập hộp kẹo mút vitamin Hàn Quốc thỏa mãn từng giác quan 📦✨",
+    "description": "📦 Trải nghiệm đập hộp lốc kẹo mút Vitamin Hàn Quốc cực kỳ thỏa mãn mắt nhìn!\n\n🍭 Từng chiếc kẹo đầy màu sắc, cung cấp đủ loại dưỡng chất cần thiết cho bé yêu mỗi ngày mà không lo hại răng.\n\n👇 Các mẹ đã bổ sung vị nào cho bé nhà mình chưa, chia sẻ ngay dưới đây nhé!",
     "hashtags": [
-      "Bristik",
-      "UnboxingASMR",
-      "KemDanhRangTreEm",
-      "SatisfyingUnboxing",
-      "ChamSocRangMieng"
+      "keomutvitamin",
+      "unboxing",
+      "reviewanngon",
+      "happyvitamin",
+      "chamsocbeyeu"
     ],
     "pipeline_mode": "Short2Short",
-    "created_at": "2026-09-02 20:07:21",
-    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260815_090157.mp4",
-    "original_duration_s": 80.6
+    "created_at": "2026-09-03 14:41:22",
+    "input_file": "/Users/khan/Developer/Auto-Video-Factory/incoming/temp_concat/combined_master_1788421099041.mp4",
+    "original_duration_s": 54.5
   },
   "timeline": [
     {
       "scene_id": "scene_001",
       "scene_type": "hook",
-      "start_s": 7,
-      "end_s": 18,
-      "duration_s": 11,
-      "title": "Rạch băng keo đập hộp",
+      "start_s": 0,
+      "end_s": 3.5,
+      "duration_s": 3.5,
+      "title": "Rạch băng keo khui hộp",
       "story_importance": 0.95,
       "key_moments": [
-        8.5,
-        12,
-        16
+        1.5
       ],
-      "speed_strategy": "uniform",
+      "speed_strategy": "adaptive",
       "render_priority": "keep",
-      "subtitle": "ĐẬP HỘP\nKEM ĐÁNH RĂNG BRISTIK",
+      "subtitle": "ĐẬP HỘP\nSIÊU PHẨM",
       "subtitle_style": "vibrant_yellow_sticker",
       "text_position": "top",
-      "voice": "Cùng đập hộp kiện hàng kem đánh răng trẻ em Bristik cực thỏa mãn này nhé!",
-      "visual_cue": "Tay cầm dao rọc giấy đường cắt sắc bén quanh hộp carton",
+      "voice": "Hộp bưu phẩm mong chờ nhất tuần này đã về rồi đây cả nhà ơi!",
+      "visual_cue": "Tay rọc dứt khoát đường băng keo trên hộp các-tông",
       "text_effect": {
         "name": "Pop-up",
-        "description": "Chữ nảy ra gây chú ý ngay từ giây đầu tiên"
+        "description": "Nảy chữ nhanh theo nhịp cắt dao"
       },
       "advanced_effect": {
-        "name": "sharp_knife_cut",
-        "intent": "satisfying_cut",
+        "name": "impact_zoom",
+        "intent": "reveal_impact",
         "mood": "satisfying",
         "pacing": "fast",
         "focus": "hand_action",
-        "camera_motion": "static",
-        "intensity": 0.9,
-        "description": "Đường rạch dao mượt mà dứt khoát trên băng keo"
+        "camera_motion": "snap",
+        "intensity": 0.85,
+        "description": "Nhịp zoom nhẹ theo tiếng rọc dao sắc bén"
       },
       "hook_strength": 0.95,
-      "visual_energy": 0.88,
-      "retention_score": 0.92,
-      "confidence": 0.98,
-      "include": true,
-      "transition_out": {
-        "type": "wipe_left",
-        "duration": 0.3
-      }
-    },
-    {
-      "scene_id": "scene_002",
-      "scene_type": "body",
-      "start_s": 18,
-      "end_s": 24,
-      "duration_s": 6,
-      "title": "Mở nắp hộp lấy gói hàng",
-      "story_importance": 0.8,
-      "key_moments": [
-        19.5,
-        22
-      ],
-      "speed_strategy": "uniform",
-      "render_priority": "keep",
-      "subtitle": "MỞ HỘP CARTON\nLẤY SẢN PHẨM",
-      "subtitle_style": "minimal_glass_card",
-      "text_position": "top",
-      "voice": "Hộp được đóng gói cẩn thận với lớp chống sốc dày dặn.",
-      "visual_cue": "Hai tay mở nắp thùng và lấy cuộn bóng khí đựng hai hộp kem ra",
-      "text_effect": {
-        "name": "Slide In",
-        "description": "Phụ đề trượt nhẹ nhàng vào góc trên"
-      },
-      "advanced_effect": {
-        "name": "box_open_reveal",
-        "intent": "reveal_impact",
-        "mood": "playful",
-        "pacing": "medium",
-        "focus": "packaging",
-        "camera_motion": "push_in",
-        "intensity": 0.75,
-        "description": "Tập trung vào khoảnh khắc lộ diện lớp bao bọc bên trong"
-      },
-      "hook_strength": 0.7,
-      "visual_energy": 0.75,
-      "retention_score": 0.8,
+      "visual_energy": 0.8,
+      "retention_score": 0.9,
       "confidence": 0.95,
-      "include": true,
-      "transition_out": {
-        "type": "fade",
-        "duration": 0.3
-      }
-    },
-    {
-      "scene_id": "scene_003",
-      "scene_type": "body",
-      "start_s": 27,
-      "end_s": 36,
-      "duration_s": 9,
-      "title": "Bóc lớp bọc chống sốc",
-      "story_importance": 0.85,
-      "key_moments": [
-        29,
-        34
-      ],
-      "speed_strategy": "uniform",
-      "render_priority": "keep",
-      "subtitle": "BỎ LỚP CHỐNG SỐC\nLỘ 2 MÙI SIÊU XỊN",
-      "subtitle_style": "minimal_glass_card",
-      "text_position": "bottom",
-      "voice": "Dùng dao rạch nhẹ lớp xốp hơi để lộ hai hộp sản phẩm màu sắc rực rỡ.",
-      "visual_cue": "Dao rạch bóng xốp hơi và tháo bỏ bao ni lông chống sốc",
-      "text_effect": {
-        "name": "Bounce",
-        "description": "Chữ nẩy nhẹ tạo nhịp điệu sinh động"
-      },
-      "advanced_effect": {
-        "name": "bubble_wrap_peel",
-        "intent": "satisfying_cut",
-        "mood": "satisfying",
-        "pacing": "medium",
-        "focus": "texture",
-        "camera_motion": "static",
-        "intensity": 0.85,
-        "description": "Thao tác bóc xốp hơi mượt mà kích thích thị giác"
-      },
-      "hook_strength": 0.8,
-      "visual_energy": 0.82,
-      "retention_score": 0.85,
-      "confidence": 0.96,
       "include": true,
       "transition_out": {
         "type": "wipe_right",
@@ -146,133 +58,124 @@
       }
     },
     {
-      "scene_id": "scene_004",
+      "scene_id": "scene_002",
       "scene_type": "body",
-      "start_s": 41,
-      "end_s": 52,
-      "duration_s": 11,
-      "title": "Đập hộp tuýp Amazing Strawberry",
-      "story_importance": 0.9,
+      "start_s": 11,
+      "end_s": 15,
+      "duration_s": 4,
+      "title": "Lôi lốc kẹo rực rỡ ra",
+      "story_importance": 0.85,
       "key_moments": [
-        44,
-        48
+        13
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "AMAZING STRAWBERRY\nVỊ DÂU TÂY THƠM NGỌT",
-      "subtitle_style": "vibrant_yellow_sticker",
-      "text_position": "top",
-      "voice": "Đầu tiên là tuýp Amazing Strawberry vị dâu tây thơm ngọt dịu nhẹ.",
-      "visual_cue": "Mở hộp giấy màu đỏ và lấy tuýp kem Bristik dâu ra xoay nhẹ",
+      "subtitle": "KẸO MÚT\nVITAMIN HÀN QUỐC",
+      "subtitle_style": "minimal_glass_card",
+      "text_position": "bottom",
+      "voice": "Cả một lốc kẹo mút vitamin Hàn Quốc đủ sắc màu rực rỡ hiện ra cực kì thích mắt.",
+      "visual_cue": "Tay kéo nguyên một dải kẹo được xếp gọn gàng trong túi nilon ra khỏi hộp giấy",
       "text_effect": {
-        "name": "Pop-up",
-        "description": "Nổi bật dòng tên sản phẩm dâu tây"
+        "name": "Bounce",
+        "description": "Hiệu ứng chữ nảy nhẹ nhàng"
       },
       "advanced_effect": {
-        "name": "strawberry_tube_showcase",
+        "name": "vibrant_pop",
         "intent": "premium_showcase",
         "mood": "playful",
         "pacing": "medium",
-        "focus": "product",
+        "focus": "reveal",
         "camera_motion": "push_in",
-        "intensity": 0.8,
-        "description": "Cận cảnh chi tiết tuýp kem đánh răng vị dâu tây"
+        "intensity": 0.75,
+        "description": "Zoom nhẹ cận cảnh dải màu sắc sinh động"
       },
-      "hook_strength": 0.85,
+      "hook_strength": 0.75,
       "visual_energy": 0.85,
-      "retention_score": 0.88,
-      "confidence": 0.97,
+      "retention_score": 0.8,
+      "confidence": 0.9,
       "include": true,
       "transition_out": {
         "type": "slide_up",
-        "duration": 0.3
-      }
-    },
-    {
-      "scene_id": "scene_005",
-      "scene_type": "body",
-      "start_s": 57,
-      "end_s": 70,
-      "duration_s": 13,
-      "title": "Đập hộp tuýp Super Blueberry",
-      "story_importance": 0.9,
-      "key_moments": [
-        60,
-        65
-      ],
-      "speed_strategy": "uniform",
-      "render_priority": "keep",
-      "subtitle": "SUPER BLUEBERRY\nVỊ VIỆT QUẤT CỰC MÁT",
-      "subtitle_style": "vibrant_yellow_sticker",
-      "text_position": "top",
-      "voice": "Tiếp theo là Super Blueberry vị việt quất tươi mát cực kỳ dễ thương.",
-      "visual_cue": "Mở hộp màu vàng nắp vàng và rút tuýp kem việt quất ra khoe chi tiết",
-      "text_effect": {
-        "name": "Glow",
-        "description": "Chữ phát sáng thu hút ánh nhìn vào phiên bản việt quất"
-      },
-      "advanced_effect": {
-        "name": "blueberry_tube_showcase",
-        "intent": "premium_showcase",
-        "mood": "playful",
-        "pacing": "medium",
-        "focus": "product",
-        "camera_motion": "push_in",
-        "intensity": 0.8,
-        "description": "Cận cảnh tuýp kem việt quất với thiết kế sinh động"
-      },
-      "hook_strength": 0.85,
-      "visual_energy": 0.86,
-      "retention_score": 0.89,
-      "confidence": 0.97,
-      "include": true,
-      "transition_out": {
-        "type": "circle_open",
         "duration": 0.4
       }
     },
     {
-      "scene_id": "scene_006",
+      "scene_id": "scene_003",
+      "scene_type": "body",
+      "start_s": 15,
+      "end_s": 44.5,
+      "duration_s": 29.5,
+      "title": "Lọc bỏ đoạn bé đếm kẹo chậm",
+      "story_importance": 0.1,
+      "key_moments": [],
+      "speed_strategy": "jumpcut",
+      "render_priority": "compress",
+      "subtitle": "",
+      "subtitle_style": "none",
+      "text_position": "center",
+      "voice": "",
+      "visual_cue": "Bé đếm từng chiếc kẹo lặp đi lặp lại gây loãng nhịp độ video",
+      "text_effect": {
+        "name": "Typewriter",
+        "description": "Không hiển thị"
+      },
+      "advanced_effect": {
+        "name": "skip_dead_time",
+        "intent": "tension_build",
+        "mood": "soft",
+        "pacing": "slow",
+        "focus": "product",
+        "camera_motion": "static",
+        "intensity": 0,
+        "description": "Lọc bỏ phân cảnh thừa không bổ sung thông tin mới"
+      },
+      "hook_strength": 0.1,
+      "visual_energy": 0.2,
+      "retention_score": 0.1,
+      "confidence": 0.95,
+      "include": false
+    },
+    {
+      "scene_id": "scene_004",
       "scene_type": "conclusion",
-      "start_s": 77,
-      "end_s": 80,
-      "duration_s": 3,
-      "title": "Tổng quan bộ đôi Bristik",
-      "story_importance": 0.95,
+      "start_s": 44.5,
+      "end_s": 53,
+      "duration_s": 8.5,
+      "title": "Cận cảnh các dòng vị kẹo mút",
+      "story_importance": 0.9,
       "key_moments": [
-        78.5
+        48
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "BỘ ĐÔI CHĂM SÓC\nRĂNG MIỆNG CHO BÉ",
-      "subtitle_style": "vibrant_yellow_sticker",
-      "text_position": "bottom",
-      "voice": "Bộ đôi hoàn hảo giúp bé yêu thích việc đánh răng mỗi ngày!",
-      "visual_cue": "Hai vỏ hộp Bristik xếp ngay ngắn cạnh nhau trên thảm cắt",
+      "subtitle": "5 VÌ THƠM NGON\nĐỦ CHẤT CHO BÉ",
+      "subtitle_style": "vibrant_yellow_lightning_sticker",
+      "text_position": "center",
+      "voice": "Nào là Canxi, Lysine, Vitamin C đầy đủ luôn. Bé vừa thích mê vị hoa quả lại vừa được bổ sung vi chất bảo vệ sức khỏe nữa đấy.",
+      "visual_cue": "Bàn tay xòe 5 thanh kẹo mút các màu tím, xanh lá, xanh dương, đỏ, vàng rực rỡ khoe trọn bao bì",
       "text_effect": {
-        "name": "Bounce",
-        "description": "Chữ nhún nhảy chốt lại video đầy cảm xúc"
+        "name": "Glow",
+        "description": "Chữ sáng bừng lấp lánh theo độ rực rỡ của kẹo"
       },
       "advanced_effect": {
-        "name": "final_pair_display",
-        "intent": "reveal_impact",
+        "name": "premium_macro",
+        "intent": "premium_showcase",
         "mood": "premium",
-        "pacing": "slow",
-        "focus": "packaging",
-        "camera_motion": "static",
+        "pacing": "dynamic",
+        "focus": "product",
+        "camera_motion": "pulse",
         "intensity": 0.9,
-        "description": "Hiển thị chỉn chu bộ đôi sản phẩm trên nền khung hình"
+        "description": "Cận cảnh sắc nét từng nhãn mác vị kẹo mút xịn xò"
       },
-      "hook_strength": 0.9,
-      "visual_energy": 0.8,
-      "retention_score": 0.9,
-      "confidence": 0.99,
+      "hook_strength": 0.8,
+      "visual_energy": 0.9,
+      "retention_score": 0.88,
+      "confidence": 0.98,
       "include": true
     }
   ],
   "audio_config": {
     "bgm_mood": "satisfying",
-    "bgm_url": "",
     "enable_sfx": true
   }
 }

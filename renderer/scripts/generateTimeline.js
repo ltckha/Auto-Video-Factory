@@ -635,7 +635,7 @@ Yêu cầu từng trường dữ liệu:
             chosenIdea.hook_summary || "",
             chosenIdea.style_direction || "",
             chosenIdea.creative_prompt_directive || "",
-            path.basename(filePath)
+            path.basename(absoluteVideoPath)
           ].join(" ");
 
           const matchedStyle = findBestMatchingStyle(queryText);

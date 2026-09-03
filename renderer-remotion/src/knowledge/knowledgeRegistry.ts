@@ -1,6 +1,3 @@
-import fs from "fs";
-import path from "path";
-
 export interface KnowledgeCandidate {
   primitiveId: "macro_push" | "punch_zoom" | "drift_cam" | "snap_zoom" | "cinematic_glide_zoom";
   confidence: number; // 0.0 -> 1.0
@@ -44,36 +41,23 @@ try {
   } catch {}
 }
 
-// Dynamically auto-scan all daily style recipes from effects/learned_styles/
-const possibleEffectsDirs = [
-  path.resolve(__dirname, "../../../../effects/learned_styles"),
-  path.resolve(__dirname, "../../../effects/learned_styles"),
-  path.resolve(process.cwd(), "effects/learned_styles"),
-];
-
-let stylesDir = "";
-for (const dir of possibleEffectsDirs) {
-  if (fs.existsSync(dir)) {
-    stylesDir = dir;
-    break;
-  }
-}
-
-if (stylesDir) {
-  try {
-    const files = fs.readdirSync(stylesDir).filter((f) => f.endsWith(".json"));
-    for (const file of files) {
-      const key = file.replace(/\.json$/, "");
+// Ingest all style recipes using Webpack require.context (100% browser/Remotion-safe, no fs or path)
+try {
+  // @ts-ignore
+  if (typeof require !== "undefined" && typeof require.context === "function") {
+    // @ts-ignore
+    const req = require.context("../../../../effects/learned_styles", false, /\.json$/);
+    req.keys().forEach((filename: string) => {
       try {
-        const content = fs.readFileSync(path.join(stylesDir, file), "utf8");
-        const data = JSON.parse(content);
+        const data = req(filename);
+        const styleKey = filename.replace(/^\.\//, "").replace(/\.json$/, "");
         if (data?.style_profile) {
-          staticLearnedStyles[key] = data.style_profile;
+          staticLearnedStyles[styleKey] = data.style_profile;
         }
       } catch {}
-    }
-  } catch {}
-}
+    });
+  }
+} catch {}
 
 export function loadLegacyKnowledge(): LegacyKnowledgeData {
   return {
