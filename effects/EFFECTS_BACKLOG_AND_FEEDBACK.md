@@ -61,6 +61,7 @@ Tài liệu này là **Kho Danh Mục Đầy Đủ Nhất ($100\%$ Single Source
 | **`push_in`** | Tiến máy vào cận cảnh đối tượng. | Tăng kịch tính, chốt sản phẩm. | 🟢 Đang chạy |
 | **`pull_out`** | Lùi máy ra xa toàn cảnh. | Mở rộng góc nhìn toàn thể. | 🟢 Đang chạy |
 | **`slow_zoom_in`** | Thu phóng siêu chậm không gây giật. | Sang trọng, điện ảnh. | 🟢 Đang chạy |
+| **`cinematic_glide_zoom`** | Đồ thị Fast-In, Slow-Out (Ease-Out) kiểu CapCut Graphs. | Lướt nhanh lúc đầu rồi hãm phanh trôi cực êm. | 🟢 Đang chạy |
 | **`static`** | Giữ tĩnh góc máy 100% gốc. | Xem rõ thao tác không biến dạng. | 🟢 Đang chạy |
 
 ---

@@ -25,6 +25,27 @@
       "camera_motion": "zoom_in_out",
       "recommended_intensity": 0.8,
       "description": "Cú camera di chuyển mượt mà đi từ cửa chính của ngôi nhà vòm thô sơ bước thẳng vào một không gian nội thất sang trọng, ấm cúng hoàn toàn tương phản."
+    },
+    {
+      "effect_name": "Wood Grain Stain Saturate Glide",
+      "visual_intent": "reveal_impact",
+      "camera_motion": "push_in",
+      "recommended_intensity": 0.85,
+      "description": "Đẩy góc quay mượt mà theo đường quét cọ xốp thấm đẫm vệt dầu lau làm nổi vân gỗ tự nhiên tương phản."
+    },
+    {
+      "effect_name": "Vibrant Acrylic Edge Outline Snap",
+      "visual_intent": "actioncut",
+      "camera_motion": "snap",
+      "recommended_intensity": 0.85,
+      "description": "Nhấn nhịp dứt khoát tại góc cọ viền khít đường khắc laser ngăn cách các mảng màu pop-art rực rỡ."
+    },
+    {
+      "effect_name": "Fine Detail Highlight Pulse",
+      "visual_intent": "precision_craft",
+      "camera_motion": "drift",
+      "recommended_intensity": 0.75,
+      "description": "Trượt vi mô cận cảnh điểm nhấn chấm màu hoàn thiện đường nét nhân vật trên gỗ mộc."
     }
   ],
   "few_shot_examples": [
@@ -132,6 +153,69 @@
       },
       "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
       "voice_rhythm": "Ultra-sharp Japanese chisel shaving end-grain wood fibers with crisp paper-thin curls."
+    },
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Wood Grain Stain Saturate Glide",
+        "intent": "reveal_impact",
+        "camera_motion": "push_in",
+        "focus": "texture",
+        "intensity": 0.85,
+        "mood": "satisfying",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 3.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Wet foam brush swishing over dry wood grain with deep rich walnut stain saturation."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Vibrant Acrylic Edge Outline Snap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.85,
+        "mood": "energetic",
+        "pacing": "fast"
+      },
+      "duration_range": "3.0s - 12.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "wipe_left"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Crisp edge brush outlining laser grooves with bright turquoise acrylic color block."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Fine Detail Highlight Pulse",
+        "intent": "precision_craft",
+        "camera_motion": "drift",
+        "focus": "product",
+        "intensity": 0.75,
+        "mood": "focused",
+        "pacing": "slow"
+      },
+      "duration_range": "18.0s - 35.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Micro-precision dotting brush applying white eye highlights on wood art plaque."
     }
   ]
 }

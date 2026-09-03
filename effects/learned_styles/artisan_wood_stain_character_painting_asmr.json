@@ -1,0 +1,67 @@
+{
+  "style_name": "Artisan Wood Stain & Character Acrylic Painting ASMR",
+  "category_niche": "asmr_build",
+  "source_video_id": "Sy5WFjCQFwo",
+  "source_url": "http://www.youtube.com/watch?v=Sy5WFjCQFwo",
+  "source_title": "😱 So satisfying! #art #satisfying #drawing #satisfyingvideos #asmr #shorts",
+  "source_channel": "Foxhouse Wood Work, LLC",
+  "style_dna": {
+    "pacing": {
+      "average_scene_duration_s": 2.5,
+      "pacing_speed": "fluid_artisan_layering",
+      "rhythm_type": "progressive_color_block_reveal"
+    },
+    "hook_3s": {
+      "strategy": "Instant tactile stain saturation: Direct foam brush stroke gliding over pale raw circular wood plaque, turning it deep glossy walnut and instantly popping the engraved character outline.",
+      "energy": "ultra_satisfying_instant_transformation",
+      "focus": "wood_grain_contrast_reveal"
+    },
+    "color_grading": {
+      "lighting": "studio_workbench_direct_neutral",
+      "color_palette": ["#5A3825", "#00C4D6", "#C49A45", "#FFFFFF"],
+      "contrast": "rich_woodgrain_vs_vivid_pop_turquoise_acrylic",
+      "mood": "hypnotic_satisfying_handcrafted_pop_art"
+    },
+    "typography_and_cards": {
+      "layout": "none",
+      "style": "clean_unobstructed_canvas",
+      "emphasis": "zero_overlay_maximum_artistic_focus"
+    },
+    "micro_effects": [
+      {
+        "name": "Wood Grain Stain Saturate Glide",
+        "camera_motion": "push_in",
+        "intent": "reveal_impact",
+        "focus": "texture",
+        "intensity": 0.85,
+        "timing_s": "0.0s - 3.0s"
+      },
+      {
+        "name": "Vibrant Acrylic Edge Outline Snap",
+        "camera_motion": "snap",
+        "intent": "actioncut",
+        "focus": "action",
+        "intensity": 0.85,
+        "timing_s": "3.0s - 12.0s"
+      },
+      {
+        "name": "Fine Detail Highlight Pulse",
+        "camera_motion": "drift",
+        "intent": "precision_craft",
+        "focus": "product",
+        "intensity": 0.75,
+        "timing_s": "18.0s - 35.0s"
+      }
+    ],
+    "audio_and_asmr": {
+      "has_bgm": false,
+      "sfx_cues": [
+        "porous wood sponge brush swishing friction",
+        "wet stain saturation squelch",
+        "delicate fine brush bristling on acrylic",
+        "ambient craft table acoustics"
+      ],
+      "dominant_frequency": "tactile_wood_painting_liquid_friction"
+    }
+  }
+}

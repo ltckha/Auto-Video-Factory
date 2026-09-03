@@ -5,6 +5,7 @@ const path = require("path");
 const { GoogleGenAI } = require("@google/genai");
 const { getLocalDateTime, syncProjectToSheet, syncScenesToSheet } = require("./googleSheetsSync");
 const { selectCreativeIdea } = require("./interactiveIdeationReview");
+const { findBestMatchingStyle } = require("./styleRetriever");
 
 const ROOT = path.resolve(__dirname, "..", "..");
 const INCOMING_DIR = path.join(ROOT, "incoming");
@@ -627,6 +628,25 @@ Yêu cầu từng trường dữ liệu:
         const chosenIdea = await selectCreativeIdea(ideationData.ideas);
         if (chosenIdea && chosenIdea.creative_prompt_directive) {
           chosenIdeaDirective = `\n\n━━━━━━━━━━━━━━━━━━\n🎯 ĐỊNH HƯỚNG Ý TƯỞNG ĐÃ ĐƯỢC NGƯỜI DÙNG LỰA CHỌN:\n- Tên Góc Ý Tưởng: ${chosenIdea.angle_name}\n- Chỉ Đạo Đạo Diễn: ${chosenIdea.creative_prompt_directive}\n━━━━━━━━━━━━━━━━━━\nHãy bám sát $100\%$ định hướng ý tưởng này khi chọn mốc thời gian, viết subtitle và dựng phân cảnh!`;
+
+          // ⚡ LOCAL STYLE RETRIEVER: Match against learned_styles
+          const queryText = [
+            chosenIdea.angle_name || "",
+            chosenIdea.hook_summary || "",
+            chosenIdea.style_direction || "",
+            chosenIdea.creative_prompt_directive || "",
+            path.basename(filePath)
+          ].join(" ");
+
+          const matchedStyle = findBestMatchingStyle(queryText);
+          if (matchedStyle && matchedStyle.profile) {
+            console.log(`\n[StyleRetriever] 🎯 Bắt trúng Style Recipe mẫu: "${matchedStyle.name}" (Độ khớp: ${(matchedStyle.score * 100).toFixed(1)}%)`);
+            console.log(`[StyleRetriever] 💡 ${matchedStyle.reason}`);
+
+            chosenIdeaDirective += `\n\n━━━━━━━━━━━━━━━━━━\n🎨 CÔNG THỨC DỰNG ĐÃ HỌC TỪ VIRAL VIDEO (LEARNED STYLE RECIPE):\n- Phong Cách Mẫu: ${matchedStyle.name} ("${matchedStyle.id}")\n- Thời lượng trung bình mỗi phân cảnh: ${matchedStyle.profile.average_scene_duration_s || 4}s\n- Nhịp độ cắt (Pacing): ${matchedStyle.profile.pacing_speed || "medium"}\n- Chuyển động camera ưu tiên: ${matchedStyle.profile.recommended_camera_motion || "macro_push"}\n${matchedStyle.profile.motion_graph ? `- Đồ thị chuyển động: ${matchedStyle.profile.motion_graph}\n` : ""}${matchedStyle.profile.hook_strategy ? `- Chiến lược Hook: ${matchedStyle.profile.hook_strategy}\n` : ""}- Hãy gán trường "style" trong video_meta là "${matchedStyle.id}" và áp dụng các thông số trên vào từng phân cảnh!`;
+          } else {
+            console.log("\n[StyleRetriever] ℹ️ Chủ đề độc lập, áp dụng phong cách tự do của đạo diễn.");
+          }
         }
       }
     } catch (ideationErr) {

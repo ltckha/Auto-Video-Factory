@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 export interface KnowledgeCandidate {
-  primitiveId: "macro_push" | "punch_zoom" | "drift_cam" | "snap_zoom";
+  primitiveId: "macro_push" | "punch_zoom" | "drift_cam" | "snap_zoom" | "cinematic_glide_zoom";
   confidence: number; // 0.0 -> 1.0
   source: "semantic_match" | "style_recipe" | "stats_candidate" | "fallback";
   recommendedIntensity: number;
@@ -129,12 +129,22 @@ export function queryKnowledgeRegistry(query: string): KnowledgeCandidate[] {
   for (const [styleKey, profile] of Object.entries(legacy.learnedStyles)) {
     const normStyle = normalizeKey(styleKey + " " + (profile.name || "") + " " + (profile.category_niche || ""));
     if (normQuery && normStyle.includes(normQuery)) {
-      const isFast = profile.pacing_speed === "fast" || profile.category_niche?.includes("destruction");
+      let primitiveId: KnowledgeCandidate["primitiveId"] = "macro_push";
+      let recommendedIntensity = 0.7;
+
+      if (profile.pacing_speed === "slow_glide" || normStyle.includes("phonk") || normStyle.includes("glide")) {
+        primitiveId = "cinematic_glide_zoom";
+        recommendedIntensity = 0.8;
+      } else if (profile.pacing_speed === "fast" || profile.category_niche?.includes("destruction")) {
+        primitiveId = "punch_zoom";
+        recommendedIntensity = 0.9;
+      }
+
       candidates.push({
-        primitiveId: isFast ? "punch_zoom" : "macro_push",
+        primitiveId,
         confidence: 0.88,
         source: "style_recipe",
-        recommendedIntensity: isFast ? 0.9 : 0.65,
+        recommendedIntensity,
       });
     }
   }

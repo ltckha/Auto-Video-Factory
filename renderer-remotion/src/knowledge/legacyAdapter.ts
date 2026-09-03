@@ -1,7 +1,7 @@
 import { queryKnowledgeRegistry, KnowledgeCandidate } from "./knowledgeRegistry";
 
 export interface ResolvedMotionChoice {
-  primitiveId: "macro_push" | "punch_zoom" | "drift_cam" | "snap_zoom" | "overshoot_zoom" | "static";
+  primitiveId: "macro_push" | "punch_zoom" | "drift_cam" | "snap_zoom" | "overshoot_zoom" | "cinematic_glide_zoom" | "static";
   intensity: number;
   confidence: number;
   reason: string;
@@ -16,7 +16,7 @@ export function adaptLegacyKnowledgeToMotion(
     brand?: string;
     platform?: string;
     isHook?: boolean;
-    defaultMotion?: "macro_push" | "punch_zoom" | "drift_cam" | "snap_zoom" | "overshoot_zoom" | "static";
+    defaultMotion?: "macro_push" | "punch_zoom" | "drift_cam" | "snap_zoom" | "overshoot_zoom" | "cinematic_glide_zoom" | "static";
   }
 ): ResolvedMotionChoice {
   const query = String(effectNameOrIntent || "").trim();

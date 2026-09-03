@@ -1,0 +1,21 @@
+{
+  "style_profile": {
+    "name": "Dark Cinematic Phonk Slowed Showcase",
+    "category_niche": "luxury_shoes_leather_hardware",
+    "average_scene_duration_s": 5.0,
+    "pacing_speed": "slow_glide",
+    "motion_graph": "fast_in_slow_out",
+    "hook_strategy": "worm_eye_low_angle_push_in",
+    "preferred_font_layout": "tracking_expand_minimal_glass",
+    "audio_strategy": "ultra_slowed_phonk_sub_bass",
+    "recommended_camera_motion": "cinematic_glide_zoom",
+    "impact_effect": "micro_jitter_on_beat",
+    "color_grading": {
+      "mood": "dark_moody_teal_orange",
+      "contrast": "+15%",
+      "shadows": "-15%",
+      "sharpen": "+25%"
+    },
+    "description": "Phong cách điện ảnh bóng bẩy u tối kết hợp nhạc Phonk Slowed. Sử dụng đồ thị chuyển động Fast In Slow Out lướt êm ái trên các góc quay cực thấp (Worm's-Eye) soi chi tiết mũi giày, vân da và phụ kiện kim loại."
+  }
+}

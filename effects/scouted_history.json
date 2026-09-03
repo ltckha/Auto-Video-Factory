@@ -1,5 +1,5 @@
 {
-  "last_niche_index": 1,
+  "last_niche_index": 2,
   "history": [
     {
       "video_id": "wYuSwmHZOvA",
@@ -143,6 +143,17 @@
       "scouted_at": "2026-09-01T13:44:00+07:00",
       "learned_style_file": "effects/learned_styles/artisan_leathercraft_tooling_edge_beveling_asmr.json",
       "style_name": "Artisan Leathercraft Tooling & Edge Beveling ASMR"
+    },
+    {
+      "video_id": "Sy5WFjCQFwo",
+      "url": "http://www.youtube.com/watch?v=Sy5WFjCQFwo",
+      "title": "😱 So satisfying! #art #satisfying #drawing #satisfyingvideos #asmr #shorts",
+      "channel": "Foxhouse Wood Work, LLC",
+      "niche": "asmr_build",
+      "view_count": 210494579,
+      "scouted_at": "2026-09-03T13:00:00+07:00",
+      "learned_style_file": "effects/learned_styles/artisan_wood_stain_character_painting_asmr.json",
+      "style_name": "Artisan Wood Stain & Character Acrylic Painting ASMR"
     }
   ]
 }

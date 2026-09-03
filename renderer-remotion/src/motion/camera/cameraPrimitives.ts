@@ -73,3 +73,20 @@ export function driftCam(
 
   return { scale, translateX, translateY };
 }
+
+/**
+ * CapCut Graphs Style: Fast-In, Slow-Out Cinematic Glide Zoom
+ * S-curve ease-out: pushes in with high momentum then decelerates smoothly
+ */
+export function cinematicGlideZoom(
+  frame: number,
+  durationInFrames: number,
+  intensity = 0.75
+): CameraMotionOutput {
+  const progress = frame / Math.max(1, durationInFrames);
+  // CapCut Ease-Out 3rd power curve: 1 - (1 - t)^3
+  const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+  const targetScale = 1.0 + 0.10 * Math.max(0.1, Math.min(1.0, intensity));
+  const scale = interpolate(easeOutProgress, [0, 1], [1.0, targetScale]);
+  return { scale, translateX: 0, translateY: 0 };
+}

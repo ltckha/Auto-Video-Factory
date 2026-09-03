@@ -1,4 +1,4 @@
-import { punchZoom, macroPush, driftCam, CameraMotionOutput } from "./camera/cameraPrimitives";
+import { punchZoom, macroPush, driftCam, cinematicGlideZoom, CameraMotionOutput } from "./camera/cameraPrimitives";
 import { calculateCardReveal, CardMotionOutput } from "./card/cardPrimitives";
 import { calculateWordPop, WordMotionOutput } from "./text/textPrimitives";
 import { calculateExitMotion } from "./motionGrammar";
@@ -41,6 +41,8 @@ export class MotionComposer {
         return macroPush(frame, durationInFrames, intensity);
       case "drift_cam":
         return driftCam(frame, durationInFrames, intensity);
+      case "cinematic_glide_zoom":
+        return cinematicGlideZoom(frame, durationInFrames, intensity);
       case "static":
       default:
         return { scale: 1.0, translateX: 0, translateY: 0 };

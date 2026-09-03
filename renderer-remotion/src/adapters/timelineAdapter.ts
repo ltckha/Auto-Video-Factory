@@ -63,7 +63,7 @@ export interface AdaptedScene {
   subtitle: string;
   subtitleStyle: string;
   position: "top" | "center" | "bottom";
-  cameraMotion: "punch_zoom" | "macro_push" | "drift_cam" | "snap_zoom" | "overshoot_zoom" | "static";
+  cameraMotion: "punch_zoom" | "macro_push" | "drift_cam" | "snap_zoom" | "overshoot_zoom" | "cinematic_glide_zoom" | "static";
   token: DesignToken;
   intensity: number;
   brand: BrandDnaProfile;
