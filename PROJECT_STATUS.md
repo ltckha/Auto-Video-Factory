@@ -54,7 +54,7 @@
 ### 📌 Bộ 2 Lệnh Command Cốt Lõi Tinh Gọn (Root Executable Commands)
 * 🎬 **`generate.command`:** Phân tích video, đề xuất ý tưởng & tạo kịch bản JSON.
 * 🚀 **`render.command`:** Dựng video thành phẩm tự động (Hybrid Remotion + FFmpeg).
-* 🧠 **Hấp thụ tri thức phong cách tự động:** Toàn bộ các file style JSON mới do người dùng nạp hàng ngày tại [`effects/learned_styles/`](file:///Users/khan/Developer/Auto-Video-Factory/effects/learned_styles) được Remotion tự động quét và nạp $100\%$ vào kho dữ liệu mà không cần can thiệp thủ công.
+* 🧠 **Hấp thụ tri thức phong cách tự động:** Toàn bộ các file style JSON do Agent trong Spark nạp hàng ngày (tự động theo lịch hoặc theo yêu cầu) tại [`effects/learned_styles/`](file:///Users/khan/Developer/Auto-Video-Factory/effects/learned_styles) được Remotion và `styleRetriever.js` tự động quét và nạp $100\%$ vào kịch bản mà không cần can thiệp thủ công. Chi tiết xem tại: 👉 [`effects/STYLE_LEARNING_SYSTEM.md`](effects/STYLE_LEARNING_SYSTEM.md).
 
 ---
 
