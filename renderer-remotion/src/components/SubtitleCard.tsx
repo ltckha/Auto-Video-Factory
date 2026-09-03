@@ -92,6 +92,61 @@ export const SubtitleCard: React.FC<SubtitleCardProps> = ({
   const isLightning = subtitleStyle.includes("lightning") || token.id === "viral_tiktok";
   const isGlass = token.card.type === "glass";
   const isBadge = token.card.type === "badge";
+  const isWashi = subtitleStyle.includes("washi") || token.card.type === "washi_tape";
+  const isEditorial = subtitleStyle.includes("editorial") || token.card.type === "editorial_line";
+  const isPriceTag = subtitleStyle.includes("price") || subtitleStyle.includes("pill") || token.card.type === "price_tag_pill";
+  const isNeon = subtitleStyle.includes("neon") || token.card.type === "neon_glow";
+
+  // Dynamic Card Visual Overrides
+  let cardBackground = token.card.background;
+  let cardBorder = token.card.border;
+  let cardBorderRadius = token.card.borderRadius;
+  let cardBoxShadow = token.card.boxShadow;
+  let cardBackdropFilter = token.card.backdropFilter;
+  let cardTilt = token.card.tiltAngle;
+
+  let customToken = token;
+
+  if (isWashi) {
+    cardBackground = "#f5eee1";
+    cardBorder = "1px dashed #b8a892";
+    cardBorderRadius = "4px";
+    cardBoxShadow = "3px 4px 12px rgba(0,0,0,0.35)";
+    cardTilt = "-1.2deg";
+    customToken = {
+      ...token,
+      colors: { ...token.colors, primaryText: "#251a12", accentText: "#8a3c0e" },
+    };
+  } else if (isEditorial) {
+    cardBackground = "transparent";
+    cardBorder = "none";
+    cardBorderRadius = "0px";
+    cardBoxShadow = "none";
+    cardTilt = "0deg";
+    customToken = {
+      ...token,
+      colors: { ...token.colors, primaryText: "#ffffff", accentText: "#FFE600" },
+    };
+  } else if (isPriceTag) {
+    cardBackground = "linear-gradient(135deg, #FF6B00 0%, #FF2600 100%)";
+    cardBorder = "2px solid #FFE600";
+    cardBorderRadius = "9999px";
+    cardBoxShadow = "0 8px 24px rgba(255, 60, 0, 0.45)";
+    customToken = {
+      ...token,
+      colors: { ...token.colors, primaryText: "#ffffff", accentText: "#FFE600" },
+    };
+  } else if (isNeon) {
+    cardBackground = "rgba(10, 14, 26, 0.85)";
+    cardBorder = "2px solid #00F0FF";
+    cardBorderRadius = "16px";
+    cardBoxShadow = "0 0 22px rgba(0, 240, 255, 0.6), inset 0 0 12px rgba(0, 240, 255, 0.25)";
+    cardBackdropFilter = "blur(14px)";
+    customToken = {
+      ...token,
+      colors: { ...token.colors, primaryText: "#ffffff", accentText: "#00F0FF" },
+    };
+  }
 
   return (
     <div
@@ -111,15 +166,16 @@ export const SubtitleCard: React.FC<SubtitleCardProps> = ({
       <div
         style={{
           position: "relative",
-          background: token.card.background,
-          backdropFilter: token.card.backdropFilter,
-          border: token.card.border,
-          borderRadius: token.card.borderRadius,
-          boxShadow: token.card.boxShadow,
-          padding: `${paddingY}px ${paddingX}px`,
+          background: cardBackground,
+          backdropFilter: cardBackdropFilter,
+          border: cardBorder,
+          borderLeft: isEditorial ? "6px solid #FFE600" : cardBorder,
+          borderRadius: cardBorderRadius,
+          boxShadow: cardBoxShadow,
+          padding: isEditorial ? `${paddingY}px ${paddingX}px ${paddingY}px 24px` : `${paddingY}px ${paddingX}px`,
           maxWidth: token.card.maxWidth,
           opacity: totalOpacity,
-          transform: `scale(${entrance.scale}) translateY(${entrance.translateY}px) rotate(${token.card.tiltAngle})`,
+          transform: `scale(${entrance.scale}) translateY(${entrance.translateY}px) rotate(${cardTilt})`,
           transformOrigin: "center center",
           overflow: "visible",
         }}
@@ -208,7 +264,7 @@ export const SubtitleCard: React.FC<SubtitleCardProps> = ({
 
         <KineticText
           text={text}
-          token={token}
+          token={customToken}
           fontSize={fontSize}
           intensity={intensity}
           treatment={treatment}

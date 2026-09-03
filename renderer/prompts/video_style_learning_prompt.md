@@ -26,8 +26,19 @@ Khi phát hiện một hiệu ứng hoặc kỹ thuật dựng mới:
    - Vị trí xuất hiện chữ (`top`, `center`, `bottom`, hoặc di chuyển theo vật thể).
    - Phong cách phông chữ & màu sắc nền (nhấn mạnh từ khóa hay hiện toàn bộ câu).
    - Cách xuất hiện (nổ chữ, gõ bàn phím, nảy chữ, trượt vào...).
-3. **Kỹ Thuật Chuyển Cảnh (Transition Out Patterns):**
-   - Sự kết hợp giữa các loại chuyển cảnh (`wipe`, `slide`, `circle`, `pixelize`, `fade`, `flash`...).
+3. **Bộ Khung Đồ Họa Chữ (Graphic Text Frames & Badges):**
+   - Khung chữ thuộc phong cách nào:
+     - `washi_tape` (băng keo dán mộc mạc, viền răng cưa / rách viền thủ công).
+     - `editorial_line` (chữ lớn tinh tế kèm 1 đường kẻ dọc/ngang thanh lịch, tối giản).
+     - `price_tag_pill` (thẻ bo tròn viên thuốc kiểu sàn TMĐT / săn deal / review đồ bền).
+     - `neon_glow` (khung phát quang neon rực rỡ phong cách Phonk / Cyberpunk).
+     - `minimal_glass_card` (kính mờ sang trọng).
+     - `vibrant_yellow_sticker` (nhãn dán vàng 3D bóng đổ đậm).
+   - Bảng màu thẻ chữ (Màu nền, màu chữ, màu viền, độ mờ đục).
+4. **Chiến Lược Kỹ Xảo Âm Thanh (SFX Sound Effects Strategy):**
+   - Các điểm nhấn âm thanh: tiếng Whoosh (vút gió chuyển cảnh), tiếng Pop (chữ nảy), tiếng Paper Tear (xé giấy), tiếng Click / Tap (chạm màn hình/bấm nút), tiếng Boom / Riser (cao trào).
+5. **Kỹ Thuật Chuyển Cảnh (Transition Out Patterns):**
+   - Sự kết hợp giữa các loại chuyển cảnh (`paper_rip`, `circle_open`, `flip`, `wipe`, `slide`, `fade`...).
    - Độ dài khoảnh khắc chuyển cảnh (ví dụ `0.2s` cực nhanh hay `0.5s` mượt mà).
 
 ---
@@ -44,6 +55,17 @@ Kết quả trả về BẮT BUỘC là 01 khối mã JSON hợp lệ, không ch
     "pacing_speed": "fast | dynamic | slow | medium",
     "hook_strategy": "Mô tả chiến thuật giữ chân người xem ở 3 giây đầu",
     "preferred_font_layout": "Mô tả bố cục phông chữ & vị trí ưu tiên",
+    "graphic_text_frame": {
+      "frame_type": "washi_tape | editorial_line | price_tag_pill | neon_glow | minimal_glass_card | vibrant_yellow_sticker | none",
+      "background_color": "Mã màu hex hoặc rgba",
+      "border_style": "Mô tả viền (ví dụ: 1px gold glow, dashed tape edge, no border)",
+      "text_color": "Mã màu chữ"
+    },
+    "sfx_strategy": {
+      "scene_cut_sfx": "whoosh | paper_tear | none",
+      "text_reveal_sfx": "pop | ding | typewriter_click | none",
+      "impact_sfx": "bass_drop | riser | none"
+    },
     "transition_rules": [
       "Mô tả quy tắc chuyển cảnh kết hợp"
     ]

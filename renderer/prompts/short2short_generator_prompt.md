@@ -194,20 +194,20 @@ OUTPUT JSON SCHEMA
 
 <!-- ENUM_VALID_VALUES:START -->
 
-## GIÁ TRỊ HỢP LỆ CHO CÁC TRƯỜNG ADVANCED_EFFECT
+## DANH MỤC HIỆU ỨNG & KỸ XẢO TƯƠNG THÍCH CAO NHẤT
 
-Bắt buộc chỉ sử dụng các giá trị dưới đây. Mọi giá trị ngoài danh sách sẽ bị hệ thống render từ chối:
+Hệ thống hỗ trợ toàn diện các giá trị dưới đây (kèm cơ chế Safe Fallback và Tự Tiến Hóa cho các hiệu ứng sáng tạo mới lạ):
 
-**advanced_effect.intent**: `viral_fast`, `reveal_impact`, `premium_showcase`, `luxury_soft`, `dramatic_focus`, `satisfying_cut`, `energetic_demo`, `cinematic_transition`, `tension_build`, `emotional_pause`
+**advanced_effect.camera_motion**: `static`, `macro_push`, `push_in`, `push_out`, `pull_out`, `cinematic_glide_zoom`, `punch_zoom`, `drift_cam`, `drift`, `slow_zoom_in`, `snap_zoom`, `snap`, `overshoot`, `pulse`
 
-**advanced_effect.mood**: `aggressive`, `premium`, `energetic`, `satisfying`, `playful`, `emotional`, `dramatic`, `soft`
+**transition_out.type**: `fade`, `circle_open`, `paper_rip`, `flip`, `wipe_left`, `wipe_right`, `wipe_up`, `wipe_down`, `slide_up`, `slide_down`, `slide_left`, `slide_right`, `none`
 
-**advanced_effect.pacing**: `slow`, `medium`, `fast`, `pulse`, `dynamic`
+**subtitle_style**: `vibrant_yellow_sticker`, `minimal_glass_card`, `warning_red_badge`, `vibrant_yellow_lightning_sticker`, `washi_tape`, `editorial_line`, `price_tag_pill`, `neon_glow`, `none`
 
-**advanced_effect.focus**: `product`, `texture`, `packaging`, `reveal`, `hand_action`, `logo`
+**layout**: `full`, `split`, `split_vertical`, `split_horizontal`
 
-**advanced_effect.camera_motion**: `static`, `push_in`, `push_out`, `drift`, `snap`, `overshoot`, `pulse`
+**impact_effect**: `micro_jitter_on_beat`, `flash`, `none`
 
-**transition_out.type**: `fade`, `wipe_left`, `wipe_right`, `slide_up`, `circle_open`, `pixelize`
+**text_effect.name**: `word_pop`, `masked_slide`, `tracking_expand`, `typewriter`, `outlined_punch`, `rotated_sticker_pop`, `smooth_blur_reveal`, `stomp_zoom`, `Pop-up`, `Bounce`, `Glow`
 
 <!-- ENUM_VALID_VALUES:END -->

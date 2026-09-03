@@ -9,7 +9,15 @@
     "energetic_demo",
     "cinematic_transition",
     "tension_build",
-    "emotional_pause"
+    "emotional_pause",
+    "explain",
+    "demonstrate",
+    "compare",
+    "emphasize",
+    "warn",
+    "prove",
+    "offer",
+    "cta"
   ],
   "mood": [
     "aggressive",
@@ -19,10 +27,52 @@
     "playful",
     "emotional",
     "dramatic",
-    "soft"
+    "soft",
+    "chill",
+    "luxury"
   ],
-  "pacing": ["slow", "medium", "fast", "pulse", "dynamic"],
-  "focus": ["product", "texture", "packaging", "reveal", "hand_action", "logo"],
-  "camera_motion": ["static", "push_in", "push_out", "drift", "snap", "overshoot", "pulse"],
-  "transition_type": ["fade", "wipe_left", "wipe_right", "slide_up", "circle_open", "pixelize"]
+  "pacing": ["slow", "medium", "fast", "pulse", "dynamic", "ramp"],
+  "focus": ["product", "texture", "packaging", "reveal", "hand_action", "logo", "detail", "face"],
+  "camera_motion": [
+    "static",
+    "macro_push",
+    "push_in",
+    "push_out",
+    "pull_out",
+    "cinematic_glide_zoom",
+    "punch_zoom",
+    "drift_cam",
+    "drift",
+    "slow_zoom_in",
+    "snap_zoom",
+    "snap",
+    "overshoot",
+    "pulse"
+  ],
+  "transition_type": [
+    "fade",
+    "circle_open",
+    "paper_rip",
+    "flip",
+    "wipe_left",
+    "wipe_right",
+    "wipe_up",
+    "wipe_down",
+    "slide_up",
+    "slide_down",
+    "slide_left",
+    "slide_right",
+    "none"
+  ],
+  "subtitle_style": [
+    "vibrant_yellow_sticker",
+    "minimal_glass_card",
+    "warning_red_badge",
+    "vibrant_yellow_lightning_sticker",
+    "washi_tape",
+    "editorial_line",
+    "price_tag_pill",
+    "neon_glow",
+    "none"
+  ]
 }

@@ -30,6 +30,10 @@ Tài liệu này là **Kho Danh Mục Đầy Đủ Nhất ($100\%$ Single Source
 | **`vibrant_yellow_sticker`** | Nhãn dán vàng rực rỡ, viền đen dày, bóng cứng 3D nổi bật. | Mở màn Hook giật tít, cảnh kết Outro, mẹo hay. | 🟢 Đang chạy |
 | **`warning_red_badge`** | Thẻ đỏ cảnh báo, viền vàng rực, chữ tương phản cao. | Cảnh báo sai lầm, lưu ý quan trọng, bí quyết nghề. | 🟢 Đang chạy |
 | **`vibrant_yellow_lightning_sticker`** | Nhãn dán vàng tia sét năng lượng cao. | Khoảnh khắc bất ngờ, tốc độ, đột phá. | 🟢 Đang chạy |
+| **`washi_tape`** | Dải băng dính dán mộc mạc, nền giấy kraft, viền răng cưa thủ công. | Đồ da may tay, vintage, nghệ thuật thủ công, tự nhiên. | 🟢 Đang chạy |
+| **`editorial_line`** | Chữ lớn sang trọng kèm 1 vạch line thẳng đứng bên hông, nền trong suốt. | Tạp chí thời trang, giày cao cấp Hải Nancy, thanh lịch. | 🟢 Đang chạy |
+| **`price_tag_pill`** | Thẻ bo tròn viên thuốc màu cam/đỏ rực rỡ kèm viền vàng kim. | Đập hộp, review đồ bền, săn sale, Mua Chuẩn Xài Lâu. | 🟢 Đang chạy |
+| **`neon_glow`** | Khung kính tối màu phát quang viền neon xanh cyan rực rỡ. | Nhạc Phonk Slowed, công nghệ đêm, thể thao điện tử. | 🟢 Đang chạy |
 
 ---
 

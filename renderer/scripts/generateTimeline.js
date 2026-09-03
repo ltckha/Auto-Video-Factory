@@ -47,7 +47,8 @@ const RESPONSE_SCHEMA = {
             "general"
           ]
         },
-        brand_name: { type: "STRING" }
+        brand_name: { type: "STRING" },
+        style: { type: "STRING" }
       },
       required: ["title", "description", "hashtags"]
     },
@@ -78,14 +79,35 @@ const RESPONSE_SCHEMA = {
           speed_strategy: { type: "STRING", enum: ["uniform", "adaptive", "ramp", "jumpcut"] },
           render_priority: { type: "STRING", enum: ["keep", "compress"] },
           subtitle: { type: "STRING" },
-          subtitle_style: { type: "STRING" },
+          subtitle_style: { type: "STRING", enum: effectEnums.subtitle_style || [] },
           text_position: { type: "STRING", enum: ["top", "center", "bottom"] },
           voice: { type: "STRING" },
           visual_cue: { type: "STRING" },
+          visual_description: { type: "STRING" },
+          visual_intent: { type: "STRING" },
+          rhythm_intent: { type: "STRING" },
+          layout: { type: "STRING", enum: ["full", "split", "split_vertical", "split_horizontal"] },
+          impact_effect: { type: "STRING" },
           text_effect: {
             type: "OBJECT",
             properties: {
-              name: { type: "STRING", enum: ["Pop-up", "Bounce", "Typewriter", "Slide In", "Glow"] },
+              name: {
+                type: "STRING",
+                enum: [
+                  "word_pop",
+                  "masked_slide",
+                  "tracking_expand",
+                  "typewriter",
+                  "outlined_punch",
+                  "rotated_sticker_pop",
+                  "smooth_blur_reveal",
+                  "stomp_zoom",
+                  "Pop-up",
+                  "Bounce",
+                  "Slide In",
+                  "Glow"
+                ]
+              },
               description: { type: "STRING" }
             },
             required: ["name", "description"]

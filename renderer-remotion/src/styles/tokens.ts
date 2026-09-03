@@ -26,7 +26,16 @@ export interface TypographyToken {
 }
 
 export interface CardToken {
-  type: "glass" | "sticker" | "badge" | "editorial" | "none";
+  type:
+    | "glass"
+    | "sticker"
+    | "badge"
+    | "editorial"
+    | "washi_tape"
+    | "editorial_line"
+    | "price_tag_pill"
+    | "neon_glow"
+    | "none";
   background: string;
   backdropFilter?: string;
   border: string;
