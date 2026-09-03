@@ -33,27 +33,7 @@ Tài liệu này là **Kho Danh Mục Đầy Đủ Nhất ($100\%$ Single Source
 
 ---
 
-### 3. 🧵 KHO NGUYÊN VẬT LIỆU XÚC GIÁC (CREATIVE MATERIALS LAYER M6.2)
-| Tên Material | Cách Thể Hiện Trong Video | Chuyển Động (Motion) & Âm Thanh | Trạng Thái |
-| :--- | :--- | :--- | :---: |
-| **`StitchingThread`** | Đường may chỉ xiên $45^\circ$ thủ công, lỗ đục quả trám 3D. | Kim luồn chỉ nối tiếp + Tiếng kéo chỉ `stitch_pull`. | 🟢 Đang chạy |
-| **`HandMark (circle)`** | Vòng tròn vẽ tay hữu cơ khoanh trúng chi tiết đắt giá. | Nét chì vẽ tay nảy lò xo mềm mại. | 🟢 Đang chạy |
-| **`HandMark (arrow)`** | Mũi tên chì nháp uốn cong chỉ thẳng vào thao tác. | Vẽ vút đầu mũi tên dứt khoát. | 🟢 Đang chạy |
-| **`HandMark (check_mark)`**| Dấu tick xanh xác nhận chuẩn quy trình / mẹo đúng. | Nét chì tick xanh nảy lò xo. | 🟢 Đang chạy |
-| **`KraftTape`** | Băng keo dán giấy Kraft mờ 2 đầu thẻ, viền răng cưa nhăn. | Dán áp vào khung hình góc nghiêng vật lý + Tiếng xé `paper_tear`. | 🟢 Đang chạy |
-| **`EmbossStamp`** | Dấu dập chìm nhiệt độ sâu 3D trên da & Con dấu tròn chất lượng.| Lực nén xuống và nảy lò xo `press_rebound` + Tiếng búa `stamp_press`. | 🟢 Đang chạy |
-| **`PaperClip`** | Kẹp giấy kim loại phản quang & Ghim bấm đồng. | Kẹp áp vào thẻ ghi chú + Tiếng `clip_click`. | 🟢 Đang chạy |
-| **`BeforeAfterSlider`** | Thanh trượt phân đôi màn hình Trước & Sau phục hồi/chế tác. | Vạch chia di chuyển linh hoạt `slide_split`. | 🟢 Đang chạy |
-| **`PriceTagBadge`** | Tag giá thương mại nổi khối, gạch giá cũ làm nổi giá ưu đãi. | Nảy lò xo 3D nổi bật góc màn hình. | 🟢 Đang chạy |
-| **`DimensionLine`** | Thước đo milimet thông số kỹ thuật độ dày da/kích thước. | Gióng dài 2 đầu nẹp giá trị thực tế. | 🟢 Đang chạy |
-| **`LightSweep`** | Vệt sáng quét mượt qua bề mặt da/sản phẩm. | Quét chéo làm bừng sáng độ bóng và vân da. | 🟢 Đang chạy |
-| **`SurfaceGrainOverlay`**| Lớp hạt phim hữu cơ siêu mịn phủ mờ. | Giúp video ấm áp, chất điện ảnh tự nhiên. | 🟢 Đang chạy |
-| **`StepBadge`** | Huy hiệu đánh số thứ tự công đoạn (`BƯỚC 01`, `02`...). | Nảy lò xo bo tròn nổi bật. | 🟢 Đang chạy |
-| **`StarRatingBadge`** | Cụm đánh giá 5 sao vàng óng bảo chứng chất lượng. | Kính mờ viền vàng rực. | 🟢 Đang chạy |
-
----
-
-### 4. 🎥 CHUYỂN ĐỘNG MÁY QUAY (CAMERA MOTIONS)
+### 3. 🎥 CHUYỂN ĐỘNG MÁY QUAY (CAMERA MOTIONS)
 | Tên Camera Motion | Hành Vi Chuyển Động Vật Lý | Cảm Giác Thị Giác | Trạng Thái |
 | :--- | :--- | :--- | :---: |
 | **`macro_push`** | Zoom đẩy từ từ vào trung tâm tay đang thao tác. | Tập trung cao độ, chuẩn ASMR. | 🟢 Đang chạy |
@@ -66,7 +46,7 @@ Tài liệu này là **Kho Danh Mục Đầy Đủ Nhất ($100\%$ Single Source
 
 ---
 
-### 5. 🔄 CHUYỂN CẢNH ĐÃ TÍCH HỢP (COMPOSITOR TRANSITIONS)
+### 4. 🔄 CHUYỂN CẢNH ĐÃ TÍCH HỢP (COMPOSITOR TRANSITIONS)
 | Tên Transition | Hướng Chuyển Động & Hiệu Ứng | Bù Trừ Khung Hình Đen | Trạng Thái |
 | :--- | :--- | :---: | :---: |
 | **`circle_open` / `iris`** | Mở vòng tròn ống kính từ tâm bung tỏa ra toàn màn hình. | ✅ Bù trừ hoàn hảo | 🟢 Đang chạy |
@@ -80,7 +60,7 @@ Tài liệu này là **Kho Danh Mục Đầy Đủ Nhất ($100\%$ Single Source
 
 ---
 
-### 6. 🏷️ TÀI SẢN THƯƠNG HIỆU CHÍNH THỨC (BRAND ASSETS)
+### 5. 🏷️ TÀI SẢN THƯƠNG HIỆU CHÍNH THỨC (BRAND ASSETS)
 | Tên Thương Hiệu | File Asset Chính Thức | Cơ Chế Bảo Vệ | Trạng Thái |
 | :--- | :--- | :--- | :---: |
 | **Hiệu Giày Hải Nancy** | [`logo_hai_nancy.png`](file:///Users/khan/Developer/Auto-Video-Factory/renderer-remotion/src/brand/assets/logo_hai_nancy.png) | Chỉ gắn khi video $100\%$ là Hải Nancy. | 🟢 Đang chạy |
@@ -107,3 +87,5 @@ Tài liệu này là **Kho Danh Mục Đầy Đủ Nhất ($100\%$ Single Source
 
 | Thời Gian | Dự Án Yêu Cầu | Phân Cảnh | Hiệu Ứng / Kỹ Xảo Chưa Có Code | Fallback Đã Dùng | Đề Xuất Nâng Cấp Cho Lần Sau |
 | :--- | :--- | :---: | :--- | :--- | :--- |
+| `03/09/2026 15:14` | `VID_20260817_081002` | scene_005 | `push_out` (Camera Motion / Effect) | macro_push (Mặc định mượt mà) | Bổ sung Motion Primitive: `push_out` vào cameraPrimitives.ts |
+| `03/09/2026 16:02` | `VID_20260817_081217` | scene_003 | `push_out` (Camera Motion / Effect) | macro_push (Mặc định mượt mà) | Bổ sung Motion Primitive: `push_out` vào cameraPrimitives.ts |

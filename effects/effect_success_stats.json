@@ -69,7 +69,7 @@
     "fail": 0
   },
   "transition_out:fade": {
-    "success": 135,
+    "success": 141,
     "fail": 0
   },
   "advanced_effect:zoomin": {
@@ -157,19 +157,19 @@
     "fail": 1
   },
   "subtitle_style:vibrant_yellow_sticker": {
-    "success": 31,
+    "success": 34,
     "fail": 0
   },
   "transition_out:wipe_left": {
-    "success": 18,
+    "success": 20,
     "fail": 0
   },
   "advanced_effect:Satisfying Timewarp": {
-    "success": 6,
+    "success": 8,
     "fail": 0
   },
   "subtitle_style:minimal_glass_card": {
-    "success": 57,
+    "success": 61,
     "fail": 0
   },
   "transition_out:slide_up": {
@@ -189,7 +189,7 @@
     "fail": 0
   },
   "transition_out:circle_open": {
-    "success": 12,
+    "success": 13,
     "fail": 0
   },
   "advanced_effect:Luxury Focus": {
@@ -197,7 +197,7 @@
     "fail": 0
   },
   "subtitle_style:vibrant_yellow_lightning_sticker": {
-    "success": 17,
+    "success": 19,
     "fail": 0
   },
   "advanced_effect:Epic Reveal Outro": {
@@ -265,15 +265,15 @@
     "fail": 0
   },
   "advanced_effect:Fast Motion": {
-    "success": 3,
+    "success": 4,
     "fail": 0
   },
   "advanced_effect:Cinematic Zoom": {
-    "success": 3,
+    "success": 5,
     "fail": 0
   },
   "advanced_effect:Epic Reveal": {
-    "success": 3,
+    "success": 5,
     "fail": 0
   },
   "advanced_effect:Flash": {
@@ -281,11 +281,11 @@
     "fail": 0
   },
   "advanced_effect:Glow": {
-    "success": 1,
+    "success": 2,
     "fail": 0
   },
   "advanced_effect:Smooth Transition": {
-    "success": 3,
+    "success": 4,
     "fail": 0
   },
   "advanced_effect:reveal_spring_wood": {

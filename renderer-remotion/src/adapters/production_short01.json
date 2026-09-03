@@ -1,190 +1,195 @@
 {
   "video_meta": {
-    "title": "Đập Hộp Ốp Lưng MagSafe Siêu Xịn",
-    "description": "Bóc seal ốp lưng MagSafe cực đỉnh cho iPhone. Cảm giác cầm nắm đầm tay, viền bảo vệ chắc chắn.",
+    "title": "Nghệ Thuật Hồi Sinh Giày Da Cũ Thủ Công",
+    "description": "🎣 Bạn đã bao giờ tự tay hồi sinh một đôi giày da cũ chưa?\n\n📖 Cận cảnh nghệ thuật chăm sóc đồ hiệu thủ công cực chill. Từng lớp kem dưỡng len lỏi làm mềm thớ da, trả lại độ bóng mượt và sang trọng nguyên bản.\n\n💬 Bạn thích cảm giác thư thái khi tự chăm sóc đôi giày của mình chứ, hãy bình luận cho mình biết nhé!",
     "hashtags": [
-      "unboxing",
-      "oplungiphone",
-      "magsafe",
-      "phukiendienthoai"
+      "shoecare",
+      "leatherrestore",
+      "asmrshoecare",
+      "dothucong",
+      "chamsocgiay"
     ],
-    "pipeline_mode": "Short2Short",
-    "created_at": "2026-09-03 14:51:47",
-    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260816_100506.mp4",
-    "original_duration_s": 56.7
+    "pipeline_mode": "Long2Short",
+    "created_at": "2026-09-03 16:02:15",
+    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260817_081217.mp4",
+    "original_duration_s": 105.5
   },
   "timeline": [
     {
       "scene_id": "scene_001",
       "scene_type": "hook",
-      "start_s": 9.5,
-      "end_s": 13.5,
-      "duration_s": 4,
-      "title": "Khui ốp lưng đầu tiên",
+      "start_s": 0,
+      "end_s": 18.5,
+      "duration_s": 8,
+      "title": "Bắt đầu làm sạch bề mặt da",
       "story_importance": 0.95,
       "key_moments": [
-        10.2,
-        12
+        2.5,
+        6
       ],
-      "speed_strategy": "jumpcut",
-      "render_priority": "keep",
-      "subtitle": "ĐẬP HỘP\nỐP LƯNG MỚI",
+      "speed_strategy": "adaptive",
+      "render_priority": "compress",
+      "subtitle": "HỒI SINH GIÀY DA\nCỰC CHILL",
       "subtitle_style": "vibrant_yellow_sticker",
       "text_position": "top",
-      "voice": "Khui hàng ốp lưng mới về tay xem có xịn không nhé!",
-      "visual_cue": "Rút chiếc ốp lưng màu xám viền cam lộ diện từ phong bì chuyển phát.",
+      "voice": "Hôm nay cùng mình hồi sinh vẻ đẹp nguyên bản của một đôi giày da cũ nhé.",
+      "visual_cue": "Cận cảnh bàn tay đeo găng đen dùng miếng xốp xoa nhẹ lớp dưỡng chất lên bề mặt da giày màu nâu cũ kỹ, bộc lộ độ sáng bóng mới mẻ mượt mà.",
       "text_effect": {
-        "name": "Pop-up",
-        "description": "Nảy nhanh thu hút chú ý"
+        "name": "Bounce",
+        "description": "Chữ nảy nhẹ nhàng tinh tế theo nhịp điệu thư thái"
       },
       "advanced_effect": {
-        "name": "reveal_pop",
-        "intent": "reveal_impact",
-        "mood": "energetic",
-        "pacing": "fast",
-        "focus": "reveal",
-        "camera_motion": "snap",
-        "intensity": 0.85,
-        "description": "Hiệu ứng xuất hiện nhanh dứt khoát"
+        "name": "Cinematic Zoom",
+        "intent": "premium_showcase",
+        "mood": "premium",
+        "pacing": "slow",
+        "focus": "product",
+        "camera_motion": "push_in",
+        "intensity": 0.8,
+        "description": "Zoom chậm tăng sự tập trung vào bề mặt chất liệu da"
       },
-      "hook_strength": 0.92,
-      "visual_energy": 0.85,
+      "hook_strength": 0.95,
+      "visual_energy": 0.75,
       "retention_score": 0.9,
       "confidence": 0.95,
       "include": true,
       "transition_out": {
-        "type": "wipe_right",
-        "duration": 0.3
+        "type": "fade",
+        "duration": 0.4
       }
     },
     {
       "scene_id": "scene_002",
       "scene_type": "body",
-      "start_s": 24,
-      "end_s": 33.5,
-      "duration_s": 9.5,
-      "title": "Mở lớp bảo vệ & so sánh 2 mẫu",
+      "start_s": 21,
+      "end_s": 45,
+      "duration_s": 8,
+      "title": "Lau sâu phần lưỡi gà và bên trong",
       "story_importance": 0.85,
       "key_moments": [
         25,
-        31
+        35
       ],
-      "speed_strategy": "uniform",
-      "render_priority": "keep",
-      "subtitle": "CHẤT LIỆU CAO CẤP\nFORM CỰC CHUẨN",
+      "speed_strategy": "ramp",
+      "render_priority": "compress",
+      "subtitle": "LÀM SẠCH SÂU\nTỪNG KẼ CHỈ",
       "subtitle_style": "minimal_glass_card",
-      "text_position": "top",
-      "voice": "Chất liệu hoàn thiện nhám mịn, vòng MagSafe gia công rất sắc nét.",
-      "visual_cue": "Lột lớp xốp bảo vệ và đặt song song hai chiếc ốp để so sánh mặt lưng.",
+      "text_position": "bottom",
+      "voice": "Lớp kem dưỡng thấm sâu giúp chất da mềm mại và phục hồi độ bóng mượt ban đầu.",
+      "visual_cue": "Tay di chuyển tỉ mỉ lau sạch kẽ luồn dây và các góc khuất bên trong lòng giày, làm nổi bật cấu trúc phom dáng.",
       "text_effect": {
-        "name": "Slide In",
-        "description": "Trượt mượt mà từ trên xuống"
+        "name": "Pop-up",
+        "description": "Xuất hiện mượt mà tạo cảm giác dễ chịu"
       },
       "advanced_effect": {
-        "name": "texture_showcase",
-        "intent": "premium_showcase",
-        "mood": "premium",
-        "pacing": "medium",
-        "focus": "texture",
+        "name": "Satisfying Timewarp",
+        "intent": "satisfying_cut",
+        "mood": "satisfying",
+        "pacing": "dynamic",
+        "focus": "hand_action",
         "camera_motion": "drift",
         "intensity": 0.7,
-        "description": "Quay cận chất liệu và chi tiết mặt lưng"
+        "description": "Tua nhanh thao tác tay đều đặn kích thích thị giác"
       },
-      "hook_strength": 0.75,
-      "visual_energy": 0.78,
-      "retention_score": 0.82,
-      "confidence": 0.92,
+      "hook_strength": 0.8,
+      "visual_energy": 0.7,
+      "retention_score": 0.85,
+      "confidence": 0.9,
       "include": true,
       "transition_out": {
-        "type": "slide_up",
+        "type": "wipe_left",
         "duration": 0.3
       }
     },
     {
       "scene_id": "scene_003",
       "scene_type": "body",
-      "start_s": 42,
-      "end_s": 50.5,
-      "duration_s": 8.5,
-      "title": "Lắp thử lên điện thoại",
-      "story_importance": 0.9,
+      "start_s": 51,
+      "end_s": 75,
+      "duration_s": 8,
+      "title": "Dưỡng bóng mặt ngoài giày thứ hai",
+      "story_importance": 0.88,
       "key_moments": [
-        43.5,
-        49
+        55,
+        65
       ],
-      "speed_strategy": "uniform",
-      "render_priority": "keep",
-      "subtitle": "LẮP VỪA KHÍT\nCẦM CỰC ĐÃ TAY",
-      "subtitle_style": "vibrant_yellow_sticker",
-      "text_position": "top",
-      "voice": "Lắp vào máy vừa khít từng góc cạnh, cầm trên tay cảm giác đầm và chắc chắn.",
-      "visual_cue": "Ấn điện thoại iPhone vào ốp lưng và lật mặt sau ngắm nghía chi tiết viền cam.",
+      "speed_strategy": "adaptive",
+      "render_priority": "compress",
+      "subtitle": "PHỤC HỒI\nĐỘ BÓNG MƯỢT",
+      "subtitle_style": "minimal_glass_card",
+      "text_position": "center",
+      "voice": "Chăm sóc đồ hiệu thủ công luôn mang lại cảm giác thư thái đến kỳ lạ.",
+      "visual_cue": "Xoay giày nghiêng góc 45 độ, miếng bọt biển quét nhẹ nhàng mượt mà dọc thân giày phản chiếu ánh sáng lấp lánh.",
       "text_effect": {
-        "name": "Bounce",
-        "description": "Nảy nhẹ tạo nhịp điệu"
+        "name": "Glow",
+        "description": "Hiệu ứng chữ tỏa sáng tinh tế, sang trọng"
       },
       "advanced_effect": {
-        "name": "fit_demo",
-        "intent": "energetic_demo",
-        "mood": "satisfying",
+        "name": "Glow",
+        "intent": "dramatic_focus",
+        "mood": "premium",
         "pacing": "medium",
-        "focus": "hand_action",
-        "camera_motion": "push_in",
-        "intensity": 0.75,
-        "description": "Zoom nhẹ vào thao tác ốp máy"
+        "focus": "texture",
+        "camera_motion": "push_out",
+        "intensity": 0.85,
+        "description": "Làm nổi bật những thớ da căng mọng bóng bẩy sau khi dưỡng"
       },
-      "hook_strength": 0.8,
-      "visual_energy": 0.82,
-      "retention_score": 0.85,
-      "confidence": 0.94,
+      "hook_strength": 0.85,
+      "visual_energy": 0.8,
+      "retention_score": 0.88,
+      "confidence": 0.95,
       "include": true,
       "transition_out": {
-        "type": "circle_open",
-        "duration": 0.35
+        "type": "fade",
+        "duration": 0.4
       }
     },
     {
       "scene_id": "scene_004",
       "scene_type": "conclusion",
-      "start_s": 51,
-      "end_s": 56,
-      "duration_s": 5,
-      "title": "Trưng bày thành phẩm",
-      "story_importance": 0.8,
+      "start_s": 83,
+      "end_s": 105.55,
+      "duration_s": 8,
+      "title": "Hoàn thiện và đánh bóng chi tiết",
+      "story_importance": 0.9,
       "key_moments": [
-        54
+        90,
+        100
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "TRẢI NGHIỆM\nQUÁ ƯNG Ý",
-      "subtitle_style": "minimal_glass_card",
+      "subtitle": "CHĂM SÓC\nĐỒ HIỆU ĐÚNG CÁCH",
+      "subtitle_style": "vibrant_yellow_lightning_sticker",
       "text_position": "bottom",
-      "voice": "Một chiếc ốp vừa bảo vệ tốt lại còn sang xịn thế này thì quá đáng tiền.",
-      "visual_cue": "Đặt hai chiếc ốp ngay ngắn trên bàn làm việc hoàn tất màn mở hộp.",
+      "voice": "Hãy trân trọng những món đồ cũ, vì chúng mang câu chuyện của riêng bạn.",
+      "visual_cue": "Hai chiếc giày bóng loáng đặt cạnh nhau hoàn hảo, màu sắc nâu trầm ấm cực kỳ đẳng cấp như mới mua từ store.",
       "text_effect": {
-        "name": "Glow",
-        "description": "Phát sáng nhẹ nhàng"
+        "name": "Pop-up",
+        "description": "Xuất hiện uyển chuyển, kết thúc ấn tượng"
       },
       "advanced_effect": {
-        "name": "outro_still",
-        "intent": "premium_showcase",
-        "mood": "satisfying",
+        "name": "Epic Reveal",
+        "intent": "reveal_impact",
+        "mood": "premium",
         "pacing": "slow",
         "focus": "product",
         "camera_motion": "static",
-        "intensity": 0.6,
-        "description": "Dừng hình khoe trọn hai mẫu ốp"
+        "intensity": 0.9,
+        "description": "Giữ tĩnh để người xem thưởng thức trọn vẹn thành quả cuối cùng cực kỳ sang xịn mịn"
       },
-      "hook_strength": 0.7,
-      "visual_energy": 0.7,
-      "retention_score": 0.78,
-      "confidence": 0.9,
-      "include": true
+      "hook_strength": 0.9,
+      "visual_energy": 0.85,
+      "retention_score": 0.92,
+      "confidence": 0.95,
+      "include": true,
+      "transition_out": {
+        "type": "fade",
+        "duration": 0.5
+      }
     }
   ],
   "audio_config": {
-    "bgm_mood": "chill",
-    "bgm_url": "",
+    "bgm_mood": "luxury",
     "enable_sfx": true
   }
 }
