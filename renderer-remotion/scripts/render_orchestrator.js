@@ -159,9 +159,8 @@ async function orchestrateRenderSingle(projectId) {
   let engineUsed = "hybrid";
   let fallbackTriggered = false;
   let retryCount = 0;
-  let status = "SUCCESS";
-  let styleUsed = "asmr_craft";
-  let brandUsed = "yen_leather";
+  let styleUsed = "general_viral";
+  let brandUsed = "general";
   let platformUsed = "tiktok";
   let timelineJson = null;
 
@@ -173,8 +172,8 @@ async function orchestrateRenderSingle(projectId) {
   if (fs.existsSync(timelinePath)) {
     try {
       timelineJson = JSON.parse(fs.readFileSync(timelinePath, "utf8"));
-      styleUsed = timelineJson.video_meta?.style || (String(timelineJson.video_meta?.title || "").toLowerCase().includes("dalat") ? "cinematic_travel" : "asmr_craft");
-      brandUsed = timelineJson.video_meta?.brand || "yen_leather";
+      styleUsed = timelineJson.video_meta?.style || "general_viral";
+      brandUsed = timelineJson.video_meta?.brand || "general";
       platformUsed = timelineJson.video_meta?.platform || "tiktok";
     } catch {}
   }

@@ -31,7 +31,23 @@ const RESPONSE_SCHEMA = {
         hashtags: {
           type: "ARRAY",
           items: { type: "STRING" }
-        }
+        },
+        brand: {
+          type: "STRING",
+          enum: [
+            "hieu_giay_hai_nancy",
+            "yen_handmade_leather",
+            "mua_chuan_xai_lau",
+            "yenyen_deals",
+            "macadamia_hai_nancy",
+            "o_da_lat_vay_thoi",
+            "elegant_steps",
+            "yenyen_farm",
+            "yenyen_forest_farm",
+            "general"
+          ]
+        },
+        brand_name: { type: "STRING" }
       },
       required: ["title", "description", "hashtags"]
     },

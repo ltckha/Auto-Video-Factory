@@ -112,8 +112,11 @@ async function renderHybridMaster(projectIdInput) {
   let sourceVideoPath = timelineJson.video_meta?.input_file;
   if (!sourceVideoPath || !fs.existsSync(sourceVideoPath)) {
     const incomingMp4 = path.join(INCOMING_DIR, `${projectId}.mp4`);
+    const nasMp4 = path.join("/Volumes/Media/Auto-Video-Factory", projectId, `${projectId}.mp4`);
     if (fs.existsSync(incomingMp4)) {
       sourceVideoPath = incomingMp4;
+    } else if (fs.existsSync(nasMp4)) {
+      sourceVideoPath = nasMp4;
     } else {
       throw new Error(`Source video not found: ${sourceVideoPath}`);
     }
