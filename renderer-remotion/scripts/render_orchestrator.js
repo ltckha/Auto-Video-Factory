@@ -163,6 +163,7 @@ async function orchestrateRenderSingle(projectId) {
   let brandUsed = "general";
   let platformUsed = "tiktok";
   let timelineJson = null;
+  let status = "SUCCESS";
 
   // Locate Timeline metadata
   let incomingTimelinePath = path.join(INCOMING_DIR, `${projectId}.json`);

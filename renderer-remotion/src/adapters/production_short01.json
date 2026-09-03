@@ -1,195 +1,206 @@
 {
   "video_meta": {
-    "title": "Nghệ Thuật Hồi Sinh Giày Da Cũ Thủ Công",
-    "description": "🎣 Bạn đã bao giờ tự tay hồi sinh một đôi giày da cũ chưa?\n\n📖 Cận cảnh nghệ thuật chăm sóc đồ hiệu thủ công cực chill. Từng lớp kem dưỡng len lỏi làm mềm thớ da, trả lại độ bóng mượt và sang trọng nguyên bản.\n\n💬 Bạn thích cảm giác thư thái khi tự chăm sóc đôi giày của mình chứ, hãy bình luận cho mình biết nhé!",
+    "title": "✨ Trải Nghiệm Chăm Sóc Đồ Da Thỏa Mãn Giác Quan",
+    "description": "🎣 Giữ phom giày tây da bò luôn căng đẹp như mới với cốt giày gỗ!\n\n📖 Chăm sóc đồ da thủ công không chỉ là bảo quản, mà còn là một liệu pháp thư giãn tâm trí. Cùng ngắm nhìn từng thao tác lắp cốt gỗ cực kỳ chuẩn xác và đã mắt.\n\n💬 Bạn đã dùng cốt giày gỗ bảo vệ đôi giày yêu thích của mình chưa?",
     "hashtags": [
-      "shoecare",
-      "leatherrestore",
-      "asmrshoecare",
-      "dothucong",
-      "chamsocgiay"
+      "hieugiayhainancy",
+      "chamsocdoda",
+      "shoetree",
+      "giaytaynam",
+      "asmr"
     ],
-    "pipeline_mode": "Long2Short",
-    "created_at": "2026-09-03 16:02:15",
-    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260817_081217.mp4",
-    "original_duration_s": 105.5
+    "brand": "hieu_giay_hai_nancy",
+    "brand_name": "Hiệu giày Hải Nancy",
+    "style": "dark_cinematic_phonk_slowed_showcase",
+    "pipeline_mode": "Short2Short",
+    "created_at": "2026-09-03 19:49:36",
+    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260817_081805.mp4",
+    "original_duration_s": 44.5
   },
   "timeline": [
     {
       "scene_id": "scene_001",
       "scene_type": "hook",
-      "start_s": 0,
-      "end_s": 18.5,
-      "duration_s": 8,
-      "title": "Bắt đầu làm sạch bề mặt da",
+      "start_s": 6,
+      "end_s": 11,
+      "duration_s": 5,
+      "title": "Lắp Cốt Giỗ Giữ Form Giày",
       "story_importance": 0.95,
       "key_moments": [
-        2.5,
-        6
+        7.5,
+        9.5
       ],
-      "speed_strategy": "adaptive",
-      "render_priority": "compress",
-      "subtitle": "HỒI SINH GIÀY DA\nCỰC CHILL",
-      "subtitle_style": "vibrant_yellow_sticker",
+      "speed_strategy": "uniform",
+      "render_priority": "keep",
+      "subtitle": "LẮP CỐT GIÀY GỖ\nCĂNG PHOM TỨC THÌ",
+      "subtitle_style": "minimal_glass_card",
       "text_position": "top",
-      "voice": "Hôm nay cùng mình hồi sinh vẻ đẹp nguyên bản của một đôi giày da cũ nhé.",
-      "visual_cue": "Cận cảnh bàn tay đeo găng đen dùng miếng xốp xoa nhẹ lớp dưỡng chất lên bề mặt da giày màu nâu cũ kỹ, bộc lộ độ sáng bóng mới mẻ mượt mà.",
+      "voice": "Lắp cốt gỗ chuẩn phom giúp giày luôn như mới.",
+      "visual_cue": "Cận cảnh bàn tay đeo găng đen lắp cốt gỗ vào giày tây da",
       "text_effect": {
-        "name": "Bounce",
-        "description": "Chữ nảy nhẹ nhàng tinh tế theo nhịp điệu thư thái"
+        "name": "smooth_blur_reveal",
+        "description": "Hiện chữ mờ ảo mượt mà"
       },
       "advanced_effect": {
-        "name": "Cinematic Zoom",
+        "name": "cinematic_glide_zoom",
         "intent": "premium_showcase",
-        "mood": "premium",
+        "mood": "luxury",
         "pacing": "slow",
         "focus": "product",
-        "camera_motion": "push_in",
+        "camera_motion": "cinematic_glide_zoom",
         "intensity": 0.8,
-        "description": "Zoom chậm tăng sự tập trung vào bề mặt chất liệu da"
+        "description": "Lướt camera chậm tập trung vào chi tiết cốt gỗ nén vào da"
       },
-      "hook_strength": 0.95,
-      "visual_energy": 0.75,
+      "hook_strength": 0.92,
+      "visual_energy": 0.85,
       "retention_score": 0.9,
       "confidence": 0.95,
       "include": true,
       "transition_out": {
-        "type": "fade",
+        "type": "wipe_left",
         "duration": 0.4
-      }
+      },
+      "visual_description": "Đôi tay đeo găng đen đẩy thanh cốt gỗ vào trong lòng giày da nam màu nâu.",
+      "visual_intent": "demonstrate"
     },
     {
       "scene_id": "scene_002",
       "scene_type": "body",
-      "start_s": 21,
-      "end_s": 45,
-      "duration_s": 8,
-      "title": "Lau sâu phần lưỡi gà và bên trong",
+      "start_s": 11,
+      "end_s": 16,
+      "duration_s": 5,
+      "title": "Vuốt Phom Da Mịn Màng",
       "story_importance": 0.85,
       "key_moments": [
-        25,
-        35
+        13,
+        15
       ],
-      "speed_strategy": "ramp",
-      "render_priority": "compress",
-      "subtitle": "LÀM SẠCH SÂU\nTỪNG KẼ CHỈ",
+      "speed_strategy": "uniform",
+      "render_priority": "keep",
+      "subtitle": "CHĂM SÓC TỈ MỈ\nTỪNG CHI TIẾT DA",
       "subtitle_style": "minimal_glass_card",
       "text_position": "bottom",
-      "voice": "Lớp kem dưỡng thấm sâu giúp chất da mềm mại và phục hồi độ bóng mượt ban đầu.",
-      "visual_cue": "Tay di chuyển tỉ mỉ lau sạch kẽ luồn dây và các góc khuất bên trong lòng giày, làm nổi bật cấu trúc phom dáng.",
+      "voice": "Từng đường nếp nhăn trên da lập tức được vuốt phẳng.",
+      "visual_cue": "Đôi tay vuốt dọc mặt da sau khi đã căng phom",
       "text_effect": {
-        "name": "Pop-up",
-        "description": "Xuất hiện mượt mà tạo cảm giác dễ chịu"
+        "name": "tracking_expand",
+        "description": "Chữ giãn nhẹ tinh tế"
       },
       "advanced_effect": {
-        "name": "Satisfying Timewarp",
+        "name": "macro_push",
         "intent": "satisfying_cut",
         "mood": "satisfying",
-        "pacing": "dynamic",
-        "focus": "hand_action",
-        "camera_motion": "drift",
-        "intensity": 0.7,
-        "description": "Tua nhanh thao tác tay đều đặn kích thích thị giác"
+        "pacing": "slow",
+        "focus": "texture",
+        "camera_motion": "macro_push",
+        "intensity": 0.75,
+        "description": "Zoom cận cảnh vân da bò căng mịn sau khi nắn phom"
       },
-      "hook_strength": 0.8,
-      "visual_energy": 0.7,
-      "retention_score": 0.85,
-      "confidence": 0.9,
+      "hook_strength": 0.75,
+      "visual_energy": 0.8,
+      "retention_score": 0.88,
+      "confidence": 0.92,
       "include": true,
       "transition_out": {
-        "type": "wipe_left",
-        "duration": 0.3
-      }
+        "type": "slide_up",
+        "duration": 0.4
+      },
+      "visual_description": "Thao tác miết nhẹ bàn tay lên bề mặt da mũi giày căng bóng.",
+      "visual_intent": "reveal"
     },
     {
       "scene_id": "scene_003",
       "scene_type": "body",
-      "start_s": 51,
-      "end_s": 75,
-      "duration_s": 8,
-      "title": "Dưỡng bóng mặt ngoài giày thứ hai",
+      "start_s": 23,
+      "end_s": 28,
+      "duration_s": 5,
+      "title": "Cân Bằng Phom Dáng Chiếc Còn Lại",
       "story_importance": 0.88,
       "key_moments": [
-        55,
-        65
+        25,
+        27
       ],
-      "speed_strategy": "adaptive",
-      "render_priority": "compress",
-      "subtitle": "PHỤC HỒI\nĐỘ BÓNG MƯỢT",
+      "speed_strategy": "uniform",
+      "render_priority": "keep",
+      "subtitle": "GIỮ PHOM CHUẨN ĐẮC\nBỀN BỈ THEO THỜI GIAN",
       "subtitle_style": "minimal_glass_card",
-      "text_position": "center",
-      "voice": "Chăm sóc đồ hiệu thủ công luôn mang lại cảm giác thư thái đến kỳ lạ.",
-      "visual_cue": "Xoay giày nghiêng góc 45 độ, miếng bọt biển quét nhẹ nhàng mượt mà dọc thân giày phản chiếu ánh sáng lấp lánh.",
+      "text_position": "top",
+      "voice": "Đảm bảo cả hai chiếc đều giữ dáng hoàn hảo nhất.",
+      "visual_cue": "Thao tác khóa cốt gỗ vào chiếc giày thứ hai",
       "text_effect": {
-        "name": "Glow",
-        "description": "Hiệu ứng chữ tỏa sáng tinh tế, sang trọng"
+        "name": "word_pop",
+        "description": "Chữ bật ra từng từ nhẹ nhàng"
       },
       "advanced_effect": {
-        "name": "Glow",
-        "intent": "dramatic_focus",
-        "mood": "premium",
-        "pacing": "medium",
-        "focus": "texture",
-        "camera_motion": "push_out",
-        "intensity": 0.85,
-        "description": "Làm nổi bật những thớ da căng mọng bóng bẩy sau khi dưỡng"
+        "name": "slow_zoom_in",
+        "intent": "luxury_soft",
+        "mood": "chill",
+        "pacing": "slow",
+        "focus": "detail",
+        "camera_motion": "slow_zoom_in",
+        "intensity": 0.7,
+        "description": "Tập trung chuyển động vào chi tiết lò xo cốt gỗ nẩy nhẹ"
       },
-      "hook_strength": 0.85,
-      "visual_energy": 0.8,
-      "retention_score": 0.88,
-      "confidence": 0.95,
+      "hook_strength": 0.8,
+      "visual_energy": 0.82,
+      "retention_score": 0.85,
+      "confidence": 0.94,
       "include": true,
       "transition_out": {
-        "type": "fade",
+        "type": "circle_open",
         "duration": 0.4
-      }
+      },
+      "visual_description": "Lắp đặt cốt gỗ thứ 2 vào chiếc giày còn lại trên nền túi Hiệu Giày Hải Nancy.",
+      "visual_intent": "emphasize"
     },
     {
       "scene_id": "scene_004",
       "scene_type": "conclusion",
-      "start_s": 83,
-      "end_s": 105.55,
-      "duration_s": 8,
-      "title": "Hoàn thiện và đánh bóng chi tiết",
+      "start_s": 33,
+      "end_s": 38,
+      "duration_s": 5,
+      "title": "Hoàn Thiện Thành Phẩm Đồ Da",
       "story_importance": 0.9,
       "key_moments": [
-        90,
-        100
+        35,
+        37
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "CHĂM SÓC\nĐỒ HIỆU ĐÚNG CÁCH",
+      "subtitle": "BẢO VỆ GIÀY YÊU\nSANG TRỌNG ĐẲNG CẤP",
       "subtitle_style": "vibrant_yellow_lightning_sticker",
       "text_position": "bottom",
-      "voice": "Hãy trân trọng những món đồ cũ, vì chúng mang câu chuyện của riêng bạn.",
-      "visual_cue": "Hai chiếc giày bóng loáng đặt cạnh nhau hoàn hảo, màu sắc nâu trầm ấm cực kỳ đẳng cấp như mới mua từ store.",
+      "voice": "Bảo dưỡng đúng cách giúp đôi giày yêu thích đồng hành bền lâu.",
+      "visual_cue": "Góc quay toàn cảnh đôi giày da nâu đã lên phom hoàn hảo",
       "text_effect": {
-        "name": "Pop-up",
-        "description": "Xuất hiện uyển chuyển, kết thúc ấn tượng"
+        "name": "stomp_zoom",
+        "description": "Nổ chữ ấn tượng kết bài"
       },
       "advanced_effect": {
-        "name": "Epic Reveal",
-        "intent": "reveal_impact",
+        "name": "pull_out",
+        "intent": "cta",
         "mood": "premium",
-        "pacing": "slow",
+        "pacing": "medium",
         "focus": "product",
-        "camera_motion": "static",
-        "intensity": 0.9,
-        "description": "Giữ tĩnh để người xem thưởng thức trọn vẹn thành quả cuối cùng cực kỳ sang xịn mịn"
+        "camera_motion": "pull_out",
+        "intensity": 0.85,
+        "description": "Lùi camera toàn cảnh đôi giày chỉn chu chuẩn đẹp"
       },
-      "hook_strength": 0.9,
-      "visual_energy": 0.85,
+      "hook_strength": 0.85,
+      "visual_energy": 0.9,
       "retention_score": 0.92,
-      "confidence": 0.95,
+      "confidence": 0.96,
       "include": true,
       "transition_out": {
-        "type": "fade",
-        "duration": 0.5
-      }
+        "type": "none",
+        "duration": 0
+      },
+      "visual_description": "Hai chiếc giày tây đứng phom sang trọng trên bàn làm việc.",
+      "visual_intent": "cta"
     }
   ],
   "audio_config": {
-    "bgm_mood": "luxury",
+    "bgm_mood": "satisfying",
     "enable_sfx": true
   }
 }
