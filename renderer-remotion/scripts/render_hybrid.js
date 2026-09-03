@@ -22,6 +22,15 @@ try {
   console.warn(`[AudioLoader] Warning loading legacy audioEngine: ${err.message}`);
 }
 
+// Load Runtime Effect Gap Telemetry
+let inspectTimelineAndRecordGaps = null;
+try {
+  const telemetry = require(path.join(WORKSPACE_ROOT, "renderer", "scripts", "effectGapTelemetry.js"));
+  inspectTimelineAndRecordGaps = telemetry.inspectTimelineAndRecordGaps;
+} catch (err) {
+  console.warn(`[TelemetryLoader] Warning loading effectGapTelemetry: ${err.message}`);
+}
+
 /**
  * Legacy Chained atempo Builder for Audio Speed Parity
  */
@@ -76,6 +85,15 @@ async function renderHybridMaster(projectIdInput) {
 
   if (scenes.length === 0) {
     throw new Error(`Timeline has 0 active scenes.`);
+  }
+
+  // ⚡ Runtime Telemetry: Inspect unbuilt gaps and auto-record to Backlog
+  if (inspectTimelineAndRecordGaps) {
+    try {
+      inspectTimelineAndRecordGaps(projectId, timelineJson);
+    } catch (telemetryErr) {
+      console.warn(`[Telemetry] Warning: ${telemetryErr.message}`);
+    }
   }
 
   // Calculate exact total duration in seconds and frames @ 30fps

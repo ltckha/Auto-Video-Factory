@@ -97,3 +97,13 @@ Tài liệu này là **Kho Danh Mục Đầy Đủ Nhất ($100\%$ Single Source
 | **`3D_cube_spin`** | Xoay khối lập phương lỗi thời phong cách thập niên 2000, gây rối mắt. | 🚫 Đã khóa chặn |
 | **`shaky_cam` / `earthquake`** | Rung lắc bạo lực gây chóng mặt, hỏng cảm giác ASMR thư giãn. | 🚫 Đã khóa chặn |
 | **`glitch_vhs_heavy`** | Nhiễu sọc giật cục không phù hợp với đồ da sang trọng và nông sản tự nhiên. | 🚫 Đã khóa chặn |
+
+
+---
+
+## 🚨 PHẦN 3: HÀNG ĐỢI NÂNG CẤP TỰ ĐỘNG TỪ THỰC TẾ RENDER (AUTO-DETECTED RUNTIME GAPS)
+
+> **Cơ chế tự động:** Khi bạn chạy `render.command`, nếu phân cảnh nào yêu cầu hiệu ứng / kỹ xảo chưa có code thực thi riêng, hệ thống sẽ tự động dùng fallback an toàn để video vẫn ra thành phẩm đẹp, đồng thời **tự động ghi ngay vào bảng dưới đây** để lần sau chúng ta xây dựng bổ sung.
+
+| Thời Gian | Dự Án Yêu Cầu | Phân Cảnh | Hiệu Ứng / Kỹ Xảo Chưa Có Code | Fallback Đã Dùng | Đề Xuất Nâng Cấp Cho Lần Sau |
+| :--- | :--- | :---: | :--- | :--- | :--- |

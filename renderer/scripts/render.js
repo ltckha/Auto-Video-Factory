@@ -62,6 +62,7 @@ const {
   syncProjectToSheet,
   syncScenesToSheet,
 } = require("./googleSheetsSync");
+const { inspectTimelineAndRecordGaps } = require("./effectGapTelemetry");
 
 const ROOT = path.resolve(__dirname, "..");
 const WORKSPACE_ROOT = path.resolve(ROOT, "..");
@@ -1682,6 +1683,14 @@ async function renderCurrentProject() {
   );
 
   const timeline = normalizeTimeline(loadTimeline(timelinePath));
+
+  // ⚡ Runtime Telemetry: Inspect unbuilt gaps and auto-record to Backlog
+  try {
+    inspectTimelineAndRecordGaps(videoId, timeline);
+  } catch (telemetryErr) {
+    log(`[Telemetry] Warning: ${telemetryErr.message}`);
+  }
+
   const inputVideo = resolveInputVideo(timeline);
   const origDurSec = getInputVideoDuration(inputVideo) || timeline.video_meta?.original_duration_s;
   const origDurationFormatted = origDurSec ? `${Number(origDurSec).toFixed(1)}s` : "";
