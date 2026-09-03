@@ -37,6 +37,10 @@ node_modules/
 npm-debug.log*
 
 # --- Editor ---
+# --- Remotion output & temp media ---
+renderer-remotion/out/
+renderer-remotion/temp_media/
+
 # --- Environment & Secrets ---
 .env
 renderer/config/env.json
