@@ -1,4 +1,4 @@
-import { DesignToken } from "../styles/tokens";
+import { DesignToken, ColorGradeType } from "../styles/tokens";
 import { resolveCreativeSpecification, PlatformType } from "../styles/creativeResolver";
 import { resolveStyleToken } from "../styles/styleResolver";
 import { BrandDnaProfile } from "../brand/brandDna";
@@ -28,6 +28,9 @@ export interface TimelineScene {
   speed_strategy?: string;
   visual_cue?: string;
   visual_intent?: string;
+  visual_description?: string;
+  layout?: string;
+  impact_effect?: string;
   include?: boolean;
 }
 
@@ -63,7 +66,18 @@ export interface AdaptedScene {
   subtitle: string;
   subtitleStyle: string;
   position: "top" | "center" | "bottom";
-  cameraMotion: "punch_zoom" | "macro_push" | "drift_cam" | "snap_zoom" | "overshoot_zoom" | "cinematic_glide_zoom" | "static";
+  cameraMotion:
+    | "punch_zoom"
+    | "macro_push"
+    | "drift_cam"
+    | "snap_zoom"
+    | "overshoot_zoom"
+    | "cinematic_glide_zoom"
+    | "static"
+    | "push_out"
+    | "pull_out"
+    | "push_in"
+    | "slow_zoom_in";
   token: DesignToken;
   intensity: number;
   brand: BrandDnaProfile;
@@ -81,6 +95,11 @@ export interface AdaptedScene {
   };
   textTreatment?: TextTreatment;
   textComposition?: TextComposition;
+  colorGrade?: ColorGradeType;
+  splitLayout?: {
+    mode: "top_bottom" | "left_right";
+  } | null;
+  microJitter?: boolean;
 }
 
 export function adaptTimelineToRemotion(
@@ -180,6 +199,33 @@ export function adaptTimelineToRemotion(
       textComposition = "step_flow";
     }
 
+    // 7. Dynamic Layout Resolution (Multi-Screen Split / Collage)
+    const descText = `${sc.layout || ""} ${sc.visual_description || ""} ${sc.visual_intent || ""}`.toLowerCase();
+    let splitLayout: { mode: "top_bottom" | "left_right" } | null = null;
+    if (descText.includes("split") || descText.includes("chia màn hình") || descText.includes("collage")) {
+      splitLayout = {
+        mode: descText.includes("left_right") || descText.includes("trái phải") ? "left_right" : "top_bottom",
+      };
+    }
+
+    // 8. Dynamic Color Grading Resolution
+    const styleString = `${meta.style || ""} ${sc.visual_description || ""}`.toLowerCase();
+    let colorGrade: ColorGradeType = "clean_minimal";
+    if (styleString.includes("dark") || styleString.includes("moody") || styleString.includes("phonk")) {
+      colorGrade = "dark_moody";
+    } else if (styleString.includes("teal") || styleString.includes("orange") || styleString.includes("cinema")) {
+      colorGrade = "teal_orange";
+    } else if (styleString.includes("warm") || styleString.includes("leather") || styleString.includes("coffee")) {
+      colorGrade = "warm_cinema";
+    }
+
+    // 9. Beat-Sync Micro Jitter Resolution
+    const microJitter = Boolean(
+      sc.impact_effect?.includes("jitter") ||
+      styleString.includes("phonk") ||
+      (sc.advanced_effect?.name || "").toLowerCase().includes("beat")
+    );
+
     return {
       id: sc.scene_id || `scene_${idx}`,
       type: sc.scene_type || "body",
@@ -206,6 +252,9 @@ export function adaptTimelineToRemotion(
       textEffect: sc.text_effect,
       textTreatment,
       textComposition,
+      colorGrade,
+      splitLayout,
+      microJitter,
     };
   });
 

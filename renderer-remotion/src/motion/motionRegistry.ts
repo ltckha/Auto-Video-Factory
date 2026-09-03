@@ -1,4 +1,4 @@
-import { punchZoom, macroPush, driftCam, cinematicGlideZoom, CameraMotionOutput } from "./camera/cameraPrimitives";
+import { punchZoom, macroPush, driftCam, cinematicGlideZoom, pushOut, applyMicroJitter, CameraMotionOutput } from "./camera/cameraPrimitives";
 import { calculateCardReveal, CardMotionOutput } from "./card/cardPrimitives";
 import { calculateWordPop, WordMotionOutput } from "./text/textPrimitives";
 import { calculateExitMotion } from "./motionGrammar";
@@ -32,21 +32,40 @@ export class MotionComposer {
     frame: number,
     fps: number,
     durationInFrames: number,
-    intensity = 0.7
+    intensity = 0.7,
+    microJitter = false
   ): CameraMotionOutput {
+    let output: CameraMotionOutput;
     switch (motionType) {
       case "punch_zoom":
-        return punchZoom(frame, fps, intensity);
+        output = punchZoom(frame, fps, intensity);
+        break;
       case "macro_push":
-        return macroPush(frame, durationInFrames, intensity);
+      case "push_in":
+      case "slow_zoom_in":
+        output = macroPush(frame, durationInFrames, intensity);
+        break;
+      case "push_out":
+      case "pull_out":
+        output = pushOut(frame, durationInFrames, intensity);
+        break;
       case "drift_cam":
-        return driftCam(frame, durationInFrames, intensity);
+        output = driftCam(frame, durationInFrames, intensity);
+        break;
       case "cinematic_glide_zoom":
-        return cinematicGlideZoom(frame, durationInFrames, intensity);
+        output = cinematicGlideZoom(frame, durationInFrames, intensity);
+        break;
       case "static":
       default:
-        return { scale: 1.0, translateX: 0, translateY: 0 };
+        output = { scale: 1.0, translateX: 0, translateY: 0 };
+        break;
     }
+
+    if (microJitter) {
+      output = applyMicroJitter(output, frame, intensity);
+    }
+
+    return output;
   }
 
   static evaluateCard(

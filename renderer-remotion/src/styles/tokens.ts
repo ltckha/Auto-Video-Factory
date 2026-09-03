@@ -1,7 +1,19 @@
 export type EntranceMotionType = "soft_spring" | "impact_pop" | "slide_up" | "cinematic_fade";
 export type EmphasisMotionType = "gold_glow" | "neon_pulse" | "scale_bounce" | "underline_draw";
 export type ExitMotionType = "smooth_fade" | "slide_down" | "shrink_blur";
-export type CameraMotionType = "macro_push" | "punch_zoom" | "drift_cam" | "snap_zoom" | "cinematic_glide_zoom" | "static";
+export type CameraMotionType =
+  | "macro_push"
+  | "punch_zoom"
+  | "drift_cam"
+  | "snap_zoom"
+  | "cinematic_glide_zoom"
+  | "static"
+  | "push_in"
+  | "pull_out"
+  | "slow_zoom_in"
+  | "push_out";
+
+export type ColorGradeType = "clean_minimal" | "dark_moody" | "teal_orange" | "warm_cinema";
 
 export interface TypographyToken {
   fontFamily: string;

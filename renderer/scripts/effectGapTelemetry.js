@@ -18,6 +18,7 @@ const KNOWN_CAMERA_MOTIONS = new Set([
   "pulse",
   "slow_zoom_in",
   "pull_out",
+  "push_out",
 ]);
 
 const KNOWN_TRANSITIONS = new Set([

@@ -42,6 +42,7 @@ Tài liệu này là **Kho Danh Mục Đầy Đủ Nhất ($100\%$ Single Source
 | **`pull_out`** | Lùi máy ra xa toàn cảnh. | Mở rộng góc nhìn toàn thể. | 🟢 Đang chạy |
 | **`slow_zoom_in`** | Thu phóng siêu chậm không gây giật. | Sang trọng, điện ảnh. | 🟢 Đang chạy |
 | **`cinematic_glide_zoom`** | Đồ thị Fast-In, Slow-Out (Ease-Out) kiểu CapCut Graphs. | Lướt nhanh lúc đầu rồi hãm phanh trôi cực êm. | 🟢 Đang chạy |
+| **`push_out`** | Thu lùi máy quay từ cận cảnh ra xa êm ái (đồ thị Ease-Out co giãn theo intensity). | Bao quát toàn cảnh mượt mà. | 🟢 Đang chạy |
 | **`static`** | Giữ tĩnh góc máy 100% gốc. | Xem rõ thao tác không biến dạng. | 🟢 Đang chạy |
 
 ---
@@ -60,7 +61,19 @@ Tài liệu này là **Kho Danh Mục Đầy Đủ Nhất ($100\%$ Single Source
 
 ---
 
-### 5. 🏷️ TÀI SẢN THƯƠNG HIỆU CHÍNH THỨC (BRAND ASSETS)
+### 5. 🔲 BỐ CỤC KHUNG HÌNH & CHỈNH MÀU ĐIỆN ẢNH (LAYOUTS & COLOR GRADING)
+| Tên Tính Năng | Cơ Chế Hoạt Động | Giá Trị Thị Giác | Trạng Thái |
+| :--- | :--- | :--- | :---: |
+| **`MultiScreenSplit (top_bottom)`** | Chia đôi màn hình trên/dưới $50\%/50\%$ đồng bộ 2 góc máy. | Khoe toàn cảnh và cận cảnh cùng lúc. | 🟢 Đang chạy |
+| **`MultiScreenSplit (left_right)`** | Chia đôi màn hình trái/phải với line ngăn cách tinh tế. | So sánh 2 sản phẩm hoặc 2 thao tác. | 🟢 Đang chạy |
+| **`micro_jitter_on_beat`** | Vi chấn nảy khung hình $\pm 2\text{px}$ khớp nhịp Bass Drop. | Tạo cảm giác lực va đập âm thanh vào mắt. | 🟢 Đang chạy |
+| **`colorGrade (dark_moody)`** | Tông tối điện ảnh, tăng tương phản $8\%$, giảm sáng vùng tối. | Sang trọng, huyền bí, chuẩn Phonk Slowed. | 🟢 Đang chạy |
+| **`colorGrade (teal_orange)`** | Tông Hollywood Teal & Orange rực rỡ, nhấn ấm da và xanh bóng. | Bắt mắt, thời thượng, chuẩn viral. | 🟢 Đang chạy |
+| **`colorGrade (warm_cinema)`** | Tông nâu ấm rực rỡ nhẹ nhàng. | Cổ điển, hợp đồ da thủ công và cà phê. | 🟢 Đang chạy |
+
+---
+
+### 6. 🏷️ TÀI SẢN THƯƠNG HIỆU CHÍNH THỨC (BRAND ASSETS)
 | Tên Thương Hiệu | File Asset Chính Thức | Cơ Chế Bảo Vệ | Trạng Thái |
 | :--- | :--- | :--- | :---: |
 | **Hiệu Giày Hải Nancy** | [`logo_hai_nancy.png`](file:///Users/khan/Developer/Auto-Video-Factory/renderer-remotion/src/brand/assets/logo_hai_nancy.png) | Chỉ gắn khi video $100\%$ là Hải Nancy. | 🟢 Đang chạy |
@@ -87,5 +100,3 @@ Tài liệu này là **Kho Danh Mục Đầy Đủ Nhất ($100\%$ Single Source
 
 | Thời Gian | Dự Án Yêu Cầu | Phân Cảnh | Hiệu Ứng / Kỹ Xảo Chưa Có Code | Fallback Đã Dùng | Đề Xuất Nâng Cấp Cho Lần Sau |
 | :--- | :--- | :---: | :--- | :--- | :--- |
-| `03/09/2026 15:14` | `VID_20260817_081002` | scene_005 | `push_out` (Camera Motion / Effect) | macro_push (Mặc định mượt mà) | Bổ sung Motion Primitive: `push_out` vào cameraPrimitives.ts |
-| `03/09/2026 16:02` | `VID_20260817_081217` | scene_003 | `push_out` (Camera Motion / Effect) | macro_push (Mặc định mượt mà) | Bổ sung Motion Primitive: `push_out` vào cameraPrimitives.ts |

@@ -1,7 +1,8 @@
 import { queryKnowledgeRegistry, KnowledgeCandidate } from "./knowledgeRegistry";
+import { CameraMotionType } from "../styles/tokens";
 
 export interface ResolvedMotionChoice {
-  primitiveId: "macro_push" | "punch_zoom" | "drift_cam" | "snap_zoom" | "overshoot_zoom" | "cinematic_glide_zoom" | "static";
+  primitiveId: CameraMotionType;
   intensity: number;
   confidence: number;
   reason: string;
@@ -16,11 +17,20 @@ export function adaptLegacyKnowledgeToMotion(
     brand?: string;
     platform?: string;
     isHook?: boolean;
-    defaultMotion?: "macro_push" | "punch_zoom" | "drift_cam" | "snap_zoom" | "overshoot_zoom" | "cinematic_glide_zoom" | "static";
+    defaultMotion?: CameraMotionType;
   }
 ): ResolvedMotionChoice {
-  const query = String(effectNameOrIntent || "").trim();
+  const query = String(effectNameOrIntent || "").trim().toLowerCase();
   const defaultMotion = options?.defaultMotion || "macro_push";
+
+  if (query.includes("push_out") || query.includes("pull_out") || query.includes("zoom_out")) {
+    return {
+      primitiveId: "push_out",
+      intensity: 0.65,
+      confidence: 0.95,
+      reason: "Explicit push_out/pull_out camera command match",
+    };
+  }
 
   // Hook priority
   if (options?.isHook) {
