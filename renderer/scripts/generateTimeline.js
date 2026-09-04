@@ -636,7 +636,35 @@ Yêu cầu từng trường dữ liệu:
           const matchedStyle = chosenIdea.matchedStyle;
           if (matchedStyle && matchedStyle.profile) {
             console.log(`[StyleRetriever] 🎯 Áp dụng Style Recipe mẫu: "${matchedStyle.name}" (Độ khớp: ${(matchedStyle.score * 100).toFixed(1)}%)`);
-            chosenIdeaDirective += `\n\n━━━━━━━━━━━━━━━━━━\n🎨 CÔNG THỨC DỰNG ĐÃ HỌC TỪ VIRAL VIDEO (LEARNED STYLE RECIPE):\n- Phong Cách Mẫu: ${matchedStyle.name} ("${matchedStyle.id}")\n- Thời lượng trung bình mỗi phân cảnh: ${matchedStyle.profile.average_scene_duration_s || 4}s\n- Nhịp độ cắt (Pacing): ${matchedStyle.profile.pacing_speed || "medium"}\n- Chuyển động camera ưu tiên: ${matchedStyle.profile.recommended_camera_motion || "macro_push"}\n${matchedStyle.profile.motion_graph ? `- Đồ thị chuyển động: ${matchedStyle.profile.motion_graph}\n` : ""}${matchedStyle.profile.hook_strategy ? `- Chiến lược Hook: ${matchedStyle.profile.hook_strategy}\n` : ""}- Hãy gán trường "style" trong video_meta là "${matchedStyle.id}" và áp dụng các thông số trên vào từng phân cảnh!`;
+            const p = matchedStyle.profile;
+            let recipeLines = [
+              `\n\n━━━━━━━━━━━━━━━━━━`,
+              `🎨 CÔNG THỨC DỰNG ĐÃ HỌC TỪ VIRAL VIDEO (LEARNED STYLE RECIPE):`,
+              `- Phong Cách Mẫu: ${matchedStyle.name} ("${matchedStyle.id}")`,
+              `- Thời lượng trung bình mỗi phân cảnh: ${p.average_scene_duration_s || 4}s`,
+              `- Nhịp độ cắt (Pacing): ${p.pacing_speed || "medium"}`,
+              `- Chuyển động camera ưu tiên: ${p.recommended_camera_motion || "macro_push"}`,
+            ];
+            if (p.motion_graph) recipeLines.push(`- Đồ thị chuyển động: ${p.motion_graph}`);
+            if (p.speed_curve) {
+              recipeLines.push(`- Đường cong tốc độ (Speed Curve): Đỉnh ${p.speed_curve.peak_speed}x -> Đáy ${p.speed_curve.trough_speed}x (${p.speed_curve.smooth_algorithm || "smooth"})`);
+            }
+            if (p.layout) recipeLines.push(`- Bố cục khung hình (Layout): ${p.layout}`);
+            if (p.hook_strategy) recipeLines.push(`- Chiến lược Hook: ${p.hook_strategy}`);
+            if (p.graphic_text_frame?.frame_type) {
+              recipeLines.push(`- Khung đồ họa chữ (Subtitle Frame): ${p.graphic_text_frame.frame_type}`);
+            }
+            if (p.recommended_transition) {
+              recipeLines.push(`- Kỹ xảo chuyển cảnh ưu tiên: ${p.recommended_transition} (${p.transition_duration_s || 0.3}s)`);
+            }
+            if (p.sfx_strategy) {
+              recipeLines.push(`- Kỹ xảo âm thanh (SFX): Chuyển cảnh [${p.sfx_strategy.scene_cut_sfx || "none"}], Cao trào [${p.sfx_strategy.impact_sfx || "none"}]`);
+            }
+            if (p.color_grading?.mood) {
+              recipeLines.push(`- Tông màu điện ảnh (Color Mood): ${p.color_grading.mood}`);
+            }
+            recipeLines.push(`- Hãy gán trường "style" trong video_meta là "${matchedStyle.id}" và áp dụng các thông số trên vào từng phân cảnh!`);
+            chosenIdeaDirective += recipeLines.join("\n");
           } else {
             console.log(`[StyleRetriever] 🎨 Đạo diễn tự do sáng tạo theo ý tưởng đã chọn (Không ép khuôn bài mẫu).`);
           }

@@ -53,6 +53,15 @@ Kết quả trả về BẮT BUỘC là 01 khối mã JSON hợp lệ, không ch
     "name": "Tên phong cách (Ví dụ: Viral Tech Review 2026 / ASMR Satisfying Unboxing)",
     "average_scene_duration_s": 2.5,
     "pacing_speed": "fast | dynamic | slow | medium",
+    "motion_graph": "fast_in_slow_out | ease_out | linear | spring",
+    "speed_curve": {
+      "curve_type": "custom_curve | ease_in_out | linear",
+      "peak_speed": 2.5,
+      "trough_speed": 0.1,
+      "trough_duration_s": 1.8,
+      "smooth_algorithm": "optical_flow | standard"
+    },
+    "layout": "full | split_vertical | split_horizontal",
     "hook_strategy": "Mô tả chiến thuật giữ chân người xem ở 3 giây đầu",
     "preferred_font_layout": "Mô tả bố cục phông chữ & vị trí ưu tiên",
     "graphic_text_frame": {
@@ -66,9 +75,20 @@ Kết quả trả về BẮT BUỘC là 01 khối mã JSON hợp lệ, không ch
       "text_reveal_sfx": "pop | ding | typewriter_click | none",
       "impact_sfx": "bass_drop | riser | none"
     },
-    "transition_rules": [
-      "Mô tả quy tắc chuyển cảnh kết hợp"
-    ]
+    "audio_strategy": "Mô tả âm nhạc nền (ví dụ: aesthetic_lofi, slowed_phonk, asmr)",
+    "recommended_camera_motion": "cinematic_glide_zoom | macro_push | punch_zoom | drift_cam | push_out | static",
+    "recommended_transition": "wipe_left | fade | paper_rip | circle_open | slide_up",
+    "transition_duration_s": 0.3,
+    "impact_effect": "micro_jitter_on_beat | flash | none",
+    "color_grading": {
+      "mood": "warm_cinema | dark_moody | teal_orange | clean_minimal",
+      "contrast": "-10%",
+      "shadows": "+15%",
+      "highlights": "-20%",
+      "sharpen": "+20%",
+      "temp": "+5"
+    },
+    "description": "Mô tả chi tiết bằng tiếng Việt hoặc tiếng Anh về nét đặc trưng của phong cách để Local Style Retriever dùng so khớp từ khóa."
   },
   "learned_novel_effects": [
     {

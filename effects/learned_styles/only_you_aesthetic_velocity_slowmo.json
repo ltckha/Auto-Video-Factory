@@ -1,0 +1,45 @@
+{
+  "style_profile": {
+    "name": "Only You Aesthetic Velocity Slowmo",
+    "category_niche": "travel_pov_aesthetic_landscape",
+    "average_scene_duration_s": 3.0,
+    "pacing_speed": "dynamic",
+    "motion_graph": "fast_in_slow_out",
+    "speed_curve": {
+      "curve_type": "custom_curve",
+      "peak_speed": 2.5,
+      "trough_speed": 0.1,
+      "trough_duration_s": 1.8,
+      "smooth_algorithm": "optical_flow",
+      "sync_point": "on_beat"
+    },
+    "layout": "split_vertical",
+    "hook_strategy": "Khung hình chia đôi (Split Screen) trực quan hóa đồ thị Speed Curve CapCut chạy đồng bộ cảnh quay POV đồi dốc",
+    "preferred_font_layout": "minimal_glass_card",
+    "graphic_text_frame": {
+      "frame_type": "minimal_glass_card",
+      "background_color": "rgba(18, 18, 18, 0.75)",
+      "border_style": "1px solid rgba(255, 255, 255, 0.15)",
+      "text_color": "#ffffff"
+    },
+    "sfx_strategy": {
+      "scene_cut_sfx": "whoosh",
+      "text_reveal_sfx": "none",
+      "impact_sfx": "bass_drop"
+    },
+    "audio_strategy": "aesthetic_slowed_lofi_beat_with_deep_bass_drop",
+    "recommended_camera_motion": "cinematic_glide_zoom",
+    "recommended_transition": "wipe_left",
+    "transition_duration_s": 0.3,
+    "impact_effect": "micro_jitter_on_beat",
+    "color_grading": {
+      "mood": "warm_cinema",
+      "contrast": "-10%",
+      "shadows": "+15%",
+      "highlights": "-20%",
+      "sharpen": "+20%",
+      "temp": "+5"
+    },
+    "description": "Phong cách Velocity Slow-Motion thẩm mỹ kết hợp chỉnh màu Aesthetic, sử dụng đồ thị uốn tốc độ Fast-In Slow-Out hãm xuống 0.1x qua Optical Flow đồng bộ với beat bass drop, hạ highlights và nâng shadows tạo cảm giác mờ ảo điện ảnh cho video phong cảnh và sản phẩm chuyển động."
+  }
+}
