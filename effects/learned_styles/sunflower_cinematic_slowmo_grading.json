@@ -1,0 +1,47 @@
+{
+  "style_profile": {
+    "name": "Sunflower Cinematic Slowmo Grading",
+    "category_niche": "travel_cinematic",
+    "average_scene_duration_s": 4.5,
+    "pacing_speed": "slow_glide",
+    "motion_graph": "fast_in_slow_out",
+    "speed_curve": {
+      "curve_type": "custom_curve",
+      "peak_speed": 1.8,
+      "trough_speed": 0.4,
+      "trough_duration_s": 2.2,
+      "smooth_algorithm": "optical_flow",
+      "sync_point": "ambient_swell"
+    },
+    "layout": "full",
+    "hook_strategy": "Cú lướt POV cung đường uốn lượn kết hợp speed ramp giảm tốc mượt mà và tông màu vàng ấm điện ảnh",
+    "preferred_font_layout": "editorial_line",
+    "graphic_text_frame": {
+      "frame_type": "editorial_line",
+      "background_color": "rgba(0, 0, 0, 0.0)",
+      "border_style": "1px solid #ffffff",
+      "text_color": "#ffffff"
+    },
+    "sfx_strategy": {
+      "scene_cut_sfx": "whoosh",
+      "text_reveal_sfx": "none",
+      "impact_sfx": "none"
+    },
+    "audio_strategy": "cinematic_ambient",
+    "recommended_camera_motion": "drift_cam",
+    "recommended_transition": "fade",
+    "transition_duration_s": 0.4,
+    "impact_effect": "none",
+    "color_grading": {
+      "mood": "warm_cinema",
+      "exposure": "-10%",
+      "contrast": "+15%",
+      "shadows": "-15%",
+      "saturation": "+8%",
+      "temp": "+10 (vàng ấm nắng)",
+      "tint": "+2 (hồng nhẹ chân trời)",
+      "sharpen": "+20%"
+    },
+    "description": "Phong cách quay lướt chậm POV phong cảnh và du lịch, kết hợp đường cong vận tốc speed ramp optical flow và bảng màu nắng ấm vàng rực rỡ, độ tương phản sâu đậm chất điện ảnh."
+  }
+}
