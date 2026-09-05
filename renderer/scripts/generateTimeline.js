@@ -85,7 +85,7 @@ const RESPONSE_SCHEMA = {
           visual_cue: { type: "STRING" },
           visual_description: { type: "STRING" },
           visual_intent: { type: "STRING" },
-          rhythm_intent: { type: "STRING" },
+          rhythm_intent: { type: "STRING", enum: ["REST", "BUILD", "ACCELERATE", "HIT", "RELEASE", "FLOW"] },
           layout: { type: "STRING", enum: ["full", "split", "split_vertical", "split_horizontal"] },
           impact_effect: { type: "STRING" },
           text_effect: {
@@ -720,7 +720,40 @@ Yêu cầu từng trường dữ liệu:
 
     let timelineJson;
     try {
-      timelineJson = JSON.parse(responseText);
+      let cleanedText = responseText.trim();
+      if (cleanedText.startsWith("```json")) {
+        cleanedText = cleanedText.replace(/^```json\s*/i, "").replace(/\s*```$/, "").trim();
+      } else if (cleanedText.startsWith("```")) {
+        cleanedText = cleanedText.replace(/^```\s*/, "").replace(/\s*```$/, "").trim();
+      }
+
+      try {
+        timelineJson = JSON.parse(cleanedText);
+      } catch (firstErr) {
+        console.warn(`[Timeline] ⚠️ JSON.parse lần đầu không thành công (${firstErr.message}), đang kích hoạt bộ lọc sửa lỗi tự động...`);
+        // 1. Cắt tỉa các chuỗi lặp bất thường (runaway repetition)
+        cleanedText = cleanedText.replace(/("(?:visual_intent|rhythm_intent|title|subtitle)"\s*:\s*")([^"\\]{40,})(")/g, (m, p1, p2, p3) => {
+          return `${p1}${p2.substring(0, 30)}${p3}`;
+        });
+
+        // 2. Tự động đóng ngoặc kép nếu bị cắt cụt giữa chừng
+        const quotes = (cleanedText.match(/(?<!\\)"/g) || []).length;
+        if (quotes % 2 !== 0) {
+          cleanedText += '"';
+        }
+
+        // 3. Tự động đóng các cặp ngoặc nhọn {} và ngoặc vuông [] còn thiếu
+        const openBraces = (cleanedText.match(/{/g) || []).length;
+        const closeBraces = (cleanedText.match(/}/g) || []).length;
+        const openBrackets = (cleanedText.match(/\[/g) || []).length;
+        const closeBrackets = (cleanedText.match(/\]/g) || []).length;
+
+        for (let i = 0; i < openBrackets - closeBrackets; i++) cleanedText += "]";
+        for (let i = 0; i < openBraces - closeBraces; i++) cleanedText += "}";
+
+        timelineJson = JSON.parse(cleanedText);
+        console.log("[Timeline] 🛡️ Đã tự động vá và phục hồi cấu trúc JSON thành công!");
+      }
     } catch (jsonErr) {
       console.log("[AI] Dữ liệu thô từ AI:", responseText);
       throw new Error(`Phản hồi không phải là JSON hợp lệ: ${jsonErr.message}`);
