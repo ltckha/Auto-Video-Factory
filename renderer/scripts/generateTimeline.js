@@ -17,8 +17,8 @@ const effectEnums = fs.existsSync(ENUMS_PATH) ? JSON.parse(fs.readFileSync(ENUMS
 
 const MODELS_CONFIG_PATH = path.join(ROOT, "renderer", "config", "geminiModelsConfig.json");
 const modelsConfig = fs.existsSync(MODELS_CONFIG_PATH) ? JSON.parse(fs.readFileSync(MODELS_CONFIG_PATH, "utf8")) : {};
-const HEAVY_MODELS = (modelsConfig.models && modelsConfig.models.heavy_video_analysis) || ["gemini-3.6-flash", "gemini-3.7-flash", "gemini-3.5-flash", "gemini-3.0-flash", "gemini-2.5-flash"];
-const LITE_MODELS = (modelsConfig.models && modelsConfig.models.lightweight_tasks) || ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.6-flash", "gemini-3.7-flash"];
+const HEAVY_MODELS = (modelsConfig.models && modelsConfig.models.heavy_video_analysis) || ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.7-flash", "gemini-3.5-flash", "gemini-2.5-flash"];
+const LITE_MODELS = (modelsConfig.models && modelsConfig.models.lightweight_tasks) || ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.7-flash"];
 
 const RESPONSE_SCHEMA = {
   type: "OBJECT",
@@ -431,7 +431,24 @@ async function main() {
   const videoProcessingMode = (dur > 300 || isClusterMode) ? "agentic" : "static";
   console.log(`[VideoProcessing] ⚙️ Chế độ xử lý video: '${videoProcessingMode}' (${dur > 300 || isClusterMode ? "Video dài / Cluster -> 'agentic' Dynamic Scan" : "Video ngắn < 5m -> 'static' Frame-level Precision"})`);
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  let apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    try {
+      const home = process.env.HOME || require("os").homedir();
+      for (const rc of [".zshrc", ".bash_profile", ".bashrc"]) {
+        const rcPath = path.join(home, rc);
+        if (fs.existsSync(rcPath)) {
+          const content = fs.readFileSync(rcPath, "utf8");
+          const match = content.match(/export\s+GEMINI_API_KEY=["']?([^"'\r\n]+)["']?/);
+          if (match && match[1]) {
+            apiKey = match[1].trim();
+            process.env.GEMINI_API_KEY = apiKey;
+            break;
+          }
+        }
+      }
+    } catch {}
+  }
   if (!apiKey) {
     console.error("Lỗi: Chưa thiết lập biến môi trường GEMINI_API_KEY.");
     process.exit(1);

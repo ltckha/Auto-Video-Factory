@@ -69,7 +69,7 @@
     "fail": 0
   },
   "transition_out:fade": {
-    "success": 151,
+    "success": 152,
     "fail": 0
   },
   "advanced_effect:zoomin": {
@@ -157,11 +157,11 @@
     "fail": 1
   },
   "subtitle_style:vibrant_yellow_sticker": {
-    "success": 41,
+    "success": 42,
     "fail": 0
   },
   "transition_out:wipe_left": {
-    "success": 33,
+    "success": 34,
     "fail": 0
   },
   "advanced_effect:Satisfying Timewarp": {
@@ -169,11 +169,11 @@
     "fail": 0
   },
   "subtitle_style:minimal_glass_card": {
-    "success": 90,
+    "success": 93,
     "fail": 0
   },
   "transition_out:slide_up": {
-    "success": 23,
+    "success": 24,
     "fail": 0
   },
   "advanced_effect:Dramatic Focus": {
@@ -181,7 +181,7 @@
     "fail": 0
   },
   "transition_out:wipe_right": {
-    "success": 20,
+    "success": 21,
     "fail": 0
   },
   "advanced_effect:Precision Showcase": {
@@ -189,7 +189,7 @@
     "fail": 0
   },
   "transition_out:circle_open": {
-    "success": 16,
+    "success": 17,
     "fail": 0
   },
   "advanced_effect:Luxury Focus": {
@@ -197,7 +197,7 @@
     "fail": 0
   },
   "subtitle_style:vibrant_yellow_lightning_sticker": {
-    "success": 26,
+    "success": 27,
     "fail": 0
   },
   "advanced_effect:Epic Reveal Outro": {
@@ -313,7 +313,7 @@
     "fail": 0
   },
   "subtitle_style:warning_red_badge": {
-    "success": 3,
+    "success": 4,
     "fail": 0
   },
   "advanced_effect:Side-by-side Compare": {
@@ -533,7 +533,7 @@
     "fail": 0
   },
   "transition_out:none": {
-    "success": 5,
+    "success": 6,
     "fail": 0
   },
   "advanced_effect:pull_out": {
@@ -621,6 +621,30 @@
     "fail": 0
   },
   "advanced_effect:Cinematic Glide": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Hook Reveal": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Cinematic Glide Demo": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Macro Stretch Focus": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Glide Demonstration": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Slow Zoom In Detail": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Final Reveal": {
     "success": 1,
     "fail": 0
   }

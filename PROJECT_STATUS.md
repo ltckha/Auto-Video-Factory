@@ -1,13 +1,13 @@
 # 🎬 Auto-Video-Factory - Project Status & Architecture
 
-> **Cập nhật mới nhất:** 03/09/2026 — Hoàn thành Remotion Hybrid M6.2, Tự động nhận diện 9 Brand, Bộ 8 Khung Chữ Đồ Họa & Cơ Chế Tự Tiến Hóa (Self-Evolution).
+> **Cập nhật mới nhất:** 05/09/2026 — Bổ sung Gemini 3.8 Flash, hoàn thành Remotion Hybrid M6.2, Tự động nhận diện 9 Brand, Bộ 8 Khung Chữ Đồ Họa & Cơ Chế Tự Tiến Hóa (Self-Evolution).
 
 ---
 
 ## 1. 🌟 Kiến Trúc Hệ Thống Hiện Tại (Current Architecture)
 
 ### 🧠 Động Cơ AI Kép (Gemini Model Routing & Priority)
-* **Model Phân Tích Video Chính (`heavy_video_analysis`):** Ưu tiên **`gemini-3.6-flash`** (ổn định, mượt mà), dự phòng cấp 1: `gemini-3.7-flash`, dự phòng cấp 2: `gemini-3.5-flash` / `gemini-3.0-flash`.
+* **Model Phân Tích Video Chính (`heavy_video_analysis`):** Ưu tiên **`gemini-3.8-flash`** (mới nhất), dự phòng cấp 1: `gemini-3.6-flash`, dự phòng cấp 2: `gemini-3.7-flash`, dự phòng cấp 3: `gemini-3.5-flash` / `gemini-2.5-flash`.
 * **Model Gợi Ý Ý Tưởng (`lightweight_tasks`):** Ưu tiên **`gemini-3.5-flash-lite`** (siêu tốc, hạn ngạch 500 RPD), dự phòng: `gemini-3.1-flash-lite`.
 * **Dynamic Video Processing Engine (Chuẩn Google AI Studio 01/09/2026):**
   * **Video dài (> 5 phút / Mode `LongHighlightClusters`):** Kích hoạt `processing: "agentic"` để quét động thông minh, tua nhanh vùng chết và giảm $88\%$ token.
