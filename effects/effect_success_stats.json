@@ -69,7 +69,7 @@
     "fail": 0
   },
   "transition_out:fade": {
-    "success": 144,
+    "success": 151,
     "fail": 0
   },
   "advanced_effect:zoomin": {
@@ -157,23 +157,23 @@
     "fail": 1
   },
   "subtitle_style:vibrant_yellow_sticker": {
-    "success": 36,
+    "success": 41,
     "fail": 0
   },
   "transition_out:wipe_left": {
-    "success": 22,
+    "success": 33,
     "fail": 0
   },
   "advanced_effect:Satisfying Timewarp": {
-    "success": 9,
+    "success": 12,
     "fail": 0
   },
   "subtitle_style:minimal_glass_card": {
-    "success": 68,
+    "success": 90,
     "fail": 0
   },
   "transition_out:slide_up": {
-    "success": 21,
+    "success": 23,
     "fail": 0
   },
   "advanced_effect:Dramatic Focus": {
@@ -181,7 +181,7 @@
     "fail": 0
   },
   "transition_out:wipe_right": {
-    "success": 18,
+    "success": 20,
     "fail": 0
   },
   "advanced_effect:Precision Showcase": {
@@ -189,7 +189,7 @@
     "fail": 0
   },
   "transition_out:circle_open": {
-    "success": 14,
+    "success": 16,
     "fail": 0
   },
   "advanced_effect:Luxury Focus": {
@@ -197,7 +197,7 @@
     "fail": 0
   },
   "subtitle_style:vibrant_yellow_lightning_sticker": {
-    "success": 22,
+    "success": 26,
     "fail": 0
   },
   "advanced_effect:Epic Reveal Outro": {
@@ -269,11 +269,11 @@
     "fail": 0
   },
   "advanced_effect:Cinematic Zoom": {
-    "success": 6,
+    "success": 9,
     "fail": 0
   },
   "advanced_effect:Epic Reveal": {
-    "success": 6,
+    "success": 8,
     "fail": 0
   },
   "advanced_effect:Flash": {
@@ -281,7 +281,7 @@
     "fail": 0
   },
   "advanced_effect:Glow": {
-    "success": 3,
+    "success": 4,
     "fail": 0
   },
   "advanced_effect:Smooth Transition": {
@@ -313,7 +313,7 @@
     "fail": 0
   },
   "subtitle_style:warning_red_badge": {
-    "success": 2,
+    "success": 3,
     "fail": 0
   },
   "advanced_effect:Side-by-side Compare": {
@@ -521,7 +521,7 @@
     "fail": 0
   },
   "advanced_effect:cinematic_glide_zoom": {
-    "success": 3,
+    "success": 7,
     "fail": 0
   },
   "advanced_effect:macro_push": {
@@ -533,7 +533,7 @@
     "fail": 0
   },
   "transition_out:none": {
-    "success": 1,
+    "success": 5,
     "fail": 0
   },
   "advanced_effect:pull_out": {
@@ -541,6 +541,86 @@
     "fail": 0
   },
   "advanced_effect:drift_cam": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:worm_eye_low_angle_push_in": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Satisfying Cut": {
+    "success": 1,
+    "fail": 0
+  },
+  "transition_out:paper_rip": {
+    "success": 2,
+    "fail": 0
+  },
+  "advanced_effect:Macro Push Action": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Fast Cut Glide": {
+    "success": 1,
+    "fail": 0
+  },
+  "transition_out:flip": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Unroll Reveal": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Epic Slice": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Hero Product Showcase": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Outro Brand Vibe": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Cinematic Glide Zoom": {
+    "success": 2,
+    "fail": 0
+  },
+  "advanced_effect:Aesthetic Slowmo Velocity": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Drift Glide Effect": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Velocity Optical Flow": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Slow Zoom Focus": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Outro Epic Reveal": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Macro Push": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Detail Tracking": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Quick Showcase": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Cinematic Glide": {
     "success": 1,
     "fail": 0
   }

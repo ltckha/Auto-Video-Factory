@@ -1,0 +1,66 @@
+{
+  "style_name": "Upcycled Y2K Streetwear Spin Transition Aesthetic",
+  "category_niche": "lifestyle___fashion_aesthetics",
+  "source_video_id": "JV2qYzAVbSc",
+  "source_url": "http://www.youtube.com/watch?v=JV2qYzAVbSc",
+  "source_title": "when you know how to sew👀🧵🪡",
+  "source_channel": "taavi",
+  "style_dna": {
+    "pacing": {
+      "average_scene_duration_s": 2.7,
+      "pacing_speed": "high_energy_rhythmic_beat_sync",
+      "rhythm_type": "rotational_spin_match_cut"
+    },
+    "hook_3s": {
+      "strategy": "Side-by-side contrast hook: Baggy unstyled basic clothing vs. extravagant upcycled handmade piece with a relatable text hook ('when your sister outfit chopped but you know how to sew').",
+      "energy": "high_curiosity_relatable_humor",
+      "focus": "before_and_after_outfit_contrast"
+    },
+    "color_grading": {
+      "lighting": "bright_indoor_ambient_daylight",
+      "color_palette": ["#E53935", "#00C853", "#1E88E5", "#D7CCC8"],
+      "contrast": "vivid_primary_color_pop_y2k",
+      "mood": "energetic_playful_confident_fashion"
+    },
+    "typography_and_cards": {
+      "layout": "centered_top_third_card",
+      "style": "clean_lowercase_sans_serif",
+      "emphasis": "relatable_humorous_contrast"
+    },
+    "micro_effects": [
+      {
+        "name": "Partner Spin Trigger Push",
+        "camera_motion": "push_in",
+        "intent": "reveal_impact",
+        "focus": "action",
+        "intensity": 0.8,
+        "timing_s": "3.0s - 5.0s"
+      },
+      {
+        "name": "360 Rotational Hair-Whip Snap",
+        "camera_motion": "snap",
+        "intent": "actioncut",
+        "focus": "action",
+        "intensity": 0.95,
+        "timing_s": "5.0s - 6.0s"
+      },
+      {
+        "name": "Synchronized Pop Rhythm Drift",
+        "camera_motion": "drift",
+        "intent": "premium_showcase",
+        "focus": "product",
+        "intensity": 0.75,
+        "timing_s": "6.0s - 11.0s"
+      }
+    ],
+    "audio_and_asmr": {
+      "has_bgm": true,
+      "sfx_cues": [
+        "vocal buildup teaser",
+        "percussive 360 spin bass drop impact",
+        "rhythmic upbeat dance bounce"
+      ],
+      "dominant_frequency": "upbeat_rhythmic_pop_fashion_transition"
+    }
+  }
+}

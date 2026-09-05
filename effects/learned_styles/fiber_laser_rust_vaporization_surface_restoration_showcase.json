@@ -1,0 +1,66 @@
+{
+  "style_name": "Fiber Laser Rust Vaporization & Surface Restoration Showcase",
+  "category_niche": "product_showcase",
+  "source_video_id": "WKCqOsuujB0",
+  "source_url": "http://www.youtube.com/watch?v=WKCqOsuujB0",
+  "source_title": "Hard Rust Removal🌟/WhatsApp: +8618856420577 #lasercleaning #cleaning",
+  "source_channel": "PES LASER",
+  "style_dna": {
+    "pacing": {
+      "average_scene_duration_s": 5.0,
+      "pacing_speed": "mesmerizing_single_pass_sweep",
+      "rhythm_type": "linear_laser_wipe_reveal"
+    },
+    "hook_3s": {
+      "strategy": "Instant plasma vaporization line: Right at 0:02, a razor-sharp blazing white line of laser energy sweeps across a severely crusted rust blade, immediately obliterating corrosion to reveal gleaming bare steel in real time.",
+      "energy": "ultra_satisfying_instant_transformation",
+      "focus": "before_and_after_surface_contrast"
+    },
+    "color_grading": {
+      "lighting": "industrial_workbench_high_intensity_laser_glow",
+      "color_palette": ["#FFFFFF", "#8C8C8C", "#7B3F00", "#FF4500"],
+      "contrast": "blinding_white_laser_sweep_vs_deep_brown_oxidized_rust",
+      "mood": "high_tech_industrial_clean_and_satisfying"
+    },
+    "typography_and_cards": {
+      "layout": "top_banner_card",
+      "style": "bold_sans_serif_high_contrast_yellow_white_card",
+      "emphasis": "direct_product_utility_hard_rust_removal"
+    },
+    "micro_effects": [
+      {
+        "name": "Laser Plasma Line Wipe",
+        "camera_motion": "drift",
+        "intent": "reveal_impact",
+        "focus": "texture",
+        "intensity": 0.9,
+        "timing_s": "0.0s - 8.0s"
+      },
+      {
+        "name": "Instant Oxidation Vaporize Snap",
+        "camera_motion": "snap",
+        "intent": "actioncut",
+        "focus": "product",
+        "intensity": 0.85,
+        "timing_s": "8.0s - 15.0s"
+      },
+      {
+        "name": "Pristine Specular Sheen Push-In",
+        "camera_motion": "push_in",
+        "intent": "premium_showcase",
+        "focus": "product",
+        "intensity": 0.8,
+        "timing_s": "15.0s - 23.0s"
+      }
+    ],
+    "audio_and_asmr": {
+      "has_bgm": false,
+      "sfx_cues": [
+        "high-pitch laser pulsing hum and buzz",
+        "sizzling rust plasma vaporization crackle",
+        "exhaust suction airflow resonance"
+      ],
+      "dominant_frequency": "continuous_laser_pulse_high_frequency_plasma_sizzle"
+    }
+  }
+}

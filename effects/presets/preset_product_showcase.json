@@ -53,6 +53,27 @@
       "camera_motion": "drift",
       "recommended_intensity": 0.75,
       "description": "Smooth dynamic macro camera drift showcasing the virgin, immaculate surface finish."
+    },
+    {
+      "effect_name": "Laser Plasma Line Wipe",
+      "visual_intent": "reveal_impact",
+      "camera_motion": "drift",
+      "recommended_intensity": 0.9,
+      "description": "Smooth lateral camera drift tracking the blazing linear sweep of a fiber laser instantly vaporizing deep oxidation."
+    },
+    {
+      "effect_name": "Instant Oxidation Vaporize Snap",
+      "visual_intent": "actioncut",
+      "camera_motion": "snap",
+      "recommended_intensity": 0.85,
+      "description": "Instant micro camera snap emphasizing the sharp boundary between corroded crust and gleaming bare steel."
+    },
+    {
+      "effect_name": "Pristine Specular Sheen Push-In",
+      "visual_intent": "premium_showcase",
+      "camera_motion": "push_in",
+      "recommended_intensity": 0.8,
+      "description": "Slow majestic push-in capturing the silvery brushed specular reflection of fully restored metal."
     }
   ],
   "few_shot_examples": [
@@ -223,6 +244,69 @@
       },
       "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
       "voice_rhythm": "Flawless virgin sole inspection and vibrant blue rubber traction stars reveal."
+    },
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Laser Plasma Line Wipe",
+        "intent": "reveal_impact",
+        "camera_motion": "drift",
+        "focus": "texture",
+        "intensity": 0.9,
+        "mood": "satisfying",
+        "pacing": "slow"
+      },
+      "duration_range": "0.0s - 8.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "High-intensity laser beam pulse hum and crackling rust vaporization sizzle."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "Instant Oxidation Vaporize Snap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "product",
+        "intensity": 0.85,
+        "mood": "energetic",
+        "pacing": "fast"
+      },
+      "duration_range": "8.0s - 15.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "wipe_right"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Sharp optical boundary snap leaving spotless brushed steel trail behind the laser head."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Pristine Specular Sheen Push-In",
+        "intent": "premium_showcase",
+        "camera_motion": "push_in",
+        "focus": "product",
+        "intensity": 0.8,
+        "mood": "premium",
+        "pacing": "slow"
+      },
+      "duration_range": "15.0s - 23.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Smooth exhaust airflow purr and luminous silver sheen glint across restored blade."
     }
   ]
 }

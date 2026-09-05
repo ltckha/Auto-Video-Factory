@@ -1,5 +1,5 @@
 {
-  "last_niche_index": 2,
+  "last_niche_index": 0,
   "history": [
     {
       "video_id": "wYuSwmHZOvA",
@@ -154,6 +154,28 @@
       "scouted_at": "2026-09-03T13:00:00+07:00",
       "learned_style_file": "effects/learned_styles/artisan_wood_stain_character_painting_asmr.json",
       "style_name": "Artisan Wood Stain & Character Acrylic Painting ASMR"
+    },
+    {
+      "video_id": "JV2qYzAVbSc",
+      "url": "http://www.youtube.com/watch?v=JV2qYzAVbSc",
+      "title": "when you know how to sew👀🧵🪡 #fashion #fashiontrends #shorts  #tiktok #siblings",
+      "channel": "taavi",
+      "niche": "lifestyle___fashion_aesthetics",
+      "view_count": 54043302,
+      "scouted_at": "2026-09-04T13:15:00+07:00",
+      "learned_style_file": "effects/learned_styles/upcycled_y2k_streetwear_spin_transition_aesthetic.json",
+      "style_name": "Upcycled Y2K Streetwear Spin Transition Aesthetic"
+    },
+    {
+      "video_id": "WKCqOsuujB0",
+      "url": "http://www.youtube.com/watch?v=WKCqOsuujB0",
+      "title": "Hard Rust Removal🌟/WhatsApp: +8618856420577 #lasercleaning #cleaning",
+      "channel": "PES LASER",
+      "niche": "product_showcase",
+      "view_count": 38575308,
+      "scouted_at": "2026-09-05T13:30:00+07:00",
+      "learned_style_file": "effects/learned_styles/fiber_laser_rust_vaporization_surface_restoration_showcase.json",
+      "style_name": "Fiber Laser Rust Vaporization & Surface Restoration Showcase"
     }
   ]
 }

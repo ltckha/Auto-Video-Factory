@@ -102,6 +102,11 @@ Dựa vào sản phẩm, bối cảnh, hành động và nội dung video, hãy 
   1. 🎵 **TẦNG 1 — ĐÃ CÓ SẴN NHẠC NỀN HOẶC TIẾNG ASMR THỰC ĐỊA ĐẮT GIÁ:** (tiếng rọc dao, bóc vỏ, tiếng búa gõ đục da, tiếng nước chảy, chiên xào xèo xèo...): BẮT BUỘC đặt `"has_original_music": true`, `"bgm_mood": "none"`, `"audio_strategy": "preserve_native_asmr"` $\rightarrow$ **Giữ 100% âm thanh gốc, tuyệt đối không chèn thêm nhạc ngoài**.
   2. 🔇 **TẦNG 2 — VIDEO CÂM HOẶC KHÔNG CÓ TIẾNG NÓI:** Đặt `"has_original_music": false`, `"audio_strategy": "mix_bgm"` và chọn `"bgm_mood"` (`chill`, `satisfying`, `energetic`, `luxury`) $\rightarrow$ **Hệ thống tự động lồng ghép nhạc nền BGM phù hợp**.
   3. 🗣️ **TẦNG 3 — VIDEO CÓ TIẾNG NÓI TẠP / TIẾNG ỒN NGOẠI CẢNH (Noisy chatter, street noise, ambient voice):** Khi video có tiếng người lạ nói chuyện xì xào hoặc tạp âm gây nhiễu, đặt `"has_original_music": false`, `"audio_strategy": "suppress_ambient_voice_and_boost_bgm"`, chọn `"bgm_mood"` $\rightarrow$ **Hệ thống sẽ tự động ép giảm âm lượng tiếng ồn gốc xuống 30% và đẩy âm lượng BGM lên 85% để át tạp âm, mang lại âm thanh sạch sẽ, chuyên nghiệp**.
+### Nguyên Liệu & Ý Định (Raw Ingredients & Intent Directives):
+- **`visual_intent`:** Ý định thị giác, CHỈ CHỌN 1 TỪ NGẮN GỌN (ví dụ: `attention`, `explain`, `demonstrate`, `compare`, `reveal`, `emphasize`, `warn`, `prove`, `offer`, `cta`). Tuyệt đối không sinh số hay chuỗi ký tự lặp lại.
+- **`rhythm_intent`:** Nhịp điệu cảm xúc, CHỈ CHỌN 1 TỪ NGẮN GỌN (ví dụ: `REST`, `BUILD`, `ACCELERATE`, `HIT`, `RELEASE`). Tuyệt đối không sinh chuỗi lặp.
+- **`scene_relationship`:** Quan hệ với cảnh kế tiếp (`continuation`, `contrast`, `reveal`, `before_after`, `explanation`).
+- **`emphasis_items`:** Mảng các từ/cụm từ quan trọng cần nổi bật.
 
 ---
 

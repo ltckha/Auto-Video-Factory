@@ -56,8 +56,8 @@ SINGLE-PASS RAW INGREDIENTS & INTENT DIRECTIVES (ĐẠO DIỄN AI NỘI DUNG)
 ━━━━━━━━━━━━━━━━━━
 - ⚠️ BẠN KHÔNG CẦN CHỌN TÊN HIỆU ỨNG FFMPEG HOẶC TRANSITION! Code Engine sẽ tự động quyết định cách dựng.
 - Bạn chỉ cần phân tích video và xuất ra **Nguyên Liệu & Ý Định (Raw Ingredients)**:
-  - **`visual_intent`:** Ý định thị giác (Chọn 1 trong: `attention`, `explain`, `demonstrate`, `compare`, `reveal`, `emphasize`, `warn`, `prove`, `offer`, `cta`).
-  - **`rhythm_intent`:** Nhịp điệu cảm xúc (Chọn 1 trong: `REST`, `BUILD`, `ACCELERATE`, `HIT`, `RELEASE`).
+  - **`visual_intent`:** Ý định thị giác, CHỈ CHỌN 1 TỪ NGẮN GỌN (ví dụ: `attention`, `explain`, `demonstrate`, `compare`, `reveal`, `emphasize`, `warn`, `prove`, `offer`, `cta`). Tuyệt đối không sinh số hay chuỗi ký tự lặp lại.
+  - **`rhythm_intent`:** Nhịp điệu cảm xúc, CHỈ CHỌN 1 TỪ NGẮN GỌN (ví dụ: `REST`, `BUILD`, `ACCELERATE`, `HIT`, `RELEASE`). Tuyệt đối không sinh chuỗi lặp.
   - **`scene_relationship`:** Quan hệ với cảnh kế tiếp (Chọn 1 trong: `continuation`, `contrast`, `reveal`, `before_after`, `explanation`).
   - **`emphasis_items`:** Mảng các từ/cụm từ quan trọng cần nổi bật: `[{"text": "cực kỳ êm", "type": "benefit", "score": 0.95}]` (Loại: `benefit`, `commercial`, `warning`, `proof`, `cta`).
   - **`semantic_phrases`:** Tách câu thoại thành các Cụm Ý ngắn có ý nghĩa.

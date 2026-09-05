@@ -196,6 +196,65 @@ async function generateContentWithRetryFallback(ai, models, contents, config) {
   throw lastError || new Error("Tất cả các mô hình Gemini trong danh sách đều quá tải hoặc thất bại.");
 }
 
+function inspectTimelineHealth(timelineJson, originalDurationSec) {
+  if (!timelineJson || !Array.isArray(timelineJson.timeline) || timelineJson.timeline.length === 0) {
+    return { ok: false, reason: "Timeline trống hoặc không có phân cảnh nào." };
+  }
+
+  const scenes = timelineJson.timeline;
+
+  // 1. Quét phát hiện lặp token bất thường (Degeneration Loop) trong tất cả các trường
+  for (let i = 0; i < scenes.length; i++) {
+    const sc = scenes[i];
+    for (const [key, val] of Object.entries(sc)) {
+      if (typeof val === "string") {
+        // Chuỗi quá dài bất thường (> 300 ký tự cho một trường thuộc tính)
+        if (val.length > 300) {
+          return {
+            ok: false,
+            reason: `Phát hiện lỗi lặp vô tận (Degeneration Loop) ở scene ${i + 1}, trường '${key}' (dài ${val.length} ký tự).`
+          };
+        }
+        // Phát hiện chuỗi lặp token vô nghĩa lặp lại nhiều lần (ví dụ: '01010101', 'abcabcabc')
+        if (/(.{2,10})\1{5,}/.test(val)) {
+          return {
+            ok: false,
+            reason: `Phát hiện chuỗi lặp token bất thường ở scene ${i + 1}, trường '${key}'.`
+          };
+        }
+      } else if (val && typeof val === "object" && !Array.isArray(val)) {
+        for (const [subKey, subVal] of Object.entries(val)) {
+          if (typeof subVal === "string" && (subVal.length > 300 || /(.{2,10})\1{5,}/.test(subVal))) {
+            return {
+              ok: false,
+              reason: `Phát hiện lỗi lặp vô tận ở scene ${i + 1}, đối tượng '${key}.${subKey}'.`
+            };
+          }
+        }
+      }
+    }
+  }
+
+  // 2. Kiểm tra số lượng phân cảnh tối thiểu tương xứng với video gốc
+  if (originalDurationSec && originalDurationSec >= 30 && scenes.length < 2) {
+    return {
+      ok: false,
+      reason: `Video gốc dài ${originalDurationSec.toFixed(1)}s nhưng AI chỉ tạo được ${scenes.length} phân cảnh (bị cụt kịch bản).`
+    };
+  }
+
+  // 3. Kiểm tra tổng thời lượng
+  const totalDur = scenes.reduce((acc, s) => acc + (Number(s.duration_s) || 0), 0);
+  if (originalDurationSec && originalDurationSec >= 25 && totalDur < 8) {
+    return {
+      ok: false,
+      reason: `Tổng thời lượng kịch bản (${totalDur.toFixed(1)}s) quá ngắn so với video gốc ${originalDurationSec.toFixed(1)}s.`
+    };
+  }
+
+  return { ok: true };
+}
+
 function validateAndFixTimelineTimestamps(timelineJson, videoPath) {
   if (!timelineJson || !Array.isArray(timelineJson.timeline)) return timelineJson;
 
@@ -674,39 +733,65 @@ Yêu cầu từng trường dữ liệu:
       console.warn(`[Ideation] Warning: Bỏ qua bước chọn ý tưởng do gặp lỗi: ${ideationErr.message}. Tiếp tục quy trình chuẩn...`);
     }
 
-    console.log(`[AI] [VideoEngine] 🧠 Đang gửi yêu cầu phân tích video & sinh Timeline JSON (mode: ${videoProcessingMode}) sang Gemini AI...`);
-    const response = await generateContentWithRetryFallback(
-      ai,
-      HEAVY_MODELS,
-      [
-        {
-          fileData: {
-            fileUri: fileState.uri,
-            mimeType: fileState.mimeType,
-          },
-          processing: videoProcessingMode,
-        },
-        "Hãy thực hiện phân tích video trên và trả về kịch bản Timeline JSON chi tiết theo đúng cấu trúc quy chuẩn.",
-      ],
-      {
-        systemInstruction: systemInstruction + chosenIdeaDirective,
-        responseMimeType: "application/json",
-        responseSchema: RESPONSE_SCHEMA,
-      }
-    );
-
-    const responseText = response.text;
-    if (!responseText) {
-      throw new Error("Không nhận được dữ liệu phản hồi từ mô hình.");
-    }
-
-    // Kiểm tra và parse JSON
     let timelineJson;
-    try {
-      timelineJson = JSON.parse(responseText);
-    } catch (jsonErr) {
-      console.log("[AI] Dữ liệu thô từ AI:", responseText);
-      throw new Error(`Phản hồi không phải là JSON hợp lệ: ${jsonErr.message}`);
+    const MAX_TIMELINE_ATTEMPTS = 3;
+    for (let attempt = 1; attempt <= MAX_TIMELINE_ATTEMPTS; attempt++) {
+      console.log(`\n[AI] [VideoEngine] 🧠 Đang gửi yêu cầu phân tích video & sinh Timeline JSON (mode: ${videoProcessingMode}, lần thử ${attempt}/${MAX_TIMELINE_ATTEMPTS}) sang Gemini AI...`);
+      const response = await generateContentWithRetryFallback(
+        ai,
+        HEAVY_MODELS,
+        [
+          {
+            fileData: {
+              fileUri: fileState.uri,
+              mimeType: fileState.mimeType,
+            },
+            processing: videoProcessingMode,
+          },
+          "Hãy thực hiện phân tích video trên và trả về kịch bản Timeline JSON chi tiết theo đúng cấu trúc quy chuẩn.",
+        ],
+        {
+          systemInstruction: systemInstruction + chosenIdeaDirective,
+          responseMimeType: "application/json",
+          responseSchema: RESPONSE_SCHEMA,
+        }
+      );
+
+      const responseText = response.text;
+      if (!responseText) {
+        if (attempt === MAX_TIMELINE_ATTEMPTS) {
+          throw new Error("Không nhận được dữ liệu phản hồi từ mô hình.");
+        }
+        console.warn(`[AI] ⚠️ Phản hồi rỗng (Lần ${attempt}). Thử lại...`);
+        continue;
+      }
+
+      try {
+        timelineJson = JSON.parse(responseText);
+      } catch (jsonErr) {
+        console.warn(`[AI] ⚠️ Phản hồi không phải là JSON hợp lệ (Lần ${attempt}): ${jsonErr.message}`);
+        if (attempt === MAX_TIMELINE_ATTEMPTS) {
+          console.log("[AI] Dữ liệu thô từ AI:", responseText);
+          throw new Error(`Phản hồi không phải là JSON hợp lệ: ${jsonErr.message}`);
+        }
+        continue;
+      }
+
+      // Kiểm tra sức khỏe kịch bản (Health Check chống vấp đĩa & cụt cảnh)
+      const health = inspectTimelineHealth(timelineJson, dur);
+      if (!health.ok) {
+        console.warn(`[AI-HealthCheck] ⚠️ Kịch bản chưa đạt chuẩn chất lượng (Lần ${attempt}): ${health.reason}`);
+        if (attempt < MAX_TIMELINE_ATTEMPTS) {
+          console.log(`[AI-HealthCheck] 🔄 Đang tự động kích hoạt tạo lại kịch bản mới...`);
+          continue;
+        } else {
+          console.warn(`[AI-HealthCheck] ⚠️ Đã hết lượt thử, tiếp tục với kịch bản hiện tại...`);
+          break;
+        }
+      } else {
+        console.log(`[AI-HealthCheck] ✅ Kịch bản đạt chuẩn: ${timelineJson.timeline.length} phân cảnh hoàn chỉnh, không có lỗi lặp token!`);
+        break;
+      }
     }
 
     // Tự động kiểm tra và hiệu chỉnh mốc thời gian an toàn

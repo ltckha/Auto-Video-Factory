@@ -179,6 +179,69 @@
       },
       "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
       "voice_rhythm": "Glass straw plunging through boba pearls and ice with a crisp swirl clink."
+    },
+    {
+      "scene_type": "hook",
+      "suggested_advanced_effect": {
+        "name": "Partner Spin Trigger Push",
+        "intent": "reveal_impact",
+        "camera_motion": "push_in",
+        "focus": "action",
+        "intensity": 0.8,
+        "mood": "playful",
+        "pacing": "fast"
+      },
+      "duration_range": "0.0s - 3.5s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.1,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: hook] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Playful vocal tease and hand push initiating the partner spin transition."
+    },
+    {
+      "scene_type": "body",
+      "suggested_advanced_effect": {
+        "name": "360 Rotational Hair-Whip Snap",
+        "intent": "actioncut",
+        "camera_motion": "snap",
+        "focus": "action",
+        "intensity": 0.95,
+        "mood": "energetic",
+        "pacing": "fast"
+      },
+      "duration_range": "3.5s - 6.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.15,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: body] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Explosive bass drop landing cleanly as the custom upcycled streetwear outfit snaps into view."
+    },
+    {
+      "scene_type": "highlight",
+      "suggested_advanced_effect": {
+        "name": "Synchronized Pop Rhythm Drift",
+        "intent": "premium_showcase",
+        "camera_motion": "drift",
+        "focus": "product",
+        "intensity": 0.75,
+        "mood": "confident",
+        "pacing": "dynamic"
+      },
+      "duration_range": "6.0s - 11.0s",
+      "suggested_subtitle_style": "none",
+      "suggested_text_effect": "none",
+      "suggested_transition_out": {
+        "duration": 0.3,
+        "type": "fade"
+      },
+      "visual_description": "[GENERIC_SCENE_TYPE: highlight] Dynamic visual action shot matching style profile",
+      "voice_rhythm": "Rhythmic bounce and synchronized dance moves showing off completed Y2K streetwear look."
     }
   ]
 }
