@@ -1,6 +1,6 @@
 # 🎬 Auto-Video-Factory - Project Status & Architecture
 
-> **Cập nhật mới nhất:** 05/09/2026 — Bổ sung Gemini 3.8 Flash, hoàn thành Remotion Hybrid M6.2, Tự động nhận diện 9 Brand, Bộ 8 Khung Chữ Đồ Họa & Cơ Chế Tự Tiến Hóa (Self-Evolution).
+> **Cập nhật mới nhất:** 06/09/2026 — Hoàn thiện Hàng đợi Auto-Queue & Ingestion (`scan.command`, `generate.command` Auto-Next 3 video), Bổ sung Gemini 3.8 Flash, Remotion Hybrid M6.2, Nhận diện 9 Brand, Bộ 8 Khung Chữ Đồ Họa & Cơ Chế Tự Tiến Hóa (Self-Evolution).
 
 ---
 
@@ -59,6 +59,20 @@
 ### 📊 Direct Google Sheets API v4
 * **Đồng bộ 2 chiều:** Tự động cập nhật tiến độ render, thời gian chạy, dung lượng, và phân tích hiệu ứng lên bảng tính Google Sheet tại:
   `https://docs.google.com/spreadsheets/d/1Xg67qhp1J_Izt7v5uDKRgKjdEZapX9giKJ_ym0OMJN4/edit`
-  * Tab `Auto-Video-Factory`: Nhật ký dự án sản xuất.
-  * Tab `Video-Factory-EFFECTS`: Bảng thống kê tần suất và tỷ lệ thành công của các hiệu ứng.
+  * Tab `Auto-Video-Factory`: Nhật ký dự án sản xuất & Hàng đợi video tự động.
+  * Tab `Video-Factory-EFFECTS`: Bảng thống kê tần suất và tỷ lệ thành công của các hiệu ứng (6 cột chuẩn Remotion).
   * Tab `Status`: Bảng trạng thái vận hành của 9 thương hiệu.
+
+### ⚡ Hệ Thống Hàng Đợi Tự Động Hóa (Auto-Queue & Folder Ingestion Engine - 06/09/2026)
+* **`scan.command` (Quét thư mục & Lọc trùng):**
+  * Quét đệ quy toàn bộ thư mục video (`.mp4`, `.mov`, `.mkv`, `.m4v`, `.webm`, `.avi`).
+  * Trích xuất `job_id` là tên file không đuôi.
+  * Đối chiếu hai chiều với Google Sheets: Nếu `job_id` hoặc đường dẫn `Input File` đã có trên Sheet $\rightarrow$ tự động bỏ qua $100\%$ an toàn.
+  * Nạp hàng loạt (batch append 1 API request duy nhất) các video mới vào tab `Auto-Video-Factory` với `Status` để trống `""`.
+* **`generate.command` (Tự động nhận diện Hàng đợi & Vòng lặp Auto-Next):**
+  * Nhấn [ENTER] (để trống) để tự động lấy video đầu tiên có `Status` trống từ Google Sheet chạy tạo kịch bản AI.
+  * Sau khi render, hệ thống luôn hỏi tiếp tục: Đếm ngược 10 giây nếu không thao tác thì tự động lấy video tiếp theo chạy tiếp.
+  * Giới hạn an toàn: Tối đa 3 video liên tiếp mỗi phiên, tự động thoát sau 10s khi xong.
+* **Chiến lược Âm thanh 3 tầng chống méo tiếng người (Speed Ramping Audio Mix):**
+  * Hạ âm thanh gốc xuống $15\%$ khi có speedup/slowmo để giữ tiếng môi trường êm dịu, triệt tiêu méo tiếng the thé (chipmunk voice).
+  * Nâng nhạc nền BGM lên $85\%$ và tự động fade-out êm dịu ở cuối video.

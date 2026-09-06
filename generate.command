@@ -65,7 +65,7 @@ while true; do
 
         if [ $EXIT_CODE -ne 0 ] || [ -z "$NEXT_JOB_JSON" ]; then
             echo "ℹ️ Không tìm thấy video nào có Status trống trong tab Auto-Video-Factory."
-            echo "💡 Bạn có thể dùng 'scan' hoặc mở scan_to_sheet.command để nạp thêm video vào Sheet."
+            echo "💡 Bạn có thể dùng 'scan' hoặc mở scan.command để nạp thêm video vào Sheet."
             echo ""
             read -t 10 -n 1 -s -r -p "Tự động đóng sau 10s hoặc nhấn phím bất kỳ để đóng..."
             exit 0

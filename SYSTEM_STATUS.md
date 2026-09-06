@@ -1,6 +1,6 @@
 # BẢN ĐỒ NGỮ CẢNH HỆ THỐNG (SYSTEM STATUS & CONTEXT MAP)
 
-> **Cập nhật mới nhất:** 03/09/2026 — Động cơ Remotion Hybrid M6.2, Nhận diện 9 Brand, 8 Khung chữ đồ họa & Cơ chế Tự tiến hóa.
+> **Cập nhật mới nhất:** 06/09/2026 — Động cơ Hàng đợi Tự động hóa: `scan.command` lọc trùng nạp Sheet, `generate.command` bắt video Status trống & Vòng lặp Auto-Next 3 video (timeout 10s); Chiến lược Âm thanh 3 tầng chống méo tiếng người khi Speed Ramping.
 
 Tài liệu này đóng vai trò là **Bộ nhớ Trạng thái Cục bộ (Local State Memory)** để các AI Assistant đọc nhanh mỗi khi khởi động phiên làm việc mới, giúp nắm bắt ngay tình trạng hệ thống mà không cần quét lại toàn bộ mã nguồn.
 
@@ -16,10 +16,11 @@ Tài liệu này đóng vai trò là **Bộ nhớ Trạng thái Cục bộ (Loca
 
 ## 2. Các Mốc Chỉnh sửa & Cấu hình Quan trọng (Status: Đang Hoạt Động Tốt)
 
-### 📌 Danh Sách 2 Lệnh Command Cốt Lõi Tinh Gọn (Executable Commands)
-- **`generate.command`:** [generate.command](file:///Users/khan/Developer/Auto-Video-Factory/generate.command) — Phân tích video, chọn mode 5 tầng, khớp Style Recipe đã học từ TikTok, và sinh kịch bản JSON.
+### 📌 Danh Sách 3 Lệnh Command Cốt Lõi Tinh Gọn (Executable Commands)
+- **`scan.command`:** [scan.command](file:///Users/khan/Developer/Auto-Video-Factory/scan.command) — Quét thư mục video, trích xuất `job_id` (tên file không đuôi), tự động lọc trùng với Google Sheets tab `Auto-Video-Factory` và nạp hàng loạt video mới vào hàng đợi với `Status` để trống.
+- **`generate.command`:** [generate.command](file:///Users/khan/Developer/Auto-Video-Factory/generate.command) — Nhấn [ENTER] để tự động lấy video có `Status` trống từ Google Sheet phân tích kịch bản. Tích hợp **Vòng lặp Auto-Next** (hỏi tiếp tục sau render, tự động chạy sau 10s nếu không thao tác, giới hạn tối đa 3 video liên tiếp/phiên).
 - **`render.command`:** [render.command](file:///Users/khan/Developer/Auto-Video-Factory/render.command) — Dựng video thành phẩm từ kịch bản JSON qua **Remotion Hybrid Mới** (có fallback FFmpeg Legacy an toàn).
-- **Quyền hạn:** Cả 2 lệnh đã được cấp quyền `chmod +x` chuẩn trên macOS.
+- **Quyền hạn:** Cả 3 lệnh đã được cấp quyền `chmod +x` chuẩn trên macOS.
 
 ### 📌 Hệ Thống 9 Thương Hiệu Tự Động (Google Sheets Status Tab Sync)
 - Tự động nhận diện và gán chính xác $100\%$ tên Brand vào `video_meta.brand`:
@@ -68,7 +69,10 @@ Tài liệu này đóng vai trò là **Bộ nhớ Trạng thái Cục bộ (Loca
 | `renderer/scripts/generateTimeline.js` | **Đạo diễn AI.** Tương tác Gemini AI, chọn ý tưởng, khớp Style Recipe đã học. | `generateTimeline`, `RESPONSE_SCHEMA`, `findBestMatchingStyle` |
 | `renderer/scripts/styleRetriever.js` | **Bộ truy xuất Style cục bộ.** Đọc offline kho `effects/learned_styles/` trong $3\text{ms}$. | `findBestMatchingStyle`, `scoreStyleMatch`, `SYNONYM_MAP` |
 | `renderer/scripts/effectGapTelemetry.js` | **Hộp đen theo dõi kỹ xảo.** Tự động ghi nhận hiệu ứng thiếu code vào Backlog. | `inspectTimelineAndRecordGaps`, `KNOWN_CAMERA_MOTIONS` |
-| `renderer/scripts/googleSheetsDirectClient.js` | **Đồng bộ Google Sheets trực tiếp.** Ghi nhật ký tiến độ qua Service Account v4. | `appendValues`, `updateValues`, `getValues` |
+| `renderer/scripts/folderScanner.js` | **Bộ quét thư mục & lọc trùng.** Quét đệ quy, trích xuất `job_id`, lọc trùng với Google Sheets, nạp hàng loạt video mới vào Sheet với Status trống. | `scanFolderAndSyncToSheet`, `collectVideoFiles`, `cleanPath` |
+| `renderer/scripts/getNextEmptyJob.js` | **Helper lấy hàng đợi.** Đọc nhanh video đầu tiên có Status trống từ tab Auto-Video-Factory. | Trả về JSON `{ rowNumber, jobId, inputFile }` |
+| `renderer/scripts/googleSheetsSync.js` | **Cầu nối đồng bộ dữ liệu.** Quản lý đồng bộ project, analytics hiệu ứng, truy vấn và cập nhật trạng thái hàng đợi. | `syncProjectToSheet`, `syncAnalyticsToSheet`, `getNextEmptyJobFromSheet`, `updateProjectStatus` |
+| `renderer/scripts/googleSheetsDirectClient.js` | **Đồng bộ Google Sheets trực tiếp.** Ghi nhật ký tiến độ qua Service Account v4. | `appendValues`, `updateValues`, `getValues`, `updateCellByKey` |
 
 ---
 
