@@ -1,252 +1,223 @@
 {
   "video_meta": {
-    "title": "Nghệ Thuật Lắp Ráp Thanh Gỗ Vào Túi Da Thủ Công ASMR",
-    "description": "🎣 Bạn đã bao giờ cảm nhận được sự thỏa mãn khi từng chi tiết mộc mạc khớp khăng khít vào nếp da thủ công chưa?\n\n📖 Cận cảnh quá trình khui phôi gỗ tròn, cắt tỉa gọn gàng và xỏ từng thanh gỗ vào mép túi da may tay. Âm thanh mộc mạc của gỗ và da tạo nên nhịp điệu vô cùng thư thái.\n\n💬 Bạn thấy chi tiết tay cầm gia cố gỗ này thế nào, hãy để lại ý kiến cùng Yen Handmade Leather nhé!",
+    "title": "🌧️ Góc Nhìn Qua Khung Cửa Sổ Ô Tô Ngày Mưa Đà Lạt",
+    "description": "🎣 Có bao giờ bạn chỉ muốn ngồi yên trong ô tô, ngắm nhìn giọt mưa rơi ngoài cửa kính và lắng nghe thành phố chậm rãi lên đèn?\n\n📖 Khung cảnh phố núi Đà Lạt chiều mưa qua góc nhìn POV chân thực. Tiếng mưa tí tách rơi trên kính xe kết hợp cùng những ánh đèn vàng ấm áp mang lại cảm giác vô cùng bình yên và thư thái.\n\n💬 Chiều mưa ở phố bạn hôm nay như thế nào, chia sẻ cùng mình nhé!",
     "hashtags": [
-      "yenhandmadeleather",
-      "dathongminh",
-      "asmrleather",
-      "lamdathucong",
-      "dothucong",
-      "satisfying"
+      "dalat",
+      "dalatngaymua",
+      "povdalat",
+      "asmrrain",
+      "odalatvaythoi",
+      "chillintherain"
     ],
-    "brand": "yen_handmade_leather",
-    "brand_name": "Yen Handmade Leather",
-    "style": "Tactile ASMR Craftsmanship",
+    "brand": "o_da_lat_vay_thoi",
+    "brand_name": "Ờ Đà Lạt vậy thôi",
+    "style": "cinematic_asmr",
     "pipeline_mode": "Long2Short",
-    "created_at": "2026-09-06 14:55:58",
-    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260826_073341.mp4",
-    "original_duration_s": 124.3
+    "created_at": "2026-09-06 15:33:45",
+    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260827_172320.mp4",
+    "original_duration_s": 223.7
   },
   "timeline": [
     {
       "scene_id": "scene_001",
       "scene_type": "hook",
       "start_s": 0,
-      "end_s": 6,
+      "end_s": 10,
       "duration_s": 5,
-      "title": "Mở hộp gói phôi gỗ",
-      "story_importance": 0.9,
+      "title": "Đà Lạt phố mưa bắt đầu",
+      "story_importance": 0.95,
       "key_moments": [
-        2,
-        4.5
+        3
       ],
-      "speed_strategy": "uniform",
-      "render_priority": "keep",
-      "subtitle": "KHUI BỌC PHÔI GỖ\nLÀM TÚI DA",
-      "subtitle_style": "vibrant_yellow_sticker",
+      "speed_strategy": "ramp",
+      "render_priority": "compress",
+      "subtitle": "ĐÀ LẠT NGÀY MƯA\nCỰC CHILL",
+      "subtitle_style": "minimal_glass_card",
       "text_position": "top",
       "voice": "",
-      "visual_cue": "Góc quay từ trên xuống bóc lớp bao nilon đen để hé lộ các thanh gỗ tròn láng mịn bên trong.",
+      "visual_cue": "Góc nhìn POV từ trong ô tô nhìn ra con phố mưa, hạt nước đọng mờ ảo trên kính xe và ánh đèn vàng ấm áp từ các cửa hiệu.",
       "text_effect": {
-        "name": "rotated_sticker_pop",
-        "description": "Sticker nảy nhẹ tạo cảm giác tò mò và bắt mắt"
+        "name": "smooth_blur_reveal",
+        "description": "Chữ mờ mịn dần hiện ra theo nhịp rơi của giọt nước"
       },
       "advanced_effect": {
-        "name": "Macro Focus Boost",
-        "intent": "reveal_impact",
-        "mood": "satisfying",
-        "pacing": "medium",
-        "focus": "packaging",
-        "camera_motion": "macro_push",
-        "intensity": 0.8,
-        "description": "Cận cảnh âm thanh rọc nilon và lộ phôi gỗ tròn"
+        "name": "Cinematic Rain Drift",
+        "intent": "luxury_soft",
+        "mood": "chill",
+        "pacing": "slow",
+        "focus": "texture",
+        "camera_motion": "drift_cam",
+        "intensity": 0.6,
+        "description": "Tạo chuyển động lướt nhẹ nhàng đồng điệu với giọt mưa đọng trên kính"
       },
-      "hook_strength": 0.9,
-      "visual_energy": 0.75,
-      "retention_score": 0.88,
+      "hook_strength": 0.95,
+      "visual_energy": 0.6,
+      "retention_score": 0.9,
       "confidence": 0.95,
       "include": true,
-      "impact_effect": "none",
-      "layout": "full",
-      "rhythm_intent": "HIT",
-      "visual_intent": "reveal_impact"
+      "rhythm_intent": "REST",
+      "visual_intent": "luxury_soft"
     },
     {
       "scene_id": "scene_002",
       "scene_type": "body",
       "start_s": 12,
-      "end_s": 20,
-      "duration_s": 6,
-      "title": "Rọc băng dính bằng dao rọc giấy",
+      "end_s": 25,
+      "duration_s": 8,
+      "title": "Phố xá lên đèn rực rỡ",
       "story_importance": 0.85,
       "key_moments": [
-        15
+        18
       ],
-      "speed_strategy": "adaptive",
-      "render_priority": "keep",
-      "subtitle": "RỌC BĂNG DÍNH\nCỰC BẮT TAII",
+      "speed_strategy": "uniform",
+      "render_priority": "compress",
+      "subtitle": "MƯA RÍCH RẮC\nPHỐ LÊN ĐÈN",
       "subtitle_style": "minimal_glass_card",
       "text_position": "top",
       "voice": "",
-      "visual_cue": "Cận cảnh lưỡi dao rọc giấy lướt nhẹ qua lớp băng dính bó chặt các thanh gỗ, phát ra tiếng rọc giòn giã.",
-      "text_effect": {
-        "name": "smooth_blur_reveal",
-        "description": "Khung kính mờ hiện dịu dàng tôn âm thanh ASMR"
-      },
-      "advanced_effect": {
-        "name": "Tactile Precision",
-        "intent": "satisfying_cut",
-        "mood": "satisfying",
-        "pacing": "medium",
-        "focus": "hand_action",
-        "camera_motion": "snap_zoom",
-        "intensity": 0.85,
-        "description": "Snap zoom nhấn mạnh nhát rọc dao sắc bén"
-      },
-      "hook_strength": 0.82,
-      "visual_energy": 0.8,
-      "retention_score": 0.85,
-      "confidence": 0.92,
-      "include": true,
-      "impact_effect": "none",
-      "layout": "full",
-      "rhythm_intent": "BUILD",
-      "transition_out": {
-        "type": "wipe_left",
-        "duration": 0.3
-      },
-      "visual_intent": "satisfying_cut"
-    },
-    {
-      "scene_id": "scene_003",
-      "scene_type": "body",
-      "start_s": 20,
-      "end_s": 32,
-      "duration_s": 5,
-      "title": "Kiểm tra chất lượng thanh gỗ tròn",
-      "story_importance": 0.8,
-      "key_moments": [
-        26
-      ],
-      "speed_strategy": "ramp",
-      "render_priority": "compress",
-      "subtitle": "THANH GỖ TRÒN\nLÁNG MIỄN TỰ NHIÊN",
-      "subtitle_style": "minimal_glass_card",
-      "text_position": "bottom",
-      "voice": "",
-      "visual_cue": "Tháo gỡ rời các thanh gỗ tròn, xòe ra kiểm tra bề mặt trẵn mịn và độ đều của từng thanh.",
+      "visual_cue": "Xe lăn bánh qua các cửa hàng cafe và quán xá ven đường lung linh ánh đèn phản chiếu trên mặt đường ướt.",
       "text_effect": {
         "name": "tracking_expand",
         "description": "Chữ giãn nhẹ sang trọng"
       },
       "advanced_effect": {
-        "name": "Texture Highlight",
-        "intent": "premium_showcase",
-        "mood": "luxury",
+        "name": "Warm Bokeh Glide",
+        "intent": "emotional_pause",
+        "mood": "emotional",
+        "pacing": "medium",
+        "focus": "detail",
+        "camera_motion": "cinematic_glide_zoom",
+        "intensity": 0.5,
+        "description": "Lướt chậm theo vệt sáng phản chiếu lung linh trên mặt đường ướt"
+      },
+      "hook_strength": 0.8,
+      "visual_energy": 0.65,
+      "retention_score": 0.85,
+      "confidence": 0.92,
+      "include": true,
+      "rhythm_intent": "FLOW",
+      "visual_intent": "emotional_pause"
+    },
+    {
+      "scene_id": "scene_003",
+      "scene_type": "body",
+      "start_s": 45,
+      "end_s": 60,
+      "duration_s": 7,
+      "title": "Cần gạt nước gạt nhịp nhàng",
+      "story_importance": 0.88,
+      "key_moments": [
+        52
+      ],
+      "speed_strategy": "ramp",
+      "render_priority": "compress",
+      "subtitle": "TIẾNG MƯA FALLING\nÂM THANH BÌNH YÊN",
+      "subtitle_style": "minimal_glass_card",
+      "text_position": "top",
+      "voice": "",
+      "visual_cue": "Cần gạt nước xe ô tô hoạt động gạt đi làn nước, hé mở tầm nhìn phố núi mờ sương phía xa.",
+      "text_effect": {
+        "name": "masked_slide",
+        "description": "Chữ trượt nhẹ lên từ lớp nhòe nước"
+      },
+      "advanced_effect": {
+        "name": "Wiper Pulse Sync",
+        "intent": "satisfying_cut",
+        "mood": "satisfying",
         "pacing": "slow",
         "focus": "texture",
-        "camera_motion": "drift_cam",
-        "intensity": 0.7,
-        "description": "Góc quay lướt qua bề mặt vân gỗ tự nhiên"
+        "camera_motion": "slow_zoom_in",
+        "intensity": 0.55,
+        "description": "Hãm nhịp nhẹ nhàng theo chuyển động gạt nước trên kính"
       },
-      "hook_strength": 0.75,
+      "hook_strength": 0.82,
       "visual_energy": 0.7,
-      "retention_score": 0.8,
-      "confidence": 0.9,
+      "retention_score": 0.88,
+      "confidence": 0.94,
       "include": true,
-      "impact_effect": "none",
-      "layout": "full",
-      "rhythm_intent": "FLOW",
-      "transition_out": {
-        "type": "fade",
-        "duration": 0.3
-      },
-      "visual_intent": "premium_showcase"
+      "rhythm_intent": "BUILD",
+      "visual_intent": "satisfying_cut"
     },
     {
       "scene_id": "scene_004",
       "scene_type": "body",
-      "start_s": 50,
-      "end_s": 82,
-      "duration_s": 10,
-      "title": "Xỏ thanh gỗ vào nếp gấp túi da",
-      "story_importance": 0.95,
+      "start_s": 70,
+      "end_s": 90,
+      "duration_s": 8,
+      "title": "Lướt qua các góc phố trung tâm",
+      "story_importance": 0.8,
       "key_moments": [
-        58,
-        72
+        120
       ],
-      "speed_strategy": "adaptive",
-      "render_priority": "keep",
-      "subtitle": "XỎ THANH GỖ\nVÀO NẾP DA MAY TAY",
-      "subtitle_style": "vibrant_yellow_sticker",
+      "speed_strategy": "uniform",
+      "render_priority": "compress",
+      "subtitle": "GÓC NHÌN POV\nÔ TÔ DẠO PHỐ",
+      "subtitle_style": "minimal_glass_card",
       "text_position": "top",
       "voice": "",
-      "visual_cue": "Đưa thanh gỗ tròn từ từ đút vào ống da khâu chỉ xanh khăng khít, thao tác kéo nắn tỉ mỉ khéo léo.",
+      "visual_cue": "Xe ô tô di chuyển qua các con dốc đặc trưng Đà Lạt, dòng người khoác áo mưa thong thả qua lại.",
       "text_effect": {
-        "name": "stomp_zoom",
-        "description": "Nảy chữ dứt khoát theo từng nhịp tay đẩy gỗ"
+        "name": "word_pop",
+        "description": "Chữ nẩy nhẹ dịu dàng"
       },
       "advanced_effect": {
-        "name": "ASMR Assembly Focus",
-        "intent": "demonstrate",
-        "mood": "satisfying",
-        "pacing": "dynamic",
-        "focus": "hand_action",
-        "camera_motion": "push_in",
-        "intensity": 0.9,
-        "description": "Push in tập trung vào lực tay luồn thanh gỗ qua ống da"
+        "name": "Street Panorama Flow",
+        "intent": "cinematic_transition",
+        "mood": "chill",
+        "pacing": "medium",
+        "focus": "reveal",
+        "camera_motion": "drift_cam",
+        "intensity": 0.5,
+        "description": "Góc quay toàn cảnh xe nhẹ nhàng di chuyển giữa lòng phố"
       },
-      "hook_strength": 0.88,
-      "visual_energy": 0.85,
-      "retention_score": 0.92,
-      "confidence": 0.96,
+      "hook_strength": 0.78,
+      "visual_energy": 0.6,
+      "retention_score": 0.84,
+      "confidence": 0.9,
       "include": true,
-      "impact_effect": "none",
-      "layout": "full",
-      "rhythm_intent": "ACCELERATE",
-      "transition_out": {
-        "type": "circle_open",
-        "duration": 0.35
-      },
-      "visual_intent": "demonstrate"
+      "rhythm_intent": "REST",
+      "visual_intent": "cinematic_transition"
     },
     {
       "scene_id": "scene_005",
       "scene_type": "conclusion",
-      "start_s": 100,
-      "end_s": 124,
-      "duration_s": 9,
-      "title": "Lắp thanh gỗ thứ hai và hoàn thiện khung túi",
+      "start_s": 130,
+      "end_s": 143,
+      "duration_s": 6,
+      "title": "Thư thái khép lại hành trình",
       "story_importance": 0.9,
       "key_moments": [
-        110,
-        121
+        218
       ],
-      "speed_strategy": "uniform",
-      "render_priority": "keep",
-      "subtitle": "HOÀN THIỆN KẾT CẤU\nKHUNG TÚI MỘC MẠC",
+      "speed_strategy": "adaptive",
+      "render_priority": "compress",
+      "subtitle": "NGỒI TRONG XE\nNGẮM TRỜI MƯA",
       "subtitle_style": "vibrant_yellow_light",
-      "text_position": "bottom",
+      "text_position": "center",
       "voice": "",
-      "visual_cue": "Xỏ xong thanh gỗ thứ hai vào mép bên kia của túi da, nhấc hai quai gỗ lên căn chỉnh khung túi hoàn hảo.",
+      "visual_cue": "Khung hình dịu lại với ánh đèn mờ ảo ngoài khung cửa sổ ô tô, không gian đọng lại sự thư thái tuyệt đối.",
       "text_effect": {
-        "name": "word_pop",
-        "description": "Bật nhả từng từ kết thúc video ấn tượng"
+        "name": "Glow",
+        "description": "Chữ phát sáng dịu nhẹ ấm áp"
       },
       "advanced_effect": {
-        "name": "Final Craft Showcase",
-        "intent": "cta",
-        "mood": "luxury",
+        "name": "Peaceful Fade Out",
+        "intent": "emotional_pause",
+        "mood": "chill",
         "pacing": "slow",
-        "focus": "product",
+        "focus": "detail",
         "camera_motion": "pull_out",
-        "intensity": 0.85,
-        "description": "Pull out khoe trọn vẹn kết cấu tay cầm gỗ trên nền túi da đen"
+        "intensity": 0.4,
+        "description": "Lùi zoom chậm rãi kết thúc khoảnh khắc thư giãn ngày mưa"
       },
       "hook_strength": 0.85,
-      "visual_energy": 0.8,
-      "retention_score": 0.9,
+      "visual_energy": 0.5,
+      "retention_score": 0.92,
       "confidence": 0.95,
       "include": true,
-      "impact_effect": "none",
-      "layout": "full",
       "rhythm_intent": "RELEASE",
-      "transition_out": {
-        "type": "none",
-        "duration": 0
-      },
-      "visual_intent": "cta"
+      "visual_intent": "emotional_pause"
     }
   ],
   "audio_config": {

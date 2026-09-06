@@ -29,9 +29,9 @@ Nhiệm vụ của bạn là phân tích toàn diện một Video Dài (> 5 phú
   * Giữ nguyên 100% tốc độ phát 1.0x tự nhiên của video gốc để bảo toàn nhịp điệu chân thực và âm thanh thao tác.
 
 ### 4. 🎙️ THẨM ĐỊNH ÂM THANH 3 TẦNG THÔNG MINH (SMART 3-TIER AUDIO STRATEGY):
-* 🎵 **TẦNG 1 — ĐÃ CÓ SẴN NHẠC HOẶC TIẾNG ASMR THỰC ĐỊA ĐẮT GIÁ:** (tiếng rọc dao, bóc tách giòn tan, chiên xào xèo xèo, đục gọt da/gỗ, búa gõ...): BẮT BUỘC đặt `"has_original_music": true`, `"bgm_mood": "none"`, `"audio_strategy": "preserve_native_asmr"` $\rightarrow$ **Giữ 100% âm thanh thực tế, tuyệt đối không chèn thêm nhạc ngoài**.
-* 🔇 **TẦNG 2 — VIDEO CÂM HOẶC KHÔNG CÓ TIẾNG NÓI:** Đặt `"has_original_music": false`, `"audio_strategy": "mix_bgm"` và chọn `"bgm_mood"` $\rightarrow$ **Lồng ghép BGM phù hợp**.
-* 🗣️ **TẦNG 3 — VIDEO CÓ TIẾNG NÓI TẠP / TIẾNG ỒN NGOẠI CẢNH:** Đặt `"has_original_music": false`, `"audio_strategy": "suppress_ambient_voice_and_boost_bgm"`, chọn `"bgm_mood"` $\rightarrow$ **Ép giảm 30% âm lượng tiếng ồn gốc và đẩy BGM lên 85% để át tạp âm**.
+* 🎵 **TẦNG 1 — ĐÃ CÓ SẴN BẢN NHẠC NỀN HOÀN CHỈNH (Pre-existing Music Track):** CHỈ DUY NHẤT khi video gốc đã bật sẵn một bài nhạc nền hoàn chỉnh (nghe rõ giai điệu bài hát/nhạc nền có sẵn), BẮT BUỘC đặt `"has_original_music": true`, `"bgm_mood": "none"`, `"audio_strategy": "preserve_native_asmr"` $\rightarrow$ **Giữ 100% âm thanh gốc, tuyệt đối không chèn thêm nhạc ngoài để tránh đè nhạc**.
+* 🌧️ **TẦNG 2 — VIDEO THIÊN NHIÊN / MƯA RƠI / ĐƯỜNG PHỐ / TIẾNG ASMR THỰC ĐỊA:** (tiếng mưa tí tách, tiếng xe chạy, tiếng nước chảy, tiếng mài gọt thủ công...): Video loại này dù có tiếng môi trường hay nhưng **CHƯA CÓ NHẠC GIAI ĐIỆU**. BẮT BUỘC đặt `"has_original_music": false`, `"audio_strategy": "mix_bgm"` và CHỌN `"bgm_mood"` phù hợp (`chill`, `satisfying`, `luxury`, `energetic`). Hệ thống sẽ tự động hòa âm bản nhạc nền BGM du dương lót dưới tiếng mưa/tiếng ASMR thực tế.
+* 🗣️ **TẦNG 3 — VIDEO CÓ TIẾNG NÓI TẠP / TIẾNG NGƯỜI NÓI CHUYỆN / TẠP ÂM NGOẠI CẢNH:** Khi video có tiếng người lạ nói chuyện bâng quơ hoặc tạp âm gây nhiễu, đặt `"has_original_music": false`, `"audio_strategy": "suppress_ambient_voice_and_boost_bgm"`, chọn `"bgm_mood"` $\rightarrow$ **Hệ thống sẽ tự động ép nhỏ tối đa tiếng gốc (xuống 10% - 15%) và đẩy BGM lên 85% - 90% làm chủ đạo để triệt tiêu hoàn toàn méo tiếng người!**
 
 ---
 

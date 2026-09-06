@@ -233,16 +233,17 @@ async function renderHybridMaster(projectIdInput) {
       });
 
       // EXACT LEGACY VOLUME LOGIC:
-      // Long2Short or Fast Speedup (>= 2.0x) -> 85% (0.85)
-      // Normal video with Voiceover -> 25% (0.25)
-      // Normal video without Voiceover -> 50% (0.50)
+      // Long2Short or Fast Speedup (>= 2.0x) -> BGM 85%, Native tiếng gốc hạ xuống 15% để tránh méo giọng người
+      // Normal video with Voiceover -> BGM 25%, Native 20%
+      // Normal video without Voiceover -> BGM 50%, Native 80%
       const bgmVolume = (isLong2Short || hasFastSpeedup) ? 0.85 : (hasVoiceover ? 0.25 : 0.50);
+      const nativeVolume = (isLong2Short || hasFastSpeedup) ? 0.15 : (hasVoiceover ? 0.20 : 0.80);
 
-      console.log(`[AudioEngine] 🎵 Hòa âm BGM (Volume ${(bgmVolume * 100).toFixed(0)}% | Chế độ: ${isLong2Short ? "Long2Short" : (hasFastSpeedup ? "Tua Nhanh" : (hasVoiceover ? "Voiceover" : "Bình Thường"))}) + Tiếng gốc (Volume 100%): ${bgmTrack.path}`);
+      console.log(`[AudioEngine] 🎵 Hòa âm BGM (Volume ${(bgmVolume * 100).toFixed(0)}% | Chế độ: ${isLong2Short ? "Long2Short" : (hasFastSpeedup ? "Tua Nhanh" : (hasVoiceover ? "Voiceover" : "Bình Thường"))}) + Tiếng gốc (Volume ${(nativeVolume * 100).toFixed(0)}%): ${bgmTrack.path}`);
       console.log(`[AudioEngine] 🎚️ Kích hoạt Outro Decrescendo (Vuốt nhỏ âm thanh êm ái ${fadeDuration.toFixed(2)}s ở đoạn kết)...`);
       
       // Legacy pitch-shift (+0.5% asetrate) + seamless loop + dynamic volume + amix + outro fade-out
-      const bgmMixCmd = `ffmpeg -y -i "${nativeAudioTemp}" -i "${bgmTrack.path}" -filter_complex "[1:a]asetrate=44320,aresample=48000,volume=${bgmVolume},aloop=loop=-1:size=2e+9,atrim=0:${exactDurationSec.toFixed(6)}[bgm];[0:a][bgm]amix=inputs=2:duration=first:dropout_transition=2,${outroFadeFilter}[final]" -map "[final]" -c:a aac -b:a 192k "${finalAudioOutput}"`;
+      const bgmMixCmd = `ffmpeg -y -i "${nativeAudioTemp}" -i "${bgmTrack.path}" -filter_complex "[0:a]volume=${nativeVolume}[native];[1:a]asetrate=44320,aresample=48000,volume=${bgmVolume},aloop=loop=-1:size=2e+9,atrim=0:${exactDurationSec.toFixed(6)}[bgm];[native][bgm]amix=inputs=2:duration=first:dropout_transition=2,${outroFadeFilter}[final]" -map "[final]" -c:a aac -b:a 192k "${finalAudioOutput}"`;
       execSync(bgmMixCmd, { stdio: "pipe" });
     } else {
       const fadeCmd = `ffmpeg -y -i "${nativeAudioTemp}" -af "${outroFadeFilter}" -c:a aac -b:a 192k "${finalAudioOutput}"`;
