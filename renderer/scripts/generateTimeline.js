@@ -83,8 +83,29 @@ const RESPONSE_SCHEMA = {
           text_position: { type: "STRING", enum: ["top", "center", "bottom"] },
           voice: { type: "STRING" },
           visual_cue: { type: "STRING" },
-          visual_description: { type: "STRING" },
-          visual_intent: { type: "STRING" },
+          visual_intent: {
+            type: "STRING",
+            enum: [
+              "viral_fast",
+              "reveal_impact",
+              "premium_showcase",
+              "luxury_soft",
+              "dramatic_focus",
+              "satisfying_cut",
+              "energetic_demo",
+              "cinematic_transition",
+              "tension_build",
+              "emotional_pause",
+              "explain",
+              "demonstrate",
+              "compare",
+              "emphasize",
+              "warn",
+              "prove",
+              "offer",
+              "cta"
+            ]
+          },
           rhythm_intent: { type: "STRING", enum: ["REST", "BUILD", "ACCELERATE", "HIT", "RELEASE", "FLOW"] },
           layout: { type: "STRING", enum: ["full", "split", "split_vertical", "split_horizontal"] },
           impact_effect: { type: "STRING" },
@@ -698,20 +719,18 @@ Yêu cầu từng trường dữ liệu:
         cleanedText = cleanedText.replace(/^```\s*/, "").replace(/\s*```$/, "").trim();
       }
 
-      // Bộ lọc sơ bộ dọn dẹp chuỗi lặp bất thường ngay trước khi parse
-      cleanedText = cleanedText.replace(/("(?:visual_intent|rhythm_intent|title|subtitle)"\s*:\s*")([^"\\]{35,})(")/g, (m, p1, p2, p3) => {
-        const safeVal = p2.replace(/[^a-zA-Z0-9_\s]/g, "").substring(0, 30);
-        return `${p1}${safeVal}${p3}`;
+      // Bộ lọc sơ bộ: Dọn dẹp tất cả chuỗi lặp bất thường (quá 30 ký tự không có khoảng trắng)
+      cleanedText = cleanedText.replace(/:\s*"([^"\s]{30,})"/g, (m, p1) => {
+        return `: "${p1.substring(0, 20)}"`;
       });
 
       try {
         timelineJson = JSON.parse(cleanedText);
       } catch (firstErr) {
         console.warn(`[Timeline] ⚠️ JSON.parse lần đầu không thành công (${firstErr.message}), đang kích hoạt bộ lọc sửa lỗi tự động...`);
-        // 1. Cắt tỉa sâu các chuỗi lặp hoặc chuỗi số liên tiếp bất thường
-        cleanedText = cleanedText.replace(/("(?:visual_intent|rhythm_intent|title|subtitle|voice|visual_cue)"\s*:\s*")([^"\\]{30,})(")/g, (m, p1, p2, p3) => {
-          const safeVal = p2.replace(/[^a-zA-Z0-9_\s]/g, "").substring(0, 30);
-          return `${p1}${safeVal}${p3}`;
+        // 1. Cắt tỉa triệt để mọi chuỗi bất thường không có dấu cách dài trên 25 ký tự
+        cleanedText = cleanedText.replace(/:\s*"([^"\s]{25,})"/g, (m, p1) => {
+          return `: "${p1.substring(0, 20)}"`;
         });
 
         // 2. Tự động đóng ngoặc kép nếu bị cắt cụt giữa chừng (số ngoặc lẻ)
