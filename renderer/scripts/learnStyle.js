@@ -41,8 +41,8 @@ const RESPONSE_SCHEMA = {
         type: "OBJECT",
         properties: {
           effect_name: { type: "STRING" },
-          visual_intent: { type: "STRING", enum: effectEnums.intent || [] },
-          camera_motion: { type: "STRING", enum: effectEnums.camera_motion || [] },
+          visual_intent: { type: "STRING" },
+          camera_motion: { type: "STRING" },
           recommended_intensity: { type: "NUMBER" },
           description: { type: "STRING" },
         },
