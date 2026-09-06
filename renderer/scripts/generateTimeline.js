@@ -85,7 +85,7 @@ const RESPONSE_SCHEMA = {
           visual_cue: { type: "STRING" },
           visual_intent: {
             type: "STRING",
-            enum: [
+            enum: effectEnums.intent && effectEnums.intent.length > 0 ? effectEnums.intent : [
               "viral_fast",
               "reveal_impact",
               "premium_showcase",

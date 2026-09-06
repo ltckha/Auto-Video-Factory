@@ -162,6 +162,8 @@ function updateLearnedEffectsRegistry(novelEffects) {
     }
 
     let addedCount = 0;
+    const novelIntentsToRegister = new Set();
+
     for (const eff of novelEffects) {
       if (!eff || !eff.effect_name) continue;
       const key = String(eff.effect_name).toLowerCase().trim();
@@ -170,11 +172,40 @@ function updateLearnedEffectsRegistry(novelEffects) {
         existing[key] = mapped;
         addedCount++;
       }
+
+      // Thu thập intent mới (nếu có)
+      if (eff.visual_intent) {
+        const normIntent = String(eff.visual_intent).toLowerCase().trim().replace(/[^a-z0-9_]/g, "_");
+        if (normIntent.length >= 3 && normIntent.length <= 25 && !/^\d+$/.test(normIntent)) {
+          novelIntentsToRegister.add(normIntent);
+        }
+      }
     }
 
     if (addedCount > 0) {
       fs.writeFileSync(LEARNED_EFFECTS_PATH, JSON.stringify(existing, null, 2) + "\n", "utf8");
       console.log(`[LearnedEffects] Đã tự động cập nhật thêm ${addedCount} hiệu ứng mới vào: ${LEARNED_EFFECTS_PATH}`);
+    }
+
+    // Tự động cập nhật vào effectEnums.json để mở rộng kho từ vựng hợp lệ
+    if (novelIntentsToRegister.size > 0 && fs.existsSync(ENUMS_PATH)) {
+      try {
+        const currentEnums = JSON.parse(fs.readFileSync(ENUMS_PATH, "utf8"));
+        currentEnums.intent = currentEnums.intent || [];
+        let newIntentsAdded = 0;
+        for (const intent of novelIntentsToRegister) {
+          if (!currentEnums.intent.includes(intent)) {
+            currentEnums.intent.push(intent);
+            newIntentsAdded++;
+          }
+        }
+        if (newIntentsAdded > 0) {
+          fs.writeFileSync(ENUMS_PATH, JSON.stringify(currentEnums, null, 2) + "\n", "utf8");
+          console.log(`[EnumsAutoEvolution] 🚀 Đã tự động mở rộng thêm ${newIntentsAdded} visual_intent mới vào: ${ENUMS_PATH}`);
+        }
+      } catch (enumErr) {
+        console.warn(`[EnumsAutoEvolution] WARN: Không thể cập nhật effectEnums: ${enumErr.message}`);
+      }
     }
   } catch (err) {
     console.warn(`[LearnedEffects] WARN: Không thể cập nhật learned_effects.json: ${err.message}`);
