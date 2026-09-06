@@ -3,7 +3,13 @@
 const fs = require("fs");
 const path = require("path");
 const { GoogleGenAI } = require("@google/genai");
-const { getLocalDateTime, syncProjectToSheet, syncScenesToSheet } = require("./googleSheetsSync");
+const {
+  getLocalDateTime,
+  syncProjectToSheet,
+  syncScenesToSheet,
+  getNextEmptyJobFromSheet,
+  updateProjectStatus,
+} = require("./googleSheetsSync");
 const { selectCreativeIdea } = require("./interactiveIdeationReview");
 const { getCuratedTechniquesCatalog } = require("./techniqueCatalog");
 
@@ -303,26 +309,51 @@ async function main() {
   const { resolveMultiInputs, getVideoDuration } = require("./multiInputResolver");
   const { generateSmartProxy1x } = require("./smartProxyGenerator");
 
+  const isFromSheet = process.argv.includes("--from-sheet");
   const nonFlagArgs = process.argv.slice(2).filter((arg) => !arg.startsWith("--"));
-  if (nonFlagArgs.length === 0) {
-    console.error("Lỗi: Vui lòng truyền đường dẫn video gốc.");
-    process.exit(1);
+  let fromSheetJob = null;
+  let absoluteVideoPath = "";
+  let dur = 0;
+  let projectId = "";
+
+  if (isFromSheet || nonFlagArgs.length === 0) {
+    console.log("\n[Queue] 🔍 Đang tìm video có Status trống trong tab Auto-Video-Factory...");
+    fromSheetJob = await getNextEmptyJobFromSheet();
+    if (!fromSheetJob) {
+      console.log("[Queue] ℹ️ Không tìm thấy video nào có Status trống trong tab Auto-Video-Factory.");
+      process.exit(0);
+    }
+    console.log(`[Queue] 🎯 Đã lấy video từ hàng đợi Sheet: ${fromSheetJob.jobId}`);
+    console.log(`[Queue] 📁 Input File: ${fromSheetJob.inputFile}`);
+
+    if (!fs.existsSync(fromSheetJob.inputFile)) {
+      console.error(`[Queue] ❌ Không tìm thấy file video trên đĩa: ${fromSheetJob.inputFile}`);
+      await updateProjectStatus(fromSheetJob.jobId, "❌ File Not Found");
+      process.exit(1);
+    }
+
+    // Tạm thời đánh dấu Status để biết đang xử lý
+    await updateProjectStatus(fromSheetJob.jobId, "⏳ Generating...");
+
+    absoluteVideoPath = path.resolve(fromSheetJob.inputFile);
+    dur = getVideoDuration(absoluteVideoPath);
+    projectId = fromSheetJob.jobId;
+  } else {
+    const TEMP_WORK_DIR = path.join(INCOMING_DIR, "temp_concat");
+    let inputRes;
+    try {
+      inputRes = resolveMultiInputs(nonFlagArgs, TEMP_WORK_DIR);
+    } catch (resErr) {
+      console.error("Lỗi xử lý đầu vào video:", resErr.message);
+      process.exit(1);
+    }
+
+    absoluteVideoPath = inputRes.masterVideoPath;
+    dur = inputRes.totalDuration;
+
+    const defaultProjectId = inputRes.suggestedProjectId || path.basename(absoluteVideoPath, path.extname(absoluteVideoPath));
+    projectId = defaultProjectId;
   }
-
-  const TEMP_WORK_DIR = path.join(INCOMING_DIR, "temp_concat");
-  let inputRes;
-  try {
-    inputRes = resolveMultiInputs(nonFlagArgs, TEMP_WORK_DIR);
-  } catch (resErr) {
-    console.error("Lỗi xử lý đầu vào video:", resErr.message);
-    process.exit(1);
-  }
-
-  const absoluteVideoPath = inputRes.masterVideoPath;
-  const dur = inputRes.totalDuration;
-
-  const defaultProjectId = inputRes.suggestedProjectId || path.basename(absoluteVideoPath, path.extname(absoluteVideoPath));
-  const projectId = defaultProjectId;
 
   // Phân tích tham số mode trước khi upload: node generateTimeline.js <path> [--mode=short2short|long2short|long_highlight_clusters]
   let mode = null;
@@ -833,6 +864,11 @@ Yêu cầu từng trường dữ liệu:
 
   } catch (err) {
     console.error("\n[Error] Lỗi trong quá trình tạo timeline:", err.message);
+    if (projectId) {
+      try {
+        await updateProjectStatus(projectId, "❌ Failed");
+      } catch {}
+    }
     process.exitCode = 1;
   } finally {
     // Luôn dọn dẹp file tạm trên File API để tránh lãng phí dung lượng

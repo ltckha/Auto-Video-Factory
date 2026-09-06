@@ -211,9 +211,69 @@ async function syncAnalyticsToSheet() {
   fs.writeFileSync(csvPath, `${lines.join("\n")}\n`, "utf8");
 }
 
+/**
+ * Get the next project from Auto-Video-Factory tab that has an empty Status
+ * @returns {Promise<{rowNumber: number, jobId: string, inputFile: string}|null>}
+ */
+async function getNextEmptyJobFromSheet() {
+  try {
+    const rawData = await sheetsClient.getValues("Auto-Video-Factory!A:Z");
+    if (!rawData || rawData.length < 2) return null;
+
+    const headers = rawData[0].map((h) => String(h).trim());
+    const jobIdIdx = sheetsClient.findHeaderIndex(headers, "job_id");
+    const statusIdx = sheetsClient.findHeaderIndex(headers, "status");
+    const inputFileIdx = sheetsClient.findHeaderIndex(headers, "input_file");
+
+    if (jobIdIdx === -1 || statusIdx === -1) {
+      console.warn("[GoogleSheetsSync] Không tìm thấy cột job_id hoặc status trong Tab Auto-Video-Factory");
+      return null;
+    }
+
+    for (let r = 1; r < rawData.length; r++) {
+      const row = rawData[r];
+      if (!row) continue;
+      const jobId = String(row[jobIdIdx] || "").trim();
+      const status = String(row[statusIdx] || "").trim();
+      const inputFile = inputFileIdx !== -1 ? String(row[inputFileIdx] || "").trim() : "";
+
+      // Dòng có job_id nhưng Status còn trống
+      if (jobId && !status) {
+        return {
+          rowNumber: r + 1,
+          jobId,
+          inputFile,
+        };
+      }
+    }
+
+    return null;
+  } catch (err) {
+    console.warn(`[GoogleSheetsSync] Lỗi khi tìm job có status trống: ${err.message}`);
+    return null;
+  }
+}
+
+/**
+ * Quickly update project status in Auto-Video-Factory tab
+ * @param {string} jobId
+ * @param {string} newStatus
+ */
+async function updateProjectStatus(jobId, newStatus) {
+  if (!jobId) return;
+  try {
+    await sheetsClient.updateCellByKey("Auto-Video-Factory", "job_id", jobId, "status", newStatus);
+    console.log(`[GoogleSheetsSync] 🔄 Đã cập nhật trạng thái '${jobId}' -> [${newStatus}] trên Google Sheets.`);
+  } catch (err) {
+    console.warn(`[GoogleSheetsSync] Lỗi cập nhật trạng thái cho '${jobId}': ${err.message}`);
+  }
+}
+
 module.exports = {
   getLocalDateTime,
   syncAnalyticsToSheet,
   syncProjectToSheet,
   syncScenesToSheet,
+  getNextEmptyJobFromSheet,
+  updateProjectStatus,
 };

@@ -5,31 +5,31 @@
     "description": "Clean Remotion-era effect analytics tracking"
   },
   "subtitle_style:minimal_glass_card": {
-    "success": 4,
+    "success": 8,
     "fail": 0
   },
   "advanced_effect:Cinematic Rain Drift": {
-    "success": 1,
+    "success": 2,
     "fail": 0
   },
   "advanced_effect:Warm Bokeh Glide": {
-    "success": 1,
+    "success": 2,
     "fail": 0
   },
   "advanced_effect:Wiper Pulse Sync": {
-    "success": 1,
+    "success": 2,
     "fail": 0
   },
   "advanced_effect:Street Panorama Flow": {
-    "success": 1,
+    "success": 2,
     "fail": 0
   },
   "subtitle_style:vibrant_yellow_light": {
-    "success": 1,
+    "success": 2,
     "fail": 0
   },
   "advanced_effect:Peaceful Fade Out": {
-    "success": 1,
+    "success": 2,
     "fail": 0
   }
 }

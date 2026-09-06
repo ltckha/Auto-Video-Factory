@@ -214,6 +214,58 @@ class GoogleSheetsDirectClient {
       return await this.appendValues(`${tabName}!A1`, [rowValues]);
     }
   }
+
+  /**
+   * Convert 0-indexed column number to Sheets column letter (0 -> A, 25 -> Z, 26 -> AA)
+   */
+  colIndexToLetter(colIndex) {
+    let temp = colIndex;
+    let letter = "";
+    while (temp >= 0) {
+      letter = String.fromCharCode((temp % 26) + 65) + letter;
+      temp = Math.floor(temp / 26) - 1;
+    }
+    return letter;
+  }
+
+  /**
+   * Fast update of a single cell for a specific record key
+   */
+  async updateCellByKey(tabName, keyField, keyValue, targetField, newValue) {
+    const rawData = await this.getValues(`${tabName}!A:Z`);
+    if (!rawData || rawData.length < 2) return null;
+
+    const headers = rawData[0].map((h) => String(h).trim());
+    const keyColIndex = findHeaderIndex(headers, keyField);
+    const targetColIndex = findHeaderIndex(headers, targetField);
+
+    if (keyColIndex === -1) {
+      throw new Error(`Khóa '${keyField}' không tồn tại trong Header của Tab '${tabName}'`);
+    }
+    if (targetColIndex === -1) {
+      throw new Error(`Cột đích '${targetField}' không tồn tại trong Header của Tab '${tabName}'`);
+    }
+
+    let targetRowNumber = -1;
+    for (let r = 1; r < rawData.length; r++) {
+      const row = rawData[r];
+      if (row && keyColIndex < row.length && String(row[keyColIndex]).trim() === String(keyValue).trim()) {
+        targetRowNumber = r + 1; // 1-indexed for Sheets
+        break;
+      }
+    }
+
+    if (targetRowNumber === -1) {
+      console.warn(`[GoogleSheetDirect] Không tìm thấy dòng với ${keyField} = '${keyValue}' để cập nhật ${targetField}.`);
+      return null;
+    }
+
+    const colLetter = this.colIndexToLetter(targetColIndex);
+    const cellRange = `${tabName}!${colLetter}${targetRowNumber}`;
+    return await this.updateValues(cellRange, [[newValue]]);
+  }
 }
 
 module.exports = new GoogleSheetsDirectClient();
+module.exports.findHeaderIndex = findHeaderIndex;
+module.exports.FIELD_ALIASES = FIELD_ALIASES;
