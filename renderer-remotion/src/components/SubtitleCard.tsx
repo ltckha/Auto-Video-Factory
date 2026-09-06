@@ -89,7 +89,7 @@ export const SubtitleCard: React.FC<SubtitleCardProps> = ({
     return null;
   }
 
-  const isLightning = subtitleStyle.includes("lightning") || token.id === "viral_tiktok";
+  const isLightning = subtitleStyle.includes("lightning") || subtitleStyle.includes("light") || token.id === "viral_tiktok";
   const isGlass = token.card.type === "glass";
   const isBadge = token.card.type === "badge";
   const isWashi = subtitleStyle.includes("washi") || token.card.type === "washi_tape";

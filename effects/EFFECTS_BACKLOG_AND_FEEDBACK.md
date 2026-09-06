@@ -102,5 +102,9 @@ Tài liệu này là **Kho Danh Mục Đầy Đủ Nhất ($100\%$ Single Source
 
 > **Cơ chế tự động:** Khi bạn chạy `render.command`, nếu phân cảnh nào yêu cầu hiệu ứng / kỹ xảo chưa có code thực thi riêng, hệ thống sẽ tự động dùng fallback an toàn để video vẫn ra thành phẩm đẹp, đồng thời **tự động ghi ngay vào bảng dưới đây** để lần sau chúng ta xây dựng bổ sung.
 
-| Thời Gian | Dự Án Yêu Cầu | Phân Cảnh | Hiệu Ứng / Kỹ Xảo Chưa Có Code | Fallback Đã Dùng | Đề Xuất Nâng Cấp Cho Lần Sau |
-| :--- | :--- | :---: | :--- | :--- | :--- |
+| Thời Gian | Dự Án Yêu Cầu | Phân Cảnh | Hiệu Ứng / Kỹ Xảo Chưa Có Code | Fallback Đã Dùng | Trạng Thái Xử Lý |
+| :--- | :--- | :---: | :--- | :--- | :---: |
+| `06/09/2026 14:49` | `VID_20260824_083502` | scene_006 | `vibrant_yellow_light` (Subtitle Card) | minimal_glass_card | ✅ Đã hỗ trợ alias trong `SubtitleCard.tsx` |
+| `06/09/2026 14:56` | `VID_20260826_073341` | scene_005 | `vibrant_yellow_light` (Subtitle Card) | minimal_glass_card | ✅ Đã hỗ trợ alias trong `SubtitleCard.tsx` |
+
+*(Hiện tại Remotion Engine đã hỗ trợ đầy đủ 100% các thành phần đang sử dụng trong Production, không còn tồn đọng linh kiện nào chưa hoàn thiện).*

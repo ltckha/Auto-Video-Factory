@@ -45,6 +45,7 @@ const KNOWN_SUBTITLE_STYLES = new Set([
   "vibrant_yellow_sticker",
   "warning_red_badge",
   "vibrant_yellow_lightning_sticker",
+  "vibrant_yellow_light",
   "washi_tape",
   "editorial_line",
   "price_tag_pill",
