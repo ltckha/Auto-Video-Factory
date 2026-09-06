@@ -5,7 +5,7 @@ const path = require("path");
 const { GoogleGenAI } = require("@google/genai");
 const { getLocalDateTime, syncProjectToSheet, syncScenesToSheet } = require("./googleSheetsSync");
 const { selectCreativeIdea } = require("./interactiveIdeationReview");
-const { findBestMatchingStyle } = require("./styleRetriever");
+const { getCuratedTechniquesCatalog } = require("./techniqueCatalog");
 
 const ROOT = path.resolve(__dirname, "..", "..");
 const INCOMING_DIR = path.join(ROOT, "incoming");
@@ -565,6 +565,8 @@ async function main() {
     // -------------------------------------------------------------
     console.log("\n[Ideation] 🧠 Đang phân tích video để đề xuất 3 góc ý tưởng dựng sáng tạo...");
 
+    const techniquesCatalog = getCuratedTechniquesCatalog();
+
     const ideationSchema = {
       type: "OBJECT",
       properties: {
@@ -576,13 +578,15 @@ async function main() {
               id: { type: "NUMBER" },
               angle_name: { type: "STRING" },
               hook_summary: { type: "STRING" },
+              borrowed_technique: { type: "STRING" },
+              why_it_fits: { type: "STRING" },
               style_direction: { type: "STRING" },
               audio_strategy_detail: { type: "STRING" },
               viral_score: { type: "NUMBER" },
               creative_prompt_directive: { type: "STRING" },
               is_recommended: { type: "BOOLEAN" }
             },
-            required: ["id", "angle_name", "hook_summary", "style_direction", "audio_strategy_detail", "creative_prompt_directive"]
+            required: ["id", "angle_name", "hook_summary", "borrowed_technique", "why_it_fits", "style_direction", "audio_strategy_detail", "creative_prompt_directive"]
           }
         }
       },
@@ -597,8 +601,16 @@ BƯỚC 1: BÓC TÁCH NGỮ CẢNH ĐỘC NHẤT (CONTEXT EXTRACTION)
 - Hành động cốt lõi của con người đang diễn ra trong video là gì?
 - Đâu là điểm thị giác hoặc âm thanh kỳ lạ/đắt giá nhất mà CHỈ RIÊNG VIDEO NÀY MỚI CÓ?
 
-BƯỚC 2: SÁNG TẠO 3 GÓC DỰNG ĐỘC BẢN TƯƠNG PHẢN TUYỆT ĐỐI (KHÔNG DÙNG VĂN MẪU RẬP KHUÔN)
-Dựa trực tiếp trên vật thể và bối cảnh ở Bước 1, hãy đề xuất 3 góc ý tưởng mang 3 phong cách và mục tiêu truyền thông hoàn toàn khác biệt:
+BƯỚC 2: THAM KHẢO TỦ SÁCH KỸ THUẬT TRIỆU VIEW & SÁNG TẠO 3 GÓC DỰNG ĐỘC BẢN:
+Dưới đây là danh mục các thủ pháp nghệ thuật đã kiểm chứng từ các video triệu view:
+${techniquesCatalog}
+
+⚠️ NGUYÊN TẮC ĐẠO DIỄN QUAN TRỌNG:
+- Video mẫu chỉ là kho tài liệu tham khảo cảm hứng. BẠN LÀ ĐẠO DIỄN TOÀN QUYỀN.
+- Chỉ "mượn" những kỹ thuật thực sự tôn vinh được sản phẩm và âm thanh trong video này.
+- TUYỆT ĐỐI KHÔNG GƯỢNG ÉP bắt chước những thứ trái ngược với bản chất video (ví dụ: video thủ công trầm lắng thì cấm dùng nhạc điện tử/phonk dồn dập). Nếu thấy sáng tạo tự do tốt hơn, hãy ghi borrowed_technique là "none".
+
+3 Góc Ý Tưởng cần tương phản rõ rệt:
 - Ý TƯỞNG 1 (Cảm giác & Xúc giác / Trải nghiệm chân thực): Tập trung trọn vẹn vào độ thỏa mãn của hành động, âm thanh thực tế, vẻ đẹp chi tiết của vật thể.
 - Ý TƯỞNG 2 (Kể chuyện / Chia sẻ góc nhìn / Bí quyết nghề): Đặt vấn đề, chia sẻ kiến thức chuyên môn, câu chuyện đằng sau hoặc mẹo thực chiến hữu ích.
 - Ý TƯỞNG 3 (Kịch tính / Nhanh gọn / Đánh giá & Kết quả trước-sau): Giật hook mạnh mẽ, nhịp độ dứt khoát, tập trung vào kết quả bất ngờ hoặc tính năng vượt trội.
@@ -606,6 +618,8 @@ Dựa trực tiếp trên vật thể và bối cảnh ở Bước 1, hãy đề
 Yêu cầu từng trường dữ liệu:
 - angle_name: Tên ý tưởng độc bản, sắc sảo (gắn liền với tên vật thể/hành động thật trong video) kèm icon.
 - hook_summary: 1 câu mở màn giật tít đánh trúng tâm lý người xem trong 3 giây đầu.
+- borrowed_technique: Tên thủ pháp kỹ thuật triệu view bạn quyết định mượn cho góc này (ví dụ: "Instant Percussive Start", "Pure Tactile ASMR", "Velocity Ramping", hoặc "none" nếu hoàn toàn tự do).
+- why_it_fits: 1 câu giải thích tại sao kỹ thuật này tôn vinh được video hiện tại.
 - style_direction: Phong cách hình ảnh và đồ họa cụ thể phù hợp với ý tưởng này.
 - audio_strategy_detail: Chiến lược âm thanh chi tiết (Giữ 100% âm thanh thực địa, lồng nhạc nền, hoặc xử lý tạp âm).
 - viral_score: Điểm tiềm năng thu hút (từ 8.2 đến 9.8).
@@ -635,57 +649,14 @@ Yêu cầu từng trường dữ liệu:
 
       const ideationData = JSON.parse(ideationResponse.text);
       if (ideationData && Array.isArray(ideationData.ideas) && ideationData.ideas.length > 0) {
-        // ⚡ ĐỐI CHIẾU STYLE CHO TỪNG Ý TƯỞNG TRƯỚC KHI HIỂN THỊ CHO NGƯỜI DÙNG
-        ideationData.ideas.forEach((item) => {
-          const queryText = [
-            item.angle_name || "",
-            item.hook_summary || "",
-            item.style_direction || "",
-            item.creative_prompt_directive || "",
-            path.basename(absoluteVideoPath)
-          ].join(" ");
-          item.matchedStyle = findBestMatchingStyle(queryText);
-        });
-
         const chosenIdea = await selectCreativeIdea(ideationData.ideas);
         if (chosenIdea && chosenIdea.creative_prompt_directive) {
-          chosenIdeaDirective = `\n\n━━━━━━━━━━━━━━━━━━\n🎯 ĐỊNH HƯỚNG Ý TƯỞNG ĐÃ ĐƯỢC NGƯỜI DÙNG LỰA CHỌN:\n- Tên Góc Ý Tưởng: ${chosenIdea.angle_name}\n- Chỉ Đạo Đạo Diễn: ${chosenIdea.creative_prompt_directive}\n━━━━━━━━━━━━━━━━━━\nHãy bám sát $100\%$ định hướng ý tưởng này khi chọn mốc thời gian, viết subtitle và dựng phân cảnh!`;
-
-          const matchedStyle = chosenIdea.matchedStyle;
-          if (matchedStyle && matchedStyle.profile) {
-            console.log(`[StyleRetriever] 🎯 Áp dụng Style Recipe mẫu: "${matchedStyle.name}" (Độ khớp: ${(matchedStyle.score * 100).toFixed(1)}%)`);
-            const p = matchedStyle.profile;
-            let recipeLines = [
-              `\n\n━━━━━━━━━━━━━━━━━━`,
-              `🎨 CÔNG THỨC DỰNG ĐÃ HỌC TỪ VIRAL VIDEO (LEARNED STYLE RECIPE):`,
-              `- Phong Cách Mẫu: ${matchedStyle.name} ("${matchedStyle.id}")`,
-              `- Thời lượng trung bình mỗi phân cảnh: ${p.average_scene_duration_s || 4}s`,
-              `- Nhịp độ cắt (Pacing): ${p.pacing_speed || "medium"}`,
-              `- Chuyển động camera ưu tiên: ${p.recommended_camera_motion || "macro_push"}`,
-            ];
-            if (p.motion_graph) recipeLines.push(`- Đồ thị chuyển động: ${p.motion_graph}`);
-            if (p.speed_curve) {
-              recipeLines.push(`- Đường cong tốc độ (Speed Curve): Đỉnh ${p.speed_curve.peak_speed}x -> Đáy ${p.speed_curve.trough_speed}x (${p.speed_curve.smooth_algorithm || "smooth"})`);
-            }
-            if (p.layout) recipeLines.push(`- Bố cục khung hình (Layout): ${p.layout}`);
-            if (p.hook_strategy) recipeLines.push(`- Chiến lược Hook: ${p.hook_strategy}`);
-            if (p.graphic_text_frame?.frame_type) {
-              recipeLines.push(`- Khung đồ họa chữ (Subtitle Frame): ${p.graphic_text_frame.frame_type}`);
-            }
-            if (p.recommended_transition) {
-              recipeLines.push(`- Kỹ xảo chuyển cảnh ưu tiên: ${p.recommended_transition} (${p.transition_duration_s || 0.3}s)`);
-            }
-            if (p.sfx_strategy) {
-              recipeLines.push(`- Kỹ xảo âm thanh (SFX): Chuyển cảnh [${p.sfx_strategy.scene_cut_sfx || "none"}], Cao trào [${p.sfx_strategy.impact_sfx || "none"}]`);
-            }
-            if (p.color_grading?.mood) {
-              recipeLines.push(`- Tông màu điện ảnh (Color Mood): ${p.color_grading.mood}`);
-            }
-            recipeLines.push(`- Hãy gán trường "style" trong video_meta là "${matchedStyle.id}" và áp dụng các thông số trên vào từng phân cảnh!`);
-            chosenIdeaDirective += recipeLines.join("\n");
-          } else {
-            console.log(`[StyleRetriever] 🎨 Đạo diễn tự do sáng tạo theo ý tưởng đã chọn (Không ép khuôn bài mẫu).`);
+          chosenIdeaDirective = `\n\n━━━━━━━━━━━━━━━━━━\n🎯 ĐỊNH HƯỚNG Ý TƯỞNG ĐÃ ĐƯỢC NGƯỜI DÙNG LỰA CHỌN:\n- Tên Góc Ý Tưởng: ${chosenIdea.angle_name}\n- Chỉ Đạo Đạo Diễn: ${chosenIdea.creative_prompt_directive}\n`;
+          if (chosenIdea.borrowed_technique && chosenIdea.borrowed_technique !== "none") {
+            chosenIdeaDirective += `- Kỹ Thuật Mượn Cảm Hứng: ${chosenIdea.borrowed_technique} (${chosenIdea.why_it_fits || ""})\n`;
           }
+          chosenIdeaDirective += `━━━━━━━━━━━━━━━━━━\nHãy bám sát 100% định hướng ý tưởng này khi chọn mốc thời gian, viết subtitle và dựng phân cảnh!`;
+          console.log(`[Ideation] 🎯 Đã thiết lập định hướng Đạo Diễn cho kịch bản dựng: "${chosenIdea.angle_name}"`);
         }
       }
     } catch (ideationErr) {
@@ -727,22 +698,29 @@ Yêu cầu từng trường dữ liệu:
         cleanedText = cleanedText.replace(/^```\s*/, "").replace(/\s*```$/, "").trim();
       }
 
+      // Bộ lọc sơ bộ dọn dẹp chuỗi lặp bất thường ngay trước khi parse
+      cleanedText = cleanedText.replace(/("(?:visual_intent|rhythm_intent|title|subtitle)"\s*:\s*")([^"\\]{35,})(")/g, (m, p1, p2, p3) => {
+        const safeVal = p2.replace(/[^a-zA-Z0-9_\s]/g, "").substring(0, 30);
+        return `${p1}${safeVal}${p3}`;
+      });
+
       try {
         timelineJson = JSON.parse(cleanedText);
       } catch (firstErr) {
         console.warn(`[Timeline] ⚠️ JSON.parse lần đầu không thành công (${firstErr.message}), đang kích hoạt bộ lọc sửa lỗi tự động...`);
-        // 1. Cắt tỉa các chuỗi lặp bất thường (runaway repetition)
-        cleanedText = cleanedText.replace(/("(?:visual_intent|rhythm_intent|title|subtitle)"\s*:\s*")([^"\\]{40,})(")/g, (m, p1, p2, p3) => {
-          return `${p1}${p2.substring(0, 30)}${p3}`;
+        // 1. Cắt tỉa sâu các chuỗi lặp hoặc chuỗi số liên tiếp bất thường
+        cleanedText = cleanedText.replace(/("(?:visual_intent|rhythm_intent|title|subtitle|voice|visual_cue)"\s*:\s*")([^"\\]{30,})(")/g, (m, p1, p2, p3) => {
+          const safeVal = p2.replace(/[^a-zA-Z0-9_\s]/g, "").substring(0, 30);
+          return `${p1}${safeVal}${p3}`;
         });
 
-        // 2. Tự động đóng ngoặc kép nếu bị cắt cụt giữa chừng
+        // 2. Tự động đóng ngoặc kép nếu bị cắt cụt giữa chừng (số ngoặc lẻ)
         const quotes = (cleanedText.match(/(?<!\\)"/g) || []).length;
         if (quotes % 2 !== 0) {
           cleanedText += '"';
         }
 
-        // 3. Tự động đóng các cặp ngoặc nhọn {} và ngoặc vuông [] còn thiếu
+        // 3. Tự động cân bằng và đóng các cặp ngoặc nhọn {} và ngoặc vuông [] còn thiếu
         const openBraces = (cleanedText.match(/{/g) || []).length;
         const closeBraces = (cleanedText.match(/}/g) || []).length;
         const openBrackets = (cleanedText.match(/\[/g) || []).length;

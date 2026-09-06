@@ -46,10 +46,10 @@ async function selectCreativeIdea(ideas) {
 
     // Calculate Composite Badge
     let rankBadge = "";
-    if (matched && viralScore >= 9.0) {
-      rankBadge = `[🔥 HOÀN HẢO: Viral ${viralScore.toFixed(1)}/10 + Khớp Style Mẫu ${(matched.score * 100).toFixed(0)}%]`;
-    } else if (matched) {
-      rankBadge = `[📐 CHUẨN CÔNG THỨC: Khớp Style ${(matched.score * 100).toFixed(0)}% — Viral ${viralScore.toFixed(1)}/10]`;
+    if (item.borrowed_technique && item.borrowed_technique !== "none" && viralScore >= 9.0) {
+      rankBadge = `[🔥 ĐỘT PHÁ: Viral ${viralScore.toFixed(1)}/10 — Mượn Thủ Pháp Triệu View]`;
+    } else if (item.borrowed_technique && item.borrowed_technique !== "none") {
+      rankBadge = `[💡 CẢM HỨNG: Viral ${viralScore.toFixed(1)}/10 — Áp Dụng Kỹ Thuật Chọn Lọc]`;
     } else if (viralScore >= 9.0) {
       rankBadge = `[⚡ VIRAL ĐỘC BẢN: Viral ${viralScore.toFixed(1)}/10 — Sáng Tạo Phá Cách]`;
     } else {
@@ -57,17 +57,21 @@ async function selectCreativeIdea(ideas) {
     }
 
     console.log(`\n [${idx + 1}] 🎬 ${item.angle_name || `Ý Tưởng #${idx + 1}`}`);
-    console.log(`     🏆 XẾP HẠNG: ${rankBadge}${recTag}`);
-    if (matched) {
-      console.log(`     🎨 Phong cách: 🏆 ${matched.name} (Đã học từ video triệu view)`);
-    } else if (item.style_direction) {
-      console.log(`     🎨 Phong cách: 🎨 ${item.style_direction} (Đạo diễn tự do sáng tạo)`);
+    console.log(`     🏆 XẾP HẠNG   : ${rankBadge}${recTag}`);
+    if (item.borrowed_technique && item.borrowed_technique !== "none") {
+      console.log(`     💡 Kỹ thuật mượn: 🎯 ${item.borrowed_technique}`);
+      if (item.why_it_fits) {
+        console.log(`     🔍 Lý do phù hợp: ${item.why_it_fits}`);
+      }
+    }
+    if (item.style_direction) {
+      console.log(`     🎨 Phong cách : ${item.style_direction}`);
     }
     if (item.hook_summary) {
-      console.log(`     🎣 Hook 3s   : ${item.hook_summary}`);
+      console.log(`     🎣 Hook 3s    : ${item.hook_summary}`);
     }
     if (item.audio_strategy_detail) {
-      console.log(`     🎵 Âm thanh  : ${item.audio_strategy_detail}`);
+      console.log(`     🎵 Âm thanh   : ${item.audio_strategy_detail}`);
     }
   });
 

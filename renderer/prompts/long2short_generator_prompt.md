@@ -181,6 +181,8 @@ Dựa vào sản phẩm, bối cảnh, hành động và nội dung video, hãy 
 
 ## 4. CHI TIẾT CÁC PHÂN LOẠI & THUỘC TÍNH BẮT BUỘC
 
+* **`rhythm_intent` (BẮT BUỘC KHÓA CHUẨN ĐIỆN ẢNH):** Chỉ được chọn 1 trong: `REST`, `BUILD`, `ACCELERATE`, `HIT`, `RELEASE`, `FLOW`.
+* **`visual_intent` (Ý ĐỒ THỊ GIÁC SÁNG TẠO):** Cho phép tự do sáng tạo từ mới (ví dụ: `texture_reveal`, `precision_cut`, `macro_detail`, `craft_focus`), NHƯNG BẮT BUỘC viết thường, nối bằng gạch dưới (`[a-z_]`), tối đa 30 ký tự và TUYỆT ĐỐI CẤM chứa chuỗi số liên tiếp.
 * **`scene_type`:** Chỉ được chọn một trong: `hook`, `body`, `transition`, `conclusion`.
 * **`speed_strategy`:** `uniform`, `adaptive`, `ramp`, `jumpcut`.
 * **`render_priority`:** `keep`, `compress`.
