@@ -225,4 +225,9 @@ function recordGapsToBacklog(projectId, gaps) {
 
 module.exports = {
   inspectTimelineAndRecordGaps,
+  KNOWN_CAMERA_MOTIONS,
+  KNOWN_TRANSITIONS,
+  KNOWN_SUBTITLE_STYLES,
+  normalize,
 };
+

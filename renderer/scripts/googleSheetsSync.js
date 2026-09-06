@@ -6,10 +6,17 @@
 const fs = require("fs");
 const path = require("path");
 const sheetsClient = require("./googleSheetsDirectClient");
+const {
+  KNOWN_CAMERA_MOTIONS,
+  KNOWN_TRANSITIONS,
+  KNOWN_SUBTITLE_STYLES,
+  normalize,
+} = require("./effectGapTelemetry");
 
 const ROOT = path.resolve(__dirname, "..", "..");
 const BACKUP_DIR = path.join(ROOT, "renderer", "output", "sheets_backup");
 const STATS_PATH = path.join(ROOT, "effects", "effect_success_stats.json");
+const LEARNED_EFFECTS_PATH = path.join(ROOT, "effects", "learned_effects.json");
 
 function getLocalDateTime() {
   const now = new Date();
@@ -113,6 +120,19 @@ async function syncAnalyticsToSheet() {
     }
   } catch {}
 
+  let learnedEffects = {};
+  try {
+    if (fs.existsSync(LEARNED_EFFECTS_PATH)) {
+      learnedEffects = JSON.parse(fs.readFileSync(LEARNED_EFFECTS_PATH, "utf8"));
+    }
+  } catch {}
+
+  // Chuẩn hóa tập khóa không ký tự đặc biệt để nhận diện chính xác cả dạng legacy không gạch dưới
+  const stripKey = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  const STRIPPED_CAMERA = new Set([...KNOWN_CAMERA_MOTIONS].map(stripKey));
+  const STRIPPED_TRANSITIONS = new Set([...KNOWN_TRANSITIONS].map(stripKey));
+  const STRIPPED_SUBTITLES = new Set([...KNOWN_SUBTITLE_STYLES].map(stripKey));
+
   const rows = [];
   for (const [key, val] of Object.entries(stats)) {
     if (key === "_meta" || key === "fallback" || key === "none" || typeof val !== "object") continue;
@@ -137,10 +157,41 @@ async function syncAnalyticsToSheet() {
     const rate = total > 0 ? ((success / total) * 100).toFixed(1) + "%" : "0%";
     const status = (success >= 5 && (success / Math.max(1, total)) >= 0.9) ? "Safe" : "Restricted";
 
-    rows.push([formattedKey, success, fail, rate, status]);
+    // Phân loại trạng thái thực thi trong Remotion Engine
+    let remotionStatus = "Needs Remotion Build (Fallback) ⚠️";
+    const sk = stripKey(cleanKey);
+
+    if (type === "Subtitle Style") {
+      if (STRIPPED_SUBTITLES.has(sk)) {
+        remotionStatus = "Native Remotion ✅";
+      } else if (learnedEffects[cleanKey] || Object.keys(learnedEffects).some((k) => stripKey(k) === sk)) {
+        remotionStatus = "Mapped Knowledge 🔄";
+      }
+    } else if (type === "Transition Out") {
+      if (STRIPPED_TRANSITIONS.has(sk)) {
+        remotionStatus = "Native Remotion ✅";
+      } else if (learnedEffects[cleanKey] || Object.keys(learnedEffects).some((k) => stripKey(k) === sk)) {
+        remotionStatus = "Mapped Knowledge 🔄";
+      }
+    } else if (type === "Advanced Effect") {
+      if (STRIPPED_CAMERA.has(sk)) {
+        remotionStatus = "Native Remotion ✅";
+      } else if (learnedEffects[cleanKey] || Object.keys(learnedEffects).some((k) => stripKey(k) === sk)) {
+        remotionStatus = "Mapped Knowledge 🔄";
+      }
+    }
+
+    rows.push([formattedKey, success, fail, rate, status, remotionStatus]);
   }
 
-  const headers = ["Feature Key", "Success Count", "Fail Count", "Success Rate (%)", "Safe Pool Status"];
+  const headers = [
+    "Feature Key",
+    "Success Count",
+    "Fail Count",
+    "Success Rate (%)",
+    "Safe Pool Status",
+    "Remotion Engine Status"
+  ];
 
   // 1. Direct Google Sheets API v4
   try {
@@ -155,7 +206,7 @@ async function syncAnalyticsToSheet() {
   ensureBackupDir();
   const lines = [headers.join(",")];
   for (const r of rows) {
-    lines.push(`"${r[0]}","${r[1]}","${r[2]}","${r[3]}","${r[4]}"`);
+    lines.push(`"${r[0]}","${r[1]}","${r[2]}","${r[3]}","${r[4]}","${r[5]}"`);
   }
   fs.writeFileSync(csvPath, `${lines.join("\n")}\n`, "utf8");
 }
