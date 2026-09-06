@@ -1,0 +1,67 @@
+{
+  "style_name": "Artisan Leather Wallet Crafting & Edge Burnishing ASMR",
+  "category_niche": "mens_fashion___footwear",
+  "source_video_id": "Tu6-IuupEPc",
+  "source_url": "http://www.youtube.com/watch?v=Tu6-IuupEPc",
+  "source_title": "Building a Wallet with some ASMR",
+  "source_channel": "MorrisonMade Leather",
+  "style_dna": {
+    "pacing": {
+      "average_scene_duration_s": 2.2,
+      "pacing_speed": "rhythmic_tactile_step_cadence",
+      "rhythm_type": "modular_leathercraft_bench_workflow"
+    },
+    "hook_3s": {
+      "strategy": "Rotary cutter leather slice: Right at 0:00, a yellow rotary cutter blade glides forcefully through a rich caramel pull-up leather hide on a grid cutting mat, delivering an ultra-crisp rolling slice sound and clean separation.",
+      "energy": "instant_tactile_satisfaction",
+      "focus": "raw_leather_texture_and_blade_action"
+    },
+    "color_grading": {
+      "lighting": "natural_workshop_bench_diffused_light",
+      "color_palette": ["#8D4E27", "#B56535", "#F5F5F0", "#212121"],
+      "contrast": "rich_amber_leather_against_dark_cutting_grid_and_steel",
+      "mood": "warm_authentic_handcrafted_luxury"
+    },
+    "typography_and_cards": {
+      "layout": "none",
+      "style": "clean_zero_text_focus",
+      "emphasis": "pure_visual_and_acoustic_craftsmanship"
+    },
+    "micro_effects": [
+      {
+        "name": "Rotary Blade Slice Glide",
+        "camera_motion": "push_in",
+        "intent": "reveal_impact",
+        "focus": "action",
+        "intensity": 0.85,
+        "timing_s": "0.0s - 3.0s"
+      },
+      {
+        "name": "Corner Punch Mallet Snap",
+        "camera_motion": "snap",
+        "intent": "actioncut",
+        "focus": "action",
+        "intensity": 0.95,
+        "timing_s": "29.0s - 33.0s"
+      },
+      {
+        "name": "Multi-Ply Edge Slicker Drift",
+        "camera_motion": "drift",
+        "intent": "premium_showcase",
+        "focus": "texture",
+        "intensity": 0.8,
+        "timing_s": "45.0s - 49.0s"
+      }
+    ],
+    "audio_and_asmr": {
+      "has_bgm": false,
+      "sfx_cues": [
+        "rolling rotary blade slicing leather",
+        "solid mallet strike on steel corner punch",
+        "rapid high-friction wood slicker rubbing",
+        "crisp credit card insertion click"
+      ],
+      "dominant_frequency": "tactile_leather_cutting_hammering_and_burnishing_asmr"
+    }
+  }
+}

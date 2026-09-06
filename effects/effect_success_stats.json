@@ -69,7 +69,7 @@
     "fail": 0
   },
   "transition_out:fade": {
-    "success": 152,
+    "success": 154,
     "fail": 0
   },
   "advanced_effect:zoomin": {
@@ -157,19 +157,19 @@
     "fail": 1
   },
   "subtitle_style:vibrant_yellow_sticker": {
-    "success": 42,
+    "success": 47,
     "fail": 0
   },
   "transition_out:wipe_left": {
-    "success": 34,
+    "success": 35,
     "fail": 0
   },
   "advanced_effect:Satisfying Timewarp": {
-    "success": 12,
+    "success": 13,
     "fail": 0
   },
   "subtitle_style:minimal_glass_card": {
-    "success": 93,
+    "success": 97,
     "fail": 0
   },
   "transition_out:slide_up": {
@@ -177,7 +177,7 @@
     "fail": 0
   },
   "advanced_effect:Dramatic Focus": {
-    "success": 1,
+    "success": 2,
     "fail": 0
   },
   "transition_out:wipe_right": {
@@ -189,7 +189,7 @@
     "fail": 0
   },
   "transition_out:circle_open": {
-    "success": 17,
+    "success": 18,
     "fail": 0
   },
   "advanced_effect:Luxury Focus": {
@@ -533,7 +533,7 @@
     "fail": 0
   },
   "transition_out:none": {
-    "success": 6,
+    "success": 7,
     "fail": 0
   },
   "advanced_effect:pull_out": {
@@ -645,6 +645,46 @@
     "fail": 0
   },
   "advanced_effect:Final Reveal": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Tactile Detail": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Luxury Showcase": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Reveal Impact": {
+    "success": 1,
+    "fail": 0
+  },
+  "subtitle_style:vibrant_yellow_light": {
+    "success": 2,
+    "fail": 0
+  },
+  "advanced_effect:Epic Outro Glow": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Macro Focus Boost": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Tactile Precision": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Texture Highlight": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:ASMR Assembly Focus": {
+    "success": 1,
+    "fail": 0
+  },
+  "advanced_effect:Final Craft Showcase": {
     "success": 1,
     "fail": 0
   }

@@ -6,6 +6,7 @@ import { SubtitleCard } from "./SubtitleCard";
 import { EmbossStamp } from "../materials/procedural/EmbossStamp";
 import { resolveBrandSafely } from "../brand/brandDna";
 import { MultiScreenSplit } from "./MultiScreenSplit";
+import { getSpeedRampPlaybackRate } from "../motion/speed/speedCurves";
 
 /**
  * Resolves high-performance CSS filter string for cinematic color grading
@@ -50,6 +51,15 @@ export const VideoScene: React.FC<{
   // 2. Cinematic Color Grade Filter
   const colorFilter = resolveColorGradeFilter(scene.colorGrade);
 
+  // 3. Dynamic Speed Ramping (Hãm chậm 0.35x - 0.5x tại cao trào, vút nhanh 2.0x - 3.5x ở đoạn chuyển)
+  const effectivePlaybackRate = getSpeedRampPlaybackRate({
+    frame,
+    durationInFrames: scene.durationInFrames,
+    basePlaybackRate: scene.playbackRate || 1.0,
+    keyMomentsFrames: scene.keyMomentsFrames || [],
+    strategy: scene.speedStrategy || "uniform",
+  });
+
   return (
     <AbsoluteFill style={{ backgroundColor: "#000000", overflow: "hidden" }}>
       {/* Background Video Layer with Smooth Camera Transform & Color Grade */}
@@ -64,14 +74,14 @@ export const VideoScene: React.FC<{
           <MultiScreenSplit
             videoSrc={videoSrc}
             startFromFrame={scene.startFromFrame}
-            playbackRate={scene.playbackRate || 1.0}
+            playbackRate={effectivePlaybackRate}
             mode={scene.splitLayout.mode}
           />
         ) : (
           <OffthreadVideo
             src={videoSrc}
             startFrom={scene.startFromFrame}
-            playbackRate={scene.playbackRate || 1.0}
+            playbackRate={effectivePlaybackRate}
             style={{
               width: "100%",
               height: "100%",

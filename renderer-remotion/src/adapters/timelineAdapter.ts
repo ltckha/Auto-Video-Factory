@@ -24,6 +24,7 @@ export interface TimelineScene {
     type: string;
     duration: number;
   } | null;
+  key_moments?: number[];
   advanced_effect?: any;
   speed_strategy?: string;
   visual_cue?: string;
@@ -87,6 +88,9 @@ export interface AdaptedScene {
     duration: number;
   } | null;
   speedStrategy?: string;
+  keyMoments?: number[];
+  keyMomentsFrames?: number[];
+  sourceDurationSec?: number;
   visualCue?: string;
   visualIntent?: string;
   textEffect?: {
@@ -247,6 +251,31 @@ export function adaptTimelineToRemotion(
           }
         : null,
       speedStrategy: sc.speed_strategy || "uniform",
+      keyMoments: Array.isArray(sc.key_moments) ? sc.key_moments : [],
+      keyMomentsFrames: (() => {
+        const rawMoments = Array.isArray(sc.key_moments) ? sc.key_moments : [];
+        const frames = rawMoments
+          .map((m: any) => Number(m))
+          .filter((m: number) => Number.isFinite(m))
+          .map((m: number) => {
+            if (m >= startSec && m <= endSec && sourceDurSec > 0) {
+              const progress = (m - startSec) / sourceDurSec;
+              return Math.round(progress * durationInFrames);
+            }
+            if (m >= 0 && m <= targetDurSec && targetDurSec > 0) {
+              return Math.round((m / targetDurSec) * durationInFrames);
+            }
+            return null;
+          })
+          .filter((f: number | null): f is number => f !== null && f >= 0 && f < durationInFrames);
+
+        // Fallback tự nhiên nếu chỉ định speedStrategy ramp/adaptive nhưng chưa có mốc
+        if (frames.length === 0 && (sc.speed_strategy === "ramp" || sc.speed_strategy === "adaptive")) {
+          return [Math.round(durationInFrames * 0.45)];
+        }
+        return frames;
+      })(),
+      sourceDurationSec: sourceDurSec,
       visualCue: sc.visual_cue,
       visualIntent: sc.visual_intent,
       textEffect: sc.text_effect,

@@ -1,239 +1,257 @@
 {
   "video_meta": {
-    "title": "Phục Hồi Giày Da Cũ 👞 ASMR Thỏa Mãn Từng Nhát Xi",
-    "description": "🎣 Bạn có tin một đôi giày da cũ sờn xước nặng vẫn có thể hồi sinh vẻ sang trọng nguyên bản?\n\n📖 Cận cảnh quy trình phục hồi da thủ công tỉ mỉ tại xưởng Hiệu giày Hải Nancy. Từng lớp xi dưỡng đen tuyền thẩm thấu sâu, lấp đầy mọi rãnh xước và trả lại độ bóng mịn kinh điển.\n\n💬 Đôi giày gắn bó lâu nhất của bạn đã đồng hành được bao nhiêu năm rồi, hãy chia sẻ cùng Hải Nancy nhé!",
+    "title": "Nghệ Thuật Lắp Ráp Thanh Gỗ Vào Túi Da Thủ Công ASMR",
+    "description": "🎣 Bạn đã bao giờ cảm nhận được sự thỏa mãn khi từng chi tiết mộc mạc khớp khăng khít vào nếp da thủ công chưa?\n\n📖 Cận cảnh quá trình khui phôi gỗ tròn, cắt tỉa gọn gàng và xỏ từng thanh gỗ vào mép túi da may tay. Âm thanh mộc mạc của gỗ và da tạo nên nhịp điệu vô cùng thư thái.\n\n💬 Bạn thấy chi tiết tay cầm gia cố gỗ này thế nào, hãy để lại ý kiến cùng Yen Handmade Leather nhé!",
     "hashtags": [
-      "phuchoigiayda",
-      "hieugiayhainancy",
-      "danhxigiay",
+      "yenhandmadeleather",
+      "dathongminh",
       "asmrleather",
-      "chamsocgiayda",
-      "craftsmanship"
+      "lamdathucong",
+      "dothucong",
+      "satisfying"
     ],
-    "brand": "hieu_giay_hai_nancy",
-    "brand_name": "Hiệu giày Hải Nancy",
-    "style": "dark_cinematic_phonk_slowed_showcase",
+    "brand": "yen_handmade_leather",
+    "brand_name": "Yen Handmade Leather",
+    "style": "Tactile ASMR Craftsmanship",
     "pipeline_mode": "Long2Short",
-    "created_at": "2026-09-05 20:02:18",
-    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260824_082404.mp4",
-    "original_duration_s": 141.5
+    "created_at": "2026-09-06 14:55:58",
+    "input_file": "/Volumes/home/Photos/MobileBackup/Xiaomi 15T Pro/DCIM/Camera/2026/08/VID_20260826_073341.mp4",
+    "original_duration_s": 124.3
   },
   "timeline": [
     {
       "scene_id": "scene_001",
       "scene_type": "hook",
       "start_s": 0,
-      "end_s": 12,
+      "end_s": 6,
       "duration_s": 5,
-      "title": "Kiểm tra hiện trạng da giày cũ",
-      "story_importance": 0.95,
+      "title": "Mở hộp gói phôi gỗ",
+      "story_importance": 0.9,
       "key_moments": [
-        2.5,
-        8
+        2,
+        4.5
       ],
-      "speed_strategy": "adaptive",
+      "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "PHỤC HỒI GIÀY DA\nCỰC THỎA MÃN",
+      "subtitle": "KHUI BỌC PHÔI GỖ\nLÀM TÚI DA",
       "subtitle_style": "vibrant_yellow_sticker",
       "text_position": "top",
-      "voice": "Cùng nhìn lại đôi giày da cũ sờn trước khi bước vào liệu trình phục hồi chuyên sâu.",
-      "visual_cue": "Góc quay từ trên xuống kiểm tra bề mặt đôi giày da đen bị mờ đục và xước răm nhẹ",
+      "voice": "",
+      "visual_cue": "Góc quay từ trên xuống bóc lớp bao nilon đen để hé lộ các thanh gỗ tròn láng mịn bên trong.",
       "text_effect": {
         "name": "rotated_sticker_pop",
-        "description": "Sticker xoay nhẹ nảy lên nổi bật"
+        "description": "Sticker nảy nhẹ tạo cảm giác tò mò và bắt mắt"
       },
       "advanced_effect": {
-        "name": "Worm Eye Low Angle Push In",
+        "name": "Macro Focus Boost",
         "intent": "reveal_impact",
-        "mood": "dramatic",
-        "pacing": "slow",
-        "focus": "texture",
-        "camera_motion": "cinematic_glide_zoom",
+        "mood": "satisfying",
+        "pacing": "medium",
+        "focus": "packaging",
+        "camera_motion": "macro_push",
         "intensity": 0.8,
-        "description": "Cú trượt camera chậm tập trung vào chất liệu da cũ"
+        "description": "Cận cảnh âm thanh rọc nilon và lộ phôi gỗ tròn"
       },
-      "hook_strength": 0.95,
+      "hook_strength": 0.9,
       "visual_energy": 0.75,
-      "retention_score": 0.92,
+      "retention_score": 0.88,
       "confidence": 0.95,
       "include": true,
+      "impact_effect": "none",
       "layout": "full",
-      "rhythm_intent": "BUILD",
+      "rhythm_intent": "HIT",
       "visual_intent": "reveal_impact"
     },
     {
       "scene_id": "scene_002",
       "scene_type": "body",
-      "start_s": 28,
-      "end_s": 45,
-      "duration_s": 5,
-      "title": "Thao tác thoa xi dưỡng phục hồi",
+      "start_s": 12,
+      "end_s": 20,
+      "duration_s": 6,
+      "title": "Rọc băng dính bằng dao rọc giấy",
       "story_importance": 0.85,
       "key_moments": [
-        31.5,
-        39
+        15
       ],
       "speed_strategy": "adaptive",
       "render_priority": "keep",
-      "subtitle": "LỚP XI ĐEN\nLẤP ĐẦY VẾT XƯỚC",
+      "subtitle": "RỌC BĂNG DÍNH\nCỰC BẮT TAII",
       "subtitle_style": "minimal_glass_card",
-      "text_position": "bottom",
-      "voice": "Từng dải xi đen được phủ đều, nhẹ nhàng thấm sâu vào da, nuôi dưỡng và che đi những tổn thương.",
-      "visual_cue": "Cận cảnh bàn tay đeo găng tay đen dùng miếng xốp thoa đều xi đen lên bề mặt thân giày da",
+      "text_position": "top",
+      "voice": "",
+      "visual_cue": "Cận cảnh lưỡi dao rọc giấy lướt nhẹ qua lớp băng dính bó chặt các thanh gỗ, phát ra tiếng rọc giòn giã.",
       "text_effect": {
         "name": "smooth_blur_reveal",
-        "description": "Chữ mờ hiện rõ dần mượt mà"
+        "description": "Khung kính mờ hiện dịu dàng tôn âm thanh ASMR"
       },
       "advanced_effect": {
-        "name": "Satisfying Timewarp",
-        "intent": "demonstrate",
+        "name": "Tactile Precision",
+        "intent": "satisfying_cut",
         "mood": "satisfying",
         "pacing": "medium",
         "focus": "hand_action",
-        "camera_motion": "macro_push",
-        "intensity": 0.7,
-        "description": "Cận cảnh thao tác miết mút xốp phủ xi đen lên mặt da"
+        "camera_motion": "snap_zoom",
+        "intensity": 0.85,
+        "description": "Snap zoom nhấn mạnh nhát rọc dao sắc bén"
       },
-      "hook_strength": 0.8,
+      "hook_strength": 0.82,
       "visual_energy": 0.8,
-      "retention_score": 0.88,
+      "retention_score": 0.85,
       "confidence": 0.92,
       "include": true,
+      "impact_effect": "none",
       "layout": "full",
-      "rhythm_intent": "ACCELERATE",
-      "visual_intent": "demonstrate"
+      "rhythm_intent": "BUILD",
+      "transition_out": {
+        "type": "wipe_left",
+        "duration": 0.3
+      },
+      "visual_intent": "satisfying_cut"
     },
     {
       "scene_id": "scene_003",
       "scene_type": "body",
-      "start_s": 55,
-      "end_s": 75,
-      "duration_s": 6,
-      "title": "Chăm sóc phần gót và má giày",
+      "start_s": 20,
+      "end_s": 32,
+      "duration_s": 5,
+      "title": "Kiểm tra chất lượng thanh gỗ tròn",
       "story_importance": 0.8,
       "key_moments": [
-        60,
-        68
+        26
       ],
-      "speed_strategy": "adaptive",
-      "render_priority": "keep",
-      "subtitle": "THAO TÁC TỈ MỈ\nTỪNG CHI TIẾT",
+      "speed_strategy": "ramp",
+      "render_priority": "compress",
+      "subtitle": "THANH GỖ TRÒN\nLÁNG MIỄN TỰ NHIÊN",
       "subtitle_style": "minimal_glass_card",
       "text_position": "bottom",
-      "voice": "Chăm chút kỹ lưỡng từng góc cạnh, từ thành giày cho đến gót chân, mang lại sự hoàn hảo đồng nhất.",
-      "visual_cue": "Cận cảnh đánh xi và đánh bóng dọc theo đường viền mép và gót giày",
+      "voice": "",
+      "visual_cue": "Tháo gỡ rời các thanh gỗ tròn, xòe ra kiểm tra bề mặt trẵn mịn và độ đều của từng thanh.",
       "text_effect": {
-        "name": "masked_slide",
-        "description": "Chữ trồi lên từ dưới thanh che"
+        "name": "tracking_expand",
+        "description": "Chữ giãn nhẹ sang trọng"
       },
       "advanced_effect": {
-        "name": "Macro Detail Push",
-        "intent": "emphasize",
+        "name": "Texture Highlight",
+        "intent": "premium_showcase",
         "mood": "luxury",
         "pacing": "slow",
-        "focus": "detail",
-        "camera_motion": "push_in",
-        "intensity": 0.6,
-        "description": "Đẩy nhẹ ống kính vào đường nét góc cạnh gót giày"
+        "focus": "texture",
+        "camera_motion": "drift_cam",
+        "intensity": 0.7,
+        "description": "Góc quay lướt qua bề mặt vân gỗ tự nhiên"
       },
       "hook_strength": 0.75,
-      "visual_energy": 0.82,
-      "retention_score": 0.85,
+      "visual_energy": 0.7,
+      "retention_score": 0.8,
       "confidence": 0.9,
       "include": true,
+      "impact_effect": "none",
       "layout": "full",
-      "rhythm_intent": "BUILD",
-      "visual_intent": "emphasize"
+      "rhythm_intent": "FLOW",
+      "transition_out": {
+        "type": "fade",
+        "duration": 0.3
+      },
+      "visual_intent": "premium_showcase"
     },
     {
       "scene_id": "scene_004",
       "scene_type": "body",
-      "start_s": 95,
-      "end_s": 120,
-      "duration_s": 6,
-      "title": "Đánh bóng mũi giày và hoàn thiện",
-      "story_importance": 0.9,
+      "start_s": 50,
+      "end_s": 82,
+      "duration_s": 10,
+      "title": "Xỏ thanh gỗ vào nếp gấp túi da",
+      "story_importance": 0.95,
       "key_moments": [
-        102,
-        112
+        58,
+        72
       ],
       "speed_strategy": "adaptive",
       "render_priority": "keep",
-      "subtitle": "ĐỘ BÓNG SÂU\nNHƯ MỚI TỪ XƯỞNG",
-      "subtitle_style": "minimal_glass_card",
-      "text_position": "bottom",
-      "voice": "Bề mặt da nhanh chóng lấy lại độ bóng mịn tự nhiên, bền vững qua thời gian.",
-      "visual_cue": "Góc quay cận cảnh miết bọt biển làm bóng mũi giày, phản chiếu ánh sáng rõ rệt",
+      "subtitle": "XỎ THANH GỖ\nVÀO NẾP DA MAY TAY",
+      "subtitle_style": "vibrant_yellow_sticker",
+      "text_position": "top",
+      "voice": "",
+      "visual_cue": "Đưa thanh gỗ tròn từ từ đút vào ống da khâu chỉ xanh khăng khít, thao tác kéo nắn tỉ mỉ khéo léo.",
       "text_effect": {
         "name": "stomp_zoom",
-        "description": "Chữ phóng to kịch tính"
+        "description": "Nảy chữ dứt khoát theo từng nhịp tay đẩy gỗ"
       },
       "advanced_effect": {
-        "name": "Glow Reveal Flash",
-        "intent": "prove",
+        "name": "ASMR Assembly Focus",
+        "intent": "demonstrate",
         "mood": "satisfying",
-        "pacing": "medium",
-        "focus": "reveal",
-        "camera_motion": "snap_zoom",
-        "intensity": 0.85,
-        "description": "Focus nhanh vào độ sáng bóng của mũi giày sau khi đánh"
+        "pacing": "dynamic",
+        "focus": "hand_action",
+        "camera_motion": "push_in",
+        "intensity": 0.9,
+        "description": "Push in tập trung vào lực tay luồn thanh gỗ qua ống da"
       },
-      "hook_strength": 0.85,
-      "visual_energy": 0.88,
-      "retention_score": 0.9,
-      "confidence": 0.95,
+      "hook_strength": 0.88,
+      "visual_energy": 0.85,
+      "retention_score": 0.92,
+      "confidence": 0.96,
       "include": true,
+      "impact_effect": "none",
       "layout": "full",
-      "rhythm_intent": "HIT",
-      "visual_intent": "prove"
+      "rhythm_intent": "ACCELERATE",
+      "transition_out": {
+        "type": "circle_open",
+        "duration": 0.35
+      },
+      "visual_intent": "demonstrate"
     },
     {
       "scene_id": "scene_005",
       "scene_type": "conclusion",
-      "start_s": 125,
-      "end_s": 141,
-      "duration_s": 5,
-      "title": "Kết quả đôi giày sau khi phục hồi",
-      "story_importance": 0.95,
+      "start_s": 100,
+      "end_s": 124,
+      "duration_s": 9,
+      "title": "Lắp thanh gỗ thứ hai và hoàn thiện khung túi",
+      "story_importance": 0.9,
       "key_moments": [
-        132,
-        138
+        110,
+        121
       ],
       "speed_strategy": "uniform",
       "render_priority": "keep",
-      "subtitle": "HẢI NANCY\nNÂNG NIU TỪNG BƯỚC CHÂN",
-      "subtitle_style": "vibrant_yellow_lightning_sticker",
+      "subtitle": "HOÀN THIỆN KẾT CẤU\nKHUNG TÚI MỘC MẠC",
+      "subtitle_style": "vibrant_yellow_light",
       "text_position": "bottom",
-      "voice": "Hãy gửi gắm đôi giày gắn bó của bạn cho Hải Nancy để sống lại vẻ đẹp thanh lịch ban đầu.",
-      "visual_cue": "Hai chiếc giày đặt cạnh nhau khoe trọn bề mặt da bóng mịn hoàn hảo",
+      "voice": "",
+      "visual_cue": "Xỏ xong thanh gỗ thứ hai vào mép bên kia của túi da, nhấc hai quai gỗ lên căn chỉnh khung túi hoàn hảo.",
       "text_effect": {
         "name": "word_pop",
-        "description": "Chữ bật lên mạnh mẽ"
+        "description": "Bật nhả từng từ kết thúc video ấn tượng"
       },
       "advanced_effect": {
-        "name": "Epic Showcase Drift",
+        "name": "Final Craft Showcase",
         "intent": "cta",
         "mood": "luxury",
         "pacing": "slow",
         "focus": "product",
-        "camera_motion": "drift_cam",
-        "intensity": 0.7,
-        "description": "Góc quay lướt nhẹ toàn cảnh đôi giày hoàn thiện đỉnh cao"
+        "camera_motion": "pull_out",
+        "intensity": 0.85,
+        "description": "Pull out khoe trọn vẹn kết cấu tay cầm gỗ trên nền túi da đen"
       },
-      "hook_strength": 0.9,
-      "visual_energy": 0.85,
-      "retention_score": 0.93,
+      "hook_strength": 0.85,
+      "visual_energy": 0.8,
+      "retention_score": 0.9,
       "confidence": 0.95,
       "include": true,
+      "impact_effect": "none",
+      "layout": "full",
+      "rhythm_intent": "RELEASE",
       "transition_out": {
-        "type": "fade",
-        "duration": 0.3
+        "type": "none",
+        "duration": 0
       },
       "visual_intent": "cta"
     }
   ],
   "audio_config": {
     "bgm_mood": "none",
-    "enable_sfx": true
+    "bgm_url": "",
+    "enable_sfx": false
   }
 }
