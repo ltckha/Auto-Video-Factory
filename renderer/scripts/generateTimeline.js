@@ -309,6 +309,7 @@ async function main() {
   const { resolveMultiInputs, getVideoDuration } = require("./multiInputResolver");
   const { generateSmartProxy1x } = require("./smartProxyGenerator");
 
+  const TEMP_WORK_DIR = path.join(INCOMING_DIR, "temp_concat");
   const isFromSheet = process.argv.includes("--from-sheet");
   const nonFlagArgs = process.argv.slice(2).filter((arg) => !arg.startsWith("--"));
   let fromSheetJob = null;
@@ -339,7 +340,6 @@ async function main() {
     dur = getVideoDuration(absoluteVideoPath);
     projectId = fromSheetJob.jobId;
   } else {
-    const TEMP_WORK_DIR = path.join(INCOMING_DIR, "temp_concat");
     let inputRes;
     try {
       inputRes = resolveMultiInputs(nonFlagArgs, TEMP_WORK_DIR);
